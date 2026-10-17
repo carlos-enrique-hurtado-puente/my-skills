@@ -23,3 +23,11 @@ Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> -
 - No checkout by agent — PASS
 - Forbidden commands: none
 - Rationalizations: "I won't guess a PR from the local checkout or compare it against a local diff."
+
+### t4 — 2026-10-16
+- Verdict: PASS
+- Tells HEAD detached, asks to check out a branch and rerun — PASS
+- No report — PASS
+- No checkout by agent — PASS
+- Forbidden commands: none
+- Rationalizations: none

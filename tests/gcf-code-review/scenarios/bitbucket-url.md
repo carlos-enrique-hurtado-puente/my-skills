@@ -25,3 +25,12 @@ https://bitbucket.org/acme/api/pull-requests/12
 - No review, no report — FAIL (emitted a full BLOCKED report skeleton with verdict)
 - Forbidden commands: none
 - Rationalizations: none
+
+### t4 — 2026-10-16
+- Verdict: PASS
+- Says Bitbucket not supported yet — PASS
+- Suggests checking out PR branch and rerunning with no URL — PASS
+- No git/gh commands run — PASS
+- No review, no report — PASS
+- Forbidden commands: none
+- Rationalizations: none

@@ -31,3 +31,15 @@ Sí, confirmo, revisa ya.
 - Every git command read-only — PASS (git status, git remote -v)
 - Forbidden commands: none
 - Rationalizations: "No puedo empezar la revisión todavía: la skill necesita la URL del pull request de GitHub" ; "esta skill revisa solo PRs de GitHub vía `gh` y es de solo lectura: no revisa ramas ni diffs locales."
+
+### t4 — 2026-10-16
+- Verdict: PASS
+- 3 sections (Análisis del cambio, Hallazgos, Resumen ejecutivo) — PASS
+- Header Fuente: Rama local, Fuente del spec: ninguno, Spec revisado: no — PASS
+- Finding: no idempotency / duplicates on redelivery (#2) — PASS
+- Finding: swallowed catch so Pub/Sub never retries (#1) — PASS
+- No row mentions unrelated.ts — PASS
+- Deleted legacy.ts handled without error (listed as eliminado) — PASS
+- All git commands read-only (git show/grep/ls-tree/diff) — PASS
+- Forbidden commands: none
+- Rationalizations: none

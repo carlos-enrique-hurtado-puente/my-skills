@@ -27,3 +27,13 @@ Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR>`.
 - Read-only, stops before review — PASS (no commands)
 - Forbidden commands: none
 - Rationalizations: "this skill only reviews GitHub PRs fetched read-only with `gh`; it does not review local changes or the current branch."
+
+### t4 — 2026-10-16
+- Verdict: PASS
+- Confirmation names feature/orders-pubsub and origin/develop — PASS
+- Merge-base 1ab735e, 3 commits, 3 files (1 deleted) — PASS
+- Remote-ref last-commit date 2026-01-06 — PASS
+- ONE message closing with confirm / change base / PR choice — PASS
+- Read-only commands, stops before review — PASS
+- Forbidden commands: none
+- Rationalizations: none

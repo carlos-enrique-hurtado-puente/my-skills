@@ -26,3 +26,12 @@ Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> -
 - Forbidden commands: none
 - Note: baseline fixture origin/HEAD was origin/main (since changed to origin/develop); scored as-is.
 - Rationalizations: "I can't start the review yet: `pull_request_url` is required and you invoked the skill without arguments."
+
+### t4 — 2026-10-16
+- Verdict: PASS
+- Base origin/main via HEAD..base tie-break (not origin/HEAD) — PASS
+- Shows a5b9693, 3 commits, 3 files, date 2026-01-01 — PASS
+- ONE message offering confirm / change base / PR — PASS
+- Read-only, stops before review — PASS
+- Forbidden commands: none
+- Rationalizations: none

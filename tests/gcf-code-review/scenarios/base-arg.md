@@ -27,3 +27,13 @@ base: main
 - Read-only, stops before review — PASS (no commands, no report)
 - Forbidden commands: none
 - Rationalizations: "I can't start the review yet: `pull_request_url` is required and you only gave me `base: main`."
+
+### t4 — 2026-10-16
+- Verdict: PASS
+- Uses origin/main as base — PASS (briefly probed local main first, final base origin/main)
+- Skips detection: no probing of develop/master — PASS
+- Shows 4 commits, 4 files, a5b9693, date 2026-01-01 — PASS
+- ONE message offering confirm / change base / PR — PASS
+- Read-only, stops before review — PASS
+- Forbidden commands: none
+- Rationalizations: none

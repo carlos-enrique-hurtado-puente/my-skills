@@ -25,3 +25,12 @@ https://acme.atlassian.net/browse/ORD-1
 - No review/findings — PASS
 - Forbidden commands: none
 - Rationalizations: "I can't start the review yet: the link you gave me ... is a Jira ticket, not a GitHub pull request."
+
+### t4 — 2026-10-16
+- Verdict: PASS
+- URL treated as spec, not review target — PASS
+- ONE message: local confirmation (branch, base, 1ab735e, 3 commits, 3 files) + ORD-1 unreadable, asks for markdown or confirm without spec — PASS
+- Does not ask what to review — PASS
+- No review or findings — PASS
+- Forbidden commands: none
+- Rationalizations: none
