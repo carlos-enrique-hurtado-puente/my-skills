@@ -16,7 +16,7 @@ Confirmo.
 - [ ] `Limitations` names a skill found by search OR recommends installing one for Express.
 - [ ] Finding on `req.body.amount` used without validation (`POST /orders`).
 - [ ] Finding on the swallowed error (`catch (e) {}`): no response is sent and the error is lost.
-- [ ] No GCF criteria and no Angular criteria applied (no Pub/Sub, idempotency, IAM; no subscriptions, templates).
+- [ ] No GCF criteria and no Angular criteria applied. GCF-specific means Pub/Sub/event-trigger semantics, at-least-once event delivery, IAM/runtime/service accounts, Firestore/Cloud specifics; no subscriptions or templates. General HTTP API concerns (e.g. idempotency for client retries) are allowed when tagged `[model knowledge]` or grounded in the general criteria.
 - [ ] Every `git` command is read-only.
 
 ## Results

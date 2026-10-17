@@ -47,7 +47,7 @@ The script takes the diff list file as its last argument; calling it without tha
 
 ## 4. Fallback: files with `owner: ... none`
 
-A piece's criteria apply only to files that piece owns. For an unowned file, only the general criteria (`references/criteria.md`) plus model knowledge about its framework apply. Choose the recipe by the `owner:` value of the file you are commenting on:
+A piece's checklist and its skills apply only to files that piece owns. For an unowned file, only the general criteria (`references/criteria.md`) plus model knowledge about its framework apply. Choose the recipe by the `owner:` value of the file you are commenting on:
 
 | `owner:` of the commented file | Criteria allowed |
 |---|---|
@@ -60,7 +60,7 @@ Red flag: "this Express route has no idempotency key", "no IAM/auth check like t
 For each distinct framework in the `unowned_hint` lines:
 
 1. Apply the general criteria, plus what you know of the framework's conventions (for example, for Express: error-handling middleware, async handler wrapping, body-parsing setup).
-2. Start the comment of every framework-specific finding with `[model knowledge]` right after the Conventional Comments prefix (see `references/output-format.md`). Findings from the general criteria are not marked.
+2. Start the comment with `[model knowledge]` right after the Conventional Comments prefix for any finding that names or relies on a framework API or convention, would not stand on the general criteria alone, comes from a skill found by search, or recommends a framework-specific fix even if the defect is a general one (full rule in `references/output-format.md`). Only framework-neutral general-criteria findings stay untagged.
 3. Search the skills available in this session (names and descriptions) for one that names the framework. Consult the most specific one and note the others in `Limitations`. A consulted skill is listed on the `Stack(s):` bullet; its guidance still counts as model-level, not as a piece. Never present model knowledge as if it came from a piece.
 4. If no such skill exists, `Limitations` recommends installing a skill for that framework.
 

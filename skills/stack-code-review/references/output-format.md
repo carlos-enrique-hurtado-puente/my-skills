@@ -2,7 +2,7 @@
 
 Deliver **only** these three sections, in this order. No preamble, no extra sections.
 
-**Language:** the templates below are in English. Translate headings, field labels, table column headers, verdict and architecture-level labels, and prose into the language of the user's request; keep only enum values (`COMPLETED`/`BLOCKED`, `blocking`/`non-blocking`/`nitpick`), Conventional Comments prefixes and code identifiers in English.
+**Language:** the templates below are in English. Translate headings, field labels, table column headers, verdict and architecture-level labels, and prose into the language of the user's request; keep only enum values (`COMPLETED`/`BLOCKED`, `blocking`/`non-blocking`/`nitpick`), Conventional Comments prefixes, the `[model knowledge]` tag and code identifiers in English.
 
 ## 1. Change analysis
 
@@ -57,7 +57,8 @@ Rules:
 - "Comment to post" = the complete comment, ready to paste as an inline PR review comment.
 - Row test: if one defect could be fixed without fixing the other (missing `await` vs. read-modify-write race; wrong ratio vs. missing input validation), they are two rows. Cross-reference with "see finding N" instead of merging.
 - No free text between rows; any extra explanation goes inside the cell.
-- A finding that rests on framework conventions for a stack with no piece starts its comment, right after the prefix, with `[model knowledge]` (e.g. `issue (non-blocking): [model knowledge] ...`). Keep the tag in English. Findings from the general criteria or a piece are never tagged.
+- Tag with `[model knowledge]` (right after the prefix, e.g. `issue (non-blocking): [model knowledge] ...`, tag kept in English) every finding on a file with no owning piece that: names or relies on a framework API or convention (`next(err)`, error-handling middleware, async handler wrappers, body-parser setup); or would not stand on the general criteria alone; or is based on a skill found by search; or is a general-criteria finding whose recommended fix is framework-specific (the mention of the framework in the fix is enough). Findings that stand on the general criteria with a framework-neutral fix, and findings from a piece, are not tagged.
+- A finding that spans owned and unowned files is split into one row per file, each using only the criteria of its file's owner.
 - Lines = new version of the file; if undeterminable, function/block/file. Never invent lines.
 
 ### Conventional Comments prefixes (a comment starts with one)
