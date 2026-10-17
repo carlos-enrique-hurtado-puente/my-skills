@@ -47,3 +47,16 @@ Confirmo.
 - detect-stacks.sh: yes (owner `src/routes.js none`; hint express; angular and gcp-functions detected, not read)
 - Forbidden commands: none
 - Notable: "A client retry after a timeout ... creates duplicate orders because the route has no idempotency key or de-duplication."
+
+### t6b (marker fix) — 2026-10-17
+- Verdict: FAIL
+- 3 sections — PASS
+- `Stack(s):` Express, model knowledge (lower confidence), no piece — PASS
+- Express-convention findings tagged `[model knowledge]` — FAIL (#3 untagged relies on Express body-parsing behavior: "si el body no es JSON, req.body puede no estar definido"; #2 and #7 are tagged)
+- Limitations recommends installing an Express skill — PASS ("se recomienda instalar una")
+- Finding `req.body.amount` unvalidated — PASS (#3)
+- Finding swallowed error `catch (e) {}` (no response, error lost) — PASS (#2, #5)
+- No GCF/Angular criteria — PASS (no idempotency/Pub/Sub; #6 authN question is general; angular and gcp-functions not read)
+- All git commands read-only — PASS
+- Forbidden commands: none
+- Notable: "si el body no es JSON, req.body puede no estar definido y la lectura lanza TypeError" (finding #3, no `[model knowledge]` tag)
