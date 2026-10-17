@@ -57,7 +57,7 @@ Rules:
 - "Comment to post" = the complete comment, ready to paste as an inline PR review comment.
 - Row test: if one defect could be fixed without fixing the other (missing `await` vs. read-modify-write race; wrong ratio vs. missing input validation), they are two rows. Cross-reference with "see finding N" instead of merging.
 - No free text between rows; any extra explanation goes inside the cell.
-- Tag with `[model knowledge]` (right after the prefix, e.g. `issue (non-blocking): [model knowledge] ...`, tag kept in English) every finding on a file with no owning piece that: names or relies on a framework API or convention (`next(err)`, error-handling middleware, async handler wrappers, body-parser setup); or would not stand on the general criteria alone; or is based on a skill found by search; or is a general-criteria finding whose recommended fix is framework-specific (the mention of the framework in the fix is enough). Findings that stand on the general criteria with a framework-neutral fix, and findings from a piece, are not tagged.
+- Every finding on a code file whose `owner:` is `none` starts its comment with `[model knowledge]` right after the Conventional Comments prefix (e.g. `issue (non-blocking): [model knowledge] ...`; tag kept in English), with no exceptions: no piece covers that file, so its review rests on the model's knowledge. Findings on files owned by a piece never carry it.
 - A finding that spans owned and unowned files is split into one row per file, each using only the criteria of its file's owner.
 - Lines = new version of the file; if undeterminable, function/block/file. Never invent lines.
 
