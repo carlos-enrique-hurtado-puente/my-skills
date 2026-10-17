@@ -71,6 +71,12 @@ build() { # build <name> -> creates $TMP/<name> (working files, no git yet)
     docs-only)
       w "$d" package.json "$PJ_EXPRESS"
       w "$d" README.md "# readme" ;;
+    peer-only)
+      w "$d" package.json '{ "name": "lib", "peerDependencies": { "@angular/core": "^19.0.0" } }'
+      w "$d" src/a.ts "export const a = 1;" ;;
+    core-extra)
+      w "$d" package.json '{ "name": "lib", "dependencies": { "@angular/core-extra": "^1.0.0" } }'
+      w "$d" src/a.ts "export const a = 1;" ;;
     spaces)
       w "$d" "my fn/package.json" "$PJ_FN"
       w "$d" "my fn/src/a b.ts" "export const a = 1;" ;;
@@ -125,8 +131,14 @@ has "owner: README.md none"; hasnt "^unowned_hint"; hasnt "loaded"; has "status:
 t "bad-piece"; d=$(repo gcp-only)
 cp -R "$SKILL" "$TMP/skill-bad"; echo "no frontmatter here" > "$TMP/skill-bad/stacks/broken.md"
 run "$d" "$TMP/skill-bad" functions/src/a.ts
-has "skipped_piece: broken.md no-frontmatter"; has "piece: gcp-functions loaded"
+has "skipped_piece: broken.md no-frontmatter"; hasnt "^piece: broken"; has "piece: gcp-functions loaded"
 has "owner: functions/src/a.ts gcp-functions"; has "status: ok"; done_t
+
+t "peerDependencies ignored"; d=$(repo peer-only); run "$d" "$SKILL" src/a.ts
+has "owner: src/a.ts none"; hasnt "^root: angular"; hasnt "loaded"; done_t
+
+t "@angular/core-extra is not @angular/core"; d=$(repo core-extra); run "$d" "$SKILL" src/a.ts
+has "owner: src/a.ts none"; hasnt "^root: angular"; hasnt "loaded"; done_t
 
 t "add-piece-no-edits"; d=$(repo no-piece)
 cp -R "$SKILL" "$TMP/skill-add"

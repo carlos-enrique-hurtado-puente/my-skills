@@ -63,7 +63,7 @@ File names are relative to the `angular-developer` skill's `references/` folder.
 
 Skipping this is how idioms get missed. If the repo and a reference disagree (for example Vitest vs Karma), the repo's `package.json` and existing code win.
 
-If `angular-developer` is not available in the session, say so in Limitations and review with this checklist only. List a consulted reference under the review's Commands.
+If `angular-developer` is not available in the session, say so in Limitations and review with this checklist only. List each consulted reference under the review's Validations performed.
 
 ## Clean Architecture in this stack
 
@@ -87,5 +87,6 @@ Additional `blocking` cases for this stack: an evident subscription leak (a long
 - Applying APIs or references the repo's Angular version or test framework lacks (for example `linkedSignal` on Angular 17, Vitest idioms in a Karma repo).
 - Style nits while missing a subscription leak, a security issue or an undocumented behavior change.
 - Asserting something about code outside the diff without reading the full file (false positive); turn it into a `question (non-blocking):` if unverifiable.
+- Judging components with async state or inputs read once from the diff hunk alone: read the full file.
 - Flagging `track $index` or a template method call without checking whether items hold local state or the call is trivial.
 - Skipping the `angular-developer` reference for an area the diff touches.

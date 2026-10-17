@@ -69,8 +69,8 @@ Public APIs and contracts; events and schemas; names other code or consumers dep
 
 ## 8. Change intent and PR hygiene
 - Does the diff match its stated purpose (PR description in GitHub mode, commit messages in local mode)? Is a description missing?
-- Does it mix unrelated changes? Is the size reviewable?
-- Are the risks documented? Are contracts with other repos or teams assumed? Raise those as `question (non-blocking):`.
+- Does it mix unrelated changes? Is the size reviewable? Over ~1000 changed lines, read production code first and specs, JSON and styles after.
+- Are the risks documented? Are contracts with other repos or teams assumed? Raise those as `question (non-blocking):`. A dependency on another repo's PR or ticket is a `question (non-blocking):` on the consuming code (is the contract agreed, and what is the merge/deploy order?).
 - Secrets or credentials committed.
 - GitHub mode only: use `gh pr checks`. Distinguish "no CI configured" from "CI did not run". Local mode: skip CI.
 

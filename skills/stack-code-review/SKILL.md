@@ -1,6 +1,6 @@
 ---
 name: stack-code-review
-description: Use when the user explicitly invokes /stack-code-review (Claude Code) or $stack-code-review (Codex) to review code changes of any stack (pieces for Google Cloud Functions and Angular), from a GitHub PR URL or the current local git branch
+description: Use when the user explicitly invokes /stack-code-review (Claude Code) or $stack-code-review (Codex) to review code changes of any stack (pluggable stack pieces, e.g. Cloud Functions, Angular), from a GitHub PR URL or the current local git branch
 disable-model-invocation: true
 ---
 
@@ -70,7 +70,7 @@ Pick the source from the target, then read **only that source's file** (paths ar
 4. **Select stacks. REQUIRED:** read `references/stack-selection.md` and follow it: build the diff file list, run `scripts/detect-stacks.sh`, read the `loaded` pieces, fill each piece's `context_fields`. Never skip the script because the stack looks obvious.
 5. **REQUIRED:** read `references/criteria.md`; evaluate the general criteria plus the checklist of each loaded piece, only on the files that piece owns.
 6. **REQUIRED:** read `references/output-format.md` and deliver the output in the exact format, in the language of the user's request (see Output language).
-7. **REQUIRED, before printing the table:** run the `[model knowledge]` check in `references/output-format.md` (every row on an `owner: none` file carries the tag).
+7. **REQUIRED, before printing the table:** run the `[model knowledge]` check in `references/output-format.md` (every row on any `owner: none` file, code or not, carries the tag).
 
 ## When the review is `BLOCKED`
 
@@ -93,7 +93,7 @@ Use **the lowest severity** that correctly describes the risk. A personal prefer
 
 ## Output language
 
-The templates in `references/output-format.md` are written in English. Determine the language of the user's request, then write every heading, field label, verdict sentence, finding comment and justification in that language (English request → English). This includes the findings-table column headers, the verdict label (e.g. "Requires rework") and the architecture-level label (e.g. "Strongly coupled"): translate them. The only text that stays in English whatever the language: enum values (`COMPLETED`/`BLOCKED`, `blocking`/`non-blocking`/`nitpick`), Conventional Comments prefixes (`issue (blocking):`...), and code identifiers.
+The templates in `references/output-format.md` are written in English. Determine the language of the user's request, then write every heading, field label, verdict sentence, finding comment and justification in that language (English request → English). This includes the findings-table column headers, the verdict label (e.g. "Requires rework") and the architecture-level label (e.g. "Strongly coupled"): translate them. The only text that stays in English whatever the language: enum values (`COMPLETED`/`BLOCKED`, `blocking`/`non-blocking`/`nitpick`), Conventional Comments prefixes (`issue (blocking):`...), the `[model knowledge]` tag, and code identifiers.
 
 ## Red flags — stop
 

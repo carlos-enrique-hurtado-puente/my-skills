@@ -12,18 +12,21 @@ git diff --name-only <base>...HEAD > "$LIST"
 bash <skill-dir>/scripts/detect-stacks.sh "$LIST"
 ```
 
-GitHub mode has no checkout, so materialize the inputs with read-only calls first:
+GitHub mode has no checkout. **Do steps a-c in order; calling `detect-stacks.sh` before they finish (empty `--root`) is wrong:**
 
 ```bash
 ROOT=$(mktemp -d); LIST=$(mktemp)
 gh pr diff <pull_request_url> --name-only > "$LIST"
-# every package.json in the head tree
+# (a) every package.json in the head tree
 gh api "repos/<owner>/<repo>/git/trees/<headRefName>?recursive=1" --jq '.tree[].path | select(endswith("package.json"))'
-# for each package.json and each path in "$LIST" (skip deleted files):
+# (b) for each package.json and each path in "$LIST" (skip deleted files), fetch it into "$ROOT":
 mkdir -p "$ROOT/$(dirname <path>)"
 gh api "repos/<owner>/<repo>/contents/<path>?ref=<headRefName>" --jq '.content' | base64 -d > "$ROOT/<path>"
+# (c) only now, with "$ROOT" populated:
 bash <skill-dir>/scripts/detect-stacks.sh --root "$ROOT" "$LIST"
 ```
+
+Fork PRs: `<owner>/<repo>` and `ref` for (a) and (b) are the head repo (`gh pr view --json headRepositoryOwner,headRepository`) and `headRefName`, not the base repo. A truncated trees response (`"truncated": true`) means package.json files may be missing: note it in `Limitations`. Files over 1 MB return empty `content` from the contents API: use the git blobs API, else treat the file as unowned. Any fetch failure: treat that file as unowned and say so in `Limitations`.
 
 The script takes the diff list file as its last argument; calling it without that file fails with `diff list file missing`: rerun it with the file, do not give up on it. Paths in the list are repo-relative. If the script reports `status: error`, fix the call and rerun; if it still fails, say so in `Limitations` and review with the general criteria only.
 
@@ -55,12 +58,12 @@ A piece's checklist and its skills apply only to files that piece owns. For an u
 | `none`, `unowned_hint` names a framework | General criteria + model knowledge of that framework (steps below) |
 | `none`, `unowned_hint` is `unknown` | General criteria only; say so in `Limitations` |
 
-Red flag: "this Express route has no idempotency key", "no IAM/auth check like the Cloud Function", "should use signals". That is a loaded piece's checklist leaking onto a file it does not own. Drop the finding unless a general criterion (not the piece) supports it on its own merits.
+Red flag: "this Express route has no idempotency key", "no IAM/auth check like the Cloud Function", "should use signals". That is a loaded piece's checklist or skills leaking onto a file it does not own. Drop the finding unless a general criterion (not the piece) supports it on its own merits.
 
 For each distinct framework in the `unowned_hint` lines:
 
 1. Apply the general criteria, plus what you know of the framework's conventions (for example, for Express: error-handling middleware, async handler wrapping, body-parsing setup).
-2. Start the comment of EVERY finding on a code file whose `owner:` is `none` with `[model knowledge]` right after the Conventional Comments prefix, no exceptions (full rule in `references/output-format.md`). Findings on piece-owned files are never tagged.
+2. Start the comment of EVERY finding on a file whose `owner:` is `none` (code or not) with `[model knowledge]` right after the Conventional Comments prefix, no exceptions (full rule in `references/output-format.md`). Findings on piece-owned files are never tagged.
 3. Search the skills available in this session (names and descriptions) for one that names the framework. Consult the most specific one and note the others in `Limitations`. A consulted skill is listed on the `Stack(s):` bullet; its guidance still counts as model-level, not as a piece. Never present model knowledge as if it came from a piece.
 4. If no such skill exists, `Limitations` recommends installing a skill for that framework.
 

@@ -36,7 +36,10 @@ Fill the `context_fields` from the changes and the repo; ask only when inference
 Well-defined repos/gateways; no Firestore/ORM/SDK models in the domain; transactions around invariants; efficient queries; no N+1; pagination; timeouts; cancellation (`AbortSignal`); retries with backoff and limits, not duplicated across layers; network, quota and rate-limit errors; pooling for Cloud SQL and connection limits; no opening/closing heavy clients per request; no business state in memory; `/tmp` is not persistent; resource cleanup. Reusable clients may be initialized outside the handler but never hold request- or user-specific mutable state.
 
 ### IAM and runtime security
-Least privilege; dedicated service account; separate deploy and runtime identities; no over-privileged accounts, no JSON keys, no credentials in the repo; no unjustified anonymous invocation; coherent ingress; service-to-service access validation; Secret Manager for secrets and rotation without code changes.
+Least privilege; dedicated service account; separate deploy and runtime identities; no over-privileged accounts, no JSON keys, no credentials in the repo; no unjustified anonymous invocation; coherent ingress; service-to-service access validation; Secret Manager for secrets and rotation without code changes; encryption and access control on data at rest and in transit (buckets, topics, databases); integrity of the deployed artifact (pinned/locked dependencies, trusted build source).
+
+### Observability additions
+Retry and throughput metrics (invocations, failures, retries, latency); function name, version/revision and environment id in logs; correlation id carried to downstream calls and published events.
 
 ### Performance and costs
 Cold starts; unnecessary dependencies; expensive init work; safe client reuse; region close to consumers; adequate timeout, memory and CPU; conscious `concurrency` (Gen 2); justified `minInstances`/`maxInstances`; efficient queries/payloads; batching; no uncontrolled fan-out or unbounded loops; DB connections; retry cost; log cost; Cloud Tasks/Pub/Sub/Workflows for long work (not inside an HTTP request). Require evidence, not preference.
@@ -45,7 +48,7 @@ Cold starts; unnecessary dependencies; expensive init work; safe client reuse; r
 Required GCP APIs; region; supported runtime; entry point; trigger; service account; minimal IAM; ingress and authentication; per-environment variables and secrets; timeout, memory, CPU, concurrency; `minInstances`/`maxInstances`; VPC Connector or Direct VPC Egress; egress `PRIVATE_RANGES_ONLY` vs `ALL_TRAFFIC`; Eventarc/Pub/Sub/Cloud Build dependencies; reproducibility; migration and rollback plan; no undocumented manual changes; declared vs expected configuration.
 
 ### Testing additions
-Handlers: valid/invalid requests, authN/authZ, status codes, headers, incomplete payloads, internal errors without leaking details. Events: valid/invalid envelopes, duplicates, retries, transient/permanent errors, unprocessable messages, version changes, concurrency/order. Adapters: Firestore/Pub/Sub/Storage/Cloud SQL, external contracts, serialization/mapping, emulators if available. Missing tests are also **blocking** for complex retries/idempotency.
+Handlers: valid/invalid requests, authN/authZ, status codes, headers, incomplete payloads, internal errors without leaking details. Events: valid/invalid envelopes, duplicates, retries, transient/permanent errors, unprocessable messages, version changes, concurrency/order. Adapters: Firestore/Pub/Sub/Storage/Cloud SQL, external contracts, serialization/mapping, emulators if available. Use-case tests: transactionality (partial failure leaves consistent state) and no duplicated effects on repeated delivery. Missing tests are also **blocking** for complex retries/idempotency.
 
 ### Compatibility additions
 Topic/queue/function names; region or trigger changes; IAM permission changes; Gen 1 ↔ Gen 2; message versioning.
