@@ -49,6 +49,7 @@ A single Markdown table, one row per finding, exactly these columns in this orde
 | # | File | Line(s) / Reference | Type | Severity | Comment to post |
 |---|------|---------------------|------|----------|-----------------|
 | 1 | `path/to/file` | `line, function or block` | `issue` | `blocking` | `issue (blocking): ...` |
+| 2 | `src/routes.js` (file without a piece) | `12` | `issue` | `non-blocking` | `issue (non-blocking): [model knowledge] ...` |
 ```
 
 Rules:
@@ -58,6 +59,7 @@ Rules:
 - Row test: if one defect could be fixed without fixing the other (missing `await` vs. read-modify-write race; wrong ratio vs. missing input validation), they are two rows. Cross-reference with "see finding N" instead of merging.
 - No free text between rows; any extra explanation goes inside the cell.
 - Every finding on a code file whose `owner:` is `none` starts its comment with `[model knowledge]` right after the Conventional Comments prefix (e.g. `issue (non-blocking): [model knowledge] ...`; tag kept in English), with no exceptions: no piece covers that file, so its review rests on the model's knowledge. Findings on files owned by a piece never carry it.
+- **Pre-output check (REQUIRED):** before printing the table, take the `owner: <path> none` lines from `detect-stacks.sh`. For every row whose File is one of them, the comment must start with `<prefix> [model knowledge]`. Fix any row that does not, including rows from general criteria such as tests, naming or error handling.
 - A finding that spans owned and unowned files is split into one row per file, each using only the criteria of its file's owner.
 - Lines = new version of the file; if undeterminable, function/block/file. Never invent lines.
 
