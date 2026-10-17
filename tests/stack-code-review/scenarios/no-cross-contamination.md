@@ -35,3 +35,13 @@ Confirmo.
 - detect-stacks.sh: yes (gcp-functions loaded; angular candidate-unused, stacks/angular.md not read)
 - Forbidden commands: none
 - Notable: none
+
+### t5 (angular piece) — 2026-10-17
+- Verdict: PASS
+- stacks/angular.md never read — PASS (Commands: "angular.md never read")
+- angular-developer never read — PASS
+- GCF findings present — PASS (#1 catch {}, #2 add() idempotency)
+- All git commands read-only — PASS
+- detect-stacks.sh: yes (gcp-functions loaded; angular candidate-unused)
+- Forbidden commands: none
+- Notable: none

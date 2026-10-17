@@ -31,3 +31,15 @@ Confirmo. Nota: en esta sesión la skill angular-developer no está instalada.
 - All git commands read-only — PASS
 - Forbidden commands: none
 - Notable behavior: "se evaluaron solo con criterio propio, sin contrastarlas con esa skill, y la pieza Angular del repo de la skill aún tiene su checklist sin completar (TODO)"
+
+### t5 (angular piece) — 2026-10-17
+- Verdict: PASS
+- 3 sections — PASS
+- `angular-developer` NOT read — PASS (no Skill call, no read of its references; stated in Commands)
+- Limitations says angular-developer missing and piece checklist used — PASS ("not installed in this session ... the review uses only the checklist of the Angular piece"; Stack(s) line also "missing: angular-developer")
+- Finding: subscription without cleanup — PASS (#2, blocking)
+- Finding: `total()` in template — PASS (#3)
+- All git commands read-only — PASS
+- detect-stacks.sh: yes (angular; gcp-functions candidate-unused)
+- Forbidden commands: none
+- Notable: none

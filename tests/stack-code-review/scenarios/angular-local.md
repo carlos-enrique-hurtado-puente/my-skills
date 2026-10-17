@@ -31,3 +31,16 @@ Confirmo.
 - All git commands read-only — PASS
 - Forbidden commands: none
 - Notable behavior: "detect-stacks.sh was not run: SKILL.md does not tell to. The angular-developer skill was not consulted: SKILL.md does not reference it."
+
+### t5 (angular piece) — 2026-10-17
+- Verdict: PASS
+- 3 sections (analysis, findings table, executive summary) — PASS
+- `Stack(s):` names Angular, from the piece — PASS ("Angular — piece; skills: angular-developer (...)")
+- `angular-developer` read — PASS (heads of components.md, signals-overview.md, di-fundamentals.md, injection-context.md under ~/.claude/skills/angular-developer/references)
+- Finding: subscribe without cleanup — PASS (#2)
+- Finding: `total()` in template — PASS (#3)
+- No GCF criteria/findings — PASS
+- All git commands read-only — PASS (log, diff, show, ls-tree, rev-parse)
+- detect-stacks.sh: yes (angular; gcp-functions candidate-unused)
+- Forbidden commands: none
+- Notable: none

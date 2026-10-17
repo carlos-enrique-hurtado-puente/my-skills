@@ -33,3 +33,17 @@ Confirmo.
 - All git commands read-only — PASS
 - Forbidden commands: none
 - Notable behavior: "detect-stacks.sh falló ... por lo que no se usaron las piezas por stack y la revisión usa solo los criterios generales"; stacks/*.md never read.
+
+### t5 (angular piece) — 2026-10-17
+- Verdict: PASS
+- 3 sections — PASS
+- `Stack(s):` lists both pieces — PASS (two Stack(s) lines: Angular — piece; GCP Cloud Functions — piece)
+- GCF idempotency finding on onOrderCreated.ts — PASS (#3, add() duplicates on redelivery)
+- Angular subscription-leak finding on orders.component.ts — PASS (#4)
+- No cross-application of criteria — PASS
+- Table names file; criterion matches file's stack — PASS (GCF rows only functions/*, Angular rows only web/*)
+- One single report — PASS
+- All git commands read-only — PASS
+- detect-stacks.sh: yes (angular, gcp-functions)
+- Forbidden commands: none
+- Notable: Stack(s) emitted as two separate lines rather than one combined line; angular-developer references read via head under ~/.claude/skills.
