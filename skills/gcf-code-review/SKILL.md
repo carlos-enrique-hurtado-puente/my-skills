@@ -14,9 +14,36 @@ Rigorous, read-only review of a set of changes (see Sources). Role: Staff/Senior
 
 ## Inputs
 
-- `pull_request_url` — REQUIRED for now (GitHub PR URL).
-- `ticket_spec_url` — optional (Jira, Notion, Confluence, Linear...).
-- Everything else (Gen 1/Gen 2, runtime, triggers, region, IaC, test framework, validation library) is **inferred from the changes and repo**. Ask only when inference is impossible.
+| Input | Required | Values |
+|---|---|---|
+| `target` | no | GitHub PR URL, Bitbucket PR URL, or nothing |
+| `spec` | no | local file path, URL, or pasted text |
+| `base` | no | local mode only: base branch name; skips base detection |
+
+Everything else (Gen 1/Gen 2, runtime, triggers, region, IaC, test framework, validation library) is **inferred from the changes and repo**. Ask only when inference is impossible.
+
+## Mode selection
+
+What arrives decides the mode:
+
+| Observable input | Action |
+|---|---|
+| `https://github.com/<owner>/<repo>/pull/<n>` | GitHub mode, no question asked. |
+| Bitbucket PR URL (`bitbucket.org/.../pull-requests/<n>`) | Reply that Bitbucket is not supported yet and suggest checking out that PR's branch and rerunning without a URL (local mode). Nothing else: no commands, no report. |
+| No target (empty, or only `spec` / `base`) | Local mode, with the confirmation defined in `references/sources/local-git.md`. |
+| A bare number, or text that is neither a spec nor a target | Ask what the user wants to review. |
+
+**Reading the arguments** (the invocation is free text):
+
+| Argument | It is the |
+|---|---|
+| GitHub or Bitbucket PR URL | `target` |
+| Any other URL, or a path to an existing file | `spec` |
+| `spec: ...` / `base: ...` prefix | that input; a prefix wins over guessing |
+| Remaining text that reads like a spec (acceptance criteria, requirements) | `spec`, pasted |
+| Other remaining text | ask |
+
+`/gcf-code-review https://acme.atlassian.net/browse/X-1` therefore means local mode with that spec. In local mode, read a given spec before sending the confirmation so the single confirmation message can state its outcome.
 
 ## Sources
 
@@ -71,7 +98,7 @@ The templates in `references/output-format.md` are written in English. Determine
 
 | Thought | Reality |
 |---|---|
-| "I'll do a quick checkout to see the code" | Forbidden. Fetch files the way the source file says. |
+| "I'll do a quick checkout to see the code" | Forbidden, even if the user says it is fine. Fetch files the way the source file says (`git show` in local mode). |
 | "The spec won't open, I'll assume the criteria" | It is `BLOCKED`. Do not invent criteria. |
 | "I'll compare against main, same thing" | Use the base the source file defines. |
 | "Generic comment: 'improve error handling'" | Vague = invalid. File, line, risk, fix. |
