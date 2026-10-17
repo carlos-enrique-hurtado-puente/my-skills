@@ -73,3 +73,16 @@ Confirmo.
 - All git commands read-only — PASS
 - Forbidden commands: none
 - Notable: "issue (blocking): El diff no incluye ningún test para un endpoint que persiste importes." (finding #4, no `[model knowledge]` tag)
+
+### t6d (pre-output check) — 2026-10-17
+- Verdict: PASS
+- 3 sections (analysis, Findings table, Executive summary) — PASS
+- `Stack(s):` Express, model knowledge (lower confidence), no piece — PASS ("Express — model knowledge (lower confidence); skills: ninguna encontrada")
+- Every finding on `src/routes.js` starts with `[model knowledge]` after its prefix — PASS (all 8 rows, #1-#8, tagged)
+- `Limitations` recommends installing a skill for Express — PASS ("se recomienda instalar uno para Express")
+- Finding `req.body.amount` unvalidated — PASS (#3)
+- Finding swallowed error `catch (e) {}` (no response, error lost) — PASS (#1)
+- No GCF/Angular criteria — PASS (no idempotency, at-least-once, IAM, Firestore; angular and gcp-functions not applied; #7 only asks whether code is missing given the `orders-pubsub` branch name, no Pub/Sub semantics applied)
+- All git commands read-only — PASS (log, diff, show, remote -v, rev-parse; plus mktemp, cat, ls)
+- Forbidden commands: none
+- Notable: "question (non-blocking): [model knowledge] El nombre de la rama (orders-pubsub) sugiere publicación en Pub/Sub, pero el commit solo añade una ruta HTTP." (borderline; passed since it applies no GCF criterion)
