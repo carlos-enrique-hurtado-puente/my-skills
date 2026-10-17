@@ -46,15 +46,20 @@ Orphaned styles/templates left when a component is removed count as dead code (c
 
 `angular-developer` is installed and model-invocable. Before judging idioms, open its reference file(s) for each area the diff touches:
 
-| Diff touches | Open the reference on |
-|--------------|-----------------------|
-| `signal`/`computed`/`effect`/`linkedSignal`/`resource` | signals / reactivity |
-| `inject()`, providers, services | dependency injection |
-| `FormGroup`, `ngModel`, signal forms | forms |
-| `Routes`, guards, resolvers, lazy loading | routing |
-| `HttpClient`, `httpResource`, interceptors | HTTP |
-| `.spec.ts` | testing |
-| ARIA, focus, keyboard handling | accessibility |
+| Diff touches | Reference file(s) |
+|--------------|-------------------|
+| `signal`/`computed`/`effect`/`linkedSignal`/`resource` | `signals-overview.md`, `effects.md`, `linked-signal.md`, `resource.md` |
+| `input()`/`output()`/`model()` | `inputs.md`, `outputs.md` |
+| Components, templates, host bindings, pipes | `components.md`, `host-elements.md`, `pipes.md` |
+| `inject()`, services, providers | `di-fundamentals.md`, `creating-services.md`, `defining-providers.md`, `injection-context.md`, `hierarchical-injectors.md` |
+| `HttpClient`, interceptors | `http-client.md` |
+| Forms | `reactive-forms.md`, `template-driven-forms.md`, `signal-forms.md` |
+| Routes, guards, resolvers, lazy loading, navigation | `define-routes.md`, `route-guards.md`, `data-resolvers.md`, `loading-strategies.md`, `navigate-to-routes.md` |
+| ARIA, focus, keyboard handling | `angular-aria.md` |
+| Component styles | `component-styling.md` |
+| `.spec.ts`, e2e | `testing-fundamentals.md`, `component-harnesses.md`, `router-testing.md`, `e2e-testing.md` |
+
+File names are relative to the `angular-developer` skill's `references/` folder. Open only the ones for areas the diff touches.
 
 Skipping this is how idioms get missed. If the repo and a reference disagree (for example Vitest vs Karma), the repo's `package.json` and existing code win.
 
