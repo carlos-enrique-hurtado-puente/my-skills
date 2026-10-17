@@ -4,26 +4,33 @@ Deliver **only** these three sections, in this order. No preamble, no extra sect
 
 **Language:** the templates below are in English. Translate headings, field labels, table column headers, verdict and architecture-level labels, and prose into the language of the user's request; keep only enum values (`COMPLETED`/`BLOCKED`, `blocking`/`non-blocking`/`nitpick`), Conventional Comments prefixes and code identifiers in English.
 
-## 1. PR analysis
+## 1. Change analysis
 
 ```markdown
-## PR analysis
+## Change analysis
 
 - **Review status:** `<COMPLETED | BLOCKED>`
-- **PR:** `#<number> — <title>`
-- **PR URL:** `<pull_request_url>`
-- **Head branch:** `<headRefName>`
-- **Base branch:** `<baseRefName>`
-- **Author:** `<author>`
+- **Source:** `<GitHub PR | Local branch>`
+- **Spec source:** `<file <path> | <tool used> (<url>) | pasted | none>`
+<source block>
 - **Generation:** `<Gen 1 | Gen 2 | Undetermined>`
 - **Runtime:** `<runtime>`
 - **Trigger(s):** `<list>`
 - **Relevant files:** `<list>`
 - **Functional summary:** `<summary>`
 - **Spec reviewed:** `<yes/no>`
-- **PR comments reviewed:** `<yes/no>`
+- **PR comments reviewed:** `<yes/no | N/A>`
 - **Limitations:** `<concrete limitations>`
 ```
+
+`<source block>` by source:
+
+| Source | Fields |
+|---|---|
+| `GitHub PR` | **PR:** `#<number> — <title>` · **PR URL** · **Head branch** · **Base branch** · **Author** |
+| `Local branch` | **Repo** (folder name or `origin` name) · **Head branch** · **HEAD** (short sha) · **Base ref** · **Merge-base** (short sha) · **Commits reviewed** (count) |
+
+`PR comments reviewed` is `N/A` for `Local branch`.
 
 If the review is `BLOCKED`, say so clearly and do not invent findings.
 
@@ -110,4 +117,4 @@ No actionable findings in the analyzed PR.
 | `Requires minor changes` | No blocking; some non-blocking; low operational and functional risk; sustainable architecture |
 | `Requires changes before merging` | ≥1 blocking; partial spec non-compliance; risk of bug, regression, security, data loss or missing critical test |
 | `Requires rework` | Implementation misaligned with the spec; business logic strongly coupled to GCP; multiple blocking; no idempotency/retry strategy; hard-to-maintain design; high operational risk |
-| `Review blocked` | Could not fetch the PR via `gh`, the required spec or the required comments; insufficient information |
+| `Review blocked` | Could not fetch the changes, the required spec or the required comments; insufficient information |
