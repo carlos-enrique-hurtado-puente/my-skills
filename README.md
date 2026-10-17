@@ -88,6 +88,8 @@ context_fields: [Versión de Express, Framework de tests]
 ## Common mistakes
 ```
 
+Cómo se decide la propiedad: `dependencies` determina qué archivos pertenecen a la pieza (las raíces son los directorios cuyo `package.json` declara la dependencia); `files` e `imports` solo desempatan cuando varias piezas comparten raíz o cubren archivos fuera de toda raíz. El `id` debe ser igual al nombre del archivo (`stacks/<id>.md`) y cumplir `^[a-z0-9][a-z0-9-]*$`; si no, el script ignora la pieza (`skipped_piece: ... id-mismatch | bad-id | duplicate-id`).
+
 Las seis secciones del cuerpo van en ese orden. Una pieza nunca redefine el formato, la escala de severidad ni el veredicto. Después ejecuta `bash tests/stack-code-review/check-structure.sh` y `bash tests/stack-code-review/test-detect-stacks.sh`.
 
 ### Fallback: archivos sin pieza
@@ -106,12 +108,13 @@ Las piezas y los criterios generales las consultan si están instaladas (si falt
 `stack-code-review` reemplaza a `gcf-pr-review`, `gcf-code-review` y `reviewing-angular-prs` (su contenido pasó a las piezas `gcp-functions` y `angular`). `install.sh` no toca carpetas antiguas; solo avisa si las encuentra.
 
 - `gcf-code-review` (symlinks antiguos en `~/.claude/skills/` o `~/.agents/skills/`): elimínalos o muévelos a mano.
-- `reviewing-angular-prs`: muévela a un respaldo.
-- `gcf-pr-review`: muévela a un respaldo.
+- `reviewing-angular-prs`: muévela a `~/.claude/skills-backup/reviewing-angular-prs-<fecha>`.
+- `gcf-pr-review`: muévela a `~/.claude/skills-backup/gcf-pr-review-<fecha>`.
 
 ```bash
-mv ~/.claude/skills/reviewing-angular-prs ~/.claude/reviewing-angular-prs.bak
-mv ~/.claude/skills/gcf-pr-review ~/.claude/gcf-pr-review.bak
+mkdir -p ~/.claude/skills-backup
+mv ~/.claude/skills/reviewing-angular-prs ~/.claude/skills-backup/reviewing-angular-prs-$(date +%F)
+mv ~/.claude/skills/gcf-pr-review ~/.claude/skills-backup/gcf-pr-review-$(date +%F)
 rm ~/.claude/skills/gcf-code-review ~/.agents/skills/gcf-code-review   # si son symlinks
 bash install.sh
 ```

@@ -11,8 +11,7 @@ Confirmo.
 
 ## Expected
 - [ ] A review in 3 sections: PR/change analysis, Findings table, Executive summary.
-- [ ] `Stack(s):` says Express, reviewed with model knowledge (lower confidence), no piece.
-- [ ] Every finding on `src/routes.js` starts with `[model knowledge]` after its Conventional Comments prefix; the `Stack(s):` line states Express with model knowledge (lower confidence).
+- [ ] Every finding on `src/routes.js` starts with `[model knowledge]` after its Conventional Comments prefix; the `Stack(s):` line says Express, reviewed with model knowledge (lower confidence), no piece.
 - [ ] `Limitations` names a skill found by search OR recommends installing one for Express.
 - [ ] Finding on `req.body.amount` used without validation (`POST /orders`).
 - [ ] Finding on the swallowed error (`catch (e) {}`): no response is sent and the error is lost.

@@ -67,7 +67,7 @@ Pick the source from the target, then read **only that source's file** (paths ar
 1. Choose the source (table above) and read its file. Check its prerequisites. Local mode order: run the script, do the spec step (3), send the confirmation and stop; collect data (2) only after the user confirms (or the invocation already did).
 2. Collect the data the source file lists: metadata, full diff, prior comments (if the source has them), full files when the diff lacks context. Read prior comments before analyzing code.
 3. **Spec step.** If a `spec` was given, read `references/spec-sources.md` and follow it (in local mode, before the confirmation): read the spec, check every acceptance criterion against the implementation, and record `Spec source`. With no spec, do not ask: `Spec reviewed: no`, `Spec source: none`.
-4. **Select stacks. REQUIRED:** read `references/stack-selection.md` and follow it: build the diff file list, run `scripts/detect-stacks.sh`, read the `loaded` pieces, fill each piece's `context_fields`. Never skip the script because the stack looks obvious.
+4. **Select stacks. REQUIRED:** read `references/stack-selection.md` and follow it: build the diff file list, run `scripts/detect-stacks.sh`, read the `loaded` pieces, fill each piece's `context_fields`; where a piece conflicts with the core, the core wins. Never skip the script because the stack looks obvious.
 5. **REQUIRED:** read `references/criteria.md`; evaluate the general criteria plus the checklist of each loaded piece, only on the files that piece owns.
 6. **REQUIRED:** read `references/output-format.md` and deliver the output in the exact format, in the language of the user's request (see Output language).
 7. **REQUIRED, before printing the table:** run the `[model knowledge]` check in `references/output-format.md` (every row on any `owner: none` file, code or not, carries the tag).
@@ -100,7 +100,7 @@ The templates in `references/output-format.md` are written in English. Determine
 | Thought | Reality |
 |---|---|
 | "I know this is Angular/GCF, I'll skip the script" | The `Stack(s):` header, the loaded pieces and file ownership come only from `scripts/detect-stacks.sh` output. No diff list file: build it (`references/stack-selection.md`) and rerun. |
-| "I'll do a quick checkout to see the code" | Forbidden, even if the user says it is fine. Fetch files the way the source file says: GitHub `gh api repos/<owner>/<repo>/contents/<path>?ref=<headRefName>`; local `git show HEAD:<path>`. |
+| "I'll do a quick checkout to see the code" | Forbidden, even if the user says it is fine. Fetch files the way the source file says: GitHub `gh api repos/<owner>/<repo>/contents/<path>?ref=<headRefOid>` (the PR head commit SHA, from the head repo for fork PRs); local `git show HEAD:<path>`. |
 | "The spec won't open, I'll assume the criteria" | Never. Say why it failed, ask for it as markdown (path or pasted); without it, `BLOCKED` unless the user confirms reviewing without it. |
 | "I'll compare against main, same thing" | Use the base the source file defines. |
 | "origin/HEAD points to main, so the base is main" | origin/HEAD is the last tie-break. The base comes only from `scripts/detect-base.sh`, never from `origin/HEAD` by hand; list every `candidate:` line in the confirmation. |

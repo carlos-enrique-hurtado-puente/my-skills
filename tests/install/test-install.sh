@@ -76,6 +76,13 @@ run
   && points_to "$H/.claude/skills/stack-code-review"
 check "i: legacy gcf-code-review untouched, warned" $?
 
+# (j) legacy reviewing-angular-prs: warned with backup path, untouched
+newhome; mkdir -p "$H/.claude/skills/reviewing-angular-prs"; echo old > "$H/.claude/skills/reviewing-angular-prs/SKILL.md"
+run
+[ "$RC" -eq 0 ] && echo "$ERR" | grep -q "reviewing-angular-prs" && echo "$ERR" | grep -q "skills-backup/reviewing-angular-prs-" \
+  && [ -f "$H/.claude/skills/reviewing-angular-prs/SKILL.md" ] && [ ! -L "$H/.claude/skills/reviewing-angular-prs" ]
+check "j: legacy reviewing-angular-prs warned, untouched" $?
+
 # unknown flag
 newhome; run --bogus
 [ "$RC" -eq 2 ] && echo "$ERR" | grep -qi "usage"

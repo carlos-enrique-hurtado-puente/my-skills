@@ -15,16 +15,17 @@ Read only when the target is a GitHub PR URL (`https://github.com/<owner>/<repo>
 ## Commands (all read-only)
 
 ```bash
-# 1. Metadata (baseRefName and headRefName come from here; do not ask the user)
+# 1. Metadata (baseRefName, headRefName and headRefOid come from here; do not ask the user)
 gh pr view <pull_request_url> --json \
   number,title,body,state,isDraft,author,baseRefName,headRefName,\
-headRepositoryOwner,mergeable,additions,deletions,changedFiles,labels,files,commits,url
+headRefOid,headRepository,headRepositoryOwner,mergeable,additions,deletions,changedFiles,labels,files,commits,url
 
 # 2. Full diff — source of the changes to review
 gh pr diff <pull_request_url>
 
-# 3. Full file without checkout (use headRefName)
-gh api "repos/<owner>/<repo>/contents/<path>?ref=<headRefName>" --jq '.content' | base64 -d
+# 3. Full file without checkout. Ref = headRefOid (commit SHA); for fork PRs use the head repo
+#    (headRepositoryOwner/headRepository) instead of the base repo
+gh api "repos/<owner>/<repo>/contents/<path>?ref=<headRefOid>" --jq '.content' | base64 -d
 
 # 4. Comments and reviews
 gh pr view <pull_request_url> --json comments,reviews

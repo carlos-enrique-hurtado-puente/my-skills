@@ -31,7 +31,7 @@ Deliver **only** these three sections, in this order. No preamble, no extra sect
 
 `PR comments reviewed` is `N/A` for `Local branch`.
 
-`Stack(s):` is one bullet per stack, built from the `detect-stacks.sh` output (see `references/stack-selection.md`): one per `loaded` piece (source `piece`) and one per framework of unowned files (source `model knowledge (lower confidence)`, no skills line unless one was consulted).
+`Stack(s):` is one bullet per stack, built from the `detect-stacks.sh` output (see `references/stack-selection.md`): one per `loaded` piece (source `piece`) and one per framework of unowned files (source `model knowledge (lower confidence)`, no skills line unless one was consulted). Reference files consulted from a skill go in parentheses after it (`skills: angular-developer (signals-overview.md, …)`), not under "Validations performed", which exists only in the no-findings template. With no loaded piece and no unowned framework (for example docs-only), write `- **Stack(s):** none — general criteria only`.
 
 `<context_fields>` is one bullet per `context_fields` entry of each loaded piece, in the piece's order, labeled with the piece's field name and its value or `Undetermined` (for example `- **Generation:** ...`). With no loaded piece there are none.
 

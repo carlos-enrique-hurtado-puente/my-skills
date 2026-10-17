@@ -16,7 +16,7 @@ Fill the `context_fields` from the owning root's `package.json` (the root that h
 | Mode | How to read it |
 |------|----------------|
 | Local | `git show HEAD:<root>/package.json` |
-| GitHub | `gh api "repos/{owner}/{repo}/contents/<root>/package.json?ref=<headRefName>" --jq .content \| base64 -d` |
+| GitHub | `gh api "repos/{owner}/{repo}/contents/<root>/package.json?ref=<headRefOid>" --jq .content \| base64 -d` |
 
 - **Angular version:** `@angular/core` in `dependencies`. Judge the diff against what that version supports: `input()`/`output()`/`model()` need 17.1+, `linkedSignal`/`resource` need 19+. Never suggest an API the repo's version lacks.
 - **Test framework:** `devDependencies` and the `test` script / `angular.json` builder (Karma + Jasmine, Jest, Vitest). Suggest tests in the project's framework.
@@ -63,7 +63,7 @@ File names are relative to the `angular-developer` skill's `references/` folder.
 
 Skipping this is how idioms get missed. If the repo and a reference disagree (for example Vitest vs Karma), the repo's `package.json` and existing code win.
 
-If `angular-developer` is not available in the session, say so in Limitations and review with this checklist only. List each consulted reference under the review's Validations performed.
+If `angular-developer` is not available in the session, say so in Limitations and review with this checklist only. List each consulted reference file on this stack's `Stack(s):` bullet (`skills: angular-developer (signals-overview.md, …)`).
 
 ## Clean Architecture in this stack
 
