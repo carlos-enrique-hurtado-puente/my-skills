@@ -3,8 +3,9 @@
 # Usage: bash detect-stacks.sh [--root <dir>] <diff-file-list-file>
 #   <diff-file-list-file>: one diff path per line (repo-relative).
 #   Without --root: run inside the git repo; package.json files come from
-#     `git ls-tree -r HEAD` and contents from `git show HEAD:<path>` (read-only),
-#     falling back to the working tree when HEAD lacks a file.
+#     `git ls-tree -r HEAD` and contents from `git show HEAD:<path>` (read-only);
+#     a file missing from HEAD reads as empty (never the working tree). The script
+#     first cd's to the repo top level, so it can run from any subdirectory.
 #   With --root <dir>: no git at all; package.json files are found by walking <dir>
 #     (skipping node_modules) and contents are read from <dir>/<path>.
 # Output (stable "key: value" lines):
@@ -12,7 +13,9 @@
 #   root: <id> <dir>                  ('.' = repo root)
 #   owner: <path> <id>|none
 #   unowned_hint: <path> <framework-or-unknown> <nearest-package.json-or-none>
-#   skipped_piece: <file> <reason>
+#   skipped_piece: <file> <reason>    (no-frontmatter, missing-id, bad-id, id-mismatch,
+#                                      duplicate-id, missing-name, no-detect-signals)
+#   A piece's id must equal its filename (stacks/<id>.md) and match ^[a-z0-9][a-z0-9-]*$.
 #   status: ok
 # Pieces live in "$(dirname "$0")/../stacks/*.md". Works on bash 3.2; no jq, no
 # associative arrays. Heuristics are documented inline.
@@ -29,6 +32,11 @@ fi
 DIFF="$1"
 [ -n "$DIFF" ] && [ -f "$DIFF" ] || { echo "status: error"; echo "message: diff list file missing"; exit 2; }
 [ -z "$ROOTDIR" ] || [ -d "$ROOTDIR" ] || { echo "status: error"; echo "message: --root is not a directory"; exit 2; }
+case "$DIFF" in /*) ;; *) DIFF="$(cd "$(dirname "$DIFF")" && pwd)/$(basename "$DIFF")" ;; esac
+if [ -z "$ROOTDIR" ]; then
+  TOP=$(G rev-parse --show-toplevel 2>/dev/null) && [ -n "$TOP" ] && cd "$TOP" 2>/dev/null \
+    || { echo "status: error"; echo "message: not inside a git repository"; exit 2; }
+fi
 
 W=$(mktemp -d); trap 'rm -rf "$W"' EXIT
 mkdir -p "$W/pj" "$W/p"
@@ -36,7 +44,7 @@ mkdir -p "$W/pj" "$W/p"
 # read_file <path>: file content on stdout (empty/failed if unreadable)
 read_file() {
   if [ -n "$ROOTDIR" ]; then cat "$ROOTDIR/$1" 2>/dev/null
-  else G show "HEAD:$1" 2>/dev/null || cat "$1" 2>/dev/null; fi
+  else G show "HEAD:$1" 2>/dev/null; fi
 }
 
 # deps_of <block-regex>: names of keys inside the given package.json block(s).
@@ -88,7 +96,14 @@ list_of() {
       exit
     }'
 }
-: > "$W/pieces"; : > "$W/skipped"
+ID_RE='^[a-z0-9][a-z0-9-]*$'
+: > "$W/pieces"; : > "$W/skipped"; : > "$W/allids"
+# pass 1: every piece file's declared id (to detect duplicates)
+for f in "$STACKS"/*.md; do
+  [ -f "$f" ] || continue
+  [ "$(head -n 1 "$f")" = "---" ] || continue
+  awk 'NR==1{next} $0=="---"{exit} {print}' "$f" | sed -n 's/^id:[[:space:]]*//p' | head -n 1 | tr -d '"'"'"' \t' >> "$W/allids"
+done
 for f in "$STACKS"/*.md; do
   [ -f "$f" ] || continue
   base=$(basename "$f")
@@ -97,6 +112,9 @@ for f in "$STACKS"/*.md; do
   id=$(printf '%s\n' "$fm" | sed -n 's/^id:[[:space:]]*//p' | head -n 1 | tr -d '"'"'"' \t')
   name=$(printf '%s\n' "$fm" | sed -n 's/^name:[[:space:]]*//p' | head -n 1)
   if [ -z "$id" ]; then echo "skipped_piece: $base missing-id" >> "$W/skipped"; continue; fi
+  if ! printf '%s\n' "$id" | grep -Eq "$ID_RE"; then echo "skipped_piece: $base bad-id" >> "$W/skipped"; continue; fi
+  if [ "$(grep -cxF -- "$id" "$W/allids")" -gt 1 ]; then echo "skipped_piece: $base duplicate-id" >> "$W/skipped"; continue; fi
+  if [ "$base" != "$id.md" ]; then echo "skipped_piece: $base id-mismatch" >> "$W/skipped"; continue; fi
   if [ -z "$name" ]; then echo "skipped_piece: $base missing-name" >> "$W/skipped"; continue; fi
   detect=$(printf '%s\n' "$fm" | awk '/^detect:/{d=1;next} d&&/^[^ \t#]/{d=0} d{print}')
   for k in dependencies files imports; do printf '%s\n' "$detect" | list_of "$k" > "$W/p/$id.$k"; done
@@ -105,6 +123,8 @@ for f in "$STACKS"/*.md; do
   fi
   echo "$id" >> "$W/pieces"
 done
+
+set -f   # ids are validated, but never glob-expand unquoted lists below
 
 # --- roots: dirs of package.json files that declare a piece's dependency -------
 while IFS= read -r id; do
@@ -205,7 +225,7 @@ done < "$DIFF"
 # One piece line per valid piece file ("candidate-unused" = loaded nowhere, whether or
 # not it has a root).
 for id in $ALL; do
-  if grep -q " $id\$" "$W/owners"; then echo "piece: $id loaded"; else echo "piece: $id candidate-unused"; fi
+  if awk -v id="$id" '$1=="owner:" && $NF==id {f=1} END{exit !f}' "$W/owners"; then echo "piece: $id loaded"; else echo "piece: $id candidate-unused"; fi
 done
 for id in $ALL; do
   while IFS= read -r r; do [ -n "$r" ] && echo "root: $id $r"; done < "$W/p/$id.roots"

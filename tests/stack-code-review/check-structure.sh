@@ -3,7 +3,7 @@
 fail=0
 bad() { echo "FAIL: $1"; fail=1; }
 cd "$(dirname "$0")/../.." || exit 1
-S=skills/stack-code-review
+S=${STACK_SKILL_DIR:-skills/stack-code-review}
 
 if [ ! -f "$S/SKILL.md" ]; then
   bad "$S/SKILL.md does not exist"
@@ -29,12 +29,24 @@ fi
 
 # Stack pieces (design 6.3): frontmatter id/name/detect (>=1 signal) + six headings in order.
 HEADINGS="Context detection|Checklist|How to use the skills|Clean Architecture in this stack|Severity notes|Common mistakes"
+ALLIDS=""
+for f in "$S"/stacks/*.md; do
+  [ -f "$f" ] || continue
+  ALLIDS="$ALLIDS $(awk 'NR==1{next} $0=="---"{exit} {print}' "$f" | sed -n 's/^id:[[:space:]]*//p' | head -n 1 | tr -d '"'"'"' \t')"
+done
 for f in "$S"/stacks/*.md; do
   [ -f "$f" ] || continue
   b=$(basename "$f")
   if [ "$(head -n 1 "$f")" != "---" ]; then bad "$b: no frontmatter"; continue; fi
   fm=$(awk 'NR==1{next} $0=="---"{exit} {print}' "$f")
   echo "$fm" | grep -qE '^id:[[:space:]]*[^[:space:]]' || bad "$b: frontmatter lacks id"
+  pid=$(echo "$fm" | sed -n 's/^id:[[:space:]]*//p' | head -n 1 | tr -d '"'"'"' \t')
+  if [ -n "$pid" ]; then
+    echo "$pid" | grep -qE '^[a-z0-9][a-z0-9-]*$' || bad "$b: id '$pid' is not ^[a-z0-9][a-z0-9-]*$"
+    [ "$b" = "$pid.md" ] || bad "$b: id does not equal filename ($pid)"
+    n=0; for x in $ALLIDS; do [ "$x" = "$pid" ] && n=$((n+1)); done
+    [ "$n" -le 1 ] || bad "$b: duplicate id '$pid'"
+  fi
   echo "$fm" | grep -qE '^name:[[:space:]]*[^[:space:]]' || bad "$b: frontmatter lacks name"
   echo "$fm" | grep -qE '^detect:' || bad "$b: frontmatter lacks detect"
   echo "$fm" | grep -qE '^[[:space:]]+(dependencies|files|imports):[[:space:]]*\[[^]]*[^][:space:]][^]]*\]' || bad "$b: detect has no signal"

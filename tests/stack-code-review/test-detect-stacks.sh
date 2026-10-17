@@ -142,12 +142,53 @@ has "owner: src/a.ts none"; hasnt "^root: angular"; hasnt "loaded"; done_t
 
 t "add-piece-no-edits"; d=$(repo no-piece)
 cp -R "$SKILL" "$TMP/skill-add"
-printf -- '---\nid: express\nname: Express\ndetect:\n  dependencies: [express]\n---\n' > "$TMP/skill-add/stacks/express.md"
+printf -- '---\nid: express\nname: Express\ndetect:\n  dependencies: [express]\nskills: []\ncontext_fields: []\n---\n\n## Context detection\n## Checklist\n## How to use the skills\n## Clean Architecture in this stack\n## Severity notes\n## Common mistakes\n' > "$TMP/skill-add/stacks/express.md"
+CS=$(STACK_SKILL_DIR="$TMP/skill-add" bash "$ROOT/tests/stack-code-review/check-structure.sh" 2>&1); echo "$CS" | grep -q "express.md" && bad "$NAME: new piece fails structure check"
 run "$d" "$TMP/skill-add" src/routes.js
 has "piece: express loaded"; has "owner: src/routes.js express"; hasnt "^unowned_hint"; done_t
 
 t "paths with spaces"; d=$(repo spaces); run "$d" "$SKILL" "my fn/src/a b.ts"
 has "owner: my fn/src/a b.ts gcp-functions"; has "root: gcp-functions my fn"; done_t
+
+t "run from functions/ subdir in the mixed monorepo"; d=$(repo mixed)
+run "$d" "$SKILL" functions/src/a.ts web/src/app/x.component.ts; root_run="$OUT"
+printf '%s\n' functions/src/a.ts web/src/app/x.component.ts > "$TMP/diff.txt"
+OUT=$(cd "$d/functions" && bash "$SCRIPT" "$TMP/diff.txt" 2>&1)
+[ "$OUT" = "$root_run" ] || { bad "$NAME: subdir output differs from root"; diff <(echo "$root_run") <(echo "$OUT") | sed 's/^/    /'; }
+has "owner: web/src/app/x.component.ts angular"; has "status: ok"
+printf '%s\n' functions/src/a.ts > "$TMP/rel-diff.txt"
+OUT=$(cd "$d/functions" && cp "$TMP/rel-diff.txt" ./rel-diff.txt && bash "$SCRIPT" rel-diff.txt 2>&1); rm -f "$d/functions/rel-diff.txt"
+has "owner: functions/src/a.ts gcp-functions"; done_t
+
+t "git mode never reads the working tree (file missing from HEAD is empty)"; d=$(repo no-piece)
+cp -R "$SKILL" "$TMP/skill-imp"
+printf -- '---\nid: marker\nname: Marker\ndetect:\n  imports: [zzmarker]\n---\n' > "$TMP/skill-imp/stacks/marker.md"
+w "$d" src/new.js "require('zzmarker');"
+run "$d" "$TMP/skill-imp" src/new.js
+has "owner: src/new.js none"
+printf '%s\n' src/new.js > "$TMP/diff.txt"
+OUT=$(cd "$TMP" && bash "$SCRIPT" --root "$d" "$TMP/diff.txt" 2>&1)
+has "owner: src/new.js none" ; done_t
+
+t "piece id must equal filename / be well-formed / unique"
+d=$(repo gcp-only); cp -R "$SKILL" "$TMP/skill-ids"
+hdr() { printf -- '---\nid: %s\nname: N\ndetect:\n  dependencies: [zz]\n---\n' "$1"; }
+hdr other > "$TMP/skill-ids/stacks/mismatch.md"
+hdr "a.b" > "$TMP/skill-ids/stacks/a.b.md"
+hdr "Up" > "$TMP/skill-ids/stacks/Up.md"
+hdr "dup" > "$TMP/skill-ids/stacks/dup.md"
+hdr "dup" > "$TMP/skill-ids/stacks/dup2.md"
+hdr "star*" > "$TMP/skill-ids/stacks/star*.md"
+run "$d" "$TMP/skill-ids" functions/src/a.ts
+has "skipped_piece: mismatch.md id-mismatch"; has "skipped_piece: a.b.md bad-id"
+has "skipped_piece: Up.md bad-id"; has "skipped_piece: star*.md bad-id"
+has "skipped_piece: dup.md duplicate-id"; has "skipped_piece: dup2.md duplicate-id"
+hasnt "^piece: (other|a.b|Up|dup|dup2|star)"; has "piece: gcp-functions loaded"; has "status: ok"
+CS=$(STACK_SKILL_DIR="$TMP/skill-ids" bash "$ROOT/tests/stack-code-review/check-structure.sh" 2>&1)
+echo "$CS" | grep -q "mismatch.md: id does not equal filename" || bad "$NAME: check-structure misses id-mismatch"
+echo "$CS" | grep -q "duplicate id" || bad "$NAME: check-structure misses duplicate id"
+echo "$CS" | grep -q "a.b.md: id 'a.b' is not" || bad "$NAME: check-structure misses bad id"
+done_t
 
 # --- --root mode on plain directories (no .git), identical to git mode -------
 for c in mixed root-shared-package; do
