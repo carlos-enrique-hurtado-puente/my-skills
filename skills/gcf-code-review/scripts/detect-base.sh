@@ -9,7 +9,7 @@ fin() { # fin <status> <exit> <message>
 }
 has() { G rev-parse --verify -q "$1" >/dev/null 2>&1; }
 
-G rev-parse --is-inside-work-tree >/dev/null 2>&1 || fin not-a-repo 1 "not a git repository"
+[ "$(G rev-parse --is-inside-work-tree 2>/dev/null)" = true ] || fin not-a-repo 1 "not a git repository"
 has HEAD || fin unborn 1 "nothing committed yet (HEAD is unborn)"
 G symbolic-ref -q HEAD >/dev/null 2>&1 || fin detached 1 "HEAD is detached: check out the branch to review and rerun"
 
@@ -50,7 +50,9 @@ printf '%s\n' "$cand" | awk 'NF{print $1, $2, $5}' | while read -r a b r; do
   if [ "$r" = "$base" ]; then echo "candidate: $r $a $b chosen"; else echo "candidate: $r $a $b"; fi
 done
 echo "base: $base"
-if has "refs/remotes/$base"; then
+full=$(G rev-parse --symbolic-full-name "$base" 2>/dev/null)
+case "$full" in refs/remotes/*) isremote=yes ;; *) isremote=no ;; esac
+if [ "$isremote" = yes ]; then
   echo "base_is_remote: yes"; echo "base_date: $(G log -1 --format=%cs "$base")"
 else echo "base_is_remote: no"; fi
 mb=$(G merge-base "$base" HEAD 2>/dev/null) || fin unrelated 1 "no merge-base between $base and HEAD (unrelated histories)"
@@ -61,5 +63,5 @@ if [ -n "$ns" ]; then
   echo "files: $(printf '%s\n' "$ns" | wc -l | tr -d ' ')"
   echo "deleted: $(printf '%s\n' "$ns" | grep -c '^D')"
 else echo "files: 0"; echo "deleted: 0"; fi
-if [ "$n" -eq 0 ]; then fin nothing-to-review 0 "nothing to review against $base"; fi
+if [ "${n:-0}" -eq 0 ]; then fin nothing-to-review 0 "nothing to review against $base"; fi
 echo "status: ok"

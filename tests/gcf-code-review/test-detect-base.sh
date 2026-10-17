@@ -4,7 +4,7 @@ ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 SCRIPT="$ROOT/skills/gcf-code-review/scripts/detect-base.sh"
 MK="$ROOT/tests/gcf-code-review/fixtures/make-local-repo.sh"
 TMP=$(mktemp -d); trap 'rm -rf "$TMP"' EXIT
-fail=0; i=0
+fail=0
 ok()  { echo "PASS: $1"; }
 nfail=0
 bad() { echo "FAIL: $1"; fail=1; nfail=$((nfail+1)); }
@@ -34,6 +34,10 @@ t "base: main (bare)"; d=$(fixture); run "$d" main
 has "base: origin/main"; has "commits: 4"; has "files: 4"; has "status: ok"; done_t
 t "base: origin/main as-is"; d=$(fixture); run "$d" origin/main
 has "base: origin/main"; has "commits: 4"; done_t
+t "base: refs/remotes/origin/main as-is"; d=$(fixture); run "$d" refs/remotes/origin/main
+has "base_is_remote: yes"; has "base_date: 2026-01-01"; has "commits: 4"; done_t
+t "base: nope"; d=$(fixture); run "$d" nope
+[ "$RC" -ne 0 ] || bad "$NAME: exit 0"; has "status: base-unresolved"; done_t
 t "uncommitted"; d=$(fixture --uncommitted); run "$d"; has "uncommitted: yes"; done_t
 t "on-base"; d=$(fixture --state on-base); run "$d"
 [ "$RC" -eq 0 ] || bad "$NAME: exit $RC"; has "status: nothing-to-review"; has "commits: 0"; done_t

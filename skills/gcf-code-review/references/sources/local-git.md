@@ -47,11 +47,11 @@ Review prior context in the commit messages. Files in the diff are the only file
 Taken from the script output (status `ok`), as **one** message with these parts in this order, then stop and wait:
 
 1. `` `<branch>` against `<base>` ``.
-2. Every `candidate:` line as `<ref>: <ahead> ahead, <behind> behind`, the `chosen` one marked.
+2. Every `candidate:` line as `<ref>: <ahead> ahead, <behind> behind`, the `chosen` one marked (`candidate: origin/develop 3 1 chosen` becomes `origin/develop: 3 ahead, 1 behind (chosen)`).
 3. `merge_base`, `commits` commits, `files` files of which `deleted` deleted.
 4. Only if `base_is_remote: yes`: `base_date` as the date of the base's last commit.
 5. Only when a spec was given: its outcome, read before this message. Read from `<source>`, or could not be read (say why) and ask for it as markdown (path or pasted) or for confirmation to review without it (Spec step of the workflow).
-6. Only if `uncommitted: yes`: a warning that uncommitted changes are not part of the review.
+6. Only if `uncommitted: yes`: a warning that uncommitted or untracked changes are not part of the review. The report's `Limitations` repeats it, also when this confirmation is skipped.
 7. The closing choice: confirm, change the base, or did you mean to review a PR?
 
 If the invocation message already confirms (for example "confirm, review now"), skip the wait and proceed; the facts still go in the report header. Exception: when a given spec could not be read, stop and ask. If the user names a different base, rerun the script with it and confirm again.
