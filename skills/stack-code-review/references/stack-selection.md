@@ -60,7 +60,7 @@ Red flag: "this Express route has no idempotency key", "no IAM/auth check like t
 For each distinct framework in the `unowned_hint` lines:
 
 1. Apply the general criteria, plus what you know of the framework's conventions (for example, for Express: error-handling middleware, async handler wrapping, body-parsing setup).
-2. Start the comment of EVERY finding on an `owner: none` file with `[model knowledge]` right after the Conventional Comments prefix, no exceptions (full rule in `references/output-format.md`). Findings on piece-owned files are never tagged.
+2. Start the comment of EVERY finding on a code file whose `owner:` is `none` with `[model knowledge]` right after the Conventional Comments prefix, no exceptions (full rule in `references/output-format.md`). Findings on piece-owned files are never tagged.
 3. Search the skills available in this session (names and descriptions) for one that names the framework. Consult the most specific one and note the others in `Limitations`. A consulted skill is listed on the `Stack(s):` bullet; its guidance still counts as model-level, not as a piece. Never present model knowledge as if it came from a piece.
 4. If no such skill exists, `Limitations` recommends installing a skill for that framework.
 
