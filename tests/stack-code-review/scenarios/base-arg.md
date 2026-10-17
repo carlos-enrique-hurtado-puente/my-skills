@@ -56,3 +56,14 @@ base: main
 - Read-only, stops before review — PASS
 - detect-base.sh used: yes
 - Forbidden commands: none
+
+### t4 (core split) — 2026-10-17
+- Verdict: PASS
+- Uses origin/main as base — PASS
+- Skips detection (detect-base.sh main, single candidate, no probing of develop) — PASS
+- 4 commits, 4 files, merge-base a5b9693, date 2026-01-01 — PASS
+- ONE message with confirm / change base / PR choice — PASS
+- Read-only, stops before review — PASS
+- detect-stacks.sh: n/a (stops at confirmation)
+- Forbidden commands: none
+- Notable: none

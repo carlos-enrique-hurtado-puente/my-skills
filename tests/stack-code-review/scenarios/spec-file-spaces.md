@@ -51,3 +51,13 @@ Confirmo.
 - Does not report docs/order spec.md as changed file — PASS
 - detect-base.sh used: yes
 - Forbidden commands: none
+
+### t4 (core split) — 2026-10-17
+- Verdict: PASS
+- Spec file with space read — PASS
+- Header Spec source: file docs/order spec.md — PASS
+- Criteria checked; idempotency (criterion 3) reported not met — PASS
+- docs/order spec.md not reported as changed file — PASS
+- detect-stacks.sh: yes (gcp-functions loaded; angular candidate-unused, not read)
+- Forbidden commands: none
+- Notable: Spanish labels: "Fuente de la spec: file docs/order spec.md".

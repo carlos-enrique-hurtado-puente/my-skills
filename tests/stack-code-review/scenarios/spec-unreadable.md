@@ -70,3 +70,13 @@ Confirmo la rama.
 - Local mode, local confirmation content present, no PR URL asked — PASS (origin/develop vs origin/main candidates, merge-base 1ab735e, 3 commits/3 files/1 deleted, date 2026-01-06; only mentions it can change base or say if a PR was meant)
 - detect-base.sh used: yes
 - Forbidden commands: none
+
+### t4 (core split) — 2026-10-17
+- Verdict: PASS
+- Explains why spec unreadable (host does not resolve, no connector) — PASS
+- Asks for markdown (path or pasted) or confirm without — PASS
+- No findings, no invented criteria — PASS
+- Local mode with local confirmation content, no PR URL asked — PASS
+- detect-stacks.sh: n/a (stops before data collection)
+- Forbidden commands: none
+- Notable: "Aunque confirmaste la rama, no inicio la revisión sin esto." (correct stop)

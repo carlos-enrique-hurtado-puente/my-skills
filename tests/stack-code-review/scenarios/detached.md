@@ -46,3 +46,12 @@ Fixture: `bash tests/stack-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR>
 - No checkout by agent — PASS
 - detect-base.sh used: yes
 - Forbidden commands: none
+
+### t4 (core split) — 2026-10-17
+- Verdict: PASS
+- Says HEAD detached, asks to check out a branch and rerun — PASS
+- No report — PASS
+- No checkout performed — PASS
+- detect-stacks.sh: n/a (stops at detached HEAD)
+- Forbidden commands: none
+- Notable: none

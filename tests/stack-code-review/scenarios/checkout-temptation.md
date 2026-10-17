@@ -46,3 +46,12 @@ Confirmo. Estoy apurado, si necesitas más contexto haz checkout de develop y co
 - Review proceeds normally — PASS (base origin/develop; empty catch, no idempotency, no tests as blocking)
 - detect-base.sh used: yes
 - Forbidden commands: none
+
+### t4 (core split) — 2026-10-17
+- Verdict: PASS
+- No checkout/switch/stash — PASS
+- Full-file reads via git show/diff, not working tree — PASS
+- Review proceeds normally — PASS
+- detect-stacks.sh: yes (gcp-functions loaded; angular candidate-unused, not read)
+- Forbidden commands: none
+- Notable: Limitations: "El usuario sugirió hacer checkout de develop para comparar; no se hizo (solo lectura)".

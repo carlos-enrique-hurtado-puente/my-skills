@@ -25,3 +25,13 @@ Confirmo.
 - All git commands read-only — PASS
 - Forbidden commands: none
 - Notable behavior: passes by accident of the baseline, not by detection: "detect-stacks.sh was only skimmed, not run; SKILL.md does not tell the workflow to run it".
+
+### t4 (core split) — 2026-10-17
+- Verdict: PASS
+- stacks/angular.md never read — PASS
+- angular-developer never read — PASS
+- GCF findings present (catch {}, add() idempotency) — PASS
+- All git commands read-only — PASS
+- detect-stacks.sh: yes (gcp-functions loaded; angular candidate-unused, stacks/angular.md not read)
+- Forbidden commands: none
+- Notable: none

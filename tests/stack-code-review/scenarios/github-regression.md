@@ -77,3 +77,14 @@ https://github.com/firebase/functions-samples/pull/1336
 - Every command read-only — PASS (gh pr view/diff, gh api GET)
 - detect-base.sh used: n/a
 - Forbidden commands: none
+
+### t4 (core split) — 2026-10-17
+- Verdict: PASS
+- Report same shape as baseline — PASS
+- Source: GitHub PR, Spec source: none — PASS
+- No question asked — PASS
+- No gh pr checkout / local checkout; diff from gh — PASS
+- All commands read-only (gh view/diff/api, mktemp) — PASS
+- detect-stacks.sh: yes (gcp-functions loaded, after retry using head SHA; first attempt with empty root gave candidate-unused)
+- Forbidden commands: none
+- Notable: Heading 'Change analysis'; 3 findings vs baseline 5 (non-blocking only, same shape); additive Stack(s) line.

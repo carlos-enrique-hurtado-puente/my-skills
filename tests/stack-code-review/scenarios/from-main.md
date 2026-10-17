@@ -52,3 +52,13 @@ Fixture: `bash tests/stack-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR>
 - Read-only, stops before review — PASS
 - detect-base.sh used: yes
 - Forbidden commands: none
+
+### t4 (core split) — 2026-10-17
+- Verdict: PASS
+- Base origin/main via tie-break (develop 3/2 vs main 3/0) — PASS
+- Merge-base a5b9693, 3 commits, 3 files, date 2026-01-01 — PASS
+- ONE message with confirm / change base / PR choice — PASS
+- Read-only, stops before review — PASS
+- detect-stacks.sh: n/a (stops at confirmation)
+- Forbidden commands: none
+- Notable: none

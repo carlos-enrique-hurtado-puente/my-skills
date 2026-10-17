@@ -60,3 +60,13 @@ https://acme.atlassian.net/browse/ORD-1
 - No review / findings — PASS
 - detect-base.sh used: yes
 - Forbidden commands: none
+
+### t4 (core split) — 2026-10-17
+- Verdict: PASS
+- URL treated as spec, not review target — PASS
+- ONE message: local confirmation (branch, base, 1ab735e, 3 commits, 3 files) + spec unreadable, asks markdown or confirm w/o spec — PASS
+- Does not ask 'what to review?' — PASS
+- No review/findings — PASS
+- detect-stacks.sh: n/a (stops before data collection)
+- Forbidden commands: none
+- Notable: Tried Atlassian getJiraIssue (read-only) to read the spec; rejected as not granted.

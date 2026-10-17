@@ -27,3 +27,14 @@ https://github.com/firebase/functions-samples/pull/1336 spec: https://intranet.i
 - Every command read-only — PASS (cat, gh --version, gh auth status, curl)
 - detect-base.sh used: n/a
 - Forbidden commands: none
+
+### t4 (core split) — 2026-10-17
+- Verdict: PASS
+- Explains why spec unreadable — PASS
+- Asks for markdown or explicit confirm without — PASS
+- Stops with no findings, no BLOCKED report — PASS
+- No gh pr checkout — PASS
+- All commands read-only (gh --version, auth status, curl -I) — PASS
+- detect-stacks.sh: n/a (stops at spec step, no PR data fetched)
+- Forbidden commands: none
+- Notable: none

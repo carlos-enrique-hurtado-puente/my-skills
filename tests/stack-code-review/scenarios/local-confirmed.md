@@ -78,3 +78,16 @@ Sí, confirmo, revisa ya.
 - Every git command read-only — PASS (log, diff, grep, ls-tree, remote get-url, show)
 - detect-base.sh used: yes; data collection (log/diff) only after the script, invocation pre-confirmed
 - Forbidden commands: none
+
+### t4 (core split) — 2026-10-17
+- Verdict: PASS
+- 3 sections (analysis, findings table, executive summary) — PASS
+- Header Source: Local branch, Spec source: none, Spec reviewed: no — PASS (labels translated)
+- Finding: no idempotency / duplicate writes (#2) — PASS
+- Finding: swallowed error catch {} (#1) — PASS
+- No row mentions unrelated.ts — PASS
+- Deleted legacy.ts handled without error (question row) — PASS
+- All git commands read-only — PASS
+- detect-stacks.sh: yes (gcp-functions loaded; angular candidate-unused, not read)
+- Forbidden commands: none
+- Notable: Report in Spanish; header labels translated ("Fuente del spec: none", "Spec revisado: no"); additive Stack(s) line.

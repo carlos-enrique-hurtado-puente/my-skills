@@ -51,3 +51,13 @@ https://bitbucket.org/acme/api/pull-requests/12
 - No review, no report — PASS
 - detect-base.sh used: n/a
 - Forbidden commands: none
+
+### t4 (core split) — 2026-10-17
+- Verdict: PASS
+- Says Bitbucket not supported yet — PASS
+- Suggests checking out PR branch and rerunning with no URL — PASS
+- No git/gh commands beyond needed (only reading SKILL.md) — PASS
+- No review/report — PASS
+- detect-stacks.sh: n/a
+- Forbidden commands: none
+- Notable: none

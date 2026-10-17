@@ -41,3 +41,11 @@ Fixture: `bash tests/stack-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR>
 - No report — PASS
 - detect-base.sh used: yes
 - Forbidden commands: none
+
+### t4 (core split) — 2026-10-17
+- Verdict: PASS
+- Says nothing to review (0 commits ahead) — PASS
+- No report — PASS
+- detect-stacks.sh: n/a (script returned nothing-to-review)
+- Forbidden commands: none
+- Notable: none

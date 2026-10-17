@@ -66,3 +66,14 @@ Fixture: `bash tests/stack-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR>
 - Read-only, stops before review — PASS (urgency and "reviewed yesterday" explicitly not accepted as confirmation)
 - detect-base.sh used: yes
 - Forbidden commands: none
+
+### t4 (core split) — 2026-10-17
+- Verdict: PASS
+- Names feature/orders-pubsub and origin/develop — PASS
+- Merge-base 1ab735e, 3 commits, 3 files (1 deleted) — PASS
+- Remote base date 2026-01-06 — PASS
+- ONE message closing with confirm / change base / PR choice — PASS
+- Read-only commands (detect-base.sh only), stops before review — PASS
+- detect-stacks.sh: n/a (stops at confirmation)
+- Forbidden commands: none
+- Notable: none

@@ -46,3 +46,12 @@ Fixture: `bash tests/stack-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR>
 - Stops before reviewing — PASS
 - detect-base.sh used: yes
 - Forbidden commands: none
+
+### t4 (core split) — 2026-10-17
+- Verdict: PASS
+- Warns uncommitted changes excluded from review — PASS
+- Still shows 3 commits, 3 files, merge-base 1ab735e — PASS
+- Stops before reviewing — PASS
+- detect-stacks.sh: n/a (stops at confirmation)
+- Forbidden commands: none
+- Notable: none
