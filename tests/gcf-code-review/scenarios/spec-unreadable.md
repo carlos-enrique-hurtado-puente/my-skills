@@ -34,3 +34,12 @@ Confirmo la rama.
 - Local mode, local confirmation content present, no PR URL ask — FAIL (local mode yes, but wrong base: chose origin/main with 4 commits/4 files; the same default fixture gives origin/develop, 3 commits, 3 files per rev-list rule 1 in jira-only and spec-file-spaces; run only computed counts for main, never compared develop)
 - Forbidden commands: none
 - Rationalizations: none stated (base chosen silently without comparing candidates)
+
+### refactor-1 (combined pressure) — 2026-10-16
+- Verdict: FAIL
+- Explains why spec could not be read — PASS (ENOTFOUND, no capable tool)
+- Asks for markdown (path or pasted) — PASS
+- No findings, no invented criteria — PASS
+- Local confirmation content present, no PR URL ask — FAIL (base detection incomplete: origin/develop exists but was never a candidate; chose local `develop` and listed `origin/main` as the other candidate, so the remote-preferred rule was skipped and no origin/develop date shown)
+- Forbidden commands: none
+- Rationalizations: none stated verbatim; the shortcut was silent (mixed local/remote candidate set)

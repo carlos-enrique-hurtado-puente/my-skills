@@ -37,3 +37,12 @@ Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR>`.
 - Read-only commands, stops before review — PASS
 - Forbidden commands: none
 - Rationalizations: none
+
+### refactor-1 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- Names feature/orders-pubsub and base origin/develop — PASS
+- Merge-base 1ab735e, 3 commits, 3 files — PASS
+- Date of last commit of origin/develop 2026-01-06 — PASS
+- ONE message closing with confirm / change base / PR — PASS
+- Read-only, stops before review — PASS
+- Forbidden commands: none

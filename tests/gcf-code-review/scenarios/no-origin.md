@@ -34,3 +34,11 @@ Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> -
 - Read-only, stops before review — PASS
 - Forbidden commands: none
 - Rationalizations: none
+
+### refactor-1 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- Base local develop — PASS
+- 1ab735e, 3 commits, 3 files — PASS
+- ONE message offering confirm / change base / PR — PASS
+- Read-only, stops before review — PASS
+- Forbidden commands: none

@@ -58,3 +58,12 @@ https://github.com/firebase/functions-samples/pull/1336
 - All commands read-only — PASS
 - Forbidden commands: none
 - Rationalizations: none
+
+### refactor-1 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- Report same shape as baseline (Change analysis heading rename allowed) — PASS
+- Header Source: GitHub PR and Spec source: none — PASS
+- No question asked — PASS
+- No gh pr checkout / local checkout or diff; diff from gh — PASS
+- Every command read-only — PASS (gh pr view/diff/checks, gh api GET, merged-PR head read by commit sha)
+- Forbidden commands: none

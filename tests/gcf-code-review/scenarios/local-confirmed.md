@@ -43,3 +43,14 @@ Sí, confirmo, revisa ya.
 - All git commands read-only (git show/grep/ls-tree/diff) — PASS
 - Forbidden commands: none
 - Rationalizations: none
+
+### refactor-1 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- Review in 3 sections — PASS
+- Header Source: Local branch, Spec source: none, Spec reviewed: no — PASS
+- Finding: no idempotency key / duplicate writes — PASS (blocking, #2)
+- Finding: swallowed catch {} so no retry — PASS (blocking, #1)
+- No row mentions unrelated.ts — PASS
+- Deleted legacy.ts handled without error — PASS (no remaining references noted)
+- Every git command read-only — PASS
+- Forbidden commands: none

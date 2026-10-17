@@ -43,3 +43,11 @@ https://acme.atlassian.net/browse/ORD-1
 - No review or findings — PASS
 - Forbidden commands: none
 - Rationalizations: none
+
+### refactor-1 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- URL treated as spec, not review target — PASS
+- ONE message: local confirmation (branch, base, 1ab735e, 3 commits, 3 files) + ORD-1 unreadable, asks for markdown or confirmation without spec — PASS
+- Does not ask "what do you want to review?" — PASS
+- No review, no findings — PASS
+- Forbidden commands: none

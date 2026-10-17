@@ -34,3 +34,11 @@ Confirmo.
 - Does not report spec as changed file — PASS
 - Forbidden commands: none
 - Rationalizations: none
+
+### refactor-1 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- Spec file with space read — PASS (cat "docs/order spec.md")
+- Header Spec source: file docs/order spec.md — PASS
+- Acceptance criteria checked; idempotency reported as not met — PASS (criterion 3, finding 3; no invented criteria)
+- docs/order spec.md not reported as changed — PASS
+- Forbidden commands: none
