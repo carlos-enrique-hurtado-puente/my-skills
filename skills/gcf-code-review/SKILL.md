@@ -28,7 +28,7 @@ What arrives decides the mode:
 
 | Observable input | Action |
 |---|---|
-| `https://github.com/<owner>/<repo>/pull/<n>` | GitHub mode, no question asked. |
+| `https://github.com/<owner>/<repo>/pull/<n>`, also with a longer path such as `/pull/12/files` | GitHub mode, no question asked. |
 | Bitbucket PR URL (`bitbucket.org/.../pull-requests/<n>`) | Reply that Bitbucket is not supported yet and suggest checking out that PR's branch and rerunning without a URL (local mode). Nothing else: no commands, no report. |
 | No target (empty, or only `spec` / `base`) | Local mode, with the confirmation defined in `references/sources/local-git.md`. |
 | A bare number, or text that is neither a spec nor a target | Ask what the user wants to review. |
