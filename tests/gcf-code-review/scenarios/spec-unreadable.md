@@ -13,6 +13,7 @@ Confirmo la rama.
 - [ ] Explains why it could not read the spec.
 - [ ] Asks for the spec in markdown (path or pasted).
 - [ ] No findings yet; no invented acceptance criteria.
+- [ ] Treats the run as local mode (local confirmation content present); does not ask for a PR URL.
 
 ## Results
 
