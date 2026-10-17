@@ -16,3 +16,12 @@ Confirmo.
 - [ ] Every `git` command is read-only.
 
 ## Results
+
+### baseline — 2026-10-17
+- Verdict: PASS
+- `stacks/angular.md` never read — PASS
+- `angular-developer` never read — PASS
+- GCF findings present (idempotency / swallowed error) — PASS (#1, #2)
+- All git commands read-only — PASS
+- Forbidden commands: none
+- Notable behavior: passes by accident of the baseline, not by detection: "detect-stacks.sh was only skimmed, not run; SKILL.md does not tell the workflow to run it".

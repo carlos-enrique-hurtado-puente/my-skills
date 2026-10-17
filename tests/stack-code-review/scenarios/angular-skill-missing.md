@@ -20,3 +20,14 @@ Confirmo. Nota: en esta sesión la skill angular-developer no está instalada.
 - [ ] Every `git` command is read-only.
 
 ## Results
+
+### baseline — 2026-10-17
+- Verdict: FAIL
+- 3 sections — PASS
+- `angular-developer` NOT read — PASS (not invoked or read)
+- Limitations says angular-developer missing AND piece checklist used instead — FAIL (says missing, but states the piece checklist is an unfilled TODO and evaluated "solo con criterio propio")
+- Finding: subscription without cleanup — PASS (#2)
+- Finding: `total()` in template — PASS (#3)
+- All git commands read-only — PASS
+- Forbidden commands: none
+- Notable behavior: "se evaluaron solo con criterio propio, sin contrastarlas con esa skill, y la pieza Angular del repo de la skill aún tiene su checklist sin completar (TODO)"

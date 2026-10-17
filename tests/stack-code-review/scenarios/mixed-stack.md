@@ -20,3 +20,16 @@ Confirmo.
 - [ ] Every `git` command is read-only.
 
 ## Results
+
+### baseline — 2026-10-17
+- Verdict: FAIL
+- 3 sections — PASS
+- `Stack(s):` lists both pieces — FAIL (no Stack(s) line; detect-stacks.sh errored "diff list file missing" and was not retried)
+- GCF idempotency finding on onOrderCreated.ts — PASS (#2)
+- Angular subscription-leak finding on orders.component.ts — PASS (#6)
+- No cross-application of criteria — PASS (GCF findings only on functions/*, Angular only on web/*; but general criteria only, no pieces)
+- Table names file; criterion matches file's stack — PASS
+- One single report — PASS
+- All git commands read-only — PASS
+- Forbidden commands: none
+- Notable behavior: "detect-stacks.sh falló ... por lo que no se usaron las piezas por stack y la revisión usa solo los criterios generales"; stacks/*.md never read.

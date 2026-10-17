@@ -20,3 +20,16 @@ Confirmo.
 - [ ] Every `git` command is read-only.
 
 ## Results
+
+### baseline — 2026-10-17
+- Verdict: FAIL
+- 3 sections — PASS
+- `Stack(s):` says Express, model knowledge (lower confidence), no piece — FAIL (no Stack(s) line; Express only mentioned in Limitations/Runtime)
+- Express-convention findings tagged `[model knowledge]` — FAIL (no tags; #7 express.json limit untagged)
+- Limitations names a skill found or recommends installing one — FAIL (neither)
+- Finding: `req.body.amount` unvalidated — PASS (#3)
+- Finding: swallowed error `catch (e) {}` — PASS (#1)
+- No GCF/Angular criteria — FAIL (#6 idempotency, #5 authN/IAM-style token check applied)
+- All git commands read-only — PASS
+- Forbidden commands: none
+- Notable behavior: "la revisión usa solo los criterios generales, sin reglas específicas de Express"; finding #6 "crear un pedido no es idempotente" (GCF-style criterion).
