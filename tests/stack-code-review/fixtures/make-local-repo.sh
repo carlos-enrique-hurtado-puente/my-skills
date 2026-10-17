@@ -3,6 +3,7 @@
 #
 # Usage: make-local-repo.sh <dir> [--no-origin] [--from-main] [--uncommitted]
 #                                 [--state feature|detached|on-base]
+#                                 [--stack gcp|angular|express|mixed]
 # Prints the absolute fixture path on stdout (last line). Works on bash 3.2.
 #
 # History (default):
@@ -11,25 +12,38 @@
 #   feature/orders-pubsub (from develop at d1): f1 add handler, f2 package.json, f3 delete legacy.ts
 # With --from-main the feature branches from main (m1) instead; origin/HEAD points to origin/develop
 # (so main can only win base detection via the tie-break on HEAD..<base>).
+# --stack (default gcp = the history above, unchanged):
+#   angular : main has web/package.json (Angular 18 + karma); feature adds web/src/app/orders.component.ts
+#   express : main has a root package.json (express); feature adds src/routes.js
+#   mixed   : gcp skeleton + web/package.json on main; feature = the 3 gcp commits + the angular commit
+# Same main -> develop -> feature layout, d1 spec, d2 on develop touching the "unrelated" file
+# (functions/src/unrelated.ts for gcp/mixed, src/unrelated.js for express, web/src/unrelated.ts for angular).
 # Note: --uncommitted modifies onOrderCreated.ts; with --state on-base (file absent) it modifies unrelated.ts instead.
 set -euo pipefail
 
-usage() { echo "usage: $0 <dir> [--no-origin] [--from-main] [--uncommitted] [--state feature|detached|on-base]" >&2; exit 2; }
+usage() { echo "usage: $0 <dir> [--no-origin] [--from-main] [--uncommitted] [--state feature|detached|on-base] [--stack gcp|angular|express|mixed]" >&2; exit 2; }
 
 [ $# -ge 1 ] || usage
 DIR="$1"; shift
-NO_ORIGIN=0; FROM_MAIN=0; UNCOMMITTED=0; STATE=feature
+NO_ORIGIN=0; FROM_MAIN=0; UNCOMMITTED=0; STATE=feature; STACK=gcp
 while [ $# -gt 0 ]; do
   case "$1" in
     --no-origin) NO_ORIGIN=1 ;;
     --from-main) FROM_MAIN=1 ;;
     --uncommitted) UNCOMMITTED=1 ;;
     --state) shift; [ $# -ge 1 ] || usage; STATE="$1" ;;
+    --stack) shift; [ $# -ge 1 ] || usage; STACK="$1" ;;
     *) usage ;;
   esac
   shift
 done
 case "$STATE" in feature|detached|on-base) ;; *) usage ;; esac
+case "$STACK" in gcp|angular|express|mixed) ;; *) usage ;; esac
+case "$STACK" in
+  gcp|mixed) UNREL="functions/src/unrelated.ts" ;;
+  angular)   UNREL="web/src/unrelated.ts" ;;
+  express)   UNREL="src/unrelated.js" ;;
+esac
 
 case "$DIR" in /*) ;; *) DIR="$PWD/$DIR" ;; esac
 DIR="${DIR%/}"
@@ -59,6 +73,7 @@ commit() { # commit <message>
 git -c init.defaultBranch=main init -q "$DIR"
 
 # ---- main: m1 ----
+if [ "$STACK" = gcp ] || [ "$STACK" = mixed ]; then
 mkdir -p "$DIR/functions/src"
 cat > "$DIR/README.md" <<'EOT'
 # orders-api
@@ -82,6 +97,40 @@ EOT
 cat > "$DIR/functions/src/unrelated.ts" <<'EOT'
 export const VERSION = "1.0.0";
 EOT
+fi
+if [ "$STACK" = angular ] || [ "$STACK" = mixed ]; then
+  mkdir -p "$DIR/web/src/app"
+  cat > "$DIR/web/package.json" <<'EOT'
+{
+  "name": "web",
+  "dependencies": {
+    "@angular/core": "^18.0.0",
+    "@angular/common": "^18.0.0",
+    "rxjs": "~7.8.0"
+  },
+  "devDependencies": {
+    "karma": "~6.4.0",
+    "jasmine-core": "~5.1.0"
+  }
+}
+EOT
+  [ "$STACK" = angular ] && printf '%s\n' '# orders-web' 'Angular frontend for orders.' > "$DIR/README.md"
+  [ "$STACK" = angular ] && printf 'export const VERSION = "1.0.0";\n' > "$DIR/web/src/unrelated.ts"
+fi
+if [ "$STACK" = express ]; then
+  mkdir -p "$DIR/src"
+  printf '%s\n' '# orders-api' 'Express backend for orders.' > "$DIR/README.md"
+  cat > "$DIR/package.json" <<'EOT'
+{
+  "name": "orders-api",
+  "main": "src/routes.js",
+  "dependencies": {
+    "express": "^4.19.0"
+  }
+}
+EOT
+  printf 'exports.VERSION = "1.0.0";\n' > "$DIR/src/unrelated.js"
+fi
 G add -A
 commit "chore: initial functions skeleton"
 
@@ -115,6 +164,7 @@ fi
 
 # ---- feature: f1..f3 ----
 G checkout -q feature/orders-pubsub
+if [ "$STACK" = gcp ] || [ "$STACK" = mixed ]; then
 cat > "$DIR/functions/src/onOrderCreated.ts" <<'EOT'
 import { onMessagePublished } from "firebase-functions/v2/pubsub";
 import { getFirestore } from "firebase-admin/firestore";
@@ -148,10 +198,61 @@ commit "chore: add zod dependency"
 
 G rm -q functions/src/legacy.ts
 commit "refactor: remove legacy total helper"
+fi
+
+if [ "$STACK" = angular ] || [ "$STACK" = mixed ]; then
+  cat > "$DIR/web/src/app/orders.component.ts" <<'EOT'
+import { Component, OnInit } from "@angular/core";
+import { OrdersService } from "./orders.service";
+
+@Component({
+  selector: "app-orders",
+  template: `<p>Total: {{ total() }}</p>`,
+})
+export class OrdersComponent implements OnInit {
+  items: { amount: number }[] = [];
+
+  constructor(private svc: OrdersService) {}
+
+  ngOnInit(): void {
+    this.svc.orders$.subscribe((orders) => {
+      this.items = orders;
+    });
+  }
+
+  total(): number {
+    return this.items.reduce((sum, i) => sum + i.amount, 0);
+  }
+}
+EOT
+  G add -A
+  commit "feat: add orders component"
+fi
+
+if [ "$STACK" = express ]; then
+  cat > "$DIR/src/routes.js" <<'EOT'
+const express = require("express");
+const app = express();
+app.use(express.json());
+
+app.post("/orders", async (req, res) => {
+  try {
+    const amount = req.body.amount;
+    await saveOrder({ amount, createdAt: Date.now() });
+    res.status(201).json({ ok: true, amount });
+  } catch (e) {}
+});
+
+module.exports = app;
+EOT
+  G add -A
+  commit "feat: add orders route"
+fi
 
 # ---- develop: d2 (leak check, after the branch point) ----
 G checkout -q develop
-cat > "$DIR/functions/src/unrelated.ts" <<'EOT'
+mkdir -p "$DIR/$(dirname "$UNREL")"
+cat > "$DIR/$UNREL" <<'EOT'
 export const VERSION = "1.1.0";
 export const BUILD = "develop-only";
 EOT
@@ -178,7 +279,7 @@ if [ "$UNCOMMITTED" -eq 1 ]; then
   if [ -f "$DIR/functions/src/onOrderCreated.ts" ]; then
     echo "// TODO: wip, not committed" >> "$DIR/functions/src/onOrderCreated.ts"
   else
-    echo "// wip, not committed" >> "$DIR/functions/src/unrelated.ts"
+    echo "// wip, not committed" >> "$DIR/$UNREL"
   fi
 fi
 

@@ -11,10 +11,10 @@ Pressure scenarios for the `stack-code-review` skill, in the superpowers:writing
 ## Build a fixture
 
 ```bash
-bash tests/stack-code-review/fixtures/make-local-repo.sh <dir> [--no-origin] [--from-main] [--uncommitted] [--state feature|detached|on-base]
+bash tests/stack-code-review/fixtures/make-local-repo.sh <dir> [--no-origin] [--from-main] [--uncommitted] [--state feature|detached|on-base] [--stack gcp|angular|express|mixed]
 ```
 
-Prints the fixture path. `<dir>` must not exist or must be empty; a bare origin is created beside it as `<dir>.origin.git` (unless `--no-origin`). Authors and dates are fixed, so the same flags always give the same commit shas. Use a scratch location, not inside this repo.
+`--stack angular|express|mixed` swaps the project for an Angular (`web/`), Express (root) or both-stacks fixture with the same branch layout; default `gcp` is unchanged. Prints the fixture path. `<dir>` must not exist or must be empty; a bare origin is created beside it as `<dir>.origin.git` (unless `--no-origin`). Authors and dates are fixed, so the same flags always give the same commit shas. Use a scratch location, not inside this repo.
 
 Default shape: `main` (1 commit) -> `develop` (+ `docs/order spec.md`, +1 commit touching `functions/src/unrelated.ts` AFTER the branch point) and `feature/orders-pubsub` (3 commits from `develop`: add `onOrderCreated.ts` with no idempotency and `catch {}`, modify `functions/package.json`, delete `functions/src/legacy.ts`). `unrelated.ts` must never appear in a review. With `--from-main`, the feature branches from `main`; `origin/HEAD` points to `origin/develop`. `develop..HEAD` and `main..HEAD` both have 3 commits, so detection must tie-break on `HEAD..<base>` (develop 2, main 0), which picks `main`. `--uncommitted --state on-base` modifies `unrelated.ts` (the handler file does not exist on `develop`).
 
