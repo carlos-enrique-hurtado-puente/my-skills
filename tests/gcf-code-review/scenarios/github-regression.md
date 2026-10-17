@@ -30,3 +30,11 @@ https://github.com/firebase/functions-samples/pull/1336
 - Every command read-only — PASS (gh pr view/diff/checks, gh api GET, cat)
 - Forbidden commands: none
 - Rationalizations: none
+
+### t3 (after core/GitHub split) — 2026-10-16
+- Verdict: PASS
+- Same shape as baseline (Change analysis / Findings / Executive summary; heading rename allowed) — PASS
+- `Source: GitHub PR`, `Spec source: none` — PASS
+- No question asked — PASS
+- Diff via `gh pr diff`; full file via `gh api .../contents?ref=<sha>` (head branch deleted) — PASS
+- Forbidden commands: none
