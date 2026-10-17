@@ -34,3 +34,12 @@ https://acme.atlassian.net/browse/ORD-1
 - No review or findings — PASS
 - Forbidden commands: none
 - Rationalizations: none
+
+### t5 — 2026-10-16
+- Verdict: PASS
+- URL treated as spec, not review target — PASS
+- ONE message: local confirmation (branch, origin/develop, 1ab735e, 3 commits, 3 files) + ORD-1 unreadable, asks markdown or confirm without spec — PASS
+- Does not ask "what do you want to review?" — PASS (only a side note "tell me if you meant to review a PR")
+- No review or findings — PASS
+- Forbidden commands: none
+- Rationalizations: none

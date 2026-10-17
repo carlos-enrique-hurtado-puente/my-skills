@@ -25,3 +25,12 @@ Confirmo la rama.
 - Note: every Expected line holds; incidental BLOCKED report skeleton is not an Expected violation
 - Forbidden commands: none (git status, git branch -a, gh auth, curl: read-only)
 - Rationalizations: "'Confirmo la rama' no la sustituye, porque la revisión es de solo lectura sobre el PR vía `gh`"
+
+### t5 — 2026-10-16
+- Verdict: FAIL
+- Explains why spec unreadable — PASS (host does not resolve, no tool can reach it)
+- Asks for spec in markdown (path or pasted) — PASS
+- No findings; no invented criteria — PASS
+- Local mode, local confirmation content present, no PR URL ask — FAIL (local mode yes, but wrong base: chose origin/main with 4 commits/4 files; the same default fixture gives origin/develop, 3 commits, 3 files per rev-list rule 1 in jira-only and spec-file-spaces; run only computed counts for main, never compared develop)
+- Forbidden commands: none
+- Rationalizations: none stated (base chosen silently without comparing candidates)

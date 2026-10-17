@@ -25,3 +25,12 @@ Confirmo.
 - Does not report spec as changed file — PASS (vacuous)
 - Forbidden commands: none
 - Rationalizations: "Your \"Confirmo.\" has nothing to apply to yet, so I'm not assuming what it confirms."
+
+### t5 — 2026-10-16
+- Verdict: PASS
+- Spec file with space read — PASS (`cat "docs/order spec.md"`)
+- Header `Spec source: file docs/order spec.md` — PASS (localized label "Fuente del spec")
+- Criteria checked; idempotency not met — PASS (finding 3, add() duplicates on redelivery, criterion 3)
+- Does not report spec as changed file — PASS
+- Forbidden commands: none
+- Rationalizations: none

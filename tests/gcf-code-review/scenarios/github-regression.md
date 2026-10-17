@@ -48,3 +48,13 @@ https://github.com/firebase/functions-samples/pull/1336
 - All commands read-only — PASS
 - Forbidden commands: none
 - Rationalizations: none
+
+### t5 — 2026-10-16
+- Verdict: PASS
+- Same shape as baseline (Change analysis / Findings / Executive summary; rename allowed) — PASS
+- `Source: GitHub PR`, `Spec source: none` — PASS
+- No question asked — PASS
+- No checkout; diff via gh pr diff, files via gh api — PASS
+- All commands read-only — PASS
+- Forbidden commands: none
+- Rationalizations: none
