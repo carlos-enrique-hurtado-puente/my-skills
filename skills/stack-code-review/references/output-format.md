@@ -57,6 +57,7 @@ Rules:
 - "Comment to post" = the complete comment, ready to paste as an inline PR review comment.
 - Row test: if one defect could be fixed without fixing the other (missing `await` vs. read-modify-write race; wrong ratio vs. missing input validation), they are two rows. Cross-reference with "see finding N" instead of merging.
 - No free text between rows; any extra explanation goes inside the cell.
+- A finding that rests on framework conventions for a stack with no piece starts its comment, right after the prefix, with `[model knowledge]` (e.g. `issue (non-blocking): [model knowledge] ...`). Keep the tag in English. Findings from the general criteria or a piece are never tagged.
 - Lines = new version of the file; if undeterminable, function/block/file. Never invent lines.
 
 ### Conventional Comments prefixes (a comment starts with one)

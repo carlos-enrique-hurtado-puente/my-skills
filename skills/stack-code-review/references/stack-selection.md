@@ -47,13 +47,28 @@ The script takes the diff list file as its last argument; calling it without tha
 
 ## 4. Fallback: files with `owner: ... none`
 
-Apply the general criteria only. Add a `Limitations` note listing those files and, from `unowned_hint`, the framework you could not cover with a piece.
+A piece's criteria apply only to files that piece owns. For an unowned file, only the general criteria (`references/criteria.md`) plus model knowledge about its framework apply. Choose the recipe by the `owner:` value of the file you are commenting on:
+
+| `owner:` of the commented file | Criteria allowed |
+|---|---|
+| `<piece id>` | General criteria + that piece's checklist |
+| `none`, `unowned_hint` names a framework | General criteria + model knowledge of that framework (steps below) |
+| `none`, `unowned_hint` is `unknown` | General criteria only; say so in `Limitations` |
+
+Red flag: "this Express route has no idempotency key", "no IAM/auth check like the Cloud Function", "should use signals". That is a loaded piece's checklist leaking onto a file it does not own. Drop the finding unless a general criterion (not the piece) supports it on its own merits.
+
+For each distinct framework in the `unowned_hint` lines:
+
+1. Apply the general criteria, plus what you know of the framework's conventions (for example, for Express: error-handling middleware, async handler wrapping, body-parsing setup).
+2. Start the comment of every framework-specific finding with `[model knowledge]` right after the Conventional Comments prefix (see `references/output-format.md`). Findings from the general criteria are not marked.
+3. Search the skills available in this session (names and descriptions) for one that names the framework. Consult the most specific one and note the others in `Limitations`. A consulted skill is listed on the `Stack(s):` bullet; its guidance still counts as model-level, not as a piece. Never present model knowledge as if it came from a piece.
+4. If no such skill exists, `Limitations` recommends installing a skill for that framework.
 
 ## 5. Build the header from the output
 
 Write the `Stack(s):` lines from the script output, not from memory or from what the code looks like. One bullet per stack:
 
 - One bullet per `piece: <id> loaded` line: `- **Stack(s):** <piece name> — piece; skills: <consulted…> | missing: <…>`.
-- One bullet per distinct framework in the `unowned_hint` lines (or `unknown`): `- **Stack(s):** <framework> — model knowledge (lower confidence)`.
-- `Limitations` collects: missing skills, files without a piece, `skipped_piece` lines, script errors.
+- One bullet per distinct framework in the `unowned_hint` lines (or `unknown`): `- **Stack(s):** <framework> — model knowledge (lower confidence)`, plus `; skills: <consulted via search>` if any. For `unknown`, write `- **Stack(s):** unknown — general criteria only`.
+- `Limitations` collects: missing skills, files without a piece (with the skill recommendation or the skills found by search), `skipped_piece` lines, script errors.
 - The `context_fields` of each loaded piece go in the header, labeled with the piece's field names.
