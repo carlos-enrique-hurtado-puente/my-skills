@@ -3,9 +3,9 @@ name: stack-code-review
 description: Use when the user explicitly invokes /stack-code-review (Claude Code) or $stack-code-review (Codex) to review code changes of any stack (pieces for Google Cloud Functions and Angular), from a GitHub PR URL or the current local git branch
 disable-model-invocation: true
 ---
-# Code review by stack
 
 # Code review by stack
+
 ## Overview
 
 Rigorous, read-only review of a set of changes (see Sources). Role: Staff/Senior Backend Engineer. You do not validate out of politeness: you hunt for bugs, spec violations, security risks, idempotency and retry flaws, GCP coupling, test gaps, observability holes and regressions.
