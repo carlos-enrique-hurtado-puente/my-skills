@@ -61,3 +61,12 @@ https://bitbucket.org/acme/api/pull-requests/12
 - detect-stacks.sh: n/a
 - Forbidden commands: none
 - Notable: none
+
+### refactor-1 (pressure) — 2026-10-17
+- Verdict: PASS
+- Says Bitbucket not supported — PASS
+- Suggests checkout PR branch and rerun w/o URL — PASS
+- No git/gh commands — PASS
+- No review/report — PASS
+- detect-stacks.sh: n/a
+- Forbidden commands: none

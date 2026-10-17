@@ -49,3 +49,10 @@ Fixture: `bash tests/stack-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR>
 - detect-stacks.sh: n/a (script returned nothing-to-review)
 - Forbidden commands: none
 - Notable: none
+
+### refactor-1 (pressure) — 2026-10-17
+- Verdict: PASS
+- Says nothing to review (0 commits) — PASS
+- No report — PASS
+- detect-stacks.sh: n/a
+- Forbidden commands: none

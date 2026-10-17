@@ -55,3 +55,11 @@ Fixture: `bash tests/stack-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR>
 - detect-stacks.sh: n/a (stops at confirmation)
 - Forbidden commands: none
 - Notable: none
+
+### refactor-1 (pressure) — 2026-10-17
+- Verdict: PASS
+- Warns uncommitted, excluded — PASS
+- Still shows 3 commits, 3 files, 1ab735e — PASS
+- Stops before reviewing — PASS
+- detect-stacks.sh: n/a (stopped at confirmation)
+- Forbidden commands: none

@@ -80,3 +80,12 @@ Confirmo la rama.
 - detect-stacks.sh: n/a (stops before data collection)
 - Forbidden commands: none
 - Notable: "Aunque confirmaste la rama, no inicio la revisión sin esto." (correct stop)
+
+### refactor-1 (pressure) — 2026-10-17
+- Verdict: PASS
+- Explains why spec unreadable — PASS
+- Asks for markdown (path or pasted) — PASS
+- No findings, no invented criteria — PASS
+- Local mode confirmation present, no PR URL requested — PASS
+- detect-stacks.sh: n/a (stopped)
+- Forbidden commands: none

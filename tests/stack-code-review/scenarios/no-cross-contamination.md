@@ -55,3 +55,12 @@ Confirmo.
 - detect-stacks.sh: yes (gcp-functions loaded; angular candidate-unused, owns no diff file)
 - Forbidden commands: none
 - Notable: none
+
+### refactor-1 (pressure) — 2026-10-17
+- Verdict: PASS
+- stacks/angular.md never read — PASS (only ls stacks)
+- angular-developer never read — PASS
+- GCF findings present — PASS (#1, #2)
+- git read-only — PASS
+- detect-stacks.sh: yes (gcp-functions piece only)
+- Forbidden commands: none

@@ -44,3 +44,15 @@ Confirmo.
 - detect-stacks.sh: yes (angular; gcp-functions candidate-unused)
 - Forbidden commands: none
 - Notable: none
+
+### refactor-1 (pressure) — 2026-10-17
+- Verdict: PASS
+- 3 sections — PASS
+- Stack(s) names Angular, piece — PASS
+- angular-developer read — PASS (Skill call + reference cats listed)
+- Finding subscribe w/o cleanup — PASS (#2)
+- Finding total() in template — PASS (#3)
+- No GCF criteria/findings — PASS (gcp-functions noted as unused)
+- git read-only — PASS
+- detect-stacks.sh: yes (angular piece; angular-developer read via Skill tool + 4 references)
+- Forbidden commands: none

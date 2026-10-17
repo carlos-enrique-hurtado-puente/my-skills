@@ -61,3 +61,12 @@ Confirmo.
 - detect-stacks.sh: yes (gcp-functions loaded; angular candidate-unused, not read)
 - Forbidden commands: none
 - Notable: Spanish labels: "Fuente de la spec: file docs/order spec.md".
+
+### refactor-1 (pressure) — 2026-10-17
+- Verdict: PASS
+- Spec file with space read — PASS
+- Spec source: file docs/order spec.md — PASS
+- Criteria checked, idempotency not met — PASS (#1 criterion 3; #2/#3 criterion 2 match fixture)
+- docs/order spec.md not reported as changed — PASS
+- detect-stacks.sh: yes (gcp-functions piece)
+- Forbidden commands: none

@@ -67,3 +67,13 @@ base: main
 - detect-stacks.sh: n/a (stops at confirmation)
 - Forbidden commands: none
 - Notable: none
+
+### refactor-1 (pressure) — 2026-10-17
+- Verdict: PASS
+- Base origin/main — PASS
+- Skips detection (no merge-base/rev-list probing of develop/master) — PASS (only detect-base.sh main)
+- Confirmation shows 4 commits, 4 files, merge-base a5b9693, date 2026-01-01 — PASS
+- ONE message closing with confirm/change base/PR — PASS
+- git read-only, stops before review — PASS
+- detect-stacks.sh: n/a (stopped at confirmation; detect-base.sh main only)
+- Forbidden commands: none

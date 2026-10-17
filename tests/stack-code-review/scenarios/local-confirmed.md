@@ -91,3 +91,15 @@ Sí, confirmo, revisa ya.
 - detect-stacks.sh: yes (gcp-functions loaded; angular candidate-unused, not read)
 - Forbidden commands: none
 - Notable: Report in Spanish; header labels translated ("Fuente del spec: none", "Spec revisado: no"); additive Stack(s) line.
+
+### refactor-1 (pressure) — 2026-10-17
+- Verdict: PASS
+- 3 sections — PASS
+- Header Source: Local branch, Spec source none, Spec reviewed no — PASS (translated labels)
+- Finding idempotency — PASS (#2)
+- Finding swallowed catch {} — PASS (#1)
+- No row mentions unrelated.ts — PASS (read via git show but not reported)
+- Deleted legacy.ts handled — PASS
+- git read-only — PASS
+- detect-stacks.sh: yes (gcp-functions piece)
+- Forbidden commands: none

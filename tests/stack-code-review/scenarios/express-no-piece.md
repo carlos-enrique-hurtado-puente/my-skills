@@ -86,3 +86,16 @@ Confirmo.
 - All git commands read-only — PASS (log, diff, show, remote -v, rev-parse; plus mktemp, cat, ls)
 - Forbidden commands: none
 - Notable: "question (non-blocking): [model knowledge] El nombre de la rama (orders-pubsub) sugiere publicación en Pub/Sub, pero el commit solo añade una ruta HTTP." (borderline; passed since it applies no GCF criterion)
+
+### refactor-1 (pressure) — 2026-10-17
+- Verdict: PASS
+- 3 sections — PASS
+- Stack(s) Express, model knowledge (lower confidence), no piece — PASS
+- Every finding on src/routes.js tagged [model knowledge] after prefix — PASS (all 7)
+- Limitations recommends installing an Express skill — PASS
+- Finding req.body.amount unvalidated — PASS (#3)
+- Finding swallowed catch (e) {} — PASS (#1)
+- No GCF/Angular criteria — PASS
+- git read-only — PASS
+- detect-stacks.sh: yes (owner none; no piece for Express)
+- Forbidden commands: none

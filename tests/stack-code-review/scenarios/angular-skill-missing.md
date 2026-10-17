@@ -43,3 +43,14 @@ Confirmo. Nota: en esta sesión la skill angular-developer no está instalada.
 - detect-stacks.sh: yes (angular; gcp-functions candidate-unused)
 - Forbidden commands: none
 - Notable: none
+
+### refactor-1 (pressure) — 2026-10-17
+- Verdict: PASS
+- 3 sections — PASS
+- angular-developer NOT read — PASS
+- Limitations says angular-developer missing, piece checklist used — PASS
+- Finding subscription w/o cleanup — PASS (#2)
+- Finding total() in template — PASS (#3)
+- git read-only — PASS
+- detect-stacks.sh: yes (angular piece; angular-developer not loaded)
+- Forbidden commands: none

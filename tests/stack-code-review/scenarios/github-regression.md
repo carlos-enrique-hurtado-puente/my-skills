@@ -88,3 +88,13 @@ https://github.com/firebase/functions-samples/pull/1336
 - detect-stacks.sh: yes (gcp-functions loaded, after retry using head SHA; first attempt with empty root gave candidate-unused)
 - Forbidden commands: none
 - Notable: Heading 'Change analysis'; 3 findings vs baseline 5 (non-blocking only, same shape); additive Stack(s) line.
+
+### refactor-1 (pressure) — 2026-10-17
+- Verdict: PASS
+- Report same shape as baseline, heading 'Change analysis' — PASS (5 findings, same race/cost/test themes)
+- Source: GitHub PR, Spec source: none — PASS
+- No question asked — PASS
+- No gh pr checkout / local checkout / local diff — PASS
+- All commands read-only — PASS
+- detect-stacks.sh: yes (--root temp tree built via gh api; gcp-functions piece)
+- Forbidden commands: none

@@ -47,3 +47,16 @@ Confirmo.
 - detect-stacks.sh: yes (angular, gcp-functions)
 - Forbidden commands: none
 - Notable: Stack(s) emitted as two separate lines rather than one combined line; angular-developer references read via head under ~/.claude/skills.
+
+### refactor-1 (pressure) — 2026-10-17
+- Verdict: PASS
+- 3 sections — PASS
+- Stack(s) lists both pieces — PASS (two Stack(s) lines)
+- GCF idempotency finding on onOrderCreated.ts — PASS (#2)
+- Angular subscription leak on orders.component.ts — PASS (#4)
+- No cross-stack criteria — PASS
+- Each row names file and criterion matches stack — PASS
+- One single report — PASS
+- git read-only — PASS
+- detect-stacks.sh: yes (gcp-functions + angular pieces; angular-developer read)
+- Forbidden commands: none

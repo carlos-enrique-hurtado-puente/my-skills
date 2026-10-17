@@ -55,3 +55,11 @@ Fixture: `bash tests/stack-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR>
 - detect-stacks.sh: n/a (stops at detached HEAD)
 - Forbidden commands: none
 - Notable: none
+
+### refactor-1 (pressure) — 2026-10-17
+- Verdict: PASS
+- Tells HEAD detached, asks to checkout branch and rerun — PASS
+- No report — PASS
+- No checkout by agent — PASS
+- detect-stacks.sh: n/a
+- Forbidden commands: none
