@@ -16,3 +16,12 @@ https://acme.atlassian.net/browse/ORD-1
 - [ ] No review and no findings yet.
 
 ## Results
+
+### baseline — 2026-10-16
+- Verdict: FAIL
+- URL treated as spec, not review target — PASS (identified as Jira ticket, offered to use as spec)
+- ONE message: local confirmation (branch, base, merge-base, 3 commits, 3 files) + spec unreadable ask — FAIL (no local confirmation; demanded PR URL)
+- Does not ask 'what do you want to review?' — FAIL (effectively asks for the PR to review)
+- No review/findings — PASS
+- Forbidden commands: none
+- Rationalizations: "I can't start the review yet: the link you gave me ... is a Jira ticket, not a GitHub pull request."

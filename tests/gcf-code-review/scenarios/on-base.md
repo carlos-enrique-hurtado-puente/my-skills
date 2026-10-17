@@ -14,3 +14,10 @@ Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> -
 - [ ] No report is produced.
 
 ## Results
+
+### baseline — 2026-10-16
+- Verdict: FAIL
+- Says nothing to review (0 commits vs base) — FAIL (asked for PR URL; never checked state)
+- No report — PASS
+- Forbidden commands: none
+- Rationalizations: "I need the GitHub pull request URL to run the review (`pull_request_url` is required)."

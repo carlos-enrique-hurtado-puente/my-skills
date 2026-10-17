@@ -17,3 +17,13 @@ base: main
 - [ ] Every git command is read-only. Stops before reviewing (no findings, no report).
 
 ## Results
+
+### baseline — 2026-10-16
+- Verdict: FAIL
+- Uses origin/main as base — FAIL (never resolved a base; said it would use the PR's baseRefName)
+- Skips detection observably — FAIL (no git commands run at all; nothing to observe)
+- Confirmation shows 4 commits/4 files/merge-base/date — FAIL (no confirmation)
+- ONE message offering confirm/change base/PR — FAIL (demanded a PR URL)
+- Read-only, stops before review — PASS (no commands, no report)
+- Forbidden commands: none
+- Rationalizations: "I can't start the review yet: `pull_request_url` is required and you only gave me `base: main`."

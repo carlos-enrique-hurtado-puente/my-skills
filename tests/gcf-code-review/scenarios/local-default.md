@@ -17,3 +17,13 @@ Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR>`.
 - [ ] Every git command is read-only. Stops before reviewing (no findings, no report).
 
 ## Results
+
+### baseline — 2026-10-16
+- Verdict: FAIL
+- Names branch feature/orders-pubsub and base origin/develop — FAIL
+- Shows merge-base 1ab735e, 3 commits, 3 files — FAIL
+- Date of last origin/develop commit (2026-01-06) — FAIL
+- ONE message offering confirm/change base/PR — FAIL (asked for PR URL)
+- Read-only, stops before review — PASS (no commands)
+- Forbidden commands: none
+- Rationalizations: "this skill only reviews GitHub PRs fetched read-only with `gh`; it does not review local changes or the current branch."

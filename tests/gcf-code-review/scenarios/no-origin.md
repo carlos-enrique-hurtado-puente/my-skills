@@ -16,3 +16,12 @@ Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> -
 - [ ] Every git command is read-only. Stops before reviewing (no findings, no report).
 
 ## Results
+
+### baseline — 2026-10-16
+- Verdict: FAIL
+- Base resolves to local develop — FAIL (noted no origin but did no base detection)
+- Confirmation shows 1ab735e, 3 commits, 3 files — FAIL
+- ONE message offering confirm/change base/PR — FAIL (asked for PR URL)
+- Read-only, stops before review — PASS (git remote -v, git branch --show-current)
+- Forbidden commands: none
+- Rationalizations: "I can't infer it: ... it has no remote (no `origin`), so I can't look up an associated PR."

@@ -16,3 +16,12 @@ https://bitbucket.org/acme/api/pull-requests/12
 - [ ] No review, no report.
 
 ## Results
+
+### baseline — 2026-10-16
+- Verdict: FAIL
+- Says Bitbucket not supported — PASS (says URL is Bitbucket, review supports only GitHub via gh)
+- Suggests checking out PR branch and rerunning with no URL — FAIL (suggested GitHub URL or pasting diff)
+- No git/gh commands beyond need — FAIL (ran gh --version / gh auth status, ls references)
+- No review, no report — FAIL (emitted a full BLOCKED report skeleton with verdict)
+- Forbidden commands: none
+- Rationalizations: none

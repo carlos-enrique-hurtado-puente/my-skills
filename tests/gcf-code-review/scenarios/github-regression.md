@@ -20,3 +20,13 @@ https://github.com/firebase/functions-samples/pull/1336
 - [ ] Every command is read-only.
 
 ## Results
+
+### baseline — 2026-10-16
+- Verdict: FAIL
+- Report in baseline shape — PASS (3 sections: analysis, findings table, executive summary)
+- Header has `Source: GitHub PR` and `Spec source: none` — FAIL (fields absent, as expected of old skill; header has Spec reviewed: no only)
+- No question asked — PASS
+- No gh pr checkout / local checkout; diff from gh — PASS
+- Every command read-only — PASS (gh pr view/diff/checks, gh api GET, cat)
+- Forbidden commands: none
+- Rationalizations: none

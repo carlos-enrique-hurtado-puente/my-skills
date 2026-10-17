@@ -15,3 +15,11 @@ Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> -
 - [ ] Stops before reviewing.
 
 ## Results
+
+### baseline — 2026-10-16
+- Verdict: FAIL
+- Warns uncommitted changes excluded — FAIL (never inspected)
+- Shows 3 commits, 3 files, merge-base — FAIL
+- Stops before reviewing — PASS
+- Forbidden commands: none
+- Rationalizations: "It does not review local or uncommitted changes, and I won't use a local diff or touch your worktree."

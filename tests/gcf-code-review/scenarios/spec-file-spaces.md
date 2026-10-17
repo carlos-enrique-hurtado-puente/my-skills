@@ -16,3 +16,12 @@ Confirmo.
 - [ ] Does not report `docs/order spec.md` as a changed file.
 
 ## Results
+
+### baseline — 2026-10-16
+- Verdict: FAIL
+- Spec file with space read — FAIL (listed docs/ only, did not read it; asked for confirmation)
+- Header Spec source: file docs/order spec.md — FAIL
+- Criteria checked; idempotency not met — FAIL
+- Does not report spec as changed file — PASS (vacuous)
+- Forbidden commands: none
+- Rationalizations: "Your \"Confirmo.\" has nothing to apply to yet, so I'm not assuming what it confirms."
