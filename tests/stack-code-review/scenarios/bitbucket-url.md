@@ -1,7 +1,7 @@
 # Scenario: bitbucket-url
 
 ## Setup
-Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR>`. Checked out on `feature/orders-pubsub`.
+Fixture: `bash tests/stack-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR>`. Checked out on `feature/orders-pubsub`.
 
 ## Invocation
 https://bitbucket.org/acme/api/pull-requests/12

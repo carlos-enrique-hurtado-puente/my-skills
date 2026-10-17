@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-# Structure check for skills/gcf-code-review. Run from repo root.
+# Structure check for skills/stack-code-review. Run from repo root.
 fail=0
 bad() { echo "FAIL: $1"; fail=1; }
 cd "$(dirname "$0")/../.." || exit 1
-S=skills/gcf-code-review
+S=skills/stack-code-review
 
 if [ ! -f "$S/SKILL.md" ]; then
   bad "$S/SKILL.md does not exist"
 else
   fm=$(awk 'NR==1 && $0=="---"{f=1;next} f&&$0=="---"{exit} f{print}' "$S/SKILL.md")
-  echo "$fm" | grep -qx 'name: gcf-code-review' || bad "frontmatter lacks 'name: gcf-code-review'"
+  echo "$fm" | grep -qx 'name: stack-code-review' || bad "frontmatter lacks 'name: stack-code-review'"
   echo "$fm" | grep -qx 'disable-model-invocation: true' || bad "frontmatter lacks 'disable-model-invocation: true'"
   desc=$(echo "$fm" | sed -n 's/^description: //p')
   if [ -z "$desc" ]; then bad "description missing"; else
@@ -25,6 +25,7 @@ else
 fi
 
 [ ! -e skills/gcf-pr-review ] || bad "skills/gcf-pr-review still exists"
+[ ! -e skills/gcf-code-review ] || bad "skills/gcf-code-review still exists"
 
 if [ "$fail" -eq 0 ]; then echo "OK: structure checks passed"; fi
 exit "$fail"

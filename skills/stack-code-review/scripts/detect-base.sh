@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Base detection for gcf-code-review local mode. Read-only git only.
+# Base detection for stack-code-review local mode. Read-only git only.
 # Usage (from inside the repo): bash detect-base.sh [base]
 # Prints stable "key: value" lines; "status:" is always printed. Exit 0 for ok and
 # nothing-to-review, non-zero otherwise. Works on bash 3.2.

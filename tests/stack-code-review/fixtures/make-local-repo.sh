@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build a deterministic fixture git repo for testing the gcf-code-review skill.
+# Build a deterministic fixture git repo for testing the stack-code-review skill.
 #
 # Usage: make-local-repo.sh <dir> [--no-origin] [--from-main] [--uncommitted]
 #                                 [--state feature|detached|on-base]

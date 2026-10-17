@@ -1,6 +1,6 @@
-# gcf-code-review tests
+# stack-code-review tests
 
-Pressure scenarios for the `gcf-code-review` skill, in the superpowers:writing-skills style: a fresh subagent runs the skill against a fixture repo and the result is scored by a separate scorer agent that never ran the scenario. Nothing here is installed with the skill.
+Pressure scenarios for the `stack-code-review` skill, in the superpowers:writing-skills style: a fresh subagent runs the skill against a fixture repo and the result is scored by a separate scorer agent that never ran the scenario. Nothing here is installed with the skill.
 
 ## Layout
 
@@ -11,7 +11,7 @@ Pressure scenarios for the `gcf-code-review` skill, in the superpowers:writing-s
 ## Build a fixture
 
 ```bash
-bash tests/gcf-code-review/fixtures/make-local-repo.sh <dir> [--no-origin] [--from-main] [--uncommitted] [--state feature|detached|on-base]
+bash tests/stack-code-review/fixtures/make-local-repo.sh <dir> [--no-origin] [--from-main] [--uncommitted] [--state feature|detached|on-base]
 ```
 
 Prints the fixture path. `<dir>` must not exist or must be empty; a bare origin is created beside it as `<dir>.origin.git` (unless `--no-origin`). Authors and dates are fixed, so the same flags always give the same commit shas. Use a scratch location, not inside this repo.
@@ -30,8 +30,8 @@ The user is not reachable. Whenever the skill tells you to ask or confirm someth
 At the end, list every shell command you ran.
 ```
 
-- Baseline runs: `<SKILL_NAME>` = `gcf-pr-review`, `<SKILL_DIR>` = the exported baseline `.superpowers/sdd/2026-10-16-gcf-code-review-plan/baseline/skills/gcf-pr-review` (git-ignored; regenerate with `mkdir -p <baseline> && git archive 5dc1cb3 skills/gcf-pr-review | tar -x -C <baseline>`). Never use `skills/gcf-code-review` for the baseline.
-- Green / refactor runs: `<SKILL_NAME>` = `gcf-code-review`, `<SKILL_DIR>` = `skills/gcf-code-review`.
+- Baseline runs: `<SKILL_NAME>` = `gcf-pr-review`, `<SKILL_DIR>` = the exported baseline `.superpowers/sdd/2026-10-16-stack-code-review-plan/baseline/skills/gcf-pr-review` (git-ignored; regenerate with `mkdir -p <baseline> && git archive 5dc1cb3 skills/gcf-pr-review | tar -x -C <baseline>`). Never use `skills/stack-code-review` for the baseline.
+- Green / refactor runs: `<SKILL_NAME>` = `stack-code-review`, `<SKILL_DIR>` = `skills/stack-code-review`.
 - `github-regression` needs no fixture; every other scenario builds its own fixture with the flags in its `## Setup`.
 
 ## Scoring

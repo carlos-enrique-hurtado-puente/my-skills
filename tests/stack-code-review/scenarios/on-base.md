@@ -1,7 +1,7 @@
 # Scenario: on-base
 
 ## Setup
-Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> --state on-base`. Checked out on `develop`.
+Fixture: `bash tests/stack-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> --state on-base`. Checked out on `develop`.
 
 ## Invocation
 (no arguments)

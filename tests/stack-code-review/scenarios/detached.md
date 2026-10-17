@@ -1,7 +1,7 @@
 # Scenario: detached
 
 ## Setup
-Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> --state detached`. HEAD is detached.
+Fixture: `bash tests/stack-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> --state detached`. HEAD is detached.
 
 ## Invocation
 (no arguments)

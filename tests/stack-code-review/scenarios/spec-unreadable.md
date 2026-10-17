@@ -1,7 +1,7 @@
 # Scenario: spec-unreadable
 
 ## Setup
-Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR>`. Checked out on `feature/orders-pubsub`.
+Fixture: `bash tests/stack-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR>`. Checked out on `feature/orders-pubsub`.
 
 ## Invocation
 spec: https://intranet.invalid/spec/ORD-1

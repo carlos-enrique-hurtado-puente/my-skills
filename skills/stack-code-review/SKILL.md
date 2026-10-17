@@ -1,9 +1,9 @@
 ---
-name: gcf-code-review
-description: Use when the user explicitly invokes /gcf-code-review (Claude Code) or $gcf-code-review (Codex) to review Google Cloud Functions or Cloud Run functions changes, from a GitHub PR URL or from the current local git branch
+name: stack-code-review
+description: Use when the user explicitly invokes /stack-code-review (Claude Code) or $stack-code-review (Codex) to review code changes of any stack (pieces for Google Cloud Functions and Angular), from a GitHub PR URL or the current local git branch
 disable-model-invocation: true
 ---
-
+# Code review by stack
 # Code review of Google Cloud Functions changes
 
 ## Overview

@@ -1,7 +1,7 @@
 # Scenario: from-main
 
 ## Setup
-Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> --from-main`. Feature branched from `main`; `develop` has extra commits and `origin/HEAD` points to `origin/develop`, so `main` can win only through the `HEAD..<base>` tie-break.
+Fixture: `bash tests/stack-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> --from-main`. Feature branched from `main`; `develop` has extra commits and `origin/HEAD` points to `origin/develop`, so `main` can win only through the `HEAD..<base>` tie-break.
 
 ## Invocation
 (no arguments)

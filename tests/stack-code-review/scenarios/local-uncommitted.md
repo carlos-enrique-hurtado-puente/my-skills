@@ -1,7 +1,7 @@
 # Scenario: local-uncommitted
 
 ## Setup
-Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> --uncommitted`. Checked out on `feature/orders-pubsub`, with a modified unstaged `functions/src/onOrderCreated.ts`.
+Fixture: `bash tests/stack-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> --uncommitted`. Checked out on `feature/orders-pubsub`, with a modified unstaged `functions/src/onOrderCreated.ts`.
 
 ## Invocation
 (no arguments)

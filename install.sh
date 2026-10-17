@@ -48,6 +48,11 @@ for src in "$REPO"/skills/*/; do
 done
 
 if [ "$do_claude" -eq 1 ] && [ -e "$HOME/.claude/skills/gcf-pr-review" ] && [ ! -L "$HOME/.claude/skills/gcf-pr-review" ]; then
-  echo "warning: old skill found at $HOME/.claude/skills/gcf-pr-review; it was replaced by gcf-code-review. Move it to a backup (see README, Migración)." >&2
+  echo "warning: old skill found at $HOME/.claude/skills/gcf-pr-review; it was replaced by stack-code-review. Move it to a backup (see README, Migración)." >&2
 fi
+for legacy in "$HOME/.claude/skills/gcf-code-review" "$HOME/.agents/skills/gcf-code-review"; do
+  if [ -e "$legacy" ] || [ -L "$legacy" ]; then
+    echo "warning: old skill found at $legacy; it was renamed to stack-code-review. Remove or move it manually (see README, Migración); it was left untouched." >&2
+  fi
+done
 exit "$failed"

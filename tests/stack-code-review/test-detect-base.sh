@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Tests for skills/gcf-code-review/scripts/detect-base.sh against fixture repos.
+# Tests for skills/stack-code-review/scripts/detect-base.sh against fixture repos.
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-SCRIPT="$ROOT/skills/gcf-code-review/scripts/detect-base.sh"
-MK="$ROOT/tests/gcf-code-review/fixtures/make-local-repo.sh"
+SCRIPT="$ROOT/skills/stack-code-review/scripts/detect-base.sh"
+MK="$ROOT/tests/stack-code-review/fixtures/make-local-repo.sh"
 TMP=$(mktemp -d); trap 'rm -rf "$TMP"' EXIT
 fail=0
 ok()  { echo "PASS: $1"; }
