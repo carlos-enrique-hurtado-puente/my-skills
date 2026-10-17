@@ -71,7 +71,7 @@ Vague comments are forbidden ("Improve this", "Review", "This is wrong", "Could 
 ```markdown
 ## Findings
 
-No actionable findings in the analyzed PR.
+No actionable findings in the analyzed changes.
 
 ## Validations performed
 

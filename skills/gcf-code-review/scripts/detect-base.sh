@@ -15,7 +15,7 @@ G symbolic-ref -q HEAD >/dev/null 2>&1 || fin detached 1 "HEAD is detached: chec
 
 echo "branch: $(G rev-parse --abbrev-ref HEAD)"
 echo "head: $(G rev-parse --short HEAD)"
-if [ -n "$(G status --porcelain 2>/dev/null)" ]; then echo "uncommitted: yes"; else echo "uncommitted: no"; fi
+if [ -n "$(G status --porcelain --untracked-files=normal 2>/dev/null)" ]; then echo "uncommitted: yes"; else echo "uncommitted: no"; fi
 
 count() { G rev-list --count "$1" 2>/dev/null; }
 base=""; cand=""   # cand lines: ahead behind notHeadTarget order ref

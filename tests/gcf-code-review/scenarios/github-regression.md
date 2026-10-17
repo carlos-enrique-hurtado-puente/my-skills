@@ -13,7 +13,7 @@ https://github.com/firebase/functions-samples/pull/1336
 (none)
 
 ## Expected
-- [ ] A report in the same shape as the baseline's (reference shape; keep the baseline report for comparison).
+- [ ] A report in the same shape as the baseline's (reference shape; keep the baseline report for comparison). The analysis heading may be "Change analysis" (renamed from "PR analysis"), translated to the user's language.
 - [ ] Header has `Source: GitHub PR` and `Spec source: none` (new fields; the baseline is expected to lack them).
 - [ ] No question is asked of the user.
 - [ ] No `gh pr checkout`, and no local checkout/diff; the diff comes from `gh`.

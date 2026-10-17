@@ -4,7 +4,7 @@ Read only when no PR URL was given: the target is the current git branch (`HEAD`
 
 ## Rules for this source
 
-1. **Read-only.** Run only git commands that read: `rev-parse`, `symbolic-ref`, `status`, `log`, `rev-list`, `merge-base`, `diff`, `show`, `for-each-ref`, `remote`. A command that writes to the repo, the index, the worktree or a ref is out of scope: `checkout`, `switch`, `stash`, `commit`, `fetch`, `pull`, `reset`, `restore`, `clean`, `merge`, `rebase`, `worktree`, `add`, `branch -f`.
+1. **Read-only.** Run only read-only commands, such as `rev-parse`, `symbolic-ref`, `status`, `log`, `rev-list`, `merge-base`, `diff`, `show`, `for-each-ref`, `remote`, `grep`, `ls-tree`, `cat-file`. The binding rule is this: a command that writes to the repo, the index, the worktree or a ref is out of scope: `checkout`, `switch`, `stash`, `commit`, `fetch`, `pull`, `reset`, `restore`, `clean`, `merge`, `rebase`, `worktree`, `add`, `branch -f`.
 2. **Only `HEAD` is reviewed.** Another branch is reviewed after the user checks it out and reruns the skill.
 3. **Full files come from git objects:** `git show HEAD:<path>`; for a file deleted on the branch, `git show <merge-base>:<path>`. The working tree is never read, so local edits cannot leak into the review.
 4. **Missing context is read with `git show`**, never by switching branches.
@@ -17,7 +17,7 @@ The script checks them (repository, commits, attached `HEAD`, uncommitted change
 
 Run `bash <skill-dir>/scripts/detect-base.sh [base]` from inside the repo (`<skill-dir>` is the folder containing SKILL.md; pass `base` only when the user gave one). The script is the only way to pick a base: never compute candidates, counts or the base by hand, and never replace it with `origin/HEAD`. It prints `key: value` lines.
 
-What it decides, for humans: candidates are `develop`, `main`, `master` and the `origin/HEAD` target, each as `origin/<x>` if that remote ref exists, else local `<x>`; the base is the one with the fewest commits ahead of it, then fewest behind, then the `origin/HEAD` target, then the order `develop`, `main`, `master`. A user `base` containing `/` or starting with `refs/` is used as-is; a bare name tries `origin/<name>` then `<name>`. A `base` given with a GitHub PR URL is ignored; say so. No `git fetch`.
+What it decides, for humans: candidates are `develop`, `main`, `master` and the `origin/HEAD` target, each as `origin/<x>` if that remote ref exists, else local `<x>`; the base is the one with the fewest commits ahead of it, then fewest behind, then the `origin/HEAD` target, then the order `develop`, `main`, `master`. A user `base` containing `/` or starting with `refs/` is used as-is; a bare name tries `origin/<name>` then `<name>`. No `git fetch`.
 
 | `status:` | Action |
 |---|---|

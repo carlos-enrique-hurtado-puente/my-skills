@@ -12,7 +12,7 @@ fixture() { local r="$TMP/r$RANDOM$RANDOM"; bash "$MK" "$r" "$@" >/dev/null 2>&1
 run() { # run <dir> [args] -> sets OUT, RC
   local d="$1"; shift
   [ -d "$d" ] || { bad "$NAME: fixture missing"; OUT=""; RC=99; return; }
-  OUT=$(cd "$d" && bash "$SCRIPT" "$@" 2>&1); RC=$?
+  OUT=$(cd "$d" && GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_NOSYSTEM=1 bash "$SCRIPT" "$@" 2>&1); RC=$?
 }
 has() { echo "$OUT" | grep -qx "$1" || { bad "$NAME: missing '$1'"; echo "$OUT" | sed 's/^/    /'; return 1; }; }
 t() { NAME="$1"; before=$nfail; }
@@ -45,5 +45,25 @@ t "detached"; d=$(fixture --state detached); run "$d"
 [ "$RC" -ne 0 ] || bad "$NAME: exit 0"; has "status: detached"; echo "$OUT" | grep -qi 'detached' || bad "$NAME: no message"; done_t
 t "not a repo"; mkdir "$TMP/plain"; run "$TMP/plain"
 [ "$RC" -ne 0 ] || bad "$NAME: exit 0"; has "status: not-a-repo"; done_t
+t "untracked with status.showUntrackedFiles=no"; d=$(fixture)
+git -C "$d" config status.showUntrackedFiles no; echo x > "$d/untracked.txt"; run "$d"; has "uncommitted: yes"; done_t
+G() { git -C "$1" -c user.name=t -c user.email=t@t "${@:2}"; }
+mini() { local r="$TMP/m$RANDOM$RANDOM"; git init -q "$r" -b "$1" && echo "$r"; }
+cm() { echo "$2" > "$1/$2"; git -C "$1" add -A; G "$1" commit -q -m "$2"; }
+t "unborn"; d=$(mini feature); run "$d"
+[ "$RC" -ne 0 ] || bad "$NAME: exit 0"; has "status: unborn"; done_t
+t "no-candidate"; d=$(mini feature); cm "$d" a; run "$d"
+[ "$RC" -ne 0 ] || bad "$NAME: exit 0"; has "status: no-candidate"; done_t
+t "unrelated"; d=$(mini feature); cm "$d" a; git -C "$d" checkout -q --orphan develop; cm "$d" b
+git -C "$d" checkout -q feature; cm "$d" c; run "$d"
+[ "$RC" -ne 0 ] || bad "$NAME: exit 0"; has "status: unrelated"; done_t
+t "origin/HEAD tie-break"; d=$(mini main); cm "$d" a; git -C "$d" branch develop; git -C "$d" branch master
+git -C "$d" checkout -q -b feature; cm "$d" b
+for b in develop master; do git -C "$d" update-ref refs/remotes/origin/$b $(git -C "$d" rev-parse $b); done
+git -C "$d" symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/master
+git -C "$d" branch -D main -q; run "$d"
+[ "$RC" -eq 0 ] || bad "$NAME: exit $RC"; has "base: origin/master"; has "candidate: origin/master 1 0 chosen"; has "candidate: origin/develop 1 0"; done_t
+t "bare name only local"; d=$(mini main); cm "$d" a; git -C "$d" branch release; git -C "$d" checkout -q -b feature; cm "$d" b; run "$d" release
+[ "$RC" -eq 0 ] || bad "$NAME: exit $RC"; has "base: release"; has "base_is_remote: no"; has "commits: 1"; done_t
 [ "$fail" -eq 0 ] && echo "OK: all detect-base tests passed"
 exit "$fail"

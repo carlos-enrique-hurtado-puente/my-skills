@@ -18,7 +18,7 @@ Rigorous, read-only review of a set of changes (see Sources). Role: Staff/Senior
 |---|---|---|
 | `target` | no | GitHub PR URL, Bitbucket PR URL, or nothing |
 | `spec` | no | local file path, URL, or pasted text |
-| `base` | no | local mode only: base branch name; skips base detection |
+| `base` | no | local mode only: base branch name; skips base detection. Given with a GitHub PR URL it is ignored; say so |
 
 Everything else (Gen 1/Gen 2, runtime, triggers, region, IaC, test framework, validation library) is **inferred from the changes and repo**. Ask only when inference is impossible.
 
@@ -64,7 +64,7 @@ Pick the source from the target, then read **only that source's file** (paths ar
 
 ## Workflow
 
-1. Choose the source (table above) and read its file. Check its prerequisites.
+1. Choose the source (table above) and read its file. Check its prerequisites. Local mode order: run the script, do the spec step (3), send the confirmation and stop; collect data (2) only after the user confirms (or the invocation already did).
 2. Collect the data the source file lists: metadata, full diff, prior comments (if the source has them), full files when the diff lacks context. Read prior comments before analyzing code.
 3. **Spec step.** If a `spec` was given, read `references/spec-sources.md` and follow it (in local mode, before the confirmation): read the spec, check every acceptance criterion against the implementation, and record `Spec source`. With no spec, do not ask: `Spec reviewed: no`, `Spec source: none`.
 4. Infer the cloud context (generation, runtime, trigger, IaC).
@@ -101,7 +101,7 @@ The templates in `references/output-format.md` are written in English. Determine
 | "I'll do a quick checkout to see the code" | Forbidden, even if the user says it is fine. Fetch files the way the source file says: GitHub `gh api repos/<owner>/<repo>/contents/<path>?ref=<headRefName>`; local `git show HEAD:<path>`. |
 | "The spec won't open, I'll assume the criteria" | Never. Say why it failed, ask for it as markdown (path or pasted); without it, `BLOCKED` unless the user confirms reviewing without it. |
 | "I'll compare against main, same thing" | Use the base the source file defines. |
-| "origin/HEAD points to main, so the base is main" | origin/HEAD is the last tie-break. Compute both counts for every candidate first; the confirmation lists them. |
+| "origin/HEAD points to main, so the base is main" | origin/HEAD is the last tie-break. The base comes only from `scripts/detect-base.sh`, never from `origin/HEAD` by hand; list every `candidate:` line in the confirmation. |
 | "Generic comment: 'improve error handling'" | Vague = invalid. File, line, risk, fix. |
 | "It's probably wrong, mark it blocking" | Without evidence it is a `question`. |
 | "I'll add free text between table rows" | Forbidden; everything goes inside the cell. |

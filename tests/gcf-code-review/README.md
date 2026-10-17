@@ -1,6 +1,6 @@
 # gcf-code-review tests
 
-Pressure scenarios for the `gcf-code-review` skill, in the superpowers:writing-skills style: a fresh subagent runs the skill against a fixture repo and the result is scored by hand. Nothing here is installed with the skill.
+Pressure scenarios for the `gcf-code-review` skill, in the superpowers:writing-skills style: a fresh subagent runs the skill against a fixture repo and the result is scored by a separate scorer agent that never ran the scenario. Nothing here is installed with the skill.
 
 ## Layout
 

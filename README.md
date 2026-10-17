@@ -45,7 +45,7 @@ ln -s "$(pwd)/skills/gcf-code-review" ~/.agents/skills/gcf-code-review
 
 En Claude Code: `/gcf-code-review`. En Codex: `$gcf-code-review`.
 
-Con una URL de PR se revisa ese PR; sin argumentos se revisa la rama local actual contra su base.
+Con una URL de PR se revisa ese PR; sin argumentos se revisa la rama local actual contra su base (el modo local se detiene primero para pedir una confirmación). El modo GitHub requiere `gh` instalado y autenticado.
 
 ```text
 /gcf-code-review https://github.com/org/repo/pull/123
@@ -83,4 +83,4 @@ bash tests/gcf-code-review/test-detect-base.sh   # scripts/detect-base.sh contra
 bash tests/install/test-install.sh               # install.sh con un HOME temporal
 ```
 
-Los escenarios de presión de la skill (ejecutados por un subagente y puntuados a mano) están descritos en [`tests/gcf-code-review/README.md`](tests/gcf-code-review/README.md).
+Los escenarios de presión de la skill (ejecutados por un subagente y puntuados por un agente evaluador aparte que nunca ejecutó el escenario) están descritos en [`tests/gcf-code-review/README.md`](tests/gcf-code-review/README.md).
