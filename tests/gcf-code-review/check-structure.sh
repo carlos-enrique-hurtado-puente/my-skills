@@ -2,6 +2,7 @@
 # Structure check for skills/gcf-code-review. Run from repo root.
 fail=0
 bad() { echo "FAIL: $1"; fail=1; }
+cd "$(dirname "$0")/../.." || exit 1
 S=skills/gcf-code-review
 
 if [ ! -f "$S/SKILL.md" ]; then
@@ -11,15 +12,16 @@ else
   echo "$fm" | grep -qx 'name: gcf-code-review' || bad "frontmatter lacks 'name: gcf-code-review'"
   echo "$fm" | grep -qx 'disable-model-invocation: true' || bad "frontmatter lacks 'disable-model-invocation: true'"
   desc=$(echo "$fm" | sed -n 's/^description: //p')
-  case "$desc" in "Use when"*) ;; *) bad "description does not start with 'Use when'" ;; esac
-  [ "${#desc}" -le 500 ] || bad "description is ${#desc} chars (> 500)"
-  [ -n "$desc" ] || bad "description missing"
+  if [ -z "$desc" ]; then bad "description missing"; else
+    case "$desc" in "Use when "*) ;; *) bad "description does not start with 'Use when '" ;; esac
+    [ "${#desc}" -le 500 ] || bad "description is ${#desc} chars (> 500)"
+  fi
 fi
 
 if [ ! -f "$S/agents/openai.yaml" ]; then
   bad "$S/agents/openai.yaml does not exist"
 else
-  grep -q 'allow_implicit_invocation: false' "$S/agents/openai.yaml" || bad "openai.yaml lacks 'allow_implicit_invocation: false'"
+  awk '/^policy:/{p=1;next} p&&/^[^ #]/{p=0} p&&/^[ \t]+allow_implicit_invocation: false[ \t]*$/{f=1} END{exit !f}' "$S/agents/openai.yaml" || bad "openai.yaml lacks 'allow_implicit_invocation: false'"
 fi
 
 [ ! -e skills/gcf-pr-review ] || bad "skills/gcf-pr-review still exists"

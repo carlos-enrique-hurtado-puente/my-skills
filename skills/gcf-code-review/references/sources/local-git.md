@@ -22,9 +22,11 @@ Check in this order; the first row that applies decides.
 
 ## Base
 
-If the user gave `base`, skip detection: a value that already resolves as a ref (`git rev-parse --verify -q <base>`, for example `origin/main`) is used as-is; a bare name tries `origin/<name>` first, then `<name>`. A `base` given together with a GitHub PR URL is ignored; say so. Otherwise detect.
+If the user gave `base`, skip detection: a value containing `/` or starting with `refs/` (for example `origin/main`) is used as-is if `git rev-parse --verify -q <base>` resolves; a bare name (for example `main`) tries `origin/<name>` first, then `<name>`. A `base` given together with a GitHub PR URL is ignored; say so. Otherwise detect.
 
 **Candidates:** for each `x` in `develop`, `main`, `master` and the branch `origin/HEAD` points to (`git symbolic-ref -q --short refs/remotes/origin/HEAD`, when it exists; it prints `origin/<name>`, so strip the leading `origin/` to get `x`), the ref is `origin/<x>` if `git rev-parse --verify -q refs/remotes/origin/<x>` succeeds, else local `<x>` if `refs/heads/<x>` exists. Drop duplicates and non-existent ones.
+
+**Evaluate every candidate before choosing.** For each existing candidate run both `git rev-list --count <base>..HEAD` and `git rev-list --count HEAD..<base>`; the pair is the evidence. Computing counts for one candidate (for example only the `origin/HEAD` target) is not detection. `origin/HEAD` only breaks a tie (key 3); it never selects the base by itself.
 
 **Choose** with these keys, in order:
 
@@ -59,11 +61,11 @@ Review prior context in the commit messages. Files in the diff are the only file
 
 Before reviewing, compute N first: with 0 commits, report nothing to review (Edge cases) and send no confirmation. Otherwise send **one** message with these parts, in this order, then stop and wait for the answer:
 
-1. Branch and base ref: `` `<branch>` against `<base>` ``.
-2. Merge-base short sha, N commits, and "M files, of which K deleted". M is the number of lines in `git diff --name-status <base>...HEAD` (a rename is one line); K is the lines with status `D`.
+1. Branch and base ref: `` `<branch>` against `<base>` ``. Lines 2 and 3 below describe the chosen base.
+2. Candidate table: one line per existing candidate, `<ref>: <ahead> ahead, <behind> behind`, with the chosen one marked. Then the merge-base short sha, N commits, and "M files, of which K deleted". M is the number of lines in `git diff --name-status <base>...HEAD` (a rename is one line); K is the lines with status `D`.
 3. Only when the base is a remote ref: the date of its last commit.
 4. Only when a spec was given: its outcome, read before this message. Read from `<source>`, or could not be read (say why) and ask for it as markdown (path or pasted) or for confirmation to review without it. The mechanics are in the Spec step of the workflow.
-5. Only when `git status --porcelain` is non-empty: a warning that uncommitted changes are not part of the review.
+5. Only when `git --no-optional-locks status --porcelain` is non-empty: a warning that uncommitted changes are not part of the review.
 6. The closing choice: confirm, change the base, or did you mean to review a PR?
 
 If the user's invocation message already confirms (for example "confirm, review now"), skip the wait and proceed; the confirmation facts still go in the report header. Exception: when a given spec could not be read, stop and ask, because that needs the user's answer.

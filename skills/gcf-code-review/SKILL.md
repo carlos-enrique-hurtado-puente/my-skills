@@ -66,7 +66,7 @@ Pick the source from the target, then read **only that source's file**; it holds
 
 1. Choose the source (table above) and read its file. Check its prerequisites.
 2. Collect the data the source file lists: metadata, full diff, prior comments (if the source has them), full files when the diff lacks context. Read prior comments before analyzing code.
-3. **Spec step.** If a `spec` was given, read `references/spec-sources.md` and follow it: read the spec, check every acceptance criterion against the implementation, and record `Spec source`. With no spec, do not ask: `Spec reviewed: no`, `Spec source: none`.
+3. **Spec step.** If a `spec` was given, read `references/spec-sources.md` and follow it (in local mode, before the confirmation): read the spec, check every acceptance criterion against the implementation, and record `Spec source`. With no spec, do not ask: `Spec reviewed: no`, `Spec source: none`.
 4. Infer the cloud context (generation, runtime, trigger, IaC).
 5. **REQUIRED:** read `references/criteria.md` and evaluate all 12 criteria.
 6. **REQUIRED:** read `references/output-format.md` and deliver the output in the exact format, in the language of the user's request (see Output language).
@@ -75,7 +75,7 @@ Pick the source from the target, then read **only that source's file**; it holds
 
 Stop, report the limitation, and **do not invent findings** if:
 - A `BLOCKED` condition of the active source file applies.
-- A spec was given, could not be read, and the user neither provided it as markdown nor confirmed reviewing without it (`references/spec-sources.md`). Do not pretend to have validated functionality.
+- A spec was given, could not be read, and the user declined to provide it as markdown or to confirm reviewing without it (`references/spec-sources.md`). In GitHub mode the first reply is a stop message asking for it, not a `BLOCKED` report. Do not pretend to have validated functionality.
 - There is not enough information to review responsibly.
 
 **`BLOCKED` output:** the 3 sections, with the findings table replaced by "Review not performed: <cause>". The justification contains only the cause and what unblocks the review (spec pasted, accessible URL, or the user's explicit confirmation to review without it). Zero preliminary findings, not even "obvious from the diff", and no merge recommendation, even if the user is in a hurry. If the user confirms reviewing without the spec, the review becomes `COMPLETED` with `Spec reviewed` = `no`.
@@ -98,9 +98,10 @@ The templates in `references/output-format.md` are written in English. Determine
 
 | Thought | Reality |
 |---|---|
-| "I'll do a quick checkout to see the code" | Forbidden, even if the user says it is fine. Fetch files the way the source file says (`git show` in local mode). |
+| "I'll do a quick checkout to see the code" | Forbidden, even if the user says it is fine. Fetch files the way the source file says: GitHub `gh api repos/<owner>/<repo>/contents/<path>?ref=<headRefName>`; local `git show HEAD:<path>`. |
 | "The spec won't open, I'll assume the criteria" | Never. Say why it failed, ask for it as markdown (path or pasted); without it, `BLOCKED` unless the user confirms reviewing without it. |
 | "I'll compare against main, same thing" | Use the base the source file defines. |
+| "origin/HEAD points to main, so the base is main" | origin/HEAD is the last tie-break. Compute both counts for every candidate first; the confirmation lists them. |
 | "Generic comment: 'improve error handling'" | Vague = invalid. File, line, risk, fix. |
 | "It's probably wrong, mark it blocking" | Without evidence it is a `question`. |
 | "I'll add free text between table rows" | Forbidden; everything goes inside the cell. |
