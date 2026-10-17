@@ -1,9 +1,10 @@
 ---
-name: gcf-pr-review
-description: Use when asked to review, code-review or audit a GitHub pull request URL that changes Google Cloud Functions or Cloud Run functions (HTTP, Pub/Sub, Eventarc, Storage, Firestore, Scheduler, Tasks triggers), including requests like "review this PR", "revisa este PR", or checking idempotency, retries, IAM or Clean Architecture in serverless backend changes
+name: gcf-code-review
+description: Use when the user explicitly invokes /gcf-code-review (Claude Code) or $gcf-code-review (Codex) to review Google Cloud Functions or Cloud Run functions changes, from a GitHub PR URL or from the current local git branch
+disable-model-invocation: true
 ---
 
-# Code review of Google Cloud Functions PRs
+# Code review of Google Cloud Functions changes
 
 ## Overview
 

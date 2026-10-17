@@ -6,7 +6,7 @@ Skills personales para agentes de código (Claude Code, Codex).
 
 | Skill | Descripción |
 |---|---|
-| [`gcf-pr-review`](skills/gcf-pr-review/SKILL.md) | Code review de PRs de GitHub que cambian Google Cloud Functions / Cloud Run functions. |
+| [`gcf-code-review`](skills/gcf-code-review/SKILL.md) | Code review de PRs de GitHub que cambian Google Cloud Functions / Cloud Run functions. |
 
 ## Estructura
 
