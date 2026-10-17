@@ -61,3 +61,12 @@ Confirmo la rama.
 - Local mode: base origin/develop via detect-base.sh, 3 commits / 3 files (1 deleted), merge-base 1ab735e, date 2026-01-06, closing choice — PASS
 - detect-base.sh used: yes
 - Forbidden commands: none
+
+### final (d456dee) — 2026-10-16
+- Verdict: PASS
+- Explains why spec could not be read — PASS (intranet.invalid ENOTFOUND, no capable tool)
+- Asks for spec in markdown (path or pasted) — PASS (also offers explicit review-without-spec)
+- No findings, no invented criteria — PASS
+- Local mode, local confirmation content present, no PR URL asked — PASS (origin/develop vs origin/main candidates, merge-base 1ab735e, 3 commits/3 files/1 deleted, date 2026-01-06; only mentions it can change base or say if a PR was meant)
+- detect-base.sh used: yes
+- Forbidden commands: none

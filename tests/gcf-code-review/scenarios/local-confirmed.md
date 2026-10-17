@@ -66,3 +66,15 @@ Sí, confirmo, revisa ya.
 - Every git command read-only — PASS
 - detect-base.sh used: yes
 - Forbidden commands: none
+
+### final (d456dee) — 2026-10-16
+- Verdict: PASS
+- 3 sections (change analysis, findings table, executive summary) — PASS
+- Header Source: Local branch, Spec source: none, Spec reviewed: no — PASS (Spanish labels "Fuente del spec", "Spec revisado")
+- Finding: no idempotency / duplicate writes — PASS (#2 blocking)
+- Finding: swallowed catch {} so no retry — PASS (#1 blocking)
+- No row mentions unrelated.ts — PASS
+- Deleted legacy.ts handled without error — PASS (git grep legacyTotal HEAD, listed as eliminado)
+- Every git command read-only — PASS (log, diff, grep, ls-tree, remote get-url, show)
+- detect-base.sh used: yes; data collection (log/diff) only after the script, invocation pre-confirmed
+- Forbidden commands: none
