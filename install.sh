@@ -15,21 +15,28 @@ for arg in "$@"; do
 done
 if [ "$do_claude" -eq 0 ] && [ "$do_codex" -eq 0 ]; then do_claude=1; do_codex=1; fi
 
+failed=0
+
+physical() { (cd "$1" 2>/dev/null && pwd -P); } # resolved path of a dir, empty if unreachable
+
 link_skill() { # link_skill <skills-dir> <src>
   local dir="$1" src="$2" name dest cur
   name="$(basename "$src")"
   dest="$dir/$name"
   if [ -L "$dest" ]; then
     cur="$(readlink "$dest")"
-    if [ "$cur" = "$src" ]; then
+    if [ "$cur" = "$src" ] || [ "$(physical "$dest")" = "$(physical "$src")" ]; then
       echo "ok: $dest already linked"
     else
       echo "warning: $dest is a symlink to $cur; leaving it untouched" >&2
     fi
   elif [ -e "$dest" ]; then
     echo "warning: $dest already exists and is not a symlink; leaving it untouched" >&2
+  elif mkdir -p "$dir" && ln -s "$src" "$dest"; then
+    echo "linked: $dest -> $src"
   else
-    mkdir -p "$dir" && ln -s "$src" "$dest" && echo "linked: $dest -> $src"
+    echo "warning: could not link $dest (see the error above)" >&2
+    failed=1
   fi
 }
 
@@ -43,4 +50,4 @@ done
 if [ "$do_claude" -eq 1 ] && [ -e "$HOME/.claude/skills/gcf-pr-review" ] && [ ! -L "$HOME/.claude/skills/gcf-pr-review" ]; then
   echo "warning: old skill found at $HOME/.claude/skills/gcf-pr-review; it was replaced by gcf-code-review. Move it to a backup (see README, Migración)." >&2
 fi
-exit 0
+exit "$failed"

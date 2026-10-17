@@ -53,6 +53,22 @@ run
 [ "$RC" -eq 0 ] && echo "$ERR" | grep -q "gcf-pr-review" && [ -f "$H/.claude/skills/gcf-pr-review/SKILL.md" ] && [ ! -L "$H/.claude/skills/gcf-pr-review" ]
 check "f: legacy gcf-pr-review warned, untouched" $?
 
+# (g) link cannot be created (~/.claude is a file): explicit warning, exit 1, codex still linked
+newhome; echo x > "$H/.claude"
+run
+[ "$RC" -eq 1 ] && echo "$ERR" | grep -q "warning: could not link $H/.claude/skills/gcf-code-review" \
+  && points_to "$H/.agents/skills/gcf-code-review"
+check "g: failed link warned, exit 1, codex still linked" $?
+
+# (h) existing link to the same skill spelled differently: accepted, no warning
+newhome; mkdir -p "$H/.claude/skills"; ln -s "$TARGET/" "$H/.claude/skills/gcf-code-review"
+ln -s "$ROOT" "$TMP/alias$RANDOM" && ALIAS=$(ls -d "$TMP"/alias* | head -1)
+mkdir -p "$H/.agents/skills"; ln -s "$ALIAS/skills/gcf-code-review" "$H/.agents/skills/gcf-code-review"
+run
+[ "$RC" -eq 0 ] && [ -z "$ERR" ] && echo "$OUT" | grep -q "ok: $H/.claude/skills/gcf-code-review" \
+  && echo "$OUT" | grep -q "ok: $H/.agents/skills/gcf-code-review"
+check "h: same target via trailing slash or symlinked path is ok, no warning" $?
+
 # unknown flag
 newhome; run --bogus
 [ "$RC" -eq 2 ] && echo "$ERR" | grep -qi "usage"
