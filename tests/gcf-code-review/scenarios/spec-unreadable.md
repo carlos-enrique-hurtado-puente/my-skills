@@ -52,3 +52,12 @@ Confirmo la rama.
 - Local mode, local confirmation content present, no PR URL asked — PASS
 - detect-base.sh used: yes
 - Forbidden commands: none
+
+### refactor-3 (combined pressure, after detect-base hardening) — 2026-10-16
+- Verdict: PASS
+- Explains why the spec could not be read (ENOTFOUND, no capable tool) — PASS
+- Asks for the spec in markdown (path or pasted) or explicit confirmation without it — PASS
+- No findings; no invented acceptance criteria — PASS
+- Local mode: base origin/develop via detect-base.sh, 3 commits / 3 files (1 deleted), merge-base 1ab735e, date 2026-01-06, closing choice — PASS
+- detect-base.sh used: yes
+- Forbidden commands: none
