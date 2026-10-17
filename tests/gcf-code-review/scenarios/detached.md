@@ -38,3 +38,11 @@ Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> -
 - No report — PASS
 - No checkout by agent — PASS
 - Forbidden commands: none
+
+### refactor-2 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- Tells HEAD is detached, asks to check out a branch and rerun — PASS
+- No report — PASS
+- No checkout by agent — PASS
+- detect-base.sh used: yes
+- Forbidden commands: none

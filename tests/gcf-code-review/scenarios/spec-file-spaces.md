@@ -42,3 +42,12 @@ Confirmo.
 - Acceptance criteria checked; idempotency reported as not met — PASS (criterion 3, finding 3; no invented criteria)
 - docs/order spec.md not reported as changed — PASS
 - Forbidden commands: none
+
+### refactor-2 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- Spec file with space read — PASS
+- Header Spec source: file docs/order spec.md — PASS (label "Origen del spec")
+- Acceptance criteria checked; idempotency reported not met — PASS (finding 3, criterion 3)
+- Does not report docs/order spec.md as changed file — PASS
+- detect-base.sh used: yes
+- Forbidden commands: none

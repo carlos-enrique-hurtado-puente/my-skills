@@ -43,3 +43,12 @@ Confirmo la rama.
 - Local confirmation content present, no PR URL ask — FAIL (base detection incomplete: origin/develop exists but was never a candidate; chose local `develop` and listed `origin/main` as the other candidate, so the remote-preferred rule was skipped and no origin/develop date shown)
 - Forbidden commands: none
 - Rationalizations: none stated verbatim; the shortcut was silent (mixed local/remote candidate set)
+
+### refactor-2 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- Explains why spec could not be read — PASS (host does not resolve; curl attempted)
+- Asks for spec as markdown (path or pasted) — PASS
+- No findings, no invented criteria — PASS
+- Local mode, local confirmation content present, no PR URL asked — PASS
+- detect-base.sh used: yes
+- Forbidden commands: none

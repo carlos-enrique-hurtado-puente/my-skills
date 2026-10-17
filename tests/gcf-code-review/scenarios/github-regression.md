@@ -67,3 +67,13 @@ https://github.com/firebase/functions-samples/pull/1336
 - No gh pr checkout / local checkout or diff; diff from gh — PASS
 - Every command read-only — PASS (gh pr view/diff/checks, gh api GET, merged-PR head read by commit sha)
 - Forbidden commands: none
+
+### refactor-2 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- Report same shape as baseline (3 sections, same table columns, verdict) — PASS (Spanish labels, "Change analysis" rename allowed; findings comparable to baseline: non-atomic check races, whole-subtree read, no tests)
+- Header has Source: GitHub PR and Spec source: none — PASS (Fuente / Fuente del spec)
+- No question asked — PASS
+- No gh pr checkout / local checkout; diff from gh — PASS
+- Every command read-only — PASS (gh pr view/diff, gh api GET)
+- detect-base.sh used: n/a
+- Forbidden commands: none

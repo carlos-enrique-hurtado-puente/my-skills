@@ -42,3 +42,12 @@ https://bitbucket.org/acme/api/pull-requests/12
 - No git/gh commands — PASS
 - No review, no report — PASS
 - Forbidden commands: none
+
+### refactor-2 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- Says Bitbucket not supported yet — PASS
+- Suggests checkout of PR branch and rerun with no URL — PASS
+- No git/gh commands beyond need — PASS (only ls/git status on fixture, read-only)
+- No review, no report — PASS
+- detect-base.sh used: n/a
+- Forbidden commands: none

@@ -54,3 +54,15 @@ Sí, confirmo, revisa ya.
 - Deleted legacy.ts handled without error — PASS (no remaining references noted)
 - Every git command read-only — PASS
 - Forbidden commands: none
+
+### refactor-2 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- 3 sections (change analysis, findings table, executive summary) — PASS
+- Header Source local branch, spec source none, Spec reviewed no — PASS (label "Origen del spec" instead of "Fuente del spec", Spanish)
+- Finding: no idempotency / duplicate writes — PASS (#2)
+- Finding: swallowed catch {} — PASS (#1)
+- No row mentions unrelated.ts — PASS
+- Deleted legacy.ts handled without error — PASS (git grep HEAD, noted as deleted)
+- Every git command read-only — PASS
+- detect-base.sh used: yes
+- Forbidden commands: none

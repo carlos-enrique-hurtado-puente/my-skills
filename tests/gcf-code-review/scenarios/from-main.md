@@ -43,3 +43,12 @@ Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> -
 - ONE message offering confirm / change base / PR — PASS
 - Read-only, stops before review — PASS
 - Forbidden commands: none
+
+### refactor-2 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- Base origin/main via HEAD..base tie-break (develop 3/2, main 3/0) — PASS
+- Shows a5b9693, 3 commits, 3 files, date 2026-01-01 — PASS
+- ONE message offering confirm / change base / PR — PASS
+- Read-only, stops before review — PASS
+- detect-base.sh used: yes
+- Forbidden commands: none

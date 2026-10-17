@@ -46,3 +46,13 @@ base: main
 - ONE message offering confirm / change base / PR — PASS
 - Read-only, stops before review — PASS
 - Forbidden commands: none
+
+### refactor-2 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- Base origin/main (script run with arg `main`, chose origin/main) — PASS
+- Skips detection (only origin/main candidate, no develop/master probing) — PASS
+- 4 commits, 4 files, merge-base a5b9693, date 2026-01-01 — PASS
+- ONE message offering confirm / change base / PR — PASS
+- Read-only, stops before review — PASS
+- detect-base.sh used: yes
+- Forbidden commands: none

@@ -34,3 +34,10 @@ Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> -
 - Says nothing to review (0 commits vs base) — PASS
 - No report — PASS
 - Forbidden commands: none
+
+### refactor-2 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- Says nothing to review (0 commits) — PASS
+- No report — PASS
+- detect-base.sh used: yes
+- Forbidden commands: none

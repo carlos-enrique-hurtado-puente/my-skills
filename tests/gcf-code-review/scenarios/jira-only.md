@@ -51,3 +51,12 @@ https://acme.atlassian.net/browse/ORD-1
 - Does not ask "what do you want to review?" — PASS
 - No review, no findings — PASS
 - Forbidden commands: none
+
+### refactor-2 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- URL treated as spec, not review target — PASS
+- ONE message with local confirmation (branch, base, merge-base 1ab735e, 3 commits, 3 files) AND ORD-1 spec unreadable, asking for markdown or confirm-without-spec — PASS
+- Does not ask "what do you want to review?" — PASS
+- No review / findings — PASS
+- detect-base.sh used: yes
+- Forbidden commands: none
