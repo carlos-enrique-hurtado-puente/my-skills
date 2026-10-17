@@ -11,74 +11,50 @@ Read only when no PR URL was given: the target is the current git branch (`HEAD`
 
 ## Prerequisites
 
-Check in this order; the first row that applies decides.
-
-| Check | Result |
-|---|---|
-| `git rev-parse --is-inside-work-tree` fails | `BLOCKED`: not a git repository. |
-| `git rev-parse --verify -q HEAD` fails (unborn HEAD, no commits) | `BLOCKED`: nothing committed yet. |
-| `git symbolic-ref -q HEAD` fails (detached) | Tell the user `HEAD` is detached and ask them to check out the branch to review and rerun. No report. |
-| `git --no-optional-locks status --porcelain` is non-empty | Continue; the confirmation carries the uncommitted-changes warning and the report's `Limitations` repeats it. |
+The script checks them (repository, commits, attached `HEAD`, uncommitted changes) and reports them in `status:` and `uncommitted:` (see Base).
 
 ## Base
 
-If the user gave `base`, skip detection: a value containing `/` or starting with `refs/` (for example `origin/main`) is used as-is if `git rev-parse --verify -q <base>` resolves; a bare name (for example `main`) tries `origin/<name>` first, then `<name>`. A `base` given together with a GitHub PR URL is ignored; say so. Otherwise detect.
+Run `bash <skill-dir>/scripts/detect-base.sh [base]` from inside the repo (`<skill-dir>` is the folder containing SKILL.md; pass `base` only when the user gave one). The script is the only way to pick a base: never compute candidates, counts or the base by hand, and never replace it with `origin/HEAD`. It prints `key: value` lines.
 
-**Candidates:** for each `x` in `develop`, `main`, `master` and the branch `origin/HEAD` points to (`git symbolic-ref -q --short refs/remotes/origin/HEAD`, when it exists; it prints `origin/<name>`, so strip the leading `origin/` to get `x`), the ref is `origin/<x>` if `git rev-parse --verify -q refs/remotes/origin/<x>` succeeds, else local `<x>` if `refs/heads/<x>` exists. Drop duplicates and non-existent ones.
+What it decides, for humans: candidates are `develop`, `main`, `master` and the `origin/HEAD` target, each as `origin/<x>` if that remote ref exists, else local `<x>`; the base is the one with the fewest commits ahead of it, then fewest behind, then the `origin/HEAD` target, then the order `develop`, `main`, `master`. A user `base` containing `/` or starting with `refs/` is used as-is; a bare name tries `origin/<name>` then `<name>`. A `base` given with a GitHub PR URL is ignored; say so. No `git fetch`.
 
-**Evaluate every candidate before choosing.** For each existing candidate run both `git rev-list --count <base>..HEAD` and `git rev-list --count HEAD..<base>`; the pair is the evidence. Computing counts for one candidate (for example only the `origin/HEAD` target) is not detection. `origin/HEAD` only breaks a tie (key 3); it never selects the base by itself.
+| `status:` | Action |
+|---|---|
+| `ok` | Build the confirmation from the fields. |
+| `nothing-to-review` | Say there is nothing to review against `base`. No report, no confirmation. |
+| `detached` | Tell the user `HEAD` is detached; ask them to check out the branch and rerun. No report. |
+| `base-unresolved` | Say the given base does not resolve and ask for another. |
+| `no-candidate` | Ask for the base; with no answer, `BLOCKED`. |
+| `not-a-repo`, `unborn`, `unrelated` | `BLOCKED` with the script's `message:`. |
 
-**Choose** with these keys, in order:
-
-1. fewest commits in `git rev-list --count <base>..HEAD`;
-2. fewest commits in `git rev-list --count HEAD..<base>` (the base the branch actually left from has not moved on);
-3. the `origin/HEAD` target;
-4. the fixed order `develop`, `main`, `master`.
-
-No candidate exists: ask the user for the base; with no answer, `BLOCKED`.
-
-No `git fetch`. When the base is a remote ref, show the date of its last commit (`git log -1 --format=%cs <base>`) so the user can notice a stale ref.
+Rerun the script with the user's base when they name a different one.
 
 ## Data
 
 ```bash
-git rev-parse --abbrev-ref HEAD
-git rev-parse --short HEAD
-git rev-parse --short "$(git merge-base <base> HEAD)"   # merge-base short sha; non-zero exit = unrelated histories
-git rev-list --count <base>..HEAD
 git log --reverse --format='%h %s%n%b' <base>..HEAD     # commit messages = context, like a PR description
-git diff --name-status <base>...HEAD                    # files; deleted ones (D) count
 git diff --stat <base>...HEAD
 git diff <base>...HEAD                                  # source of the changes
 git show HEAD:<path>                                    # full file, new version
 git show <merge-base>:<path>                            # deleted file, old version
-git --no-optional-locks status --porcelain
 ```
 
 Review prior context in the commit messages. Files in the diff are the only files reviewed: a file changed on the base after the merge-base never appears in `<base>...HEAD`.
 
 ## Confirmation
 
-Before reviewing, compute N first: with 0 commits, report nothing to review (Edge cases) and send no confirmation. Otherwise send **one** message with these parts, in this order, then stop and wait for the answer:
+Taken from the script output (status `ok`), as **one** message with these parts in this order, then stop and wait:
 
-1. Branch and base ref: `` `<branch>` against `<base>` ``. Lines 2 and 3 below describe the chosen base.
-2. Candidate table: one line per existing candidate, `<ref>: <ahead> ahead, <behind> behind`, with the chosen one marked. Then the merge-base short sha, N commits, and "M files, of which K deleted". M is the number of lines in `git diff --name-status <base>...HEAD` (a rename is one line); K is the lines with status `D`.
-3. Only when the base is a remote ref: the date of its last commit.
-4. Only when a spec was given: its outcome, read before this message. Read from `<source>`, or could not be read (say why) and ask for it as markdown (path or pasted) or for confirmation to review without it. The mechanics are in the Spec step of the workflow.
-5. Only when `git --no-optional-locks status --porcelain` is non-empty: a warning that uncommitted changes are not part of the review.
-6. The closing choice: confirm, change the base, or did you mean to review a PR?
+1. `` `<branch>` against `<base>` ``.
+2. Every `candidate:` line as `<ref>: <ahead> ahead, <behind> behind`, the `chosen` one marked.
+3. `merge_base`, `commits` commits, `files` files of which `deleted` deleted.
+4. Only if `base_is_remote: yes`: `base_date` as the date of the base's last commit.
+5. Only when a spec was given: its outcome, read before this message. Read from `<source>`, or could not be read (say why) and ask for it as markdown (path or pasted) or for confirmation to review without it (Spec step of the workflow).
+6. Only if `uncommitted: yes`: a warning that uncommitted changes are not part of the review.
+7. The closing choice: confirm, change the base, or did you mean to review a PR?
 
-If the user's invocation message already confirms (for example "confirm, review now"), skip the wait and proceed; the confirmation facts still go in the report header. Exception: when a given spec could not be read, stop and ask, because that needs the user's answer.
-
-If the user names a different base, recompute parts 2 and 3 and confirm again.
-
-## Edge cases
-
-| Situation | What to do |
-|---|---|
-| `<base>..HEAD` has 0 commits (for example standing on `develop`) | Say there is nothing to review against that base. No report. |
-| No candidate base | Ask for it (see Base). |
-| Base given by the user does not resolve | Say so and ask for another. |
+If the invocation message already confirms (for example "confirm, review now"), skip the wait and proceed; the facts still go in the report header. Exception: when a given spec could not be read, stop and ask. If the user names a different base, rerun the script with it and confirm again.
 
 ## Header fields (section 1)
 

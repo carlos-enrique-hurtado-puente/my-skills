@@ -43,11 +43,11 @@ What arrives decides the mode:
 | Remaining text that reads like a spec (acceptance criteria, requirements) | `spec`, pasted |
 | Other remaining text | ask |
 
-`/gcf-code-review https://acme.atlassian.net/browse/X-1` therefore means local mode with that spec. In local mode, read a given spec before sending the confirmation so the single confirmation message can state its outcome.
+`/gcf-code-review https://acme.atlassian.net/browse/X-1` therefore means local mode with that spec.
 
 ## Sources
 
-Pick the source from the target, then read **only that source's file**; it holds the prerequisites, how to fetch the changes, its header fields and its `BLOCKED` conditions.
+Pick the source from the target, then read **only that source's file** (paths are relative to `<skill-dir>`, the folder containing this SKILL.md); it holds the prerequisites, how to fetch the changes, its header fields and its `BLOCKED` conditions.
 
 | Target | Source | File |
 |---|---|---|
