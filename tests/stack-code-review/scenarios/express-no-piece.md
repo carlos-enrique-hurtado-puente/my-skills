@@ -60,3 +60,16 @@ Confirmo.
 - All git commands read-only — PASS
 - Forbidden commands: none
 - Notable: "si el body no es JSON, req.body puede no estar definido y la lectura lanza TypeError" (finding #3, no `[model knowledge]` tag)
+
+### t6c (tag all unowned) — 2026-10-17
+- Verdict: FAIL
+- 3 sections — PASS
+- `Stack(s):` Express, model knowledge (lower confidence), no piece — PASS
+- Every finding on `src/routes.js` starts with `[model knowledge]` after its prefix — FAIL (#4 missing-tests finding on `src/routes.js` has no tag; #1, #2, #3, #5, #6 are tagged)
+- Limitations recommends installing an Express skill — PASS ("se recomienda instalar una")
+- Finding `req.body.amount` unvalidated — PASS (#3)
+- Finding swallowed error `catch (e) {}` (no response, error lost) — PASS (#1, #5)
+- No GCF/Angular criteria — PASS (no idempotency/Pub/Sub; angular and gcp-functions not read)
+- All git commands read-only — PASS
+- Forbidden commands: none
+- Notable: "issue (blocking): El diff no incluye ningún test para un endpoint que persiste importes." (finding #4, no `[model knowledge]` tag)
