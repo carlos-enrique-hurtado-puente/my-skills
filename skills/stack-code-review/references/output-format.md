@@ -13,9 +13,8 @@ Deliver **only** these three sections, in this order. No preamble, no extra sect
 - **Source:** `<GitHub PR | Local branch>`
 - **Spec source:** `<file <path> | <tool used> (<url>) | pasted | none>`
 <source block>
-- **Generation:** `<Gen 1 | Gen 2 | Undetermined>`
-- **Runtime:** `<runtime>`
-- **Trigger(s):** `<list>`
+- **Stack(s):** `<Name> — <piece | model knowledge (lower confidence)>; skills: <consulted…> | missing: <…>`
+<context_fields>
 - **Relevant files:** `<list>`
 - **Functional summary:** `<summary>`
 - **Spec reviewed:** `<yes/no>`
@@ -31,6 +30,12 @@ Deliver **only** these three sections, in this order. No preamble, no extra sect
 | `Local branch` | **Repo** (folder name or `origin` name) · **Head branch** · **HEAD** (short sha) · **Base ref** · **Merge-base** (short sha) · **Commits reviewed** (count) |
 
 `PR comments reviewed` is `N/A` for `Local branch`.
+
+`Stack(s):` is one bullet per stack, built from the `detect-stacks.sh` output (see `references/stack-selection.md`): one per `loaded` piece (source `piece`) and one per framework of unowned files (source `model knowledge (lower confidence)`, no skills line unless one was consulted).
+
+`<context_fields>` is one bullet per `context_fields` entry of each loaded piece, in the piece's order, labeled with the piece's field name and its value or `Undetermined` (for example `- **Generation:** ...`). With no loaded piece there are none.
+
+`Limitations` also lists: declared piece skills that are missing; stacks or files without a piece (and the recommendation to install a skill for that framework, or the skill found by search); skipped pieces; script errors.
 
 If the review is `BLOCKED`, say so clearly and do not invent findings.
 
@@ -76,16 +81,14 @@ No actionable findings in the analyzed changes.
 ## Validations performed
 
 - Spec compliance reviewed.
-- Clean Code reviewed.
 - Clean Architecture reviewed.
-- Handlers and triggers reviewed.
-- Idempotency and retries reviewed.
-- Security and IAM reviewed.
-- Tests reviewed.
+- Clean Code reviewed.
+- Security reviewed.
 - Observability reviewed.
-- Performance and costs reviewed.
+- Tests reviewed.
 - Compatibility and regressions reviewed.
-- Configuration and deployment reviewed.
+- Change intent and PR hygiene reviewed.
+- <one line per Checklist area of each loaded piece, e.g. "Handlers and triggers reviewed (GCP Cloud Functions).">
 ```
 
 ## 3. Executive summary
@@ -116,5 +119,5 @@ No actionable findings in the analyzed changes.
 | `Ready to merge` | No blocking; no relevant functional risks; no major security/idempotency/compatibility issues; only nitpicks or minor suggestions |
 | `Requires minor changes` | No blocking; some non-blocking; low operational and functional risk; sustainable architecture |
 | `Requires changes before merging` | ≥1 blocking; partial spec non-compliance; risk of bug, regression, security, data loss or missing critical test |
-| `Requires rework` | Implementation misaligned with the spec; business logic strongly coupled to GCP; multiple blocking; no idempotency/retry strategy; hard-to-maintain design; high operational risk |
+| `Requires rework` | Implementation misaligned with the spec; business logic strongly coupled to the framework or infrastructure; multiple blocking; no idempotency/retry strategy; hard-to-maintain design; high operational risk |
 | `Review blocked` | Could not fetch the changes, the required spec or the required comments; insufficient information |

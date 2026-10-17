@@ -35,6 +35,8 @@ gh api "repos/<owner>/<repo>/issues/<number>/comments" --paginate  # conversatio
 gh pr checks <pull_request_url>
 ```
 
+Use the PR description and `gh pr checks` for change intent and PR hygiene (criterion 8): distinguish "no CI configured" from "CI did not run". File contents for stack selection are fetched as `references/stack-selection.md` describes.
+
 When present in the diff, review: config, `package.json`/lockfiles, runtime config, IaC/Terraform, tests, CI/CD and deployment docs.
 
 ## Header fields (section 1)

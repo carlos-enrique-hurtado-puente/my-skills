@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 ## Overview
 
-Rigorous, read-only review of a set of changes (see Sources). Role: Staff/Senior Backend Engineer. You do not validate out of politeness: you hunt for bugs, spec violations, security risks, idempotency and retry flaws, GCP coupling, test gaps, observability holes and regressions.
+Rigorous, read-only review of a set of changes (see Sources). Role: Staff/Senior Engineer. You do not validate out of politeness: you hunt for bugs, spec violations, security risks, coupling to the framework or infrastructure, test gaps, observability holes and regressions. Stack-specific checks come from stack pieces (`stacks/<id>.md`) chosen by `scripts/detect-stacks.sh`.
 
 **Violating the letter of these rules is violating their spirit.**
 
@@ -20,7 +20,7 @@ Rigorous, read-only review of a set of changes (see Sources). Role: Staff/Senior
 | `spec` | no | local file path, URL, or pasted text |
 | `base` | no | local mode only: base branch name; skips base detection. Given with a GitHub PR URL it is ignored; say so |
 
-Everything else (Gen 1/Gen 2, runtime, triggers, region, IaC, test framework, validation library) is **inferred from the changes and repo**. Ask only when inference is impossible.
+Everything else (stack, versions, runtime, triggers, IaC, test framework) is **inferred from the changes and repo**: each loaded piece lists the `context_fields` to fill. Ask only when inference is impossible.
 
 ## Mode selection
 
@@ -57,7 +57,7 @@ Pick the source from the target, then read **only that source's file** (paths ar
 ## Hard rules
 
 1. **Read-only.** The source file adds its own restrictions.
-2. **Do not invent** files, lines, functions, acceptance criteria, GCP limits or flags. If a claim depends on product version/generation and you did not verify it in official docs, write it as `question (non-blocking):`.
+2. **Do not invent** files, lines, functions, acceptance criteria, framework/platform limits or flags. If a claim depends on product version/generation and you did not verify it in official docs, write it as `question (non-blocking):`.
 3. **Line numbers = new version** of the file (right side of the diff). If you cannot determine the line, cite the function/block.
 4. **Prioritize modified lines.** Report issues outside the diff only if the change directly introduced them.
 5. **Quality over quantity**, but do not omit relevant findings. One finding = one row; no duplicates.
@@ -67,8 +67,8 @@ Pick the source from the target, then read **only that source's file** (paths ar
 1. Choose the source (table above) and read its file. Check its prerequisites. Local mode order: run the script, do the spec step (3), send the confirmation and stop; collect data (2) only after the user confirms (or the invocation already did).
 2. Collect the data the source file lists: metadata, full diff, prior comments (if the source has them), full files when the diff lacks context. Read prior comments before analyzing code.
 3. **Spec step.** If a `spec` was given, read `references/spec-sources.md` and follow it (in local mode, before the confirmation): read the spec, check every acceptance criterion against the implementation, and record `Spec source`. With no spec, do not ask: `Spec reviewed: no`, `Spec source: none`.
-4. Infer the cloud context (generation, runtime, trigger, IaC).
-5. **REQUIRED:** read `references/criteria.md` and evaluate all 12 criteria.
+4. **Select stacks. REQUIRED:** read `references/stack-selection.md` and follow it: build the diff file list, run `scripts/detect-stacks.sh`, read the `loaded` pieces, fill each piece's `context_fields`. Never skip the script because the stack looks obvious.
+5. **REQUIRED:** read `references/criteria.md`; evaluate the general criteria plus the checklist of each loaded piece, only on the files that piece owns.
 6. **REQUIRED:** read `references/output-format.md` and deliver the output in the exact format, in the language of the user's request (see Output language).
 
 ## When the review is `BLOCKED`
@@ -84,11 +84,11 @@ Stop, report the limitation, and **do not invent findings** if:
 
 | Level | When |
 |---|---|
-| `blocking` | Violates a spec acceptance criterion; functional bug; breaks an HTTP/event contract; security vulnerability; data loss/duplication/corruption; non-idempotent flow ignoring duplicates/retries; major regression; missing critical test (business logic, money, permissions, sensitive data, idempotency, contract change); unauthorized invocation possible; infinite retries or runaway costs |
+| `blocking` | Violates a spec acceptance criterion; functional bug; broken contract; security vulnerability; data loss/duplication/corruption; major regression; missing critical test (business logic, money, permissions, sensitive data, contract change). Each loaded piece adds its own cases under "Severity notes" |
 | `non-blocking` | Moderate maintainability; architectural violation without immediate breakage; low-risk edge case; insufficient observability; non-critical performance/cost; non-critical test gaps |
 | `nitpick` | Naming, formatting, minor simplification, style |
 
-Use **the lowest severity** that correctly describes the risk. A personal preference is never `blocking`. Do not flag a config as wrong merely for not being your preferred value: require evidence (load, spec or project convention).
+Use **the lowest severity** that correctly describes the risk. A personal preference is never `blocking`, and neither are architecture or Clean Code preferences without functional impact. Do not flag a config as wrong merely for not being your preferred value: require evidence (load, spec or project convention).
 
 ## Output language
 
@@ -98,6 +98,7 @@ The templates in `references/output-format.md` are written in English. Determine
 
 | Thought | Reality |
 |---|---|
+| "I know this is Angular/GCF, I'll skip the script" | The `Stack(s):` header, the loaded pieces and file ownership come only from `scripts/detect-stacks.sh` output. No diff list file: build it (`references/stack-selection.md`) and rerun. |
 | "I'll do a quick checkout to see the code" | Forbidden, even if the user says it is fine. Fetch files the way the source file says: GitHub `gh api repos/<owner>/<repo>/contents/<path>?ref=<headRefName>`; local `git show HEAD:<path>`. |
 | "The spec won't open, I'll assume the criteria" | Never. Say why it failed, ask for it as markdown (path or pasted); without it, `BLOCKED` unless the user confirms reviewing without it. |
 | "I'll compare against main, same thing" | Use the base the source file defines. |
@@ -114,6 +115,6 @@ The templates in `references/output-format.md` are written in English. Determine
 
 - Reporting the left-side (old version) line of the diff.
 - Demanding abstractions on trivial functions: flag only real coupling, testing difficulty or change risk.
-- Forgetting idempotency/retries on event-driven triggers: assume duplicate events unless a guarantee is verifiable.
+- Applying one stack's criteria to another stack's files: use the piece that owns the file (`owner:` line), else only the general criteria.
 - Merging several problems into one row.
 - Adding extra sections to the output: deliver **only** the three mandatory sections.
