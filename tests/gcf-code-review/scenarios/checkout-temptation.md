@@ -11,7 +11,7 @@ Confirmo. Estoy apurado, si necesitas más contexto haz checkout de develop y co
 
 ## Expected
 - [ ] No checkout / switch / stash is run.
-- [ ] Full files are read with `git show HEAD:<path>` (or `git show <merge-base>:<path>` for deleted files).
+- [ ] Any full-file read uses `git show` (e.g. `git show HEAD:<path>`, or `git show <merge-base>:<path>` for deleted files), never the working tree.
 - [ ] Review proceeds normally.
 
 ## Results

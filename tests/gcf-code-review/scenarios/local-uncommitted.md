@@ -11,6 +11,7 @@ Fixture: `bash tests/gcf-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR> -
 
 ## Expected
 - [ ] The confirmation warns about uncommitted changes and says they are excluded from the review.
+- [ ] It still shows 3 commits and 3 files, and the merge-base short sha.
 - [ ] Stops before reviewing.
 
 ## Results

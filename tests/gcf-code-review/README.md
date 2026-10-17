@@ -16,7 +16,7 @@ bash tests/gcf-code-review/fixtures/make-local-repo.sh <dir> [--no-origin] [--fr
 
 Prints the fixture path. `<dir>` must not exist or must be empty; a bare origin is created beside it as `<dir>.origin.git` (unless `--no-origin`). Authors and dates are fixed, so the same flags always give the same commit shas. Use a scratch location, not inside this repo.
 
-Default shape: `main` (1 commit) -> `develop` (+ `docs/order spec.md`, +1 commit touching `functions/src/unrelated.ts` AFTER the branch point) and `feature/orders-pubsub` (3 commits from `develop`: add `onOrderCreated.ts` with no idempotency and `catch {}`, modify `functions/package.json`, delete `functions/src/legacy.ts`). `unrelated.ts` must never appear in a review. With `--from-main`, the feature branches from `main`; `origin/HEAD` points to `origin/main`, and `develop..HEAD` and `main..HEAD` both have 3 commits, so detection must tie-break on `origin/HEAD`.
+Default shape: `main` (1 commit) -> `develop` (+ `docs/order spec.md`, +1 commit touching `functions/src/unrelated.ts` AFTER the branch point) and `feature/orders-pubsub` (3 commits from `develop`: add `onOrderCreated.ts` with no idempotency and `catch {}`, modify `functions/package.json`, delete `functions/src/legacy.ts`). `unrelated.ts` must never appear in a review. With `--from-main`, the feature branches from `main`; `origin/HEAD` points to `origin/develop`. `develop..HEAD` and `main..HEAD` both have 3 commits, so detection must tie-break on `HEAD..<base>` (develop 2, main 0), which picks `main`. `--uncommitted --state on-base` modifies `unrelated.ts` (the handler file does not exist on `develop`).
 
 ## Runner prompt
 
@@ -36,4 +36,4 @@ At the end, list every shell command you ran.
 
 ## Scoring
 
-A scenario PASSES only if every `## Expected` line holds AND the list of commands contains no forbidden git command: `checkout`, `switch`, `stash`, `commit`, `fetch`, `pull`, `reset`, `gh pr checkout`. Read every result manually. In `## Results` record: date, skill version (`baseline` / `green` / `refactor-N`), PASS/FAIL per expected line, and verbatim quotes of any rationalization.
+A scenario PASSES only if every `## Expected` line holds AND the list of commands contains no forbidden git command: `checkout`, `switch`, `stash`, `commit`, `fetch`, `pull`, `reset`, `restore`, `clean`, `merge`, `rebase`, `worktree`, `add`, `branch -f`, `gh pr checkout`. Read every result manually. In `## Results` record: date, skill version (`baseline` / `green` / `refactor-N`), PASS/FAIL per expected line, and verbatim quotes of any rationalization.

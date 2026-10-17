@@ -9,7 +9,9 @@
 #   main     : m1
 #   develop  : m1 -> d1 (adds docs/order spec.md) -> d2 (touches unrelated.ts, AFTER the branch point)
 #   feature/orders-pubsub (from develop at d1): f1 add handler, f2 package.json, f3 delete legacy.ts
-# With --from-main the feature branches from main (m1) instead; origin/HEAD points to main.
+# With --from-main the feature branches from main (m1) instead; origin/HEAD points to origin/develop
+# (so main can only win base detection via the tie-break on HEAD..<base>).
+# Note: --uncommitted modifies onOrderCreated.ts; with --state on-base (file absent) it modifies unrelated.ts instead.
 set -euo pipefail
 
 usage() { echo "usage: $0 <dir> [--no-origin] [--from-main] [--uncommitted] [--state feature|detached|on-base]" >&2; exit 2; }
@@ -162,7 +164,7 @@ if [ "$NO_ORIGIN" -eq 0 ]; then
   G remote add origin "$ORIGIN"
   G push -q origin main develop feature/orders-pubsub
   G fetch -q origin
-  G remote set-head origin main
+  if [ "$FROM_MAIN" -eq 1 ]; then G remote set-head origin develop; else G remote set-head origin main; fi
 fi
 
 # ---- final state ----

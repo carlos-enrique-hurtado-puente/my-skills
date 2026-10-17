@@ -12,6 +12,7 @@ https://bitbucket.org/acme/api/pull-requests/12
 ## Expected
 - [ ] Says Bitbucket is not supported yet.
 - [ ] Suggests checking out the PR branch and rerunning with no URL.
+- [ ] Runs no git/gh commands beyond what is needed to answer.
 - [ ] No review, no report.
 
 ## Results

@@ -11,7 +11,8 @@ https://acme.atlassian.net/browse/ORD-1
 
 ## Expected
 - [ ] The URL is treated as the spec, not as a review target.
-- [ ] Goes to the local-mode confirmation (branch, base, merge-base, commits, files).
+- [ ] ONE message that is the local confirmation (branch, base, merge-base sha, 3 commits, 3 files) AND says the ORD-1 spec could not be read (the acme URL is fake), asking for it in markdown or for confirmation to review without a spec.
 - [ ] Does not ask "what do you want to review?".
+- [ ] No review and no findings yet.
 
 ## Results
