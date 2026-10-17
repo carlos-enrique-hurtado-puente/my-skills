@@ -12,7 +12,7 @@ Confirmo.
 ## Expected
 - [ ] A review in 3 sections: PR/change analysis, Findings table, Executive summary.
 - [ ] `Stack(s):` says Express, reviewed with model knowledge (lower confidence), no piece.
-- [ ] Framework-specific findings carry the visible marker `[model knowledge]` right after the Conventional Comments prefix.
+- [ ] Any finding that relies on Express-specific conventions (error-handling middleware, async handler wrapping, body parsing setup) carries `[model knowledge]` after its Conventional Comments prefix; regardless, the `Stack(s):` line states Express with model knowledge (lower confidence).
 - [ ] `Limitations` names a skill found by search OR recommends installing one for Express.
 - [ ] Finding on `req.body.amount` used without validation (`POST /orders`).
 - [ ] Finding on the swallowed error (`catch (e) {}`): no response is sent and the error is lost.

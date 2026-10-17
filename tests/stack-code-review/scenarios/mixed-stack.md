@@ -15,6 +15,7 @@ Confirmo.
 - [ ] GCF idempotency finding on `functions/src/onOrderCreated.ts` (duplicate Firestore writes on redelivery).
 - [ ] Angular subscription-leak finding on `web/src/app/orders.component.ts`.
 - [ ] No GCF criteria applied to `web/` files and no Angular criteria applied to `functions/` files.
+- [ ] The findings table names the file for each row, and each finding's criterion matches the stack of its file (GCF concerns only on functions/*, Angular concerns only on web/*).
 - [ ] One single report (not one per stack).
 - [ ] Every `git` command is read-only.
 
