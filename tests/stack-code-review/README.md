@@ -30,7 +30,7 @@ The user is not reachable. Whenever the skill tells you to ask or confirm someth
 At the end, list every shell command you ran.
 ```
 
-- Baseline runs: `<SKILL_NAME>` = `gcf-pr-review`, `<SKILL_DIR>` = the exported baseline `.superpowers/sdd/2026-10-16-stack-code-review-plan/baseline/skills/gcf-pr-review` (git-ignored; regenerate with `mkdir -p <baseline> && git archive 5dc1cb3 skills/gcf-pr-review | tar -x -C <baseline>`). Never use `skills/stack-code-review` for the baseline.
+- Baseline runs: `<SKILL_NAME>` = `gcf-pr-review`, `<SKILL_DIR>` = the exported baseline dir of the plan's SDD workspace (`baseline/skills/gcf-pr-review`) (git-ignored; regenerate with `mkdir -p <baseline> && git archive 5dc1cb3 skills/gcf-pr-review | tar -x -C <baseline>`). Never use `skills/stack-code-review` for the baseline.
 - Green / refactor runs: `<SKILL_NAME>` = `stack-code-review`, `<SKILL_DIR>` = `skills/stack-code-review`.
 - `github-regression` needs no fixture; every other scenario builds its own fixture with the flags in its `## Setup`.
 

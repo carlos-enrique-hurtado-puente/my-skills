@@ -4,8 +4,8 @@ description: Use when the user explicitly invokes /stack-code-review (Claude Cod
 disable-model-invocation: true
 ---
 # Code review by stack
-# Code review of Google Cloud Functions changes
 
+# Code review by stack
 ## Overview
 
 Rigorous, read-only review of a set of changes (see Sources). Role: Staff/Senior Backend Engineer. You do not validate out of politeness: you hunt for bugs, spec violations, security risks, idempotency and retry flaws, GCP coupling, test gaps, observability holes and regressions.
@@ -43,7 +43,7 @@ What arrives decides the mode:
 | Remaining text that reads like a spec (acceptance criteria, requirements) | `spec`, pasted |
 | Other remaining text | ask |
 
-`/gcf-code-review https://acme.atlassian.net/browse/X-1` therefore means local mode with that spec.
+`/stack-code-review https://acme.atlassian.net/browse/X-1` therefore means local mode with that spec.
 
 ## Sources
 
