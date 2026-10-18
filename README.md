@@ -43,13 +43,7 @@ ln -s "$(pwd)/skills/<name>" ~/.agents/skills/<name>   # Codex
 
 ## Adding a skill
 
-1. Create `skills/<name>/SKILL.md`. The folder name must equal the `name` in its frontmatter.
-2. Make it manual-only:
-   - Claude Code: `disable-model-invocation: true` in the `SKILL.md` frontmatter.
-   - Codex: `skills/<name>/agents/openai.yaml` with `policy: { allow_implicit_invocation: false }`.
-3. Write it with test-driven discipline (`superpowers:writing-skills`): run a baseline scenario without the skill (RED), write the skill (GREEN), then pressure-test it (REFACTOR). Put scenarios and scripts in `tests/<name>/`, as `tests/stack-code-review/` does.
-4. Add a row to the table above and a page in `docs/skills/<name>.md` (plus `<name>.es.md` if you want a translation).
-5. Run `bash install.sh`.
+The full process (manual-only invocation, test-driven writing with `superpowers:writing-skills`, tests, docs) is in [AGENTS.md](AGENTS.md), which coding agents read automatically. In short: create `skills/<name>/SKILL.md`, add its tests under `tests/<name>/`, its page under `docs/skills/<name>.md` and a row in the table above, then run `bash install.sh`.
 
 ## Conventions
 
