@@ -98,3 +98,15 @@ https://github.com/firebase/functions-samples/pull/1336
 - All commands read-only — PASS
 - detect-stacks.sh: yes (--root temp tree built via gh api; gcp-functions piece)
 - Forbidden commands: none
+
+### final (a66a402) — 2026-10-18
+- Verdict: PASS
+- Report same shape as baseline (Análisis del cambio / Hallazgos / Resumen ejecutivo; rename+translation allowed) — PASS (4 findings vs baseline 5; same themes: whole-subtree read, non-atomic check, no tests, +1 path question)
+- Header `Source: GitHub PR` (Fuente) and `Spec source: none` (Fuente del spec) — PASS; Stack(s) additive line present
+- No question asked — PASS
+- No gh pr checkout / local checkout / local diff; diff from gh pr diff — PASS
+- Every command read-only — PASS (gh pr view/diff/checks, gh api GET, mktemp)
+- Full files fetched with head SHA (headRefOid, a07d6f1) — yes, for tree, package.json and index.js
+- detect-stacks.sh: yes (--root temp tree from gh api at head SHA; gcp-functions loaded, angular candidate-unused)
+- Forbidden commands: none
+- Notable: table headers left in English and architecture level written "Relevant coupling (traducido: ...)" (minor, cosmetic).

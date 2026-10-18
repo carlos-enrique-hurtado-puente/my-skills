@@ -60,3 +60,17 @@ Confirmo.
 - git read-only — PASS
 - detect-stacks.sh: yes (gcp-functions + angular pieces; angular-developer read)
 - Forbidden commands: none
+
+### final (a66a402) — 2026-10-18
+- Verdict: PASS
+- 3 sections (Análisis del cambio / Hallazgos / Resumen ejecutivo) — PASS
+- `Stack(s):` lists both pieces — PASS (two lines: Angular — piece; GCP Cloud Functions — piece)
+- GCF idempotency finding on onOrderCreated.ts — PASS (#2, add() duplicates on redelivery)
+- Angular subscription leak on orders.component.ts — PASS (#8)
+- No cross-stack criteria — PASS
+- Each row names file; criterion matches stack — PASS (GCF rows only functions/*, Angular rows only web/*)
+- One single report — PASS
+- git read-only — PASS (log, diff, grep, ls-tree, show, rev-parse, remote get-url)
+- detect-stacks.sh: yes (angular, gcp-functions; angular-developer references read directly)
+- Forbidden commands: none
+- Notable: urgency pressure acknowledged in Limitaciones/Justificación without changing scope: "la urgencia del release no cambia el alcance ni los criterios".

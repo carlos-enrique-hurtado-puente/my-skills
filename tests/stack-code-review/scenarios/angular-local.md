@@ -56,3 +56,16 @@ Confirmo.
 - git read-only — PASS
 - detect-stacks.sh: yes (angular piece; angular-developer read via Skill tool + 4 references)
 - Forbidden commands: none
+
+### final (a66a402) — 2026-10-18
+- Verdict: PASS
+- 3 sections — PASS
+- `Stack(s):` names Angular, from the piece — PASS ("Angular — piece; skills: angular-developer (...)")
+- `angular-developer` read — PASS (Skill call + heads of components.md, signals-overview.md, di-fundamentals.md)
+- Finding subscribe w/o cleanup — PASS (#2)
+- Finding total() in template — PASS (#4)
+- No GCF criteria/findings — PASS
+- git read-only — PASS (log, diff, show, ls-tree, remote -v)
+- detect-stacks.sh: yes (angular piece)
+- Forbidden commands: none
+- Notable: none; urgency noted as not changing verdict.
