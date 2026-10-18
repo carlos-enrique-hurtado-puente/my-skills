@@ -1,35 +1,37 @@
 # my-skills
 
-Skills personales para agentes de código (Claude Code, Codex).
+**English** | [Español](README.es.md)
+
+Personal skills for coding agents (Claude Code, Codex).
 
 ## Skills
 
-| Skill | Descripción | Invocación (manual) |
+| Skill | Description | Invocation (manual) |
 |---|---|---|
-| [`stack-code-review`](skills/stack-code-review/SKILL.md) | Code review de cambios de cualquier stack (piezas de stack enchufables, p. ej. Cloud Functions y Angular), desde la URL de un PR de GitHub o desde la rama local actual contra su base. | `/stack-code-review` (Claude Code), `$stack-code-review` (Codex) |
+| [`stack-code-review`](skills/stack-code-review/SKILL.md) | Code review of changes in any stack (pluggable stack pieces, e.g. Cloud Functions and Angular), from a GitHub PR URL or from the current local branch against its base. | `/stack-code-review` (Claude Code), `$stack-code-review` (Codex) |
 
-Las skills solo se ejecutan cuando las invocas de forma explícita.
+Skills run only when you invoke them explicitly.
 
-## Estructura
+## Layout
 
 ```
-skills/<nombre>/   ← una carpeta por skill (SKILL.md, agents/, references/, scripts/)
-tests/             ← tests y escenarios (no se instalan)
-docs/              ← documentos de diseño
-install.sh         ← instalador
+skills/<name>/   ← one folder per skill (SKILL.md, agents/, references/, scripts/)
+tests/           ← tests and scenarios (not installed)
+docs/            ← design documents
+install.sh       ← installer
 ```
 
-## Instalación
+## Installation
 
 ```bash
-bash install.sh              # Claude Code y Codex
-bash install.sh --claude     # solo Claude Code (~/.claude/skills)
-bash install.sh --codex      # solo Codex (~/.agents/skills)
+bash install.sh              # Claude Code and Codex
+bash install.sh --claude     # Claude Code only (~/.claude/skills)
+bash install.sh --codex      # Codex only (~/.agents/skills)
 ```
 
-El script crea un symlink por cada skill de `skills/*/`. Es idempotente, crea los directorios padre si faltan y nunca sobrescribe una carpeta real ni un symlink que apunte a otro lugar (avisa por stderr y continúa).
+The script creates one symlink per skill in `skills/*/`. It is idempotent, creates missing parent directories, and never overwrites a real folder or a symlink that points elsewhere (it warns on stderr and continues). If a link cannot be created it warns and exits with code 1.
 
-Equivalente manual (desde la raíz del repo):
+Manual equivalent (from the repo root):
 
 ```bash
 # Claude Code
@@ -41,43 +43,45 @@ mkdir -p ~/.agents/skills
 ln -s "$(pwd)/skills/stack-code-review" ~/.agents/skills/stack-code-review
 ```
 
-## Uso
+## Usage
 
-En Claude Code: `/stack-code-review`. En Codex: `$stack-code-review`.
+In Claude Code: `/stack-code-review`. In Codex: `$stack-code-review`.
 
-Con una URL de PR se revisa ese PR; sin argumentos se revisa la rama local actual contra su base (el modo local se detiene primero para pedir una confirmación). El modo GitHub requiere `gh` instalado y autenticado.
+With a PR URL it reviews that PR; with no arguments it reviews the current local branch against its base (local mode first stops to ask for confirmation). GitHub mode requires `gh` installed and authenticated.
 
 ```text
 /stack-code-review https://github.com/org/repo/pull/123
 /stack-code-review
 /stack-code-review base: main
-/stack-code-review spec: ./docs/ruta.md
-/stack-code-review https://github.com/org/repo/pull/123 spec: https://miempresa.atlassian.net/browse/PROJ-456
+/stack-code-review spec: ./docs/path.md
+/stack-code-review https://github.com/org/repo/pull/123 spec: https://yourcompany.atlassian.net/browse/PROJ-456
 ```
 
-- `base:` (solo modo local) indica la rama base y omite la detección automática.
-- `spec:` acepta una ruta local, una URL (por ejemplo un ticket de Jira) o texto pegado.
+- `base:` (local mode only) sets the base branch and skips auto-detection.
+- `spec:` accepts a local path, a URL (for example a Jira ticket) or pasted text.
 
-## Conectores
+## Connectors
 
-Leer la spec desde una URL depende de los MCP/herramientas configurados en cada herramienta. Claude Code y Codex se configuran por separado, así que un conector disponible en una no lo está necesariamente en la otra. Si no hay forma de leer la URL, la skill pide la spec en markdown.
+Reading a spec from a URL depends on the MCP servers/tools configured in each tool. Claude Code and Codex are configured separately, so a connector available in one is not necessarily available in the other. If the URL cannot be read, the skill asks for the spec as markdown.
 
-## Cómo funcionan los stacks
+## How stacks work
 
-La skill detecta los stacks del diff con `scripts/detect-stacks.sh` y carga solo las piezas (`stacks/<id>.md`) que son dueñas de algún archivo cambiado. Cada pieza aporta su checklist solo sobre los archivos que posee; el formato del reporte, la escala de severidad y el veredicto son siempre los del núcleo.
+The skill detects the stacks in the diff with `scripts/detect-stacks.sh` and loads only the pieces (`stacks/<id>.md`) that own at least one changed file. Each piece applies its checklist only to the files it owns; the report format, severity scale and verdict always come from the core.
 
-### Añadir un stack
+### Adding a stack
 
-Crea `skills/stack-code-review/stacks/<id>.md`. No hay que cambiar nada más: el script descubre las piezas por sí solo.
+Create `skills/stack-code-review/stacks/<id>.md`. Nothing else needs to change: the script discovers pieces on its own.
 
 ```markdown
 ---
 id: express
 name: Express
 detect:
-  dependencies: [express]        # también files: [...] e imports: [...]; al menos uno
-skills: [mi-skill-de-express]    # skills que la pieza consulta (puede ser [])
-context_fields: [Versión de Express, Framework de tests]
+  dependencies: [express]        # decides which files belong to the piece
+  files: ["**/routes/*.js"]      # optional: only breaks ties or covers files outside every root
+  imports: [express]             # optional: same as files
+skills: [my-express-skill]       # skills the piece consults (may be [])
+context_fields: [Express version, Test framework]
 ---
 
 ## Context detection
@@ -88,46 +92,46 @@ context_fields: [Versión de Express, Framework de tests]
 ## Common mistakes
 ```
 
-Cómo se decide la propiedad: `dependencies` determina qué archivos pertenecen a la pieza (las raíces son los directorios cuyo `package.json` declara la dependencia); `files` e `imports` solo desempatan cuando varias piezas comparten raíz o cubren archivos fuera de toda raíz. El `id` debe ser igual al nombre del archivo (`stacks/<id>.md`) y cumplir `^[a-z0-9][a-z0-9-]*$`; si no, el script ignora la pieza (`skipped_piece: ... id-mismatch | bad-id | duplicate-id`).
+How ownership is decided: `dependencies` determines which files belong to the piece (roots are the directories whose `package.json` declares the dependency); `files` and `imports` only break ties when several pieces share a root, or cover files outside every root. The `id` must equal the file name (`stacks/<id>.md`) and match `^[a-z0-9][a-z0-9-]*$`; otherwise the script skips the piece (`skipped_piece: ... id-mismatch | bad-id | duplicate-id`).
 
-Las seis secciones del cuerpo van en ese orden. Una pieza nunca redefine el formato, la escala de severidad ni el veredicto. Después ejecuta `bash tests/stack-code-review/check-structure.sh` y `bash tests/stack-code-review/test-detect-stacks.sh`.
+The six body sections go in that order. A piece never redefines the report format, severity scale or verdict. Afterwards run `bash tests/stack-code-review/check-structure.sh` and `bash tests/stack-code-review/test-detect-stacks.sh`.
 
-### Fallback: archivos sin pieza
+### Fallback: files without a piece
 
-Si ninguna pieza es dueña de un archivo (`owner: ... none`), se aplican solo los criterios generales más el conocimiento del modelo sobre su framework. Cada hallazgo de ese archivo lleva la etiqueta `[model knowledge]`, el encabezado `Stack(s):` lo marca como "model knowledge (lower confidence)" y `Limitations` indica la skill encontrada por búsqueda o recomienda instalar una para ese framework.
+If no piece owns a file (`owner: ... none`), only the general criteria plus the model's knowledge of its framework apply. Every finding on that file carries the `[model knowledge]` tag, the `Stack(s):` header marks it as "model knowledge (lower confidence)", and `Limitations` names the skill found by search or recommends installing one for that framework.
 
-### Skills recomendadas
+### Recommended skills
 
-Las piezas y los criterios generales las consultan si están instaladas (si faltan, se anota en `Limitations` y la revisión continúa):
+The pieces and the general criteria consult these when installed (if missing, it is noted in `Limitations` and the review continues):
 
-- `clean-architecture` y `clean-code` (de wondelai).
-- `angular-developer` (pieza Angular).
+- `clean-architecture` and `clean-code` (by wondelai).
+- `angular-developer` (Angular piece).
 
-## Migración desde gcf-code-review y reviewing-angular-prs
+## Migrating from gcf-code-review and reviewing-angular-prs
 
-`stack-code-review` reemplaza a `gcf-pr-review`, `gcf-code-review` y `reviewing-angular-prs` (su contenido pasó a las piezas `gcp-functions` y `angular`). `install.sh` no toca carpetas antiguas; solo avisa si las encuentra.
+`stack-code-review` replaces `gcf-pr-review`, `gcf-code-review` and `reviewing-angular-prs` (their content moved into the `gcp-functions` and `angular` pieces). `install.sh` never touches old folders; it only warns when it finds them.
 
-- `gcf-code-review` (symlinks antiguos en `~/.claude/skills/` o `~/.agents/skills/`): elimínalos o muévelos a mano.
-- `reviewing-angular-prs`: muévela a `~/.claude/skills-backup/reviewing-angular-prs-<fecha>`.
-- `gcf-pr-review`: muévela a `~/.claude/skills-backup/gcf-pr-review-<fecha>`.
+- `gcf-code-review` (old symlinks in `~/.claude/skills/` or `~/.agents/skills/`): remove them by hand.
+- `reviewing-angular-prs`: move it to `~/.claude/skills-backup/reviewing-angular-prs-<date>`.
+- `gcf-pr-review`: move it to `~/.claude/skills-backup/gcf-pr-review-<date>`.
 
 ```bash
 mkdir -p ~/.claude/skills-backup
 mv ~/.claude/skills/reviewing-angular-prs ~/.claude/skills-backup/reviewing-angular-prs-$(date +%F)
 mv ~/.claude/skills/gcf-pr-review ~/.claude/skills-backup/gcf-pr-review-$(date +%F)
-rm ~/.claude/skills/gcf-code-review ~/.agents/skills/gcf-code-review   # si son symlinks
+rm ~/.claude/skills/gcf-code-review ~/.agents/skills/gcf-code-review   # if they are symlinks
 bash install.sh
 ```
 
-## Desarrollo
+## Development
 
-Desde la raíz del repo:
+From the repo root:
 
 ```bash
-bash tests/stack-code-review/check-structure.sh    # estructura de la skill
-bash tests/stack-code-review/test-detect-base.sh   # scripts/detect-base.sh contra repos de prueba
-bash tests/stack-code-review/test-detect-stacks.sh # scripts/detect-stacks.sh contra repos de prueba
-bash tests/install/test-install.sh               # install.sh con un HOME temporal
+bash tests/stack-code-review/check-structure.sh    # skill structure
+bash tests/stack-code-review/test-detect-base.sh   # scripts/detect-base.sh against test repos
+bash tests/stack-code-review/test-detect-stacks.sh # scripts/detect-stacks.sh against test repos
+bash tests/install/test-install.sh                 # install.sh with a temporary HOME
 ```
 
-Los escenarios de presión de la skill (ejecutados por un subagente y puntuados por un agente evaluador aparte que nunca ejecutó el escenario) están descritos en [`tests/stack-code-review/README.md`](tests/stack-code-review/README.md).
+The skill's pressure scenarios (run by a subagent and scored by a separate scorer agent that never ran the scenario) are described in [`tests/stack-code-review/README.md`](tests/stack-code-review/README.md).
