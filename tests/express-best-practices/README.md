@@ -65,4 +65,4 @@ With the skill, all eight scenarios pass. On the three discriminating scenarios 
 | `with-clean-architecture` | FAIL (1 bullet) | 3 of 3 PASS |
 | `login-v5-no-deps` | FAIL (4 bullets) | 2 of 3 PASS; the failure was the shape of the `Rules applied` section (see its Results) |
 
-`login-v5-no-deps` is discriminating (it fails at baseline) and is the check on the `NOT MET` exit. In both passing runs the runner reported `SEC-5: NOT MET` quoting the user's dependency instruction, although a hand-written store was possible; the scenario allows it.
+`login-v5-no-deps` is discriminating (it fails at baseline) and is the check on the `NOT MET` exit. In both passing runs the runner reported `SEC-5: NOT MET` quoting the user's dependency instruction, although a hand-written store was possible; the scenario allows it. Scorers flagged `SEC-5: NOT MET` as avoidable in three of the six with-skill runs; the skill's wording ("implement the rule without it or report NOT MET") permits both.
