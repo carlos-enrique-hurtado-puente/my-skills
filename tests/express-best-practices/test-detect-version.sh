@@ -80,6 +80,26 @@ expect 'express: major=4 resolved=4.21.2 declared=^4.0.0 dir=packages/api\nstatu
 t "mixed-majors"; d=$(newd mm); pj "$d" apps/api5/package.json dependencies '^5.0.0'; pj "$d" apps/api4/package.json dependencies '^4.19.0'; run "$d"
 expect 'express: major=4 resolved=none declared=^4.19.0 dir=apps/api4\nexpress: major=5 resolved=none declared=^5.0.0 dir=apps/api5\nstatus: ok'; done_t
 
+t "sorted-by-dir"; d=$(newd sd)
+pj "$d" packages/api-x/package.json dependencies '^5.0.0'; pj "$d" packages/api/package.json dependencies '^4.0.0'
+pj "$d" apps/api/package.json dependencies '^4.1.0'; pj "$d" package.json dependencies '^4.2.0'; run "$d"
+expect 'express: major=4 resolved=none declared=^4.2.0 dir=.\nexpress: major=4 resolved=none declared=^4.1.0 dir=apps/api\nexpress: major=4 resolved=none declared=^4.0.0 dir=packages/api\nexpress: major=5 resolved=none declared=^5.0.0 dir=packages/api-x\nstatus: ok'; done_t
+
+t "lock-v1-nested-later"; d=$(newd l1n); pj "$d" package.json dependencies '^4.17.0'
+w "$d" package-lock.json '{
+  "lockfileVersion": 1,
+  "dependencies": {
+    "express": { "version": "4.17.3", "requires": { "accepts": "~1.3.8" } },
+    "zz-legacy": {
+      "version": "1.0.0",
+      "dependencies": {
+        "express": { "version": "3.21.2" }
+      }
+    }
+  }
+}'; run "$d"
+expect 'express: major=4 resolved=4.17.3 declared=^4.17.0 dir=.\nstatus: ok'; done_t
+
 t "skips-node-modules"; d=$(newd nm); pj "$d" node_modules/foo/package.json dependencies '^4.0.0'; run "$d"
 expect 'status: no-express'; done_t
 

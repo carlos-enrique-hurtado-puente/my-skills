@@ -41,14 +41,35 @@ dep_value() {
 }
 
 # lock_version: resolved express version from a package-lock.json on stdin (or nothing).
+# Depth-aware scan of the JSON: v2/v3 = packages -> "node_modules/express" -> version;
+# v1 = top-level "dependencies" -> express -> version. Nested/transitive entries are
+# deeper, so they never match. The v2/v3 entry wins when both exist.
 lock_version() {
   tr '\n' ' ' | awk '{
-    if (match($0, /"node_modules\/express"[ \t]*:[ \t]*[{][^}]*"version"[ \t]*:[ \t]*"[^"]*"/)) {
-      v=substr($0,RSTART,RLENGTH)
-    } else if (match($0, /"dependencies"[ \t]*:[ \t]*[{].*"express"[ \t]*:[ \t]*[{][^}]*"version"[ \t]*:[ \t]*"[^"]*"/)) {
-      v=substr($0,RSTART,RLENGTH); sub(/^.*"express"[ \t]*:[ \t]*[{]/,"",v)
-    } else exit
-    sub(/^.*"version"[ \t]*:[ \t]*"/,"",v); sub(/"$/,"",v); print v
+    s=$0; n=length(s); d=0; want=""
+    for (i=1;i<=n;i++) {
+      c=substr(s,i,1)
+      if (c=="{") d++
+      else if (c=="}") d--
+      else if (c=="\"") {
+        j=i+1; str=""
+        while (j<=n) { e=substr(s,j,1); if (e=="\\") { str=str substr(s,j,2); j+=2; continue } if (e=="\"") break; str=str e; j++ }
+        i=j; k=j+1
+        while (substr(s,k,1)==" ") k++
+        if (substr(s,k,1)==":") {
+          key[d]=str
+          if (d==3 && str=="version") {
+            if (key[1]=="packages" && key[2]=="node_modules/express") want="v3"
+            else if (key[1]=="dependencies" && key[2]=="express") want="v1"
+          }
+        } else if (want!="") {
+          if (want=="v3") { print str; exit }
+          if (v1=="") v1=str
+          want=""
+        }
+      }
+    }
+    if (v1!="") print v1
   }'
 }
 
@@ -83,11 +104,11 @@ while IFS= read -r p; do
   elif printf '%s\n' "$declared" | grep -Eq '^[\^~=v]*[0-9]+(\.[0-9x*]+)*$'; then
     major=$(printf '%s' "$declared" | sed -n 's/^[^0-9]*\([0-9][0-9]*\).*/\1/p')
   fi
-  echo "express: major=$major resolved=${resolved:-none} declared=$declared dir=$dir" >> "$W/out"
+  printf '%s\texpress: major=%s resolved=%s declared=%s dir=%s\n' "$dir" "$major" "${resolved:-none}" "$declared" "$dir" >> "$W/out"
 done < "$W/pjlist"
 
 if [ -s "$W/out" ]; then
-  cat "$W/out"; echo "status: ok"
+  sort -t "$(printf '\t')" -k1,1 "$W/out" | cut -f2-; echo "status: ok"
 else
   echo "status: no-express"
 fi
