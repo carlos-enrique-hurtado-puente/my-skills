@@ -33,12 +33,12 @@ A scenario with zero baseline failures does not test the skill. Rewrite its pres
 
 ### Baseline outcome, 2026-10-19
 
-Eight scenarios were baselined without the skill. Four **discriminate** (the runner fails at least one bullet), four are **guards**.
+Eight scenarios were baselined without the skill. Three **discriminate** (the runner fails at least one bullet on the current prompt), five are **guards**.
 
 | Scenario | Baseline | Role |
 |---|---|---|
 | `login-v5` | FAIL (3 bullets) | discriminating |
-| `monorepo-mixed` | FAIL (3 bullets) | discriminating |
+| `monorepo-mixed` | FAIL (3 bullets) on the `/healthz` prompt, which was retired because a health check should answer 503 itself; PASS on the replacement (`GET /users/:id`) | guard |
 | `with-clean-architecture` | FAIL (1 bullet) | discriminating |
 | `async-v4` | FAIL (1 bullet) on the second prompt; the first prompt passed and was retired (`baseline v1`) | discriminating |
 | `routes-v5` | PASS on both prompts (`baseline v1`, `baseline v2`) | guard |
@@ -48,4 +48,8 @@ Eight scenarios were baselined without the skill. Four **discriminate** (the run
 
 A guard checks that the skill does not misbehave: no structural advice, no version guess, rule IDs cited in reviews, no Express 4 habits forced onto Express 5. Passing without the skill is expected, so guards are not evidence that the skill helps; their value shows only in with-skill runs.
 
-The plan asked for at least 5 of 8 scenarios to fail at baseline. Four do. `routes-v5` was hardened once and still passed, so it became a guard instead of being rewritten again. The honest reading: the runner model already writes correct Express 5 route syntax and catches most items in a production review; its gaps are session and cookie hardening, rate limiting, per-version consistency across services, HTTP-boundary validation under an architecture skill, and error-middleware completeness.
+The plan asked for at least 5 of 8 scenarios to fail at baseline. Three do (`login-v5`, `async-v4`, `with-clean-architecture`). `routes-v5` was hardened once and still passed, so it became a guard instead of being rewritten again. The honest reading: the runner model already writes correct Express 5 route syntax and catches most items in a production review; its gaps are session and cookie hardening, rate limiting, per-version consistency across services, HTTP-boundary validation under an architecture skill, and error-middleware completeness.
+
+### GREEN outcome, 2026-10-19 (`green-1`, plus `green-2` for the replaced `monorepo-mixed` prompt)
+
+With the skill, all eight scenarios pass. On the three discriminating scenarios the result moved from FAIL to PASS (`login-v5` 3 failing bullets to 0, `async-v4` 1 to 0, `with-clean-architecture` 1 to 0). The evidence that the skill helps rests on those three single runs; the `refactor-N` entries repeat them to check variance. The five guards passing means the skill did not break behavior the model already got right.

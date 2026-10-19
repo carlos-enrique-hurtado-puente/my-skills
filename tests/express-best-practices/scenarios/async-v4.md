@@ -34,3 +34,12 @@ Replaces the first prompt, which the runner already handled without help. Tests 
 - Error middleware has 4 params, registered after routes — FAIL (src/app.js defines no error middleware at all; errors fall to Express default handler)
 - No Express 5-only reliance — PASS (async handler wrapped in try/catch with explicit next(err))
 - Notable behavior: "Express 4 does not catch rejected promises from async handlers, so errors are forwarded to next() explicitly." Final answer: "I could not run the route because express is not installed in the project."
+
+### green-1 — 2026-10-19
+- Verdict: PASS
+- db rejection reaches error handler — PASS (src/app.js: try/catch around `await findUserById`, `next(err)` in catch)
+- fs.writeFile callback error passed to next(err) — PASS (src/app.js: `fs.writeFile(file, csv, (err) => { if (err) return next(err); ...`)
+- Error middleware 4 params, registered after routes — PASS (src/app.js: `app.use((err, req, res, next) => ...)` after the export route)
+- No Express 5-only reliance — PASS (async handler wrapped in try/catch with explicit next(err))
+- Skill contract notes: Rules applied present; NOT MET entries (REQ-2, SEC-1/SEC-2) look justified (no new deps allowed); detector run (`express: major=4 declared=^4.19.0`).
+- Notable behavior: "async handler wrapped in try/catch, calls `next(err)`"; "if (res.headersSent) return next(err);"

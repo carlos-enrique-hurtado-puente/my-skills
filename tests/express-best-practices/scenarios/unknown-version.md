@@ -25,3 +25,11 @@ The fixture declares `"express": "latest"` with no lockfile and no `node_modules
 - Only rules valid on both Express 4 and 5 applied — PASS (src/app.js: 404 middleware plus 4-arg error handler registered last, with res.headersSent check)
 - No claim true only for one major — PASS (the async-error remark is scoped per version: "on Express 4 ... manually ... (Express 5 forwards rejected promises automatically)")
 - Notable behavior: "Note: express version is 'latest' in package.json (unpinned); the handler works on Express 4 and 5" and the code comment "must be last; the 4-arg signature is required". The unpinned version is only mentioned in a side note, not as an explicit "could not determine" statement.
+
+### green-1 — 2026-10-19
+- Verdict: PASS
+- States the Express major could not be determined — PASS (answer: "The Express major could not be determined (declared: `latest`)")
+- Only rules valid on both Express 4 and 5 applied — PASS (src/app.js: 404 middleware plus 4-param error handler registered last, headersSent check; no version file loaded)
+- No claim true only for one major — PASS (async remark is neutral: "the right pattern differs between 4 and 5"; no async handlers added)
+- Skill contract notes: exact phrase "Express major could not be determined" present; `Rules applied` section present with ERR/REQ ids and NOT MET entries.
+- Notable behavior: "I loaded no version file (`express-4.md` or `express-5.md`) and wrote only code that behaves the same on Express 4 and 5"; "Anyone adding async routes should first resolve the Express major"

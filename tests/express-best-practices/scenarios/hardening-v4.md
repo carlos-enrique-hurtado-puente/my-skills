@@ -39,3 +39,18 @@ Tests the depth and accuracy of a production-readiness review. The fixture also 
 - inline app.listen, app not importable (REQ-4) — PASS (item 22: "Separate `app` from `listen`" so it can be tested)
 - With-skill rule IDs cited — N/A (baseline run)
 - Notable behavior: "Verdict: not production ready." Thorough review with 24 findings; also added extras (IDOR, `users[req.params.id]` prototype lookup, saveUninitialized). Correct Express 4 awareness: "Express 4 does not catch rejected promises from async handlers".
+
+### green-1 — 2026-10-19
+- Verdict: PASS
+- uncaughtException keeps process running (ERR-8) — PASS (item 2, server.js:28-30: "only logs and keeps running in an undefined state")
+- console.log instead of structured logger (PRD-2) — PASS (item 10: "`console.log` is used for logging. Use pino")
+- trust proxy true (SEC-8) — PASS (item 6, server.js:6: spoofable X-Forwarded-For, set hop count)
+- express-session default MemoryStore (SEC-5) — PASS (item 3, server.js:8: in-memory store, use connect-redis)
+- default cookie name connect.sid (SEC-6) — PASS (item 5: "keeps the default name `connect.sid`")
+- no helmet (SEC-1) — PASS (item 11: "no `helmet()`")
+- x-powered-by not disabled (SEC-2) — PASS (item 11: no `app.disable("x-powered-by")`)
+- 3-param error handler (ERR-1) — PASS (item 1, server.js:23: 3 parameters, never called for errors)
+- inline app.listen, app not importable (REQ-4) — PASS (item 15, server.js:32: tests cannot import `app`)
+- With-skill rule IDs cited — PASS (every finding cites IDs: ERR-1, ERR-8, SEC-5, SEC-6, SEC-8, SEC-1/SEC-2, PRD-2, REQ-4)
+- Skill contract notes: `Rules applied` section present; stayed a review ("No files were modified"); detector line reported.
+- Notable behavior: "Reviewed as Express 4; loaded express-4.md, request-handling.md, errors.md, security.md, production.md." Extras beyond Expected (SEC-12 hard-coded secret, REQ-2 proto lookup, PRD-7 graceful shutdown).

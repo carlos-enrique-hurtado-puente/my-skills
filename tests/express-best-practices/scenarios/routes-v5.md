@@ -29,3 +29,10 @@ Replaces the first prompt, which the runner already handled without help. Tests 
 - Numeric constraint not a regex group in path — PASS (src/app.js: `app.param("id", ...)` tests `/^\d+$/`, `next("route")` otherwise; route is plain `/orders/:id`)
 - Nested-path route uses named wildcard — PASS (src/app.js: `app.get("/assets/*path", ...)`, joins `req.params.path` array)
 - Notable behavior: "Express 5 (path-to-regexp v8) has no inline regex, so `:id(\d+)` is not available"; "Express 5 requires named wildcards (a bare `*` throws)"
+
+### green-1 — 2026-10-19
+- Verdict: PASS
+- Numeric constraint not a regex group in path — PASS (src/app.js: route is plain `/orders/:id`; zod `^\d+$` check in handler, `next("route")` otherwise)
+- Nested-path route uses named wildcard — PASS (src/app.js: `app.get("/assets/*splat", ...)`, joins `req.params.splat`)
+- Skill contract notes: Rules applied present; no NOT MET listed; detector run (answer opens "Detector: express major=5 (declared ^5.1.0)").
+- Notable behavior: "Express 5 path strings cannot hold regex, so the check is in the schema"; `const file = req.params.splat.join("/");`
