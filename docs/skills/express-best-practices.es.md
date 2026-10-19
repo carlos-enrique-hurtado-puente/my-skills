@@ -16,7 +16,7 @@ En Claude Code: `/express-best-practices`. En Codex: `$express-best-practices`. 
 /express-best-practices añade una ruta async que lea un usuario de la base de datos
 ```
 
-Al escribir código, la skill implementa todas las reglas oficiales (`O`) que aplican, valida la entrada en el borde HTTP y termina su respuesta con una sección `Rules applied`: una línea por regla, ya sea `ID: path/to/file.js:LINE` o `ID: NOT MET: "<tus palabras>"` cuando descartaste explícitamente lo que la regla necesita (por ejemplo una dependencia). Al revisar, reporta cada violación como ID de regla, `file:line` y corrección, con el formato de reporte de `stack-code-review` si esa skill está instalada.
+Al escribir código, la skill implementa todas las reglas oficiales (`O`) que aplican, valida la entrada en el borde HTTP y termina su respuesta con una sección `Rules applied`: una línea por regla: `ID: path/to/file.js:LINE`, `ID: NOT MET: "<tus palabras>"` cuando descartaste explícitamente lo que la regla necesita (por ejemplo una dependencia), o `ID: outside app code` para reglas que se cumplen fuera de la app (terminación de TLS, gestor de procesos, versión de Node, `npm audit`). Al revisar, reporta cada violación como ID de regla, `file:line` y corrección, con el formato de reporte de `stack-code-review` si esa skill está instalada.
 
 ## Cómo se detecta la versión de Express
 

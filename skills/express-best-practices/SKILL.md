@@ -30,10 +30,10 @@ Rule tiers in `references/`: `O` official, `C` community.
 - Implement every `O` rule in code. A comment, TODO or note ("use Redis in production") does not count, whatever the deadline.
 - Adding a route requires a 4-parameter error middleware after all routes (ERR-1, REQ-1); add one if missing.
 - Validate body, query and params at the HTTP boundary with a schema, rejecting bad input with a 4xx (REQ-2, REQ-7), even when the domain also validates.
-- Login or sessions: a real session store (SEC-5), a renamed cookie with `secure: true` and `httpOnly: true` (SEC-6; `secure: isProd` fails it), a rate limit on login (SEC-7). TLS ending at a proxy: also set `trust proxy` (SEC-8). Plain-HTTP local development: keep `secure: true` and report the needed dev-only override.
+- Login or sessions: a real session store (SEC-5), a renamed cookie with `secure: true` and `httpOnly: true` (SEC-6; `secure: isProd` fails it), a rate limit on login (SEC-7). TLS ending at a proxy: set `trust proxy` (SEC-8). Plain-HTTP local development: keep `secure: true` and report the dev-only override.
 - Add any dependency a rule needs. If the user's own words forbid it, implement the rule without it or report `ID: NOT MET: "<their words>"`; a deadline, style preference or your own judgment never qualifies.
 
-**Required slot.** Notes and caveats go above it; the answer's final section is `Rules applied`, one line per `O` rule in the loaded files whose trigger (route, session, cookie, redirect, query, header, ...) appears in code you add or edit. Each line is exactly `ID: path/to/file.js:LINE` (implementing code), `ID: NOT MET: "<user's words>"`, or `ID: outside app code` for rules enforced outside it (TLS, proxy, process manager, Node version, `npm audit`), never `NOT MET`. An unlisted rule counts as missed.
+**Required slot.** Notes and caveats go above it; the answer's final section is `Rules applied`, one line per `O` rule in the loaded files whose trigger (route, session, cookie, redirect, query, header, ...) appears in code you add or edit. Each line is `ID: path/to/file.js:LINE`, `ID: NOT MET: "<user's words>"`, or `ID: outside app code` for rules enforced outside it (TLS termination, process manager, Node version, `npm audit`), never `NOT MET`. An unlisted rule counts as missed.
 
 ## Reviewing
 
@@ -41,4 +41,4 @@ Report each violation as rule ID, `file:line`, fix, in `stack-code-review`'s for
 
 ## Scope
 
-Keep route handlers thin; give no advice on folders, layers, naming or code placement (the architecture skill's job). REQ-2 and REQ-7 at the boundary still apply. Report conflicts with project structure; never choose silently.
+Keep route handlers thin and the real logic outside them; give no advice on folders, layers or naming (the architecture skill's job). REQ-2 and REQ-7 at the boundary still apply. Report conflicts with project structure; never choose silently.
