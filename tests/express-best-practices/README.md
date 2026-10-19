@@ -33,7 +33,7 @@ A scenario with zero baseline failures does not test the skill. Rewrite its pres
 
 ### Baseline outcome, 2026-10-19
 
-Nine scenarios exist; eight were baselined at first and `login-v5-no-deps` was added during REFACTOR. Eight were baselined without the skill. Three **discriminate** (the runner fails at least one bullet on the current prompt), five are **guards**.
+Eight scenarios were baselined without the skill, and `login-v5-no-deps` was added during REFACTOR (nine in total). Three of the first eight **discriminate** (the runner fails at least one bullet on the current prompt) and five are **guards**; `login-v5-no-deps` also discriminates.
 
 | Scenario | Baseline | Role |
 |---|---|---|
@@ -63,6 +63,6 @@ With the skill, all eight scenarios pass. On the three discriminating scenarios 
 | `login-v5` | FAIL (3 bullets) | 3 of 3 PASS |
 | `async-v4` | FAIL (1 bullet) | 3 of 3 PASS |
 | `with-clean-architecture` | FAIL (1 bullet) | 3 of 3 PASS |
-| `login-v5-no-deps` | FAIL (4 bullets) | 2 of 3 PASS; the failure was the shape of the `Rules applied` section (see its Results) |
+| `login-v5-no-deps` | FAIL (4 bullets) | 2 of 3 PASS; the failure was the shape of the `Rules applied` section. After making that section the final one with line numbers (`refactor-4` to `refactor-6`): 3 of 3 PASS |
 
 `login-v5-no-deps` is discriminating (it fails at baseline) and is the check on the `NOT MET` exit. In both passing runs the runner reported `SEC-5: NOT MET` quoting the user's dependency instruction, although a hand-written store was possible; the scenario allows it. Scorers flagged `SEC-5: NOT MET` as avoidable in three of the six with-skill runs; the skill's wording ("implement the rule without it or report NOT MET") permits both.
