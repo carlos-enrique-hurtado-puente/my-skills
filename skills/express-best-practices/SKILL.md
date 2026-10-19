@@ -6,14 +6,14 @@ disable-model-invocation: true
 
 # Express best practices
 
-Rules in `references/` are rows: ID, rule, tier (`O` official, `C` community), source. Cite the ID of every rule that drives a choice or finding.
+Rules in `references/` are rows: ID, rule, tier (`O` official, `C` community), source. Cite the ID of each rule you apply.
 
 ## Flow
 
 1. **Detect the version.** From the project root run this skill's `scripts/detect-express-version.sh` with `bash`.
    - `status: no-express` or `status: error`: report it and stop.
 2. **Pick the major per package.** Each file follows the `express:` line whose `dir` is its nearest ancestor, with that package's own major and version file. Never copy a handler between majors unchanged: no Express 4 try/catch or wrapper in Express 5 (V5-1), no bare async handler in Express 4 (V4-1).
-   - `major=unknown` or not 4 or 5: state "Express major could not be determined" with the `declared` value, load no version file, and make no single-major claim.
+   - `major=unknown` or not 4 or 5: state "Express major could not be determined" with `declared`, load no version file, and make no single-major claim.
 3. **Load rules.** `references/express-4.md` or `references/express-5.md`, plus every topic file the task touches:
 
 | Task touches | File |
@@ -33,7 +33,7 @@ Rules in `references/` are rows: ID, rule, tier (`O` official, `C` community), s
 - Login or sessions: a real session store (SEC-5), a renamed cookie with `secure: true` and `httpOnly: true` (SEC-6; `secure: isProd` fails it), a rate limit on login (SEC-7).
 - Add any dependency a rule needs. If the user's own words forbid it, implement the rule without it or report `ID: NOT MET: "<their words>"`; a deadline, style preference or your own judgment never qualifies.
 
-**Required slot.** End your answer with `Rules applied`: every `O` rule in the loaded files whose trigger (a route, session, cookie, redirect, query, header, ...) appears in code you add or edit, as `ID: file:line` of the implementing code, or `ID: NOT MET: "<user's words>"`. An unlisted rule counts as missed.
+**Required slot.** Notes and caveats go above it; the answer's final section is `Rules applied`, one line per `O` rule in the loaded files whose trigger (a route, session, cookie, redirect, query, header, ...) appears in code you add or edit. Each line is exactly `ID: path/to/file.js:LINE` (implementing code) or `ID: NOT MET: "<user's words>"`. An unlisted rule counts as missed.
 
 ## Reviewing
 
@@ -41,4 +41,4 @@ Report each violation as rule ID, `file:line`, fix. If `stack-code-review` is in
 
 ## Scope
 
-Keep route handlers thin. Folders, layers, naming and where code goes belong to the architecture skill if installed; give no layout advice. This skill still decides Express and HTTP mechanics, including REQ-2 at the boundary. Report conflicts between an Express rule and the project's structure; never choose silently.
+Keep route handlers thin. Folders, layers, naming and where code goes belong to the architecture skill if installed; give no layout advice. This skill still decides Express and HTTP mechanics, including REQ-2 at the boundary. Report conflicts between Express rules and project structure; never choose silently.
