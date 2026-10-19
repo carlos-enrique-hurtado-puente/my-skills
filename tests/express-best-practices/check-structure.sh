@@ -17,9 +17,8 @@ else
     case "$desc" in "Use when "*) ;; *) bad "description does not start with 'Use when '" ;; esac
     [ "${#desc}" -le 500 ] || bad "description is ${#desc} chars (> 500)"
   fi
-  body=$(awk 'NR==1 && $0=="---"{f=1;next} f&&$0=="---"{f=0;b=1;next} !f&&b{print}' "$S/SKILL.md")
-  words=$(echo "$body" | wc -w | tr -d ' ')
-  [ "$words" -lt 500 ] || bad "SKILL.md body is $words words (>= 500)"
+  words=$(wc -w < "$S/SKILL.md" | tr -d ' ')
+  [ "$words" -lt 500 ] || bad "SKILL.md is $words words including frontmatter (>= 500)"
 fi
 
 if [ ! -f "$S/agents/openai.yaml" ]; then
@@ -51,7 +50,7 @@ for pair in request-handling:REQ errors:ERR security:SEC production:PRD express-
     bad "$name.md contains an out-of-scope word"
   fi
   if [ -f "$S/SKILL.md" ]; then
-    grep -q "$name.md" "$S/SKILL.md" || bad "SKILL.md does not link $name.md"
+    grep -qF "$name.md" "$S/SKILL.md" || bad "SKILL.md does not link $name.md"
   fi
 done
 
