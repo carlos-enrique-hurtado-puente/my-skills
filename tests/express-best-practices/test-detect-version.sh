@@ -20,13 +20,15 @@ pj() { # pj <dir> <path> <depkey> <range>
 }
 OUT=""; RC=0
 run() { OUT=$(cd "$TMP" && bash "$SCRIPT" --root "$1" 2>&1); RC=$?; }
+runargs() { OUT=$(cd "$TMP" && bash "$SCRIPT" "$@" 2>&1); RC=$?; }   # raw arguments
+rc0() { [ "$RC" -eq 0 ] || bad "$NAME: exit code $RC, expected 0"; }
 expect() { # expect <expected-output-with-\n>
   local exp; exp=$(printf '%b' "$1")
   [ "$OUT" = "$exp" ] || { bad "$NAME: output differs"; echo "  expected:"; echo "$exp" | sed 's/^/    /'; echo "  got:"; echo "$OUT" | sed 's/^/    /'; }
 }
 
 t "caret-4"; d=$(newd c4); pj "$d" package.json dependencies '^4.19.0'; run "$d"
-expect 'express: major=4 resolved=none declared=^4.19.0 dir=.\nstatus: ok'; done_t
+expect 'express: major=4 resolved=none declared=^4.19.0 dir=.\nstatus: ok'; rc0; done_t
 
 t "tilde-5"; d=$(newd t5); pj "$d" package.json dependencies '~5.1.0'; run "$d"
 expect 'express: major=5 resolved=none declared=~5.1.0 dir=.\nstatus: ok'; done_t
@@ -104,7 +106,7 @@ t "skips-node-modules"; d=$(newd nm); pj "$d" node_modules/foo/package.json depe
 expect 'status: no-express'; done_t
 
 t "no-express"; d=$(newd ne); w "$d" package.json '{ "name": "x", "dependencies": { "koa": "^2.0.0" } }'; run "$d"
-expect 'status: no-express'; done_t
+expect 'status: no-express'; rc0; done_t
 
 t "no-package-json"; d=$(newd np); run "$d"
 expect 'status: no-express'; done_t
@@ -116,6 +118,62 @@ t "bad-root"; run /nonexistent
 [ "$RC" -eq 2 ] || bad "$NAME: exit code $RC, expected 2"
 echo "$OUT" | grep -qx "status: error" || bad "$NAME: no status: error"
 echo "$OUT" | grep -q "^message: " || bad "$NAME: no message line"; done_t
+
+t "workspace-lock-mixed"; d=$(newd wlm); w "$d" package.json '{ "name": "root", "workspaces": ["packages/*"] }'
+pj "$d" packages/api4/package.json dependencies '^4.21.0'; pj "$d" packages/api5/package.json dependencies '^5.0.0'
+w "$d" package-lock.json '{
+  "name": "root",
+  "lockfileVersion": 3,
+  "packages": {
+    "": { "name": "root", "workspaces": ["packages/*"] },
+    "node_modules/express": {
+      "version": "5.1.0"
+    },
+    "node_modules/foo/node_modules/express": {
+      "version": "3.0.0"
+    },
+    "packages/api4/node_modules/express": {
+      "version": "4.21.2"
+    }
+  }
+}'; run "$d"
+expect 'express: major=4 resolved=4.21.2 declared=^4.21.0 dir=packages/api4\nexpress: major=5 resolved=5.1.0 declared=^5.0.0 dir=packages/api5\nstatus: ok'; rc0; done_t
+
+t "root-dot"; d=$(newd rdot); pj "$d" svc/package.json dependencies '^5.0.0'
+OUT=$(cd "$d" && bash "$SCRIPT" --root . 2>&1); RC=$?
+expect 'express: major=5 resolved=none declared=^5.0.0 dir=svc\nstatus: ok'; rc0; done_t
+
+t "bad-args"
+for a in "--foo" "--root $TMP extra" "extra" "--root"; do
+  # shellcheck disable=SC2086
+  runargs $a
+  [ "$RC" -eq 2 ] || bad "$NAME [$a]: exit code $RC, expected 2"
+  echo "$OUT" | grep -qx "status: error" || bad "$NAME [$a]: no status: error"
+  echo "$OUT" | grep -q "^message: " || bad "$NAME [$a]: no message line"
+done; done_t
+
+t "large-lock-performance"; d=$(newd perf); w "$d" package.json '{ "name": "root", "workspaces": ["packages/*"] }'
+for n in a b c d e; do pj "$d" "packages/$n/package.json" dependencies '^4.0.0'; done
+awk 'BEGIN {
+  print "{"; print "  \"name\": \"root\","; print "  \"lockfileVersion\": 3,"; print "  \"requires\": true,"; print "  \"packages\": {"
+  print "    \"\": {"; print "      \"name\": \"root\""; print "    },"
+  for (i = 1; i <= 9000; i++) {
+    printf "    \"node_modules/fake-pkg-%d\": {\n", i
+    printf "      \"version\": \"1.%d.0\",\n", i
+    printf "      \"resolved\": \"https://registry.npmjs.org/fake-pkg-%d/-/fake-pkg-%d-1.%d.0.tgz\",\n", i, i, i
+    printf "      \"integrity\": \"sha512-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==\",\n"
+    printf "      \"dependencies\": {\n        \"express\": \"^4.0.0\",\n        \"dep-%d\": \"^2.0.0\"\n      }\n", i
+    print "    },"
+  }
+  print "    \"node_modules/express\": {"; print "      \"version\": \"4.21.2\""; print "    }"
+  print "  }"; print "}"
+}' > "$d/package-lock.json"
+size=$(wc -c < "$d/package-lock.json" | tr -d ' ')
+[ "$size" -ge 2500000 ] || bad "$NAME: synthetic lock is only $size bytes"
+start=$(date +%s); run "$d"; end=$(date +%s); secs=$((end-start))
+echo "  large-lock-performance: $size bytes, 5 packages, ${secs}s"
+[ "$secs" -le 10 ] || bad "$NAME: took ${secs}s (> 10s)"
+expect 'express: major=4 resolved=4.21.2 declared=^4.0.0 dir=packages/a\nexpress: major=4 resolved=4.21.2 declared=^4.0.0 dir=packages/b\nexpress: major=4 resolved=4.21.2 declared=^4.0.0 dir=packages/c\nexpress: major=4 resolved=4.21.2 declared=^4.0.0 dir=packages/d\nexpress: major=4 resolved=4.21.2 declared=^4.0.0 dir=packages/e\nstatus: ok'; rc0; done_t
 
 if [ "$fail" -eq 0 ]; then echo "ALL PASSED"; else echo "$nfail FAILED"; fi
 exit "$fail"

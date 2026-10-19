@@ -31,7 +31,7 @@ status: ok
 - Cada archivo sigue la línea `express:` cuyo `dir` es su ancestro más cercano, así que un monorepo con paquetes en Express 4 y Express 5 recibe las reglas correctas por paquete. Los handlers nunca se copian entre versiones mayores sin cambios.
 - `major=unknown` (o una versión mayor distinta de 4 o 5): la skill indica "Express major could not be determined" con el rango `declared`, no carga ningún archivo de versión y no afirma una versión única.
 - `resolved` sale de `package-lock.json` y prevalece sobre `declared`. Solo se lee `package-lock.json`: con lockfiles de yarn o pnpm no hay `resolved` y la versión mayor sale del rango declarado (`unknown` si el rango no da una versión mayor, como `latest`).
-- En un workspace con un único `package-lock.json` en la raíz, todos los paquetes reciben la versión `resolved` elevada (hoisted) de la raíz. Eso puede sobrescribir la versión mayor que un paquete declara por su cuenta.
+- Cada paquete usa el `package-lock.json` más cercano, en su carpeta o en una carpeta ancestro. En ese lock el detector busca primero `<carpeta del paquete>/node_modules/express` (la carpeta del paquete relativa a la del lock), después el `node_modules/express` elevado (hoisted) y por último `dependencies.express` del formato v1. Así, en un workspace con un único lock en la raíz, un paquete con su propio Express anidado conserva su versión, y un paquete sin él recibe la versión elevada. Salvedad: el detector no ve cómo npm elevó los paquetes más allá de esas entradas, así que un paquete sin entrada anidada siempre recibe la versión elevada, aunque declare otra versión mayor.
 
 ## Alcance
 

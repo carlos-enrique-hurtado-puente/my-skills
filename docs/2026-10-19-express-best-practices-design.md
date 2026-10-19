@@ -84,7 +84,7 @@ status: no-express    (none found)
 status: error         (+ message: line, exit code 2)
 ```
 
-- **`resolved`** comes from the `package-lock.json` in the package's directory, or in an ancestor up to the root (workspaces). It wins over `declared`.
+- **`resolved`** comes from the `package-lock.json` in the package's directory, or in an ancestor up to the root (workspaces). It wins over `declared`. In that lock the lookup order is `<package dir relative to the lock's dir>/node_modules/express`, then the hoisted `node_modules/express`, then the lockfile v1 `dependencies.express`.
 - **`declared`** gives a major only when it matches `^[\^~=v]*[0-9]+(\.[0-9x*]+)*$`. Anything else (`latest`, `*`, `>=4 <6`, `||` ranges, git, file, `workspace:`, `npm:` specifiers, empty) is ambiguous and yields `major=unknown` unless `resolved` exists.
 - Only `package-lock.json` is read. With yarn or pnpm locks the result is `resolved=none`, and the major comes from `declared`.
 

@@ -7,17 +7,23 @@
 #   express: major=<integer|unknown> resolved=<version|none> declared=<range-without-spaces> dir=<dir>
 #   status: ok | no-express | error   (error also prints "message: ..." and exits 2)
 # resolved = version of express in the package-lock.json of the package dir or the
-# nearest ancestor up to the root (v2/v3 "node_modules/express", v1 "dependencies").
-# It wins over declared. declared = dependencies.express, else devDependencies.express;
+# nearest ancestor up to the root. Lookup order: v2/v3 "<pkg>/node_modules/express"
+# (<pkg> = package dir relative to the lock's dir), then v2/v3 "node_modules/express",
+# then v1 top-level "dependencies" -> "express". It wins over declared. declared = dependencies.express, else devDependencies.express;
 # it yields a major only if it matches ^[\^~=v]*[0-9]+(\.[0-9x*]+)*$.
 # Works on bash 3.2; no jq, no associative arrays.
 export LC_ALL=C
 
+usage_error() { echo "status: error"; echo "message: $1 (usage: detect-express-version.sh [--root <dir>])"; exit 2; }
 ROOTDIR=""
-if [ "$1" = "--root" ]; then
-  [ -n "$2" ] || { echo "status: error"; echo "message: --root needs a directory"; exit 2; }
-  ROOTDIR="${2%/}"; [ -n "$ROOTDIR" ] || ROOTDIR="/"
-fi
+case $# in
+  0) ;;
+  2) [ "$1" = "--root" ] || usage_error "unknown argument: $1"
+     [ -n "$2" ] || usage_error "--root needs a directory"
+     ROOTDIR="${2%/}"; [ -n "$ROOTDIR" ] || ROOTDIR="/" ;;
+  *) [ "$1" = "--root" ] && [ $# -eq 1 ] && usage_error "--root needs a directory"
+     usage_error "unexpected arguments: $*" ;;
+esac
 if [ -z "$ROOTDIR" ]; then
   ROOTDIR=$(git --no-optional-locks rev-parse --show-toplevel 2>/dev/null) || ROOTDIR="."
 fi
@@ -40,49 +46,80 @@ dep_value() {
   }'
 }
 
-# lock_version: resolved express version from a package-lock.json on stdin (or nothing).
-# Depth-aware scan of the JSON: v2/v3 = packages -> "node_modules/express" -> version;
-# v1 = top-level "dependencies" -> express -> version. Nested/transitive entries are
-# deeper, so they never match. The v2/v3 entry wins when both exist.
-lock_version() {
-  tr '\n' ' ' | awk '{
-    s=$0; n=length(s); d=0; want=""
-    for (i=1;i<=n;i++) {
-      c=substr(s,i,1)
-      if (c=="{") d++
-      else if (c=="}") d--
-      else if (c=="\"") {
-        j=i+1; str=""
-        while (j<=n) { e=substr(s,j,1); if (e=="\\") { str=str substr(s,j,2); j+=2; continue } if (e=="\"") break; str=str e; j++ }
-        i=j; k=j+1
-        while (substr(s,k,1)==" ") k++
-        if (substr(s,k,1)==":") {
-          key[d]=str
-          if (d==3 && str=="version") {
-            if (key[1]=="packages" && key[2]=="node_modules/express") want="v3"
-            else if (key[1]=="dependencies" && key[2]=="express") want="v1"
-          }
-        } else if (want!="") {
-          if (want=="v3") { print str; exit }
-          if (v1=="") v1=str
-          want=""
-        }
+# lock_table: express entries of a pretty-printed package-lock.json on stdin, one per
+# line: "p<TAB><key><TAB><version>" for v2/v3 "packages" keys ending in node_modules/express,
+# "d<TAB>express<TAB><version>" for the v1 top-level "dependencies" -> "express" entry.
+# Line based (npm pretty-prints locks): sections are found by indentation, and only
+# direct children of "packages"/"dependencies" and their direct "version" lines count,
+# so nested or transitive entries never match.
+lock_table() {
+  awk '
+  function ind(s) { match(s, /^[ \t]*/); return RLENGTH }
+  function ver(s,  v) {
+    if (!match(s, /"version"[ \t]*:[ \t]*"[^"]*"/)) return ""
+    v = substr(s, RSTART, RLENGTH); sub(/^"version"[ \t]*:[ \t]*"/, "", v); sub(/"$/, "", v); return v
+  }
+  function emit(t, k, v) { if (!((t SUBSEP k) in seen)) { seen[t SUBSEP k] = 1; print t "\t" k "\t" v } }
+  BEGIN { top = -1 }
+  {
+    i = ind($0)
+    if (want != "") {
+      if (i <= wind) want = ""
+      else {
+        if (eind < 0) eind = i
+        if (i == eind && (v = ver($0)) != "") { emit(wtype, want, v); want = "" }
+        next
       }
     }
-    if (v1!="") print v1
+    if ($0 !~ /^[ \t]*"/) next
+    if (top < 0) top = i
+    if (i == top) {
+      sect = ""; cind = -1
+      if ($0 ~ /^[ \t]*"packages"[ \t]*:[ \t]*[{]/) sect = "p"
+      else if ($0 ~ /^[ \t]*"dependencies"[ \t]*:[ \t]*[{]/) sect = "d"
+      next
+    }
+    if (sect == "" || i < top) next
+    if (cind < 0) cind = i
+    if (i != cind) next
+    k = $0; sub(/^[ \t]*"/, "", k); sub(/".*$/, "", k)
+    if (!(sect == "p" && k ~ /(^|\/)node_modules\/express$/) && !(sect == "d" && k == "express")) next
+    if ($0 !~ /:[ \t]*[{]/) next
+    if ((v = ver($0)) != "") { emit(sect, k, v); next }
+    want = k; wtype = sect; wind = i; eind = -1
   }'
 }
 
-# find_lock <dir>: print the nearest package-lock.json for a package dir ('.' = root).
+# lock_version <lockfile> <pkg>: resolved express version for package dir <pkg>
+# (relative to the lock's dir, '.' = same dir). Each lock is parsed once and cached.
+lock_version() {
+  local n key
+  n=$(awk -F'\t' -v f="$1" '$2 == f { print $1; exit }' "$W/lockindex")
+  if [ -z "$n" ]; then
+    n=$(($(wc -l < "$W/lockindex") + 1))
+    lock_table < "$1" > "$W/lock.$n"
+    printf '%s\t%s\n' "$n" "$1" >> "$W/lockindex"
+  fi
+  if [ "$2" = "." ]; then key="node_modules/express"; else key="$2/node_modules/express"; fi
+  awk -F'\t' -v k="$key" '
+    $1 == "p" && $2 == k { a = $3 }
+    $1 == "p" && $2 == "node_modules/express" { b = $3 }
+    $1 == "d" { c = $3 }
+    END { if (a != "") print a; else if (b != "") print b; else if (c != "") print c }' "$W/lock.$n"
+}
+
+# find_lock <dir>: print the dir ('.' = root) of the nearest package-lock.json for a
+# package dir, searching the dir and its ancestors up to the root.
 find_lock() {
   local d="$1"
   while :; do
-    if [ "$d" = "." ]; then [ -f "$ROOTDIR/package-lock.json" ] && echo "$ROOTDIR/package-lock.json"; return; fi
-    [ -f "$ROOTDIR/$d/package-lock.json" ] && { echo "$ROOTDIR/$d/package-lock.json"; return; }
+    if [ "$d" = "." ]; then [ -f "$ROOTDIR/package-lock.json" ] && echo "."; return; fi
+    [ -f "$ROOTDIR/$d/package-lock.json" ] && { echo "$d"; return; }
     case "$d" in */*) d="${d%/*}" ;; *) d="." ;; esac
   done
 }
 
+: > "$W/lockindex"
 (cd "$ROOTDIR" && find . -name node_modules -prune -o -type f -name package.json -print 2>/dev/null) \
   | sed 's|^\./||' | sort > "$W/pjlist"
 
@@ -95,8 +132,13 @@ while IFS= read -r p; do
   case "$p" in */*) dir="${p%/*}" ;; *) dir="." ;; esac
   declared=$(printf '%s' "$declared" | tr -d ' \t')
   resolved=""
-  lock=$(find_lock "$dir")
-  [ -n "$lock" ] && resolved=$(lock_version < "$lock")
+  ld=$(find_lock "$dir")
+  if [ -n "$ld" ]; then
+    if [ "$ld" = "." ]; then lock="$ROOTDIR/package-lock.json"; rel="$dir"
+    else lock="$ROOTDIR/$ld/package-lock.json"; if [ "$dir" = "$ld" ]; then rel="."; else rel="${dir#"$ld"/}"; fi
+    fi
+    resolved=$(lock_version "$lock" "$rel")
+  fi
   major=unknown
   if [ -n "$resolved" ]; then
     m=$(printf '%s' "$resolved" | sed -n 's/^[^0-9]*\([0-9][0-9]*\).*/\1/p')

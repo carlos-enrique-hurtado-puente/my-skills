@@ -29,7 +29,7 @@ status: ok
 - Each file follows the `express:` line whose `dir` is its nearest ancestor, so a monorepo with Express 4 and Express 5 packages gets the right rules per package. Handlers are never copied between majors unchanged.
 - `major=unknown` (or a major other than 4 or 5): the skill states "Express major could not be determined" with the `declared` range, loads no version file and makes no single-major claim.
 - `resolved` comes from `package-lock.json` and wins over `declared`. Only `package-lock.json` is read: with yarn or pnpm lockfiles there is no `resolved`, and the major comes from the declared range (`unknown` if the range gives no major, such as `latest`).
-- In a workspace with a single root `package-lock.json`, every package gets the root's hoisted `resolved` version. That can override the major a package declares for itself.
+- Each package uses the nearest `package-lock.json` in its dir or an ancestor. In that lock the detector looks up `<package dir>/node_modules/express` first (the package dir relative to the lock's dir), then the hoisted `node_modules/express`, then the lockfile v1 `dependencies.express`. So in a workspace with one root lock, a package with its own nested Express keeps its own version, and a package without one gets the hoisted version. Caveat: the detector cannot see how npm hoisted packages beyond these entries, so a package with no nested entry always gets the hoisted version, even when it declares another major.
 
 ## Scope
 
