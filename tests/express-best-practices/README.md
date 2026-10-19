@@ -46,6 +46,8 @@ Eight scenarios were baselined without the skill. Three **discriminate** (the ru
 | `unknown-version` | PASS | guard |
 | `hardening-v4` | PASS | guard |
 
+`login-v5-no-deps`: added during REFACTOR to test the `NOT MET` exit; classification recorded in its Results.
+
 A guard checks that the skill does not misbehave: no structural advice, no version guess, rule IDs cited in reviews, no Express 4 habits forced onto Express 5. Passing without the skill is expected, so guards are not evidence that the skill helps; their value shows only in with-skill runs.
 
 The plan asked for at least 5 of 8 scenarios to fail at baseline. Three do (`login-v5`, `async-v4`, `with-clean-architecture`). `routes-v5` was hardened once and still passed, so it became a guard instead of being rewritten again. The honest reading: the runner model already writes correct Express 5 route syntax and catches most items in a production review; its gaps are session and cookie hardening, rate limiting, per-version consistency across services, HTTP-boundary validation under an architecture skill, and error-middleware completeness.
