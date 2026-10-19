@@ -103,20 +103,25 @@ Rows are already in the final reference-file format. Prefix = file: `REQ` reques
 | V5-10 | `express.static` ignores dotfiles by default; serve `/.well-known` with `dotfiles: 'allow'`. | O | https://expressjs.com/en/guide/migrating-5.html |
 | V5-11 | Express 5 requires Node.js 18 or higher. | O | https://expressjs.com/en/guide/migrating-5.html |
 
-## Express 4 rules: pending verification
+## Express 4 rules
 
-No Express 4 documentation page was read in this research; the fetched pages describe Express 5 behavior. These rows are **candidates**. Each needs an `O` source read from the 4.x documentation or the Express changelog before it enters `express-4.md`; a row that cannot be sourced is dropped.
+### express-4.md
 
-| Candidate | Rule | Needs |
-|---|---|---|
-| V4-1 | Rejected promises from async handlers are not forwarded; return the promise or `.catch(next)`, otherwise the rejection is unhandled. | 4.x error-handling doc |
-| V4-2 | Use one shared async wrapper instead of repeating `try/catch` in each route. | A source, or drop |
-| V4-3 | `express.json()` and `express.urlencoded()` are built in from 4.16; `body-parser` is not needed. | Express 4 changelog |
-| V4-4 | Path strings follow the older syntax: bare `*`, `?` optional, regex characters. Do not use Express 5 syntax. | 4.x routing doc |
+Verified against the Express 4.x documentation and changelog. IDs keep the candidate numbering; V4-2 was dropped, so there is no V4-2.
+
+| ID | Rule | Tier | Source |
+|---|---|---|---|
+| V4-1 | Rejected promises from async handlers are not forwarded to `next`; catch the error and call `next(err)`, return the promise with `.catch(next)`, or use a shared wrapper, otherwise the rejection is unhandled and can crash the process. | O | https://expressjs.com/en/4x/guide/error-handling.html |
+| V4-3 | `express.json()` and `express.urlencoded()` are built in from 4.16.0; `body-parser` is not needed for them. | O | https://expressjs.com/en/4x/api/express/ |
+| V4-4 | Path strings use the Express 4 syntax: unnamed `*` wildcards read as `req.params[0]`, `?` `+` `()` in strings, and regex in parentheses after a param (`/user/:userId(\d+)`). Do not use Express 5 syntax (`/*splat`, `{}`). | O | https://expressjs.com/en/4x/guide/routing.html |
+
+Dropped: **V4-2** (shared async wrapper instead of per-route `try/catch`): no `O` source states it as a rule. The 4.x error-handling page only shows `try/catch` and `.catch(next)`; the wrapper option is folded into V4-1 as one acceptable way to forward errors.
+
+Also confirmed in 4.x: the 4.x error-handling page states the ERR-2 and ERR-3 behavior (`next(err)` from async callbacks; `res.headersSent` delegation) and that stack traces are omitted in production. The 4.16.0 entry in `History.md` (https://github.com/expressjs/express/blob/4.x/History.md) reads "Add `express.json` and `express.urlencoded` to parse bodies".
 
 ## Gaps and cautions
 
 - **sameSite:** `nbp` has a practice titled "Modify session middleware settings", but its detail was not read. `sameSite` is therefore **not** a rule until sourced.
 - **nbp coverage:** the last 26,570 characters of the page (the rest of the Docker section and beyond) were not read. Docker is out of scope for the skill.
-- **Official pages describe the current release.** Anything in `perf`, `security`, `errors` and `proxies` that differs between 4 and 5 must be checked against 4.x before being called common. The common rules above are version-neutral on a plain reading, but the verification task re-checks them.
+- **Official pages describe the current release.** The 4.x `errors` page confirms ERR-2, ERR-3 and ERR-7. The `security` page names no version and its content applies to 4. The 4.x application API documents `trust proxy` and warns that `X-Forwarded-*` is easily spoofed, but the "known addresses, not `true`" advice (SEC-8) is stated in the `proxies` page, which was not re-read for 4.x.
 - **Express 4 support status** (end of life, security-fix window) was not researched and the skill makes no claim about it.
