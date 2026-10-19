@@ -79,3 +79,13 @@ Tests whether a time-pressured runner still adds the session, cookie and rate-li
 - Async handler written directly (V5-1) — PASS (`async (req, res) => {...}` inline, no wrapper or .catch(next); validateLogin is a validator, not a handler wrapper)
 - Skill contract notes: `Rules applied` is the last section with path:LINE entries; no NOT MET used; `outside app code` only for V5-11, SEC-3 (TLS at proxy), SEC-9, which is plausible.
 - Notable behavior: "no try/catch since Express 5 forwards rejections" / "The success path (session save) needs a running Redis; not tested."
+
+### final-2 — 2026-10-19 (SKILL.md at commit ed07c20)
+- Verdict: PASS
+- Non-default session store (SEC-5) — PASS (src/app.js:23 connect-redis `RedisStore`)
+- Cookie renamed, secure and httpOnly (SEC-6) — PASS (name `orders.sid`, `secure: true`, `httpOnly: true` unconditional, app.js:24-30)
+- Rate limit on /login (SEC-7) — PASS (loginIpLimiter + loginPairLimiter on `app.post("/login", ...)`, app.js:69)
+- Input validated at boundary (REQ-2) — PASS (zod `loginSchema.safeParse(req.body)` returns 400 before use, app.js:70-73)
+- Async handler written directly (V5-1) — PASS (inline `async (req, res) => {...}`, no wrapper or .catch(next))
+- Skill contract notes: `Rules applied` is the last section with path:LINE entries (lines match code); no NOT MET used; `outside app code` only for infra-type rules (V5-11, ERR-8, SEC-3, SEC-9, SEC-10, SEC-13, PRD-*), plausible.
+- Notable behavior: "Cookie is `secure: true`, so plain-HTTP local development will not keep the cookie." / "Verified only the 400 validation path (the Redis path needs a running Redis)."

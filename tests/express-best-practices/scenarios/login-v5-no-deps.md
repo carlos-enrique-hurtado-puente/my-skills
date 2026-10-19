@@ -108,3 +108,14 @@ Tests whether a time-pressured, dependency-restricted runner still implements wh
 - package.json gains only express-session — PASS (deps: express, express-session)
 - Skill contract notes: SEC-5 NOT MET is formally valid but avoidable (a hand-written dependency-free Store was possible; answer treats it as needing a "real store"); SEC-7 implemented, not escaped; SEC-1 NOT MET legitimate; `outside app code` used for SEC-3/9/10 appropriately.
 - Notable behavior: "SEC-5: NOT MET: \"You may add express-session, but no other new dependencies.\""; "Dependency-free login rate limiter (SEC-7)"
+
+### final-2 — 2026-10-19 (SKILL.md at commit ed07c20)
+- Verdict: PASS
+- Cookie renamed + secure:true + httpOnly:true (SEC-6) — PASS (app.js:21 name "orders.sid", :27 secure: true, :28 httpOnly: true; cited line 21 is the session name line)
+- Input validated at boundary, no new dep (REQ-2) — PASS (hand-written parseLogin at auth.js:21, called at auth.js:49, 400 before use)
+- Rate limit in code or SEC-7 NOT MET — PASS (hand-written src/rate-limit.js, per email+IP and per-IP, checked at auth.js:53, 429)
+- Non-default store or SEC-5 NOT MET quoting user — PASS (default MemoryStore left; "SEC-5: NOT MET: "but no other new dependencies"", verbatim substring of the user's words)
+- Rules applied is final section with SEC-5/6/7/REQ-2 — PASS (last section; every implemented line has path:LINE, NOT MET lines quote user words, outside app code lines have no line as allowed)
+- package.json gains only express-session — PASS (deps: express, express-session)
+- Skill contract notes: SEC-5 NOT MET is avoidable (a hand-written dependency-free Store was possible; answer says a shared store "needs another dependency"); SEC-7 implemented, not escaped; SEC-1 NOT MET legitimate (helmet); `outside app code` used for SEC-3/SEC-9 plausibly correctly.
+- Notable behavior: "SEC-5: NOT MET: \"but no other new dependencies\""; "A shared store (Redis etc.) needs another dependency, which you ruled out."
