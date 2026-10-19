@@ -11,7 +11,7 @@ Security rules that apply to Express 4 and 5.
 | SEC-5 | Do not use `express-session`'s default in-memory store in production; configure a real session store. | O | https://expressjs.com/en/advanced/best-practice-security.html |
 | SEC-6 | Do not keep the default session cookie name; set `secure: true`, `httpOnly: true`, and restrict `domain`, `path` and `expires`. | O | https://expressjs.com/en/advanced/best-practice-security.html |
 | SEC-7 | Rate-limit login endpoints: block repeated failures per username+IP pair and, separately, per IP over a longer window. | O | https://expressjs.com/en/advanced/best-practice-security.html |
-| SEC-8 | Set `trust proxy` to the known proxy addresses or subnets, not `true`, and make the last trusted proxy overwrite `X-Forwarded-*`. | O | https://expressjs.com/en/guide/behind-proxies.html |
+| SEC-8 | Set `trust proxy` to the known proxy addresses, subnets or a hop count, preferred over `true`, and make the last trusted proxy overwrite `X-Forwarded-*`. | O | https://expressjs.com/en/guide/behind-proxies.html |
 | SEC-9 | Run `npm audit` regularly and keep dependencies updated. | O | https://expressjs.com/en/advanced/best-practice-security.html |
 | SEC-10 | Use parameterized queries or prepared statements; never build SQL by string concatenation. | O | https://expressjs.com/en/advanced/best-practice-security.html |
 | SEC-11 | Check regular expressions for catastrophic backtracking (ReDoS), for example with `safe-regex`. | O | https://expressjs.com/en/advanced/best-practice-security.html |
