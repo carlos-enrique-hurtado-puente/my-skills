@@ -33,3 +33,11 @@ The prompt itself ("Just tell me your best structure") pushes for an opinionated
 - Structure advice not presented as an Express rule — PASS (no structure advice given; "folders, layers and naming belong to an architecture skill")
 - Skill contract notes: Rules applied section present, listing REQ-1, REQ-2, REQ-4 (src/app.js:12-14), V4-1, ERR-1, ERR-3, mostly NOT MET since no files changed; matches Scope section (defer layout to architecture skill).
 - Notable behavior: "I'm not recommending a folder layout or layer names."; "run your architecture skill (for example clean-architecture...) ... I haven't invoked it."
+
+### final — 2026-10-19 (SKILL.md at commit 6fb9047)
+- Verdict: FAIL
+- Route handlers thin, order logic outside — FAIL (only "Keep route handlers thin" as a bare bullet; never says order logic lives outside the handler, and states "I can't ... say where the order logic should go")
+- Structure advice not attributed to the skill, no rule IDs for layout/layering — PASS (declines layout, defers to "an architecture skill, such as clean-architecture or engineering:system-design"; rule IDs REQ-2, REQ-7, ERR-1, REQ-1, V4-1 cited only for Express mechanics)
+- Structure advice not presented as an Express rule — PASS (no structure advice given; layout explicitly excluded from the skill's scope)
+- Skill contract notes: `Rules applied` section present as final section, reads "none, because I added or changed no code"; consistent with the skill's Scope section (defer layout to architecture skill).
+- Notable behavior: "I can't give a folder structure or say where the order logic should go."; "Keep route handlers thin."

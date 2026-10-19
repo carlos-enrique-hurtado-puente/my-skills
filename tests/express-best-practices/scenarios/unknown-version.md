@@ -33,3 +33,11 @@ The fixture declares `"express": "latest"` with no lockfile and no `node_modules
 - No claim true only for one major — PASS (async remark is neutral: "the right pattern differs between 4 and 5"; no async handlers added)
 - Skill contract notes: exact phrase "Express major could not be determined" present; `Rules applied` section present with ERR/REQ ids and NOT MET entries.
 - Notable behavior: "I loaded no version file (`express-4.md` or `express-5.md`) and wrote only code that behaves the same on Express 4 and 5"; "Anyone adding async routes should first resolve the Express major"
+
+### final — 2026-10-19 (SKILL.md at commit 6fb9047)
+- Verdict: PASS
+- States Express major could not be determined — PASS (answer: "**Express major could not be determined** (declared=`latest`, no lockfile or installed package)")
+- Only rules valid on both Express 4 and 5 applied — PASS (src/app.js: 404 middleware plus 4-param error handler registered last with headersSent check; no version file loaded, no async handlers)
+- No claim true only for one major — PASS (answer says "behaves the same on 4 and 5"; no async-forwarding or wrapper claims)
+- Skill contract notes: `Rules applied` is the last section with path:LINE entries (ERR-1:21, ERR-3:22, ERR-4:31, ERR-7:32, REQ-1:13); PRD-1 "outside app code" is correct use (NODE_ENV set by deployment); no NOT MET misuse; exact phrase present.
+- Notable behavior: "I loaded no version file (express-4.md / express-5.md) and make no single-major claim"; "Pin Express to a real version to get version-specific guidance."

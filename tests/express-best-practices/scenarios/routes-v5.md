@@ -36,3 +36,10 @@ Replaces the first prompt, which the runner already handled without help. Tests 
 - Nested-path route uses named wildcard — PASS (src/app.js: `app.get("/assets/*splat", ...)`, joins `req.params.splat`)
 - Skill contract notes: Rules applied present; no NOT MET listed; detector run (answer opens "Detector: express major=5 (declared ^5.1.0)").
 - Notable behavior: "Express 5 path strings cannot hold regex, so the check is in the schema"; `const file = req.params.splat.join("/");`
+
+### final — 2026-10-19 (SKILL.md at commit 6fb9047)
+- Verdict: PASS
+- Numeric constraint not a regex group in path — PASS (src/app.js:21 route is plain `/orders/:id`; zod `/^\d+$/` check at line 10/22, `next("route")` otherwise)
+- Nested-path route uses named wildcard — PASS (src/app.js:28 `app.get("/assets/*splat", ...)`, uses `req.params.splat` array)
+- Skill contract notes: Rules applied is the last section, with path:LINE entries (lines check out); no NOT MET; `V5-4: outside app code` used once, plausible (not verifiable from code), no misuse.
+- Notable behavior: "Express 5 path strings have no regex, so numeric-only is enforced with a zod schema"; "GET /assets/*splat: named wildcard"

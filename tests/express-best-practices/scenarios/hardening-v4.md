@@ -54,3 +54,18 @@ Tests the depth and accuracy of a production-readiness review. The fixture also 
 - With-skill rule IDs cited — PASS (every finding cites IDs: ERR-1, ERR-8, SEC-5, SEC-6, SEC-8, SEC-1/SEC-2, PRD-2, REQ-4)
 - Skill contract notes: `Rules applied` section present; stayed a review ("No files were modified"); detector line reported.
 - Notable behavior: "Reviewed as Express 4; loaded express-4.md, request-handling.md, errors.md, security.md, production.md." Extras beyond Expected (SEC-12 hard-coded secret, REQ-2 proto lookup, PRD-7 graceful shutdown).
+
+### final — 2026-10-19 (SKILL.md at commit 6fb9047)
+- Verdict: PASS
+- uncaughtException keeps process running (ERR-8) — PASS (server.js:28-30: listener keeps process in undefined state; remove, let it crash)
+- console.log instead of structured logger (PRD-2) — PASS (ERR-7 / PRD-2, server.js:24: `console.log(err)`, use a logger)
+- trust proxy true (SEC-8) — PASS (server.js:6: trusts any X-Forwarded-*; use hop count)
+- express-session default MemoryStore (SEC-5) — PASS (SEC-5 / PRD-4, server.js:8: in-memory store, use Redis-backed)
+- default cookie name connect.sid (SEC-6) — PASS (server.js:8: default name `connect.sid`, custom name and cookie options)
+- no helmet (SEC-1) — PASS (server.js:4-8: no `helmet()`)
+- x-powered-by not disabled (SEC-2) — PASS (server.js:4: no `app.disable('x-powered-by')`)
+- 3-param error handler (ERR-1) — PASS (server.js:23: `(err, req, res)` never called for errors)
+- inline app.listen, app not importable (REQ-4) — PASS (server.js:32: app not exported separately from listen)
+- With-skill rule IDs cited — PASS (every finding cites IDs: ERR-1, ERR-8, PRD-2, SEC-1/2/5/6/8, REQ-4)
+- Skill contract notes: stayed a review (no edits to server.js); detector line reported; no `Rules applied` section appears (rule IDs are cited inline per finding and an express-4 rules-loaded line is given instead).
+- Notable behavior: "I did not modify any files"; "Express 4 rules loaded (`express-4.md`) plus request-handling, errors, security and production."

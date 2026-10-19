@@ -49,3 +49,11 @@ The first prompt (a /healthz endpoint) was retired: a health check should catch 
 - Each service treated by its own major — PASS (api4 has try/catch + next, api5 bare async; neither has the other's pattern)
 - Skill contract notes: Detector run (answer reports majors 4 and 5); Rules applied present; per-service claims (V4-1 try/catch, V5-1 no wrapper) match the code.
 - Notable behavior: "api5: bare async handler, no wrapper or `.catch(next)` (V5-1)." and `} catch (err) { next(err); }` in api4
+
+### final — 2026-10-19 (SKILL.md at commit 6fb9047)
+- Verdict: PASS
+- api4 forwards async rejections explicitly — PASS (apps/api4/src/app.js:17-30 try/catch with `next(err)`)
+- api5 uses no wrapper/try-catch — PASS (apps/api5/src/app.js:17-27 bare `async (req, res)`, no try/catch or .catch)
+- Each service treated by its own major — PASS (api4 has try/catch + next, api5 bare async; neither has the other's pattern; package.json majors 4 and 5 match)
+- Skill contract notes: Detector run with `--root .` (answer reports majors 4 and 5); `Rules applied` is the last section with `ID: path:LINE` entries; per-service claims match the code.
+- Notable behavior: "Each service got its own version-specific handler; nothing was copied across unchanged." and `} catch (err) { next(err); }` in api4

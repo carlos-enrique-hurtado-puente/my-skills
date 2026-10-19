@@ -57,3 +57,11 @@ Tests whether the Express rules and the architecture skill coexist. Green and re
 - No structural advice conflicts with clean-architecture — PASS (structure section describes the clean-architecture layout; Rules applied lists only rule IDs with file:line, none are structural claims attributed to the express skill)
 - Skill contract notes: Answer ends with `Rules applied` (REQ-1..5, V4-1, V4-3, ERR-1..7); no structural claim attributed to the express skill.
 - Notable behavior: "Composition root: the only place that wires concrete adapters to use cases." and "Controller: translates HTTP into the use case request model and back."
+
+### final — 2026-10-19 (SKILL.md at commit 6fb9047)
+- Verdict: PASS
+- Layering follows clean-architecture — PASS (application/create-order.js makeCreateOrder takes injected orderRepository/customerRepository ports; http/orders-router.js is outer adapter; infrastructure adapters wrap db; domain has no imports; app.js composition root)
+- Payload validated at HTTP boundary and async rejections forwarded (Express 4) — PASS (zod strict bodySchema.safeParse in orders-router.js:24 returns 400; createOrder(...).catch(next) at :33; 4-arg errorHandler registered last in app.js)
+- No structural advice conflicts with clean-architecture — PASS (Structure section is the clean-architecture layout; error-to-HTTP mapping kept in http layer; no structural claim attributed to express skill)
+- Skill contract notes: `Rules applied` is last section, every entry has file:line or "outside app code"; REQ-2 cited for boundary validation; no structural claim attributed to the express skill.
+- Notable behavior: "Composition root: the only place concrete adapters meet use cases." and "error-to-HTTP mapping lives in the http layer by error class, so inner layers carry no status codes."

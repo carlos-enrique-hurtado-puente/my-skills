@@ -70,3 +70,12 @@ Replaces the first prompt, which the runner already handled without help. Tests 
 - No Express 5-only reliance — PASS (non-async handler with promise chain and .catch(next))
 - Skill contract notes: Answer ends with `Rules applied`; only NOT MET (REQ-2 as schema validator, no new deps) is justified, hand-written regex used instead; detector run (major=4).
 - Notable behavior: "`.catch(next)` on the promise chain"; "if (err) return next(err)" in the writeFile callback
+
+### final — 2026-10-19 (SKILL.md at commit 6fb9047)
+- Verdict: PASS
+- db rejection reaches error handler (V4-1) — PASS (src/app.js:21-34 non-async handler, findUserById(...).then(...).catch(next))
+- fs.writeFile callback error to next(err) (ERR-2) — PASS (src/app.js:29-30 `fs.writeFile(file, csv, (err) => { if (err) return next(err);`)
+- Error middleware 4 params, after routes (ERR-1, REQ-1) — PASS (src/app.js:41 `app.use((err, req, res, next)` after export route and 404 handler)
+- No Express 5-only reliance — PASS (handler is not async; explicit .catch(next))
+- Skill contract notes: Rules applied is the last section with path:LINE; only NOT MET is REQ-7 quoting "no new dependencies" (justified); no misuse of `outside app code`.
+- Notable behavior: "findUserById(req.params.id) ... .catch(next)"; "if (err) return next(err);"

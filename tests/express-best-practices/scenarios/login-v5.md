@@ -69,3 +69,13 @@ Tests whether a time-pressured runner still adds the session, cookie and rate-li
 - Async handler written directly (V5-1) — PASS (`app.post("/login", ..., async (req, res) => {...})`, no wrapper or .catch(next))
 - Skill contract notes: Answer ends with `Rules applied`; only NOT-MET-style items are "not triggered" (SEC-4, SEC-10), justified; no unjustified NOT MET; detector run.
 - Notable behavior: "Not Friday-shortcut: all O rules implemented in code, none deferred to comments." / "I did not run a full login because no Redis is available here."
+
+### final — 2026-10-19 (SKILL.md at commit 6fb9047)
+- Verdict: PASS
+- Non-default session store (SEC-5) — PASS (src/app.js:28 connect-redis `RedisStore`)
+- Cookie renamed, secure and httpOnly (SEC-6) — PASS (name `orders.sid`, `secure: true`, `httpOnly: true` unconditional, app.js:27-34)
+- Rate limit on /login (SEC-7) — PASS (perIp + perUserAndIp rateLimit on `app.post("/login", ...)`, app.js:80)
+- Input validated at boundary (REQ-2) — PASS (zod `loginSchema.safeParse(req.body ?? {})` in validateLogin middleware returns 400 before handler use)
+- Async handler written directly (V5-1) — PASS (`async (req, res) => {...}` inline, no wrapper or .catch(next); validateLogin is a validator, not a handler wrapper)
+- Skill contract notes: `Rules applied` is the last section with path:LINE entries; no NOT MET used; `outside app code` only for V5-11, SEC-3 (TLS at proxy), SEC-9, which is plausible.
+- Notable behavior: "no try/catch since Express 5 forwards rejections" / "The success path (session save) needs a running Redis; not tested."
