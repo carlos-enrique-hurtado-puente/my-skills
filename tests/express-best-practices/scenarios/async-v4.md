@@ -43,3 +43,30 @@ Replaces the first prompt, which the runner already handled without help. Tests 
 - No Express 5-only reliance — PASS (async handler wrapped in try/catch with explicit next(err))
 - Skill contract notes: Rules applied present; NOT MET entries (REQ-2, SEC-1/SEC-2) look justified (no new deps allowed); detector run (`express: major=4 declared=^4.19.0`).
 - Notable behavior: "async handler wrapped in try/catch, calls `next(err)`"; "if (res.headersSent) return next(err);"
+
+### refactor-1 — 2026-10-19
+- Verdict: PASS
+- db rejection reaches error handler — PASS (src/app.js: try/catch around `await findUserById`, `next(err)` in catch)
+- fs.writeFile callback error to next(err) — PASS (`fs.writeFile(filePath, csv, (err) => { if (err) return next(err); ...`)
+- Error middleware 4 params, registered after routes — PASS (`app.use((err, req, res, next)` after the export route and 404 handler)
+- No Express 5-only reliance — PASS (async handler has explicit try/catch with next(err))
+- Skill contract notes: Rules applied present at end; only NOT MET is REQ-2 (schema validator), justified by "no new dependencies".
+- Notable behavior: "ERR-2: callback errors must be handed to next"; "REQ-2: NOT MET as a schema validator: \"no new dependencies\"."
+
+### refactor-2 — 2026-10-19
+- Verdict: PASS
+- db rejection reaches error handler — PASS (try/catch around `await findUserById`, `next(err)` in catch)
+- fs.writeFile callback error to next(err) — PASS (`fs.writeFile(filePath, csv, (err) => { if (err) return next(err); ...`)
+- Error middleware 4 params, after routes — PASS (`app.use((err, req, res, next) => ...)` after the export route)
+- No Express 5-only reliance — PASS (async handler wrapped in try/catch with explicit next(err))
+- Skill contract notes: Answer ends with `Rules applied`; detector run reported; NOT MET REQ-2 (schema validator) looks justified by "no new dependencies", with a hand-written id check substituted.
+- Notable behavior: "if (err) return next(err); // callback errors must be forwarded (ERR-2)"; "next(err); // async handler on Express 4 (V4-1)"
+
+### refactor-3 — 2026-10-19
+- Verdict: PASS
+- db rejection reaches error handler — PASS (src/app.js: findUserById(id).then(...).catch(next))
+- fs.writeFile callback error to next(err) — PASS (src/app.js: `fs.writeFile(filePath, csv, (err) => { if (err) return next(err); ...`)
+- Error middleware 4 params, registered after routes — PASS (src/app.js: `app.use((err, req, res, next) => ...)` after the export route and 404 handler)
+- No Express 5-only reliance — PASS (non-async handler with promise chain and .catch(next))
+- Skill contract notes: Answer ends with `Rules applied`; only NOT MET (REQ-2 as schema validator, no new deps) is justified, hand-written regex used instead; detector run (major=4).
+- Notable behavior: "`.catch(next)` on the promise chain"; "if (err) return next(err)" in the writeFile callback

@@ -33,7 +33,7 @@ A scenario with zero baseline failures does not test the skill. Rewrite its pres
 
 ### Baseline outcome, 2026-10-19
 
-Eight scenarios were baselined without the skill. Three **discriminate** (the runner fails at least one bullet on the current prompt), five are **guards**.
+Nine scenarios exist; eight were baselined at first and `login-v5-no-deps` was added during REFACTOR. Eight were baselined without the skill. Three **discriminate** (the runner fails at least one bullet on the current prompt), five are **guards**.
 
 | Scenario | Baseline | Role |
 |---|---|---|
@@ -55,3 +55,14 @@ The plan asked for at least 5 of 8 scenarios to fail at baseline. Three do (`log
 ### GREEN outcome, 2026-10-19 (`green-1`, plus `green-2` for the replaced `monorepo-mixed` prompt)
 
 With the skill, all eight scenarios pass. On the three discriminating scenarios the result moved from FAIL to PASS (`login-v5` 3 failing bullets to 0, `async-v4` 1 to 0, `with-clean-architecture` 1 to 0). The evidence that the skill helps rests on those three single runs; the `refactor-N` entries repeat them to check variance. The five guards passing means the skill did not break behavior the model already got right.
+
+### REFACTOR outcome, 2026-10-19 (`refactor-1` to `refactor-3`, run on SKILL.md after the wording was tightened)
+
+| Scenario | Baseline | With skill, 3 repetitions |
+|---|---|---|
+| `login-v5` | FAIL (3 bullets) | 3 of 3 PASS |
+| `async-v4` | FAIL (1 bullet) | 3 of 3 PASS |
+| `with-clean-architecture` | FAIL (1 bullet) | 3 of 3 PASS |
+| `login-v5-no-deps` | FAIL (4 bullets) | 2 of 3 PASS; the failure was the shape of the `Rules applied` section (see its Results) |
+
+`login-v5-no-deps` is discriminating (it fails at baseline) and is the check on the `NOT MET` exit. In both passing runs the runner reported `SEC-5: NOT MET` quoting the user's dependency instruction, although a hand-written store was possible; the scenario allows it.

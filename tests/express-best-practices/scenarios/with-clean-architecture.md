@@ -33,3 +33,27 @@ Tests whether the Express rules and the architecture skill coexist. Green and re
 - No structural advice conflicts with clean-architecture — PASS (Rules applied cites only rule IDs with file:line locations; no folder/layer/naming advice attributed to the express skill)
 - Skill contract notes: `Rules applied` section exists (V4-1, REQ-2, ERR-1, etc.); no structural claim attributed to the express skill.
 - Notable behavior: "Thin controller: validate HTTP input, call the use case, shape the response." and "Composition root: the only place concrete adapters are wired to use cases."
+
+### refactor-1 — 2026-10-19
+- Verdict: PASS
+- Layering follows clean-architecture — PASS (application/create-order.js makeCreateOrder takes injected orderRepository/userRepository/idGenerator ports; http/orders-router.js is the outer adapter; app.js composition root; infrastructure gateways wrap db)
+- Payload validated at HTTP boundary and async rejections forwarded (Express 4) — PASS (zod createOrderBody.safeParse in orders-router.js returns 400; try/catch -> next(err); 4-arg error middleware in app.js)
+- No structural advice conflicts with clean-architecture — PASS (layout is the clean-architecture one; Rules applied cites only rule IDs with file locations; no structural claim attributed to the express skill; "Conflicts ... none")
+- Skill contract notes: Answer ends with `Rules applied` section (REQ-1, REQ-2, ERR-1, V4-1, SEC-1, etc.); no structural claim attributed to the express skill.
+- Notable behavior: "Composition root wiring concrete implementations" and "// Interface adapter: translates HTTP to the CreateOrder use case and back."
+
+### refactor-2 — 2026-10-19
+- Verdict: PASS
+- Layering follows clean-architecture — PASS (usecases/createOrder.js makeCreateOrder takes injected orderRepository/userRepository ports defined by the use case; http/ordersRouter.js is the outer adapter; adapters/repositories.js gateways; app.js composition root)
+- Payload validated at HTTP boundary and async rejections forwarded (Express 4) — PASS (zod bodySchema.safeParse in ordersRouter.js throws 400; async handler try/catch -> next(err); 4-arg error middleware in app.js)
+- No structural advice conflicts with clean-architecture — PASS (layout section is the developer's own; Rules applied lists only rule IDs with file:line, no structural claim attributed to the express skill)
+- Skill contract notes: Answer ends with `Rules applied` section (V4-1, REQ-1..5, ERR-1..7, V4-3); no structural claim attributed to the express skill.
+- Notable behavior: "ports are defined by the use case (contract in comments)" and "Composition root: concrete adapters are wired to use cases here."
+
+### refactor-3 — 2026-10-19
+- Verdict: PASS
+- Layering follows clean-architecture — PASS (application/create-order.js use case takes injected orderRepository/customerRepository ports; http/orders-router.js is outer adapter; infrastructure adapters implement ports; app.js composition root; domain has no outer imports)
+- Payload validated at HTTP boundary and async rejections forwarded (Express 4) — PASS (zod strict schema safeParse in orders-router.js returns 400; try/catch -> next(err); 4-arg errorHandler registered last in app.js)
+- No structural advice conflicts with clean-architecture — PASS (structure section describes the clean-architecture layout; Rules applied lists only rule IDs with file:line, none are structural claims attributed to the express skill)
+- Skill contract notes: Answer ends with `Rules applied` (REQ-1..5, V4-1, V4-3, ERR-1..7); no structural claim attributed to the express skill.
+- Notable behavior: "Composition root: the only place that wires concrete adapters to use cases." and "Controller: translates HTTP into the use case request model and back."

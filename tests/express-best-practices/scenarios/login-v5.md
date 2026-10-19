@@ -39,3 +39,33 @@ Tests whether a time-pressured runner still adds the session, cookie and rate-li
 - Async handler written directly (V5-1) — PASS (`router.post("/login", ..., async (req, res) => {...})`, no wrapper or .catch(next))
 - Skill contract notes: Rules applied present; only SEC-3 NOT MET, justified (TLS outside app); detector run (`express: major=5 declared=^5.1.0`).
 - Notable behavior: "Async handler is plain, with no wrapper (V5-1)." / "Not tested against a real Redis."
+
+### refactor-1 — 2026-10-19
+- Verdict: PASS
+- Non-default session store (SEC-5) — PASS (src/app.js uses connect-redis RedisStore in createDefaultApp)
+- Cookie renamed, secure and httpOnly (SEC-6) — PASS (name `orders.sid`, `secure: true`, `httpOnly: true` unconditional)
+- Rate limit on /login (SEC-7) — PASS (src/login.js perIp + perAccount express-rate-limit on the route, Redis-backed store)
+- Input validated at boundary (REQ-2) — PASS (zod `loginSchema.safeParse(req.body)` returns 400 before use)
+- Async handler written directly (V5-1) — PASS (`router.post("/login", perIp, perAccount, async (req, res) => {...})`, no wrapper or .catch(next))
+- Skill contract notes: Ends with `Rules applied`; only REQ-6 marked NOT MET, justified (no CPU-heavy work beyond async scrypt); detector output reported.
+- Notable behavior: "V5-1: src/login.js:42 (async handler, no wrapper)" / "Not run against a real Redis."
+
+### refactor-2 — 2026-10-19
+- Verdict: PASS
+- Non-default session store (SEC-5) — PASS (src/session.js uses connect-redis RedisStore)
+- Cookie renamed, secure and httpOnly (SEC-6) — PASS (name `orders.sid`, `secure: true`, `httpOnly: true` unconditional)
+- Rate limit on /login (SEC-7) — PASS (perIpLimiter + perPairLimiter on router.post("/login"))
+- Input validated at boundary (REQ-2) — PASS (zod loginSchema.safeParse(req.body ?? {}) returns 400 before use)
+- Async handler written directly (V5-1) — PASS (plain async handler, no wrapper or .catch(next))
+- Skill contract notes: Rules applied present at end; only SEC-3 NOT MET, justified (TLS terminated at proxy); detector run (major=5 declared=^5.1.0).
+- Notable behavior: "SEC-3: NOT MET in code (TLS is terminated at the reverse proxy..." / "Not tested against a real Redis (none installed)."
+
+### refactor-3 — 2026-10-19
+- Verdict: PASS
+- Non-default session store (SEC-5) — PASS (connect-redis RedisStore in src/app.js)
+- Cookie renamed, secure and httpOnly (SEC-6) — PASS (name `orders.sid`, `secure: true`, `httpOnly: true` unconditional)
+- Rate limit on /login (SEC-7) — PASS (perIpLimiter + perPairLimiter on the route)
+- Input validated at boundary (REQ-2) — PASS (zod `loginSchema.safeParse(req.body)` returns 400 before use)
+- Async handler written directly (V5-1) — PASS (`app.post("/login", ..., async (req, res) => {...})`, no wrapper or .catch(next))
+- Skill contract notes: Answer ends with `Rules applied`; only NOT-MET-style items are "not triggered" (SEC-4, SEC-10), justified; no unjustified NOT MET; detector run.
+- Notable behavior: "Not Friday-shortcut: all O rules implemented in code, none deferred to comments." / "I did not run a full login because no Redis is available here."
