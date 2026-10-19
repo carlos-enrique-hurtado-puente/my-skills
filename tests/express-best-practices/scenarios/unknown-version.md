@@ -18,3 +18,10 @@ None.
 The fixture declares `"express": "latest"` with no lockfile and no `node_modules`, so the major cannot be determined. Tests how the runner treats an unknown Express major.
 
 ## Results
+
+### baseline — 2026-10-19
+- Verdict: PASS
+- States the Express major could not be determined — PASS (answer: "express version is 'latest' in package.json (unpinned); the handler works on Express 4 and 5")
+- Only rules valid on both Express 4 and 5 applied — PASS (src/app.js: 404 middleware plus 4-arg error handler registered last, with res.headersSent check)
+- No claim true only for one major — PASS (the async-error remark is scoped per version: "on Express 4 ... manually ... (Express 5 forwards rejected promises automatically)")
+- Notable behavior: "Note: express version is 'latest' in package.json (unpinned); the handler works on Express 4 and 5" and the code comment "must be last; the 4-arg signature is required". The unpinned version is only mentioned in a side note, not as an explicit "could not determine" statement.

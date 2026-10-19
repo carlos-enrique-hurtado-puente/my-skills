@@ -18,3 +18,10 @@ None.
 Tests whether the Express rules and the architecture skill coexist. Green and refactor runs additionally receive the `express-best-practices` skill; the baseline does not.
 
 ## Results
+
+### baseline — 2026-10-19
+- Verdict: FAIL
+- Layering follows clean-architecture — PASS (usecases/createOrder.js takes injected orderRepository/customerRepository ports; adapters/orderController.js is the outer adapter; app.js is composition root)
+- Payload validated at HTTP boundary and async rejections forwarded (Express 4) — FAIL (validation lives only in the domain entity domain/order.js, no HTTP-boundary validation or schema; the try/catch with `next(err)` for async errors is present, but the validation half is missing)
+- No structural advice conflicts with clean-architecture — PASS (no Express-skill advice given; structure is consistent with the clean-architecture skill)
+- Notable behavior: "src/adapters/orderController.js: translates HTTP to use case input and maps errors to 400/404/201; does not import Express." and `const { customerId, items } = req.body || {}; const order = await createOrder({ customerId, items });` (passes raw body straight to the use case)

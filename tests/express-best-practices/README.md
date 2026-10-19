@@ -30,3 +30,22 @@ Each entry has: per-bullet PASS or FAIL (N/A where the bullet says so) with a sh
 ## Control rule
 
 A scenario with zero baseline failures does not test the skill. Rewrite its pressure or drop it, and record that here.
+
+### Baseline outcome, 2026-10-19
+
+Eight scenarios were baselined without the skill. Four **discriminate** (the runner fails at least one bullet), four are **guards**.
+
+| Scenario | Baseline | Role |
+|---|---|---|
+| `login-v5` | FAIL (3 bullets) | discriminating |
+| `monorepo-mixed` | FAIL (3 bullets) | discriminating |
+| `with-clean-architecture` | FAIL (1 bullet) | discriminating |
+| `async-v4` | FAIL (1 bullet) on the second prompt; the first prompt passed and was retired (`baseline v1`) | discriminating |
+| `routes-v5` | PASS on both prompts (`baseline v1`, `baseline v2`) | guard |
+| `scope-architecture` | PASS | guard |
+| `unknown-version` | PASS | guard |
+| `hardening-v4` | PASS | guard |
+
+A guard checks that the skill does not misbehave: no structural advice, no version guess, rule IDs cited in reviews, no Express 4 habits forced onto Express 5. Passing without the skill is expected, so guards are not evidence that the skill helps; their value shows only in with-skill runs.
+
+The plan asked for at least 5 of 8 scenarios to fail at baseline. Four do. `routes-v5` was hardened once and still passed, so it became a guard instead of being rewritten again. The honest reading: the runner model already writes correct Express 5 route syntax and catches most items in a production review; its gaps are session and cookie hardening, rate limiting, per-version consistency across services, HTTP-boundary validation under an architecture skill, and error-middleware completeness.

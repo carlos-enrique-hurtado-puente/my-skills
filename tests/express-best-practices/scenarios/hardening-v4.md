@@ -25,3 +25,17 @@ None.
 Tests the depth and accuracy of a production-readiness review. The fixture also depends on `express-session`.
 
 ## Results
+
+### baseline — 2026-10-19
+- Verdict: PASS
+- uncaughtException keeps process running (ERR-8) — PASS (item 6: "Logging and continuing leaves the process in an undefined state"; log, exit non-zero)
+- console.log instead of structured logger (PRD-2) — PASS (item 19: "`console.log` only. Use structured logging (pino)")
+- trust proxy true (SEC-8) — PASS (item 5: set to exact hop count, spoofable X-Forwarded-For)
+- express-session default MemoryStore (SEC-5) — PASS (item 3: use Redis or another persistent store)
+- default cookie name connect.sid (SEC-6) — PASS (item 4: custom `name` (avoid the default `connect.sid`))
+- no helmet (SEC-1) — PASS (item 12: "Add `helmet`")
+- x-powered-by not disabled (SEC-2) — PASS (item 12: `app.disable("x-powered-by")`)
+- 3-param error handler (ERR-1) — PASS (item 1: `function (err, req, res)` has 3 arguments, needs `next`)
+- inline app.listen, app not importable (REQ-4) — PASS (item 22: "Separate `app` from `listen`" so it can be tested)
+- With-skill rule IDs cited — N/A (baseline run)
+- Notable behavior: "Verdict: not production ready." Thorough review with 24 findings; also added extras (IDOR, `users[req.params.id]` prototype lookup, saveUninitialized). Correct Express 4 awareness: "Express 4 does not catch rejected promises from async handlers".

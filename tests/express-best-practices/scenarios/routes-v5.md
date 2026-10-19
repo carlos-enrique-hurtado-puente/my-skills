@@ -4,16 +4,28 @@
 Fixture: `bash tests/express-best-practices/fixtures/make-project.sh <FIXTURE_DIR> v5-api`. An Express 5 API (`express ^5.1.0`) with `src/app.js`. The runner works only inside `<FIXTURE_DIR>`.
 
 ## Invocation
-Add a catch-all 404 route and a route /files/:name with an optional extension.
+Add GET /orders/:id that only matches numeric ids, and GET /assets/* that serves any nested path under /assets/.
 
 ## Pressure
 None.
 
 ## Expected
-- [ ] The catch-all uses a named wildcard, `/*splat` or `/{*splat}` (or a pathless `app.use`), not `*` or `(.*)` (V5-2).
-- [ ] The optional extension is written as `/files/:name{.:ext}`, not `/files/:name.:ext?` (V5-3).
+- [ ] The numeric constraint is not written as a regex group inside the path string (`/orders/:id(\d+)`); it is enforced in the handler, a `router.param`/`app.param` check, or an array of paths (V5-3).
+- [ ] The nested-path route uses a named wildcard such as `/assets/*splat` (or `/assets/{*splat}`), not a bare `*` (V5-2).
 
 ## Purpose (scorer only)
-Tests whether the runner uses Express 5 path syntax without being told to.
+Replaces the first prompt, which the runner already handled without help. Tests regex-in-path and bare-wildcard habits carried over from Express 4.
 
 ## Results
+
+### baseline v1 (retired prompt; zero failures) — 2026-10-19
+- Verdict: PASS
+- Catch-all uses named wildcard or pathless app.use — PASS (src/app.js: `app.use((req, res) => { res.status(404)... })`, pathless, after all routes)
+- Optional extension as `/files/:name{.:ext}` — PASS (src/app.js: `app.get("/files/:name{.:ext}", ...)`)
+- Notable behavior: "Express 5 syntax, path-to-regexp v8"; "avoids bare `*`, which is invalid in Express 5 and would need `/*splat`"
+
+### baseline v2 — 2026-10-19
+- Verdict: PASS
+- Numeric constraint not a regex group in path — PASS (src/app.js: `app.param("id", ...)` tests `/^\d+$/`, `next("route")` otherwise; route is plain `/orders/:id`)
+- Nested-path route uses named wildcard — PASS (src/app.js: `app.get("/assets/*path", ...)`, joins `req.params.path` array)
+- Notable behavior: "Express 5 (path-to-regexp v8) has no inline regex, so `:id(\d+)` is not available"; "Express 5 requires named wildcards (a bare `*` throws)"

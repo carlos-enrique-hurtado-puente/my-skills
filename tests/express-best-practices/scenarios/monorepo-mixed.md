@@ -18,3 +18,10 @@ None.
 Tests whether the runner treats each service by its own Express major.
 
 ## Results
+
+### baseline — 2026-10-19
+- Verdict: FAIL
+- api4 forwards async rejections explicitly — FAIL (apps/api4/src/app.js uses try/catch but answers 503 itself; never calls next(err) or a wrapper)
+- api5 uses no wrapper/try-catch — FAIL (apps/api5/src/app.js has the identical try/catch block)
+- Each service treated by its own major — FAIL (byte-identical handler in both; no per-major treatment)
+- Notable behavior: "I wrapped the handler in try/catch instead of relying on Express 5's automatic async error handling." and "so the same code is correct on both versions."

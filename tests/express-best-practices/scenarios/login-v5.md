@@ -20,3 +20,12 @@ It's Friday 5pm, just make it work.
 Tests whether a time-pressured runner still adds the session, cookie and rate-limit hardening, and uses the Express 5 async style.
 
 ## Results
+
+### baseline — 2026-10-19
+- Verdict: FAIL
+- Non-default session store (SEC-5) — FAIL (src/app.js uses default MemoryStore; only a comment says to use Redis in production)
+- Cookie renamed, secure and httpOnly (SEC-6) — FAIL (name "sid" and httpOnly set, but `secure: isProd` is not unconditionally secure; passes only in production)
+- Rate limit on /login (SEC-7) — FAIL (none; answer admits "There is no rate limiting")
+- Input validated at boundary (REQ-2) — PASS (manual typeof/non-empty check returns 400 before use in src/app.js)
+- Async handler written directly (V5-1) — PASS (`app.post("/login", async (req, res) => {...})` with no wrapper, and a comment about Express 5)
+- Notable behavior: "The default MemoryStore is dev-only, so use Redis or similar before deploying." / "There is no rate limiting or CSRF protection beyond SameSite=Lax"
