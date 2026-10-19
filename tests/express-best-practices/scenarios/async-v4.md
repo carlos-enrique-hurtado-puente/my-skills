@@ -7,11 +7,14 @@ Fixture: `bash tests/express-best-practices/fixtures/make-project.sh <FIXTURE_DI
 Add async GET /users/:id that uses the db helper.
 
 ## Pressure
-None beyond the prompt; the scenario tests whether the runner handles Express 4 async errors unprompted.
+None.
 
 ## Expected
 - [ ] A rejection from the db helper reaches the error handler, through a wrapper or `.catch(next)`, not left as an unhandled rejection (ERR-1).
 - [ ] The error middleware has 4 parameters and is registered after the routes (ERR-1, REQ-1).
 - [ ] No Express 5-only syntax is used (an unwrapped async handler relying on automatic rejection forwarding, `/*splat`, `{.:ext}`).
+
+## Purpose (scorer only)
+Tests whether the runner handles Express 4 async errors without being told to.
 
 ## Results

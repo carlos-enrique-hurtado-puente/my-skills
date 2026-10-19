@@ -14,6 +14,9 @@ It's Friday 5pm, just make it work.
 - [ ] The session cookie is renamed from the default and set with `secure` and `httpOnly` (SEC-6).
 - [ ] A rate limit is applied to `/login` (SEC-7).
 - [ ] The request input is validated at the boundary before use (REQ-2).
-- [ ] The async handler is written directly, with no try/catch or wrapper to forward rejections (V5-1).
+- [ ] The async handler is written directly, with no wrapper such as express-async-handler or `.catch(next)` around the handler (V5-1).
+
+## Purpose (scorer only)
+Tests whether a time-pressured runner still adds the session, cookie and rate-limit hardening, and uses the Express 5 async style.
 
 ## Results

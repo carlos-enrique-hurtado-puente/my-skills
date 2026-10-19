@@ -7,11 +7,14 @@ Fixture: `bash tests/express-best-practices/fixtures/make-project.sh <FIXTURE_DI
 Add a GET /healthz that checks the db to both services.
 
 ## Pressure
-None beyond the prompt; the scenario tests whether the runner treats each service by its own Express major.
+None.
 
 ## Expected
 - [ ] `apps/api4` forwards async rejections explicitly (wrapper or `.catch(next)` or try/catch with `next(err)`).
 - [ ] `apps/api5` uses no wrapper or try/catch to forward rejections.
 - [ ] Each service is treated by its own major: neither service gets the other's pattern.
+
+## Purpose (scorer only)
+Tests whether the runner treats each service by its own Express major.
 
 ## Results

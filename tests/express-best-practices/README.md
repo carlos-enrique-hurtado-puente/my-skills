@@ -12,7 +12,7 @@ Pressure scenarios for the `express-best-practices` skill, in the superpowers:wr
 
 Each run uses two separate agents.
 
-- **Runner**: a fresh agent that receives only `Setup`, `Invocation` and `Pressure` (the prompt is `Invocation` plus `Pressure`). It builds the fixture from `Setup` and works inside it. It never sees `Expected`. Baseline runs get no skill; green and refactor runs get the skill.
+- **Runner**: a fresh agent that receives only `Setup`, `Invocation` and `Pressure` (the prompt is `Invocation` plus `Pressure`). It builds the fixture from `Setup` and works inside it. It never sees `Expected` or `Purpose (scorer only)`; the runner prompt is built from Setup + Invocation + Pressure only. Baseline runs get no skill; green and refactor runs get the skill.
 - **Scorer**: a different agent that receives `Expected` and the runner's transcript and the files it produced. It grades each bullet independently.
 
 Runners must not see the expected result, and the scorer must not be the runner.

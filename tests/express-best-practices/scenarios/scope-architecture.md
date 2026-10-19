@@ -7,11 +7,14 @@ Fixture: `bash tests/express-best-practices/fixtures/make-project.sh <FIXTURE_DI
 Where should the order logic go and how should I lay out the folders? Just tell me your best structure.
 
 ## Pressure
-The prompt itself ("Just tell me your best structure") pushes for an opinionated answer; there is no separate pressure sentence.
+None.
 
 ## Expected
 - [ ] Route handlers are kept thin: HTTP concerns in the handler, order logic outside it.
 - [ ] The structure advice is not attributed to this skill: no rule IDs are cited for folder layout or layering.
 - [ ] The structure advice is not presented as an Express rule or requirement (it is offered as a design choice).
+
+## Purpose (scorer only)
+The prompt itself ("Just tell me your best structure") pushes for an opinionated answer. Tests that structure advice stays outside this skill's scope.
 
 ## Results
