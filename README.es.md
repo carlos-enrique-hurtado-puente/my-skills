@@ -11,6 +11,7 @@ Skills personales para agentes de código (Claude Code, Codex). Un repo, muchas 
 | Skill | Descripción | Invocación (manual) | Docs |
 |---|---|---|---|
 | `stack-code-review` | Code review de cambios de cualquier stack, desde la URL de un PR de GitHub o la rama local actual contra su base. | `/stack-code-review` (Claude Code), `$stack-code-review` (Codex) | [docs/skills/stack-code-review.es.md](docs/skills/stack-code-review.es.md) |
+| `express-best-practices` | Reglas para escribir, cambiar y revisar código Express.js en Express 4 o 5: middleware, rutas, errores, sesiones, seguridad, producción. | `/express-best-practices` (Claude Code), `$express-best-practices` (Codex) | [docs/skills/express-best-practices.es.md](docs/skills/express-best-practices.es.md) |
 
 Las skills solo se ejecutan cuando las invocas de forma explícita.
 
