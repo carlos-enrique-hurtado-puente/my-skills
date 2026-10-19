@@ -20,7 +20,7 @@ Al escribir código, la skill implementa todas las reglas oficiales (`O`) que ap
 
 ## Cómo se detecta la versión de Express
 
-La skill ejecuta `scripts/detect-express-version.sh` desde la raíz del proyecto. Imprime una línea por cada paquete que declara `express` y luego una línea de estado:
+La skill ejecuta `scripts/detect-express-version.sh --root .` desde la raíz del proyecto, así un proyecto anidado dentro de un repositorio más grande no recorre sus vecinos. Sin `--root`, el detector recorre desde la raíz de git (o desde la carpeta actual fuera de git); cualquier otro argumento es un error. Imprime una línea por cada paquete que declara `express` y luego una línea de estado:
 
 ```text
 express: major=5 resolved=5.1.0 declared=^5.0.0 dir=.
@@ -60,7 +60,7 @@ bash tests/express-best-practices/check-structure.sh
 
 La skill se probó en 9 escenarios de presión, cada uno ejecutado por un agente que nunca ve el resultado esperado y puntuado por un agente evaluador aparte. 4 escenarios discriminan (el modelo falla sin la skill y pasa con ella): `login-v5`, `async-v4`, `with-clean-architecture` y `login-v5-no-deps`. Los otros 5 son guardas: comprueban que la skill no se comporta mal (sin consejos de estructura, sin adivinar la versión, sin imponer hábitos de Express 4 a Express 5) y también pasan sin la skill, así que no son evidencia de que la skill ayude.
 
-Los modelos ya escriben correctamente la sintaxis de rutas de Express 5 y detectan la mayoría de los puntos en una revisión de producción sin la skill. La mejora medida está en el endurecimiento de sesiones y cookies, el rate limiting, la validación en el borde HTTP bajo una skill de arquitectura, la completitud del middleware de errores y el reporte de lo que no se pudo hacer. Cada escenario que discrimina pasó en 3 de 3 repeticiones con la skill. Detalles y salvedades: [`tests/express-best-practices/README.md`](../../tests/express-best-practices/README.md).
+Los modelos ya escriben correctamente la sintaxis de rutas de Express 5 y detectan la mayoría de los puntos en una revisión de producción sin la skill. La mejora medida está en el endurecimiento de sesiones y cookies, el rate limiting, la validación en el borde HTTP bajo una skill de arquitectura, la completitud del middleware de errores y el reporte de lo que no se pudo hacer. Cada escenario que discrimina pasó en 3 de 3 repeticiones con la skill (`login-v5-no-deps`, tras un ajuste de redacción). Detalles y salvedades: [`tests/express-best-practices/README.md`](../../tests/express-best-practices/README.md).
 
 ```bash
 bash tests/express-best-practices/check-structure.sh

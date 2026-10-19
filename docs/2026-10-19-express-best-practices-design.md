@@ -4,7 +4,7 @@
 - **Repo:** `my-skills` (`skills/express-best-practices/`)
 - **Evidence:** [research](2026-10-19-express-best-practices-research.md) (rule catalog, tiers, sources)
 - **Plan:** [plan](2026-10-19-express-best-practices-plan.md)
-- **Status:** draft for review
+- **Status:** implemented
 
 ## 1. Intent
 
@@ -108,6 +108,6 @@ In a monorepo the skill uses the entry whose `dir` is the nearest ancestor of th
 
 ## 10. Open questions
 
-1. **Express 4 rules** are unsourced until the 4.x documentation is read (research doc, "pending verification"). The plan makes that verification a task before `express-4.md` is written.
+1. **Express 4 rules:** resolved. V4-1, V4-3 and V4-4 are sourced from the `/en/4x/` pages; V4-2 was dropped (see the research doc).
 2. **sameSite** is not a rule until sourced.
 3. Whether to later register this skill as a `stack-code-review` piece is deferred.

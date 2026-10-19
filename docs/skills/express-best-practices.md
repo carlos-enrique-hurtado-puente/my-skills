@@ -18,7 +18,7 @@ When writing code, the skill implements every official (`O`) rule that applies, 
 
 ## How the Express version is detected
 
-The skill runs `scripts/detect-express-version.sh` from the project root. It prints one line per package that declares `express`, then a status line:
+The skill runs `scripts/detect-express-version.sh --root .` from the project root, so a project nested in a larger repository does not scan its siblings. Without `--root`, the detector scans from the git top level (or the current directory outside git); any other argument is an error. It prints one line per package that declares `express`, then a status line:
 
 ```text
 express: major=5 resolved=5.1.0 declared=^5.0.0 dir=.
@@ -58,7 +58,7 @@ bash tests/express-best-practices/check-structure.sh
 
 The skill was tested on 9 pressure scenarios, each run by a runner agent that never sees the expected result and scored by a separate scorer agent. 4 scenarios discriminate (the model fails without the skill and passes with it): `login-v5`, `async-v4`, `with-clean-architecture` and `login-v5-no-deps`. The other 5 are guards: they check the skill does not misbehave (no structural advice, no version guess, no Express 4 habits forced onto Express 5) and pass without the skill too, so they are not evidence that the skill helps.
 
-Models already write correct Express 5 route syntax and catch most items in a production review without the skill. The measured gain is in session and cookie hardening, rate limiting, HTTP-boundary validation under an architecture skill, error-middleware completeness, and reporting what could not be done. Each discriminating scenario passed in 3 of 3 repetitions with the skill. Details and caveats: [`tests/express-best-practices/README.md`](../../tests/express-best-practices/README.md).
+Models already write correct Express 5 route syntax and catch most items in a production review without the skill. The measured gain is in session and cookie hardening, rate limiting, HTTP-boundary validation under an architecture skill, error-middleware completeness, and reporting what could not be done. Each discriminating scenario passed in 3 of 3 repetitions with the skill (`login-v5-no-deps` after one wording fix). Details and caveats: [`tests/express-best-practices/README.md`](../../tests/express-best-practices/README.md).
 
 ```bash
 bash tests/express-best-practices/check-structure.sh
