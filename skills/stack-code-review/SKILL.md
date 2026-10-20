@@ -61,6 +61,7 @@ Pick the source from the target, then read **only that source's file** (paths ar
 3. **Line numbers = new version** of the file (right side of the diff). If you cannot determine the line, cite the function/block.
 4. **Prioritize modified lines.** Report issues outside the diff only if the change directly introduced them.
 5. **Quality over quantity**, but do not omit relevant findings. One finding = one row; no duplicates.
+6. **Deliver in chat.** The report is your final message; never create a file for it on your own initiative. If the invoker also asks for a file, the full report still goes in the final message, and the file is never written inside the reviewed repository or worktree (read-only): write it only to a path outside it, otherwise say in the final message that you did not write it.
 
 ## Workflow
 
@@ -104,6 +105,7 @@ The templates in `references/output-format.md` are written in English. Determine
 | "The spec won't open, I'll assume the criteria" | Never. Say why it failed, ask for it as markdown (path or pasted); without it, `BLOCKED` unless the user confirms reviewing without it. |
 | "I'll compare against main, same thing" | Use the base the source file defines. |
 | "origin/HEAD points to main, so the base is main" | origin/HEAD is the last tie-break. The base comes only from `scripts/detect-base.sh`, never from `origin/HEAD` by hand; list every `candidate:` line in the confirmation. |
+| "The invoker asked me to save the report to a file in the repo" | Read-only applies to the whole repo, including ignored folders like `.superpowers/`. The report goes in the final chat message; a requested file is written only outside the reviewed repo, otherwise say you did not write it. |
 | "Generic comment: 'improve error handling'" | Vague = invalid. File, line, risk, fix. |
 | "It's probably wrong, mark it blocking" | Without evidence it is a `question`. |
 | "I'll add free text between table rows" | Forbidden; everything goes inside the cell. |
