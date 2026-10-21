@@ -54,6 +54,10 @@ Pick the source from the target, then read **only that source's file** (paths ar
 | GitHub PR URL | `GitHub PR` | `references/sources/github.md` |
 | nothing (current git branch) | `Local branch` | `references/sources/local-git.md` |
 
+## Running it in a subagent
+
+If the user asks you to delegate the review to an agent instead of running it yourself, you do not review: **REQUIRED:** read `references/subagent-dispatch.md` and follow it for the call, the prompt and your reply. If you are the subagent, ignore this section.
+
 ## Hard rules
 
 1. **Read-only.** The source file adds its own restrictions.
@@ -113,6 +117,8 @@ The templates in `references/output-format.md` are written in English. Determine
 | "It's blocked, but these diff problems are too serious not to mention" | Blocked = zero findings. Mentioning them is a spec-less review in disguise. |
 | "The release is urgent; I'll give a partial verdict" | Urgency does not unblock the review. |
 | "Two related problems fit in one row" | One row = one finding. Split them. |
+| "The user is in a hurry; I'll put a quick summary before the subagent's report" | The subagent's message goes first and unchanged; your words go after the `---`. The report already ends with a verdict. |
+| "No model named, so the reviewer inherits mine" | If this session wrote the changes, pick a different model that is not a lightweight one (`references/subagent-dispatch.md`). |
 
 ## Common mistakes
 

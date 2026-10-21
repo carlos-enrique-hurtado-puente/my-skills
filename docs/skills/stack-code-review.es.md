@@ -23,6 +23,14 @@ Con una URL de PR se revisa ese PR; sin argumentos se revisa la rama local actua
 - `base:` (solo modo local) indica la rama base y omite la detección automática.
 - `spec:` acepta una ruta local, una URL (por ejemplo un ticket de Jira) o texto pegado.
 
+## Ejecutarla en un subagente
+
+Puedes pedirle a la sesión que delegue la review ("manda un agente a revisar esta rama con /stack-code-review"). La sesión que delega sigue [`references/subagent-dispatch.md`](../../skills/stack-code-review/references/subagent-dispatch.md):
+
+- Lanza un agente general-purpose nuevo (nunca un fork) con una plantilla de prompt fija.
+- **Modelo:** el que nombres; si no, y la sesión escribió los cambios revisados, un modelo distinto que no sea ligero (revisor independiente); si no, el de la sesión. Pedir "barato" o "rápido" nunca elige un modelo ligero.
+- **Respuesta:** primero el mensaje del subagente sin cambios, luego `---` y una línea con el modelo que revisó. La confirmación y las preguntas por la spec se reenvían igual, y tu respuesta vuelve al mismo subagente.
+
 ## Conectores
 
 Leer la spec desde una URL depende de los MCP/herramientas configurados en cada herramienta. Claude Code y Codex se configuran por separado, así que un conector disponible en una no lo está necesariamente en la otra. Si no hay forma de leer la URL, la skill pide la spec en markdown.
@@ -76,6 +84,7 @@ Las piezas y los criterios generales las consultan si están instaladas (si falt
 bash tests/stack-code-review/check-structure.sh    # estructura de la skill
 bash tests/stack-code-review/test-detect-base.sh   # scripts/detect-base.sh contra repos de prueba
 bash tests/stack-code-review/test-detect-stacks.sh # scripts/detect-stacks.sh contra repos de prueba
+python3 tests/stack-code-review/relay-check.py <reporte> <respuesta>  # la respuesta reenvía el reporte del subagente sin cambios
 ```
 
 Los escenarios de presión de la skill (ejecutados por un subagente y puntuados por un agente evaluador aparte que nunca ejecutó el escenario) están descritos en [`tests/stack-code-review/README.md`](../../tests/stack-code-review/README.md).

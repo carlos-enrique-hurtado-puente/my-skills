@@ -21,6 +21,14 @@ With a PR URL it reviews that PR; with no arguments it reviews the current local
 - `base:` (local mode only) sets the base branch and skips auto-detection.
 - `spec:` accepts a local path, a URL (for example a Jira ticket) or pasted text.
 
+## Running it in a subagent
+
+You can ask the session to delegate the review ("send an agent to review this branch with /stack-code-review"). The delegating session follows [`references/subagent-dispatch.md`](../../skills/stack-code-review/references/subagent-dispatch.md):
+
+- It dispatches a fresh general-purpose agent (never a fork) with a fixed prompt template.
+- **Model:** the one you name; otherwise, if the session wrote the changes under review, a different model that is not a lightweight one (an independent reviewer); otherwise the session's own model. Asking for "cheap" or "fast" never selects a lightweight model.
+- **Reply:** the subagent's message comes first and unchanged, then `---` and a line saying which model reviewed. Confirmation and spec questions are relayed the same way, and your answer goes back to the same subagent.
+
 ## Connectors
 
 Reading a spec from a URL depends on the MCP servers/tools configured in each tool. Claude Code and Codex are configured separately, so a connector available in one is not necessarily available in the other. If the URL cannot be read, the skill asks for the spec as markdown.
@@ -74,6 +82,7 @@ The pieces and the general criteria consult these when installed (if missing, it
 bash tests/stack-code-review/check-structure.sh    # skill structure
 bash tests/stack-code-review/test-detect-base.sh   # scripts/detect-base.sh against test repos
 bash tests/stack-code-review/test-detect-stacks.sh # scripts/detect-stacks.sh against test repos
+python3 tests/stack-code-review/relay-check.py <report> <reply>  # a relayed reply carries the subagent report unchanged
 ```
 
 The skill's pressure scenarios (run by a subagent and scored by a separate scorer agent that never ran the scenario) are described in [`tests/stack-code-review/README.md`](../../tests/stack-code-review/README.md).

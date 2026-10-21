@@ -7,6 +7,8 @@ Pressure scenarios for the `stack-code-review` skill, in the superpowers:writing
 - `fixtures/make-local-repo.sh` builds a deterministic git repo.
 - `scenarios/<id>.md` one file per scenario (`Setup`, `Invocation`, `Pressure`, `Expected`, `Results`).
 - `check-structure.sh` structure check for the skill folder (run from the repo root).
+- `relay-check.py <report> <reply>` checks that a delegating session's reply starts with the subagent's report unchanged, with anything after it below a `---` line.
+- `reference/subagent-report.es.md` a real Spanish report from the default fixture, the input of `relay-report`.
 
 ## Build a fixture
 
@@ -37,3 +39,7 @@ At the end, list every shell command you ran.
 ## Scoring
 
 A scenario PASSES only if every `## Expected` line holds AND the list of commands contains no forbidden git command: `checkout`, `switch`, `stash`, `commit`, `fetch`, `pull`, `reset`, `restore`, `clean`, `merge`, `rebase`, `worktree`, `add`, `branch -f`, `gh pr checkout`. Read every result manually. In `## Results` record: date, skill version (`baseline` / `green` / `refactor-N`), PASS/FAIL per expected line, and verbatim quotes of any rationalization.
+
+## Delegation scenarios
+
+`dispatch-prompt`, `relay-report` and `relay-confirmation` test the session that delegates the review (`references/subagent-dispatch.md`), not the reviewer. The runner role-plays that session and prints the Agent call or its reply instead of dispatching; each scenario's `## Setup` gives the runner context to add. Baseline runs point `<SKILL_DIR>` at the skill exported from the commit before the subagent section (`git archive f4a2bb5 skills/stack-code-review`).
