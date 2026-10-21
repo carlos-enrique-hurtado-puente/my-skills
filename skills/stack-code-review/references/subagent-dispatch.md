@@ -8,6 +8,7 @@ For the session that delegates the review. The subagent runs the review; you bui
 |---|---|
 | Agent type | A fresh general-purpose agent. Never a fork: it inherits this session's history, and in Claude Code it ignores `model`. |
 | Model | If the user named a model: that one, always. Else, if this session wrote or edited any of the changes under review: set a model **different from this session's** that is not a lightweight one. Else: omit it (inherits). Lightweight models (e.g. Haiku) are never chosen by you, even when the user asks for speed or low cost; "cheap/fast" is not naming a model. |
+| Effort | If your tool lets you set the subagent's effort or reasoning level: the level the user named, always; else `high`. "Fast/cheap" is not naming a level. This skill is the explicit instruction to set it. |
 | Prompt | The template below, every slot filled. |
 
 ## Prompt template

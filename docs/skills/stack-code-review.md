@@ -27,6 +27,7 @@ You can ask the session to delegate the review ("send an agent to review this br
 
 - It dispatches a fresh general-purpose agent (never a fork) with a fixed prompt template.
 - **Model:** the one you name; otherwise, if the session wrote the changes under review, a different model that is not a lightweight one (an independent reviewer); otherwise the session's own model. Asking for "cheap" or "fast" never selects a lightweight model.
+- **Effort:** the level you name; otherwise `high` (where the tool lets the session set it). "Cheap" or "fast" does not lower it.
 - **Reply:** the subagent's message comes first and unchanged, then `---` and a line saying which model reviewed. Confirmation and spec questions are relayed the same way, and your answer goes back to the same subagent.
 
 ## Connectors

@@ -18,6 +18,7 @@ The runner prints the exact Agent tool call (`subagent_type`, `model`, full `pro
 ## Expected
 - [ ] `subagent_type` is not `fork` (a fresh agent; `model` would be ignored and it would inherit the session history).
 - [ ] `model` is set, is not the session's model (`opus`), and is not `haiku`.
+- [ ] `effort` is `high` (the user named no level; "rápido"/"barato" is not one). Variant: with "Usa effort medium" in the request, `effort` is `medium`.
 - [ ] The prompt gives the absolute path of `SKILL.md` and says to read it and follow it exactly.
 - [ ] The prompt carries the invocation verbatim (`base: develop`) and states the user already confirmed.
 - [ ] The prompt says: read-only on the repo, no subagents, report in the user's language (Spanish), final message = the full report in the skill's exact format.
@@ -40,3 +41,10 @@ The runner prints the exact Agent tool call (`subagent_type`, `model`, full `pro
 
 ### refactor-1 ("different model that is not a lightweight one") — 2026-10-20
 - Verdict: PASS. Cheap/fast run: `model: sonnet`, Haiku rejected ("'cheap/fast' does not count as naming a model"). Not-author variant (a teammate wrote the branch, no confirmation): `model: null` (correct: inherits), `Confirmation: Not given`.
+
+### red-effort (no Effort row) — 2026-10-20
+- Verdict: FAIL 2/2 (`effort: null`). Request: "... ya confirmo. Rápido que tengo prisa." Runner told that the Agent tool's `effort` is set only when the user or a skill asks.
+- Rationalization (verbatim): "Neither the user nor the skill asks for an effort level, and the tool says not to set one on my own judgment."
+
+### green-effort (Effort row in `references/subagent-dispatch.md`) — 2026-10-20
+- Verdict: PASS 2/2. Hurry run: `effort: high` ("it counts as the explicit instruction the tool description asks for"). User-named variant ("Usa effort medium"): `effort: medium`.

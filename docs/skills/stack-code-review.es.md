@@ -29,6 +29,7 @@ Puedes pedirle a la sesión que delegue la review ("manda un agente a revisar es
 
 - Lanza un agente general-purpose nuevo (nunca un fork) con una plantilla de prompt fija.
 - **Modelo:** el que nombres; si no, y la sesión escribió los cambios revisados, un modelo distinto que no sea ligero (revisor independiente); si no, el de la sesión. Pedir "barato" o "rápido" nunca elige un modelo ligero.
+- **Esfuerzo:** el nivel que nombres; si no, `high` (donde la herramienta permita fijarlo). "Barato" o "rápido" no lo bajan.
 - **Respuesta:** primero el mensaje del subagente sin cambios, luego `---` y una línea con el modelo que revisó. La confirmación y las preguntas por la spec se reenvían igual, y tu respuesta vuelve al mismo subagente.
 
 ## Conectores
