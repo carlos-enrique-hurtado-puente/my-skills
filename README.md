@@ -10,6 +10,7 @@ Personal skills for coding agents (Claude Code, Codex). One repo, many skills, i
 |---|---|---|---|
 | `stack-code-review` | Code review of changes in any stack, from a GitHub PR URL or the current local branch against its base. | `/stack-code-review` (Claude Code), `$stack-code-review` (Codex) | [docs/skills/stack-code-review.md](docs/skills/stack-code-review.md) |
 | `express-best-practices` | Rules for writing, changing and reviewing Express.js code on Express 4 or 5: middleware, routes, errors, sessions, security, production. | `/express-best-practices` (Claude Code), `$express-best-practices` (Codex) | [docs/skills/express-best-practices.md](docs/skills/express-best-practices.md) |
+| `writing-tech-specs` | Prepare, write and review technical specs: what to gather before writing and a nine-principle checklist before freezing. | `/writing-tech-specs` (Claude Code), `$writing-tech-specs` (Codex) | [docs/skills/writing-tech-specs.md](docs/skills/writing-tech-specs.md) |
 
 Skills run only when you invoke them explicitly.
 
