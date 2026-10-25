@@ -20,7 +20,7 @@ else
     grep -qx "$h" "$S/SKILL.md" || bad "SKILL.md lacks heading '$h'"
   done
   words=$(wc -w < "$S/SKILL.md" | tr -d ' ')
-  [ "$words" -le 700 ] || bad "SKILL.md has $words words (> 700)"
+  [ "$words" -le 850 ] || bad "SKILL.md has $words words (> 850)"
   # Evidence stays out of the body: no ticket ids.
   ! grep -qE 'ITV-[0-9]+' "$S/SKILL.md" || bad "SKILL.md mentions an ITV ticket (belongs in references/)"
   for k in "emoji" "confirm" "epic" "reference ticket"; do

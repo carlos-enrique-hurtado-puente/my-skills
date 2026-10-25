@@ -15,8 +15,8 @@ En Claude Code: `/spec-to-jira-stories`. En Codex: `$spec-to-jira-stories`. La s
 ```
 
 - **Entradas:** la spec (página de Confluence, archivo local, texto pegado, PDF; si no se puede leer completa, la skill lo dice y no redacta nada) y un ticket de referencia, una buena historia con sub-tareas. La referencia solo aporta etiquetas: clave del proyecto, prefijo de título, nombres de sección, prefijos de rol, idioma. El método decide la estructura y el contenido, aunque pidas copiar la referencia tal cual. Tú das también la épica; la skill nunca la adivina.
-- **Primero el desglose:** por defecto una spec es una historia. Propone dividir solo con evidencia citada de la spec (bloqueos distintos, partes útiles y probables por separado, demasiado grande para una iteración) y tú decides. Cada historia lleva sub-tareas de desarrollo (más o menos un PR cada una), una de certificación y una de code review.
-- **Borrador:** cada ticket completo, sin marcadores de posición: historia (problema, solución, fuera de alcance, criterios), desarrollo (qué construir, notas, comprobaciones), certificación (una tabla con una fila por criterio más casos negativos y límite), code review (a qué prestar atención, una línea de PR por sub-tarea de desarrollo). Puedes detenerte aquí.
+- **Primero las opciones de corte:** antes de cualquier borrador te ofrece 2 o 3 opciones de desglose (historias y sub-tareas de desarrollo), cada una con sus tickets, los criterios que cumple con citas de la spec y su costo, y marca una como recomendada; tú eliges. Por defecto una spec es una historia. Propone dividir solo con evidencia citada de la spec (bloqueos distintos, partes útiles y probables por separado, demasiado grande para una iteración) y tú decides. Cada historia lleva sub-tareas de desarrollo, una de certificación y una de code review. Un rol de desarrollo se divide solo si cada parte es un entregable verificable por sí mismo, las partes no se solapan, se unen por una interfaz estable y una razón real compensa el ticket extra; nunca por las secciones de la spec ni por el tamaño del PR.
+- **Borrador:** cada ticket completo, sin marcadores de posición: historia (problema, solución, fuera de alcance, criterios), desarrollo (qué construir, notas, comprobaciones), certificación (una tabla con una fila por criterio más casos negativos y límite), code review (a qué prestar atención, una línea por PR esperado). Puedes detenerte aquí.
 - **Creación:** requiere el conector de Atlassian; sin él recibes el borrador. La skill nunca crea, edita ni transiciona un issue de Jira sin un sí para esa acción: pregunta antes de la primera creación y confirma cada una (historia, sub-tareas, enlace "relates to"), aunque digas "aprueba todo". Después informa claves y enlaces.
 
 ## Qué hay en la skill
@@ -25,7 +25,7 @@ En Claude Code: `/spec-to-jira-stories`. En Codex: `$spec-to-jira-stories`. La s
 |---|---|
 | `SKILL.md` | Entradas, cómo leer la spec, cómo decidir el desglose, contenido de los tickets, pasos de borrador y creación |
 | `references/splitting.md` | Cuándo dividir una spec en varias historias |
-| `references/sub-tasks.md` | Sub-tareas de desarrollo, certificación y code review; una de desarrollo por PR |
+| `references/sub-tasks.md` | Sub-tareas de desarrollo, certificación y code review; criterios para dividir el desarrollo y fase de opciones |
 | `references/ticket-content.md` | Esqueletos de cada ticket, etiquetas por defecto, formato de la línea de PR |
 | `references/evidence.md` | Fuentes detrás de cada regla |
 | `agents/openai.yaml` | Política de solo manual para Codex |

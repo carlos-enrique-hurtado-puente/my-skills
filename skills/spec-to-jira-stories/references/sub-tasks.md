@@ -8,32 +8,39 @@ Load this when deciding how many development sub-tasks a story has, or when the 
 - **Always present:** one certification sub-task and one code review sub-task per story, covering all of its development sub-tasks.
 - **Development sub-tasks:** at least one, following the roles the spec needs. A story may have only backend, only frontend, or one full-stack sub-task (source team: ITV-809 backend only, ITV-835 front only, ITV-804 one `[FULL]`). Never add a role the spec does not touch.
 
-## The unit is one PR
+## Split by deliverable, not by PR size
 
-One development sub-task is roughly one pull request. If a sub-task would need more than one PR, that is the signal to split it into "(Parte N de M)". Size alone ("the spec is M", "it is risky") is not a reason to split; the question is whether the work fits one reviewable, self-contained PR.
+A development role becomes more than one sub-task only when **all four** criteria hold. Quote the spec for each.
 
-Evidence:
+| Criterion | Question | Source |
+|---|---|---|
+| Own deliverable | Does each part produce a result someone can verify and mark done on its own, not an internal piece checked only by its own tests? | WBS (PMBOK: deliverable-oriented decomposition); Wake, SMART "Measurable" |
+| No overlap | Do the parts avoid touching the same design decision or the same code? | WBS mutual exclusivity (100% rule); Parnas 1972, decompose by design decisions likely to change |
+| Low-dependency seam | Do the parts meet through a stable interface rather than shared internals? | Parnas 1972 (a module is a work assignment); Cataldo and Herbsleb, socio-technical congruence (splits that cut across dependencies raise failures) |
+| A real reason worth the cost | Is there a mandatory order where each step has value of its own, another owner or team, or a risk worth isolating and shipping first, that outweighs one more ticket, review and certification? | Reinertsen, batch size is a U-curve trade-off, not "smaller is always better" |
 
-- **Google engineering practices, small CLs** (primary): a change should be self-contained, address one thing, include its tests, and leave the system working.
-- **DORA, working in small batches** (primary): small batches correlate with better delivery performance.
-- Supporting, vendor sources (cite as support, not as rules): SmartBear/Cisco study (defect discovery drops past 200 to 400 lines reviewed at once); LinearB benchmarks (elite teams under about 105 changed lines per PR).
+Not reasons to split:
 
-Tickets are written before code, so PR size cannot be measured. Estimate from spec signals (how many blocks, areas or files the technical-changes section lists for one sub-task) and turn it into a question for the developer, not a rule: "This backend part lists blocks A and B with an order rule between them; I see two PRs. Split into Parte 1 de 2 and Parte 2 de 2?"
+- **The spec's section headings** (data layer, backend, API, infrastructure). They are how the document is organized, a horizontal cut inside one role.
+- **Estimated size, PR count, or PR lists written before code** (for example placeholder `PR #[...]` lines in an older code review ticket). Tickets are written before code exists; such lists are predictions.
+- **PR size itself.** Small PRs help review (Google small CLs), but they do not need separate tickets: one sub-task may hold several stacked PRs. With coding agents, producing code is not the bottleneck; verifying it is. DORA 2024 associates AI adoption with a 7.2% drop in delivery stability and its researchers suspect larger changes, so keep changes reviewable, but split tickets by deliverable.
 
-## Separate or keep together (heuristics)
+## Split options
 
-| Separate into another sub-task when | Keep together when |
-|---|---|
-| It is another role (backend, frontend, full) | The pieces require each other (versions, internal contract) |
-| There is a mandatory order between blocks (migrate before delete) | They are verified as one unit (one full test and build run) |
-| It would need more than one PR | Splitting would leave tasks that overlap or cannot be marked done alone |
-| The spec already names separate blocks (A1/A2, Block A/B) | It is another repo but the same layer and owner |
+Before drafting, offer 2 or 3 concrete options, for example "A: one `[BACKEND]`" and "B: two parts, X and the rest". For each option give:
+
+- the sub-tasks it would produce;
+- which criteria hold and which fail, with spec quotes;
+- its cost: tickets, reviews, certification passes, risk.
+
+Mark one as recommended with the reason, and let the developer choose or mix. If only one option is reasonable (one area, no seam), say so and why; do not invent alternatives.
 
 ## Examples (source team)
 
-- **ITV-781**: planned one backend sub-task ("todos entran en un mismo PR, porque se verifica como una sola unidad") and ended as two parts: ITV-840, the LangChain cluster ("sus paquetes se exigen versión entre sí"), and ITV-782, the rest. The cluster that had to move together stayed together; the rest became its own PR.
-- **ITV-551**: split by the spec's blocks (A migrate; B+C+D delete, clean, decommission) with an order rule ("cortar el consumidor antes que el servicio").
+- **ITV-551** (Python to Node): justified split. Two verifiable deliverables ("the live endpoints run in Node" and "the dead Python code is gone") with an order rule ("cortar el consumidor antes que el servicio").
+- **ITV-781** (dependency bump): ITV-840 (the LangChain cluster, "sus paquetes se exigen versión entre sí") and ITV-782 (the rest). The seam holds; the reason is weak. A one-sub-task option was as defensible.
+- **Spec 42 Backend** (ITV-832): one `[BACKEND]`. The spec's four blocks are document layers; they overlap (retiring the old normalization touches the cron) and are verified only together through the cron's behavior. A split into the pure schedule engine and the rest meets the order criterion but not "own deliverable": nobody verifies the engine outside its tests.
 
 ## Naming parts
 
-When a role is split, every part keeps the role prefix and the same base title, with "(Parte N de M)" at the end, in the reference ticket's language (English: "(Part N of M)"). State the reason for the split in each part's notes, and give the order between parts if there is one.
+When a role is split (all four criteria hold), every part keeps the role prefix and the same base title, with "(Parte N de M)" at the end, in the reference ticket's language (English: "(Part N of M)"). State the reason for the split in each part's notes, and give the order between parts if there is one.

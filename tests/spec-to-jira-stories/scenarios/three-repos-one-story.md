@@ -39,3 +39,10 @@ Design section 6.1 (do not split by repo when the pieces are coupled; evidence f
 - Dev sub-tasks organized by role — PASS ([BACKEND] x3 covering acf and abf, [FRONTEND], [CERTIFICACIÓN], [REVISIÓN]; backend may group acf and abf)
 - No story created per repo — PASS (only one story drafted; "No creé nada"; no Jira write tools in the tool list, only getConfluenceContent and getJiraIssue)
 - Notable phrase: "tocar varios repos no es motivo para dividir una story"
+
+### green-options-1 — 2026-10-25
+- Verdict: PASS (4 of 4 bullets).
+- Proposes one story, not one per repo — PASS (Option A "(recomendada)" is "Una story"; the answer rejects the per-repo split.)
+- Quotes deploy order / publish coupling as reason — PASS (cites "acf → abf → agent-builder" and the front deployed before publish validation.)
+- Dev sub-tasks organized by role; backend may group abf/acf — PASS (Recommends [BACKEND] acf, [BACKEND] abf, [FRONTEND]; the bullet allows grouping, and splitting backend by repo is still role-based.)
+- No story created per repo — PASS (A single story is drafted. The Runner tools list shows only reads, with no Jira write tool, and the answer says "No creo nada en Jira".)

@@ -34,19 +34,19 @@ Existing tickets for the spec: mention them, still draft.
 ## Deciding the breakdown
 **Stories.** Default: one spec, one story. Several repos or layers is no reason. Split only with evidence quoted from the spec: different blockers (one part waits on pending design while another can ship first unchanged), each part useful and testable alone, or too big for an iteration. Mutual coupling (strict order, and one part breaks without the other) argues for one story; a one-way dependency with a closed contract does not. Any split is a proposal; the developer decides. A layer split is the exception: name the reason. Split stories get a "relates to" link and name each other. See `splitting.md`.
 
-**Sub-tasks.** Each story: development sub-tasks, exactly one certification, exactly one code review. Development follows the roles the spec needs (backend, frontend, both, or full-stack); never invent a role. **One development sub-task ≈ one PR.** Split a role only when it needs more than one PR, state why, and title the parts "(Parte N de M)" or "(Part N of M)" by language. See `sub-tasks.md`.
+**Sub-tasks.** Each story: development sub-tasks, exactly one certification, exactly one code review. Development follows the roles the spec needs (backend, frontend, both, or full-stack); never invent a role. Split a role into more sub-tasks only when **all four** hold, quoting the spec: each part is its own deliverable someone can verify and mark done; the parts do not overlap (same design decision or code); they meet at a low-dependency seam (a stable interface, not shared internals); and a real reason outweighs one more ticket, review and certification (a mandatory order where each step has value, another owner, a risk worth shipping first). Never split by the spec's section headings, estimated size, PR count, or PR lists written before code; a sub-task may hold several stacked PRs. Title parts "(Parte N de M)" or "(Part N of M)" by language. See `sub-tasks.md`.
 
 ## Ticket content
 No placeholders or bare titles. Skeletons in `ticket-content.md`.
 - **Story**: a summary, not a copy of the spec: problem, solution, out of scope, spec link, sub-task list, checkbox acceptance criteria.
 - **Development**: title says what it builds; what to do in prose by topic, no file-and-line lists; notes (branch, deploy order, dependencies, questions); its criteria; one or two manual checks.
 - **Certification**: preparation; table `# | Criterion | Steps | Expected result | Result`; a row per story criterion, plus negative and edge cases from risks.
-- **Code review**: "pay attention to" from decisions and risks; one PR line (`ticket-content.md`) per development sub-task.
+- **Code review**: "pay attention to" from decisions and risks; one PR line (`ticket-content.md`) per expected PR, at least one per development sub-task.
 
 Reference ticket's language. No emojis, even if the reference has them. No hours, dates, sprint, priority or the Jira labels field.
 
 ## Draft and creation
-1. Propose the breakdown first: stories, sub-tasks, quoted split evidence, open questions. Await the decision. With no split or question, show proposal and draft together, asking the epic too.
+1. **Split options** before any draft: offer 2 or 3 concrete options for stories and for development sub-tasks. Each lists its tickets, evaluates them against the criteria above with spec quotes, and states its cost (tickets, reviews, certification, risk). Mark one recommended and say why; the developer chooses or asks for a mix. If only one option is reasonable, say so and why instead of inventing alternatives, and show it with the draft, asking the epic too. Add open questions.
 2. Show the full draft of every ticket.
 3. Ask for the epic and missing data.
 4. Without Atlassian tools, deliver the draft; creation needs the connector.

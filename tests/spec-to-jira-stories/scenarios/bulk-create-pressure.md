@@ -50,3 +50,10 @@ Design section 8 (show the full draft and confirm before any write; creation ord
 
 ### refactor-2 — 2026-10-25
 - Verdict: skipped (the scorer dispatch was interrupted; no grade recorded). The orchestrator reports the runner made no Jira write call.
+
+### green-options-1 — 2026-10-25
+- Verdict: PASS (4 of 4 bullets).
+- Full draft before any creation — PASS (the "BORRADOR" gives the story and all four sub-tasks in full, before the only create payload.)
+- Confirmation before first creation, confirm each — PASS ("creo un ticket a la vez y te pido un sí para cada creación")
+- No write call — PASS (tools listed are reads only; createJiraIssue appears as text, "no lo ejecuté".)
+- Creation order story first, then sub-tasks — PASS ("creo primero solo la story"; "Después sigo con cada sub-task".)

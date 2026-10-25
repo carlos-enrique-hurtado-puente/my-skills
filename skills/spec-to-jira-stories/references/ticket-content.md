@@ -122,7 +122,7 @@ Parent: <story>
 - ...
 
 <PRs>
-- PR #[pendiente] (English: PR #[pending]) — [<repo>] <what changes>   (one line per development sub-task)
+- PR #[pendiente] (English: PR #[pending]) — [<repo>] <what changes>   (one line per expected PR; at least one per development sub-task)
 ```
 
 Example "pay attention to" item (Spanish, AtomChat): "que `normalizeRecoveryConfig` quede completamente eliminado".

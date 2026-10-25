@@ -71,3 +71,17 @@ Design sections 6.1 and 6.2 (one story per observable outcome, sub-task layout a
 - Asks epic — PASS ("No la asumo... necesito que me digas cuál es la de esta story")
 - No emojis, hours or dates — PASS (only read tools called; no Jira write tool)
 - Notable phrase: "Cada capa por separado no entrega el valor completo."
+
+### green-options-1 — 2026-10-25
+- Verdict: PASS (10 of 10 bullets).
+- One story — PASS (it recommends "A. Una story (recomendada)" and answers "no, no son dos stories por defecto")
+- Reason not repo-based — PASS ("Tocar dos repos... no es motivo para separar"; it relies on the single spec, size M and joint certification)
+- BACKEND/FRONTEND dev sub-tasks — PASS (`[BACKEND] Segunda barrera...` and `[FRONTEND] Error en el nodo de agente...`)
+- One CERTIFICACIÓN and one REVISIÓN — PASS (sub-tasks 3 and 4, one of each)
+- Story content — PASS (it has "¿Qué vamos a construir?" with problem and solution, "Fuera de alcance", the spec link, the sub-task list and `- [ ]` criteria)
+- Dev sub-tasks in prose, no file:line — PASS (the "Qué hacer" sections are prose; the only path is a Firestore collection path, with no file:line references)
+- Certification Preparation and table — PASS (it has a "Preparación" section and a 14-row table; rows 1-3, 4-5, 7-8, 9-11 and 12 cover all 5 story criteria)
+- Code review PR lines and "pay attention to" — PASS (two PR lines, one per dev sub-task, and a "Prestar atención a" block drawn from the spec's risks and decisions)
+- Asks epic — PASS ("¿Cuál es la épica? No asumo ITV-49")
+- No emojis, hours or dates — PASS (none in the ticket content; the tools called were Read, Bash, ToolSearch, getConfluenceContent and getJiraIssue, so no Jira write tool was called)
+- Notable phrase: "Tocar dos repos... no es motivo para separar"

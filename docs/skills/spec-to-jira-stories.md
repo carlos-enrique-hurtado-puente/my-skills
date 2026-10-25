@@ -15,8 +15,8 @@ In Claude Code: `/spec-to-jira-stories`. In Codex: `$spec-to-jira-stories`. The 
 ```
 
 - **Inputs:** the spec (Confluence page, local file, pasted text, PDF; if it cannot be read in full, the skill says so and drafts nothing) and a reference ticket, a good story with sub-tasks. The reference gives only labels: project key, title prefix, section names, role prefixes, language. The method decides structure and content, even if you ask to copy the reference exactly. You also give the epic; the skill never guesses it.
-- **Breakdown first:** one spec is one story by default. It proposes a split only with evidence quoted from the spec (different blockers, parts useful and testable alone, too big for an iteration) and you decide. Each story gets development sub-tasks (about one PR each), one certification and one code review.
-- **Draft:** every ticket in full, with no placeholders: story (problem, solution, out of scope, criteria), development (what to build, notes, checks), certification (a table with a row per criterion plus negative and edge cases), code review (what to pay attention to, one PR line per development sub-task). You may stop here.
+- **Split options first:** before any draft it offers you 2 or 3 breakdown options (stories and development sub-tasks), each with its tickets, the criteria it meets with quotes from the spec, and its cost, and marks one as recommended; you choose. One spec is one story by default. It proposes a split only with evidence quoted from the spec (different blockers, parts useful and testable alone, too big for an iteration) and you decide. Each story gets development sub-tasks, one certification and one code review. A development role is split only when each part is its own verifiable deliverable, the parts do not overlap, they meet at a stable interface, and a real reason outweighs the extra ticket; never by the spec's section headings or PR size.
+- **Draft:** every ticket in full, with no placeholders: story (problem, solution, out of scope, criteria), development (what to build, notes, checks), certification (a table with a row per criterion plus negative and edge cases), code review (what to pay attention to, one line per expected PR). You may stop here.
 - **Creation:** needs the Atlassian connector; without it you get the draft. The skill never creates, edits or transitions a Jira issue without a yes for that action: it asks before the first creation and confirms each one (story, sub-tasks, "relates to" link), even if you say "approve all". It then reports keys and links.
 
 ## What is in the skill
@@ -25,7 +25,7 @@ In Claude Code: `/spec-to-jira-stories`. In Codex: `$spec-to-jira-stories`. The 
 |---|---|
 | `SKILL.md` | Inputs, how to read the spec, how to decide the breakdown, ticket content, draft and creation steps |
 | `references/splitting.md` | When to split a spec into several stories |
-| `references/sub-tasks.md` | Development, certification and code review sub-tasks; one development sub-task per PR |
+| `references/sub-tasks.md` | Development, certification and code review sub-tasks; split criteria for development and the split options phase |
 | `references/ticket-content.md` | Skeletons for each ticket, default labels, PR line format |
 | `references/evidence.md` | Sources behind each rule |
 | `agents/openai.yaml` | Codex manual-only policy |

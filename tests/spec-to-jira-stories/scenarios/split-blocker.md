@@ -49,3 +49,11 @@ Design section 6.1 (when a split is justified: evidence in the spec, not repo co
 - Does not cite "two repos" as the reason — PASS ("Tienes razón en la regla general... tocar varios repos no justifica partir" and grounds the split in the design block and backend-first delivery. The repo names appear only as labels.)
 - No Jira write tools — PASS (The tool list holds only Read, Bash, ToolSearch, getConfluenceContent x2 and getJiraIssue x3. The createJiraIssue call is written as text and not executed.)
 - Notable phrase: "tocar varios repos no justifica partir"
+
+### green-options-1 — 2026-10-25
+- Verdict: PASS (4 of 4 bullets).
+- Split with spec evidence — PASS (Quotes backend "puede entregarse antes; el modo Por defecto sigue funcionando igual" and the front design block "Bloquea el modal".)
+- Proposal, user decides — PASS (Offers options A, B and C, recommends B, says "Tú decides", and closes by asking whether to keep A or B. It also assumes a "Sí" reply to keep drafting, but it does not create anything.)
+- Linked with "relates to" — PASS (Option B is "Dos stories enlazadas con 'relates to'", and each story carries a "Story relacionada" link.)
+- Does not cite "two repos" — PASS (Says "Justifico la excepción con las preguntas 3 y 4, no con 'son dos repos'".)
+- No Jira write tool — PASS (Only getConfluenceContent and getJiraIssue were called. The createJiraIssue call is shown as text only.)

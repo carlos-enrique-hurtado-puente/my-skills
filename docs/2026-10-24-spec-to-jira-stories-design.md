@@ -102,24 +102,22 @@ Splitting a story's work into sub-tasks by layer is compatible with vertical sto
 
 **Development sub-tasks:** at least one. A story may have only backend, only frontend, or one full-stack sub-task (AtomChat: ITV-809 backend only, ITV-835 front only, ITV-804 `[FULL]`).
 
-**The unit is one PR.** One development sub-task is roughly one pull request (Carlos's definition). If a sub-task would need more than one PR, that is a signal to split it into "Parte N de M". Evidence:
+**Revised 2026-10-25: split by deliverable, not by PR size.** The first version used "one development sub-task ≈ one PR" and split anything needing more than one PR. On spec 42 Backend that produced four sub-tasks from the spec's section headings (data layer, backend, API, infrastructure), which are document layers, overlap (retiring the old normalization touches the cron) and are verified only together; the team's real ticket was one `[BACKEND]` (ITV-832). PR-size sources (Google small CLs, SmartBear/Cisco, LinearB) justify small reviewable changes, not more tickets, and with coding agents producing code is no longer the bottleneck; verifying it is (DORA 2024 associates AI adoption with a 7.2% drop in delivery stability, hypothesized to come from larger changes). So PR size is not a split reason, and a sub-task may carry several stacked PRs.
 
-- Google engineering practices, small CLs: a change should be self-contained, address one thing, include its tests, and leave the system working. Primary source.
-- DORA, working in small batches: small batches correlate with better delivery performance. Primary source.
-- Supporting, vendor sources (cite as support, not as rules): SmartBear/Cisco study (defect discovery drops past 200 to 400 lines reviewed at once); LinearB benchmarks (elite teams under about 105 changed lines per PR).
+A development role is split into more sub-tasks only when **all four** hold:
 
-Since tickets are written before code, PR size cannot be measured. The skill estimates from spec signals (how many blocks, areas or files the technical-changes section lists for one sub-task) and turns that into a question, not a rule.
+| Criterion | Question | Source |
+|---|---|---|
+| Own deliverable | Does each part produce a result someone can verify and mark done on its own (not an internal piece checked only by its own tests)? | WBS (PMBOK, deliverable-oriented); Wake, SMART "Measurable" |
+| No overlap | Do the parts avoid touching the same design decision or the same code? | WBS mutual exclusivity (100% rule); Parnas 1972, decompose by design decisions |
+| Low-dependency seam | Do the parts meet through a stable interface rather than shared internals? | Parnas 1972 (modules as work assignments); Cataldo and Herbsleb, socio-technical congruence |
+| A real reason worth the cost | Is there a mandatory order where each step has value of its own, another owner or team, or a risk worth isolating and shipping first, that outweighs one more ticket, review and certification pass? | Reinertsen, batch size as a U-curve trade-off |
 
-Signals to separate vs keep together (heuristics):
+Never split by the spec's section headings, by estimated size or PR count, or by PR lists written before code. Splitting by role (backend, frontend, full) stays expected.
 
-| Separate into another sub-task when | Keep together when |
-|---|---|
-| It is another role (backend, frontend, full) | The pieces require each other (versions, internal contract) |
-| There is a mandatory order between blocks (migrate before delete) | They are verified as one unit (one full test and build run) |
-| It would need more than one PR | Splitting would leave tasks that overlap or cannot be marked done alone |
-| The spec already names separate blocks (A1/A2, Block A/B) | It is another repo but the same layer and owner |
+**Split options phase.** Before the draft, the skill offers the developer 2 or 3 concrete options for both levels (how many stories, and how many development sub-tasks per role). Each option lists the tickets it would produce, evaluates them against the criteria above (6.1 for stories) with quotes from the spec, and states its cost (tickets, reviews, certification, risk). One option is marked recommended with the reason; the developer chooses, or asks for a mix, and only then the full draft is written. When only one option is reasonable, the skill says so and why instead of inventing alternatives.
 
-AtomChat evidence: ITV-781 planned one backend sub-task ("todos entran en un mismo PR, porque se verifica como una sola unidad") and ended as two parts (ITV-840 LangChain cluster, "sus paquetes se exigen versión entre sí"; ITV-782 the rest). ITV-551 split by spec blocks (A migrate; B+C+D delete, clean, decommission) with an order rule ("cortar el consumidor antes que el servicio").
+AtomChat evidence: ITV-551 is a justified split (two verifiable deliverables, "Node replacements live" and "Python gone", with an order rule: "cortar el consumidor antes que el servicio"). ITV-781 (LangChain cluster vs the rest) meets the seam criterion but has a weak reason. Spec 42 Backend is one `[BACKEND]`.
 
 ## 7. Ticket content by type
 
@@ -170,7 +168,7 @@ Basis: Google, what to look for in a code review (design and functionality first
 ## 8. Flow and output
 
 1. Read the spec and the reference ticket. Report anything unreadable or missing.
-2. Propose the breakdown (6.1 and 6.2) with evidence and the questions the spec does not answer. Iterate with the developer.
+2. Split options phase (6.2): offer 2 or 3 breakdown options with criteria, evidence and cost, mark one recommended, and wait for the developer's choice. Ask the questions the spec does not answer.
 3. Show the full draft on screen: every ticket with its content.
 4. Ask for the dynamic data Jira needs (epic, and anything else missing).
 5. After the developer approves the draft, create in Jira one ticket at a time, asking before each: the story first, then each sub-task under it. When there are two stories, also the "relates to" link.
@@ -243,5 +241,14 @@ Older-generation tickets in this table are references for the breakdown decision
 - ISTQB test design (Foundation slides): https://www.ii.uib.no/%7Emagne/zinfh11-tekster/Kap4atestdesigntechniquesv2.04eng.pdf
 - SmartBear, code review best practices (vendor): https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/
 - LinearB benchmarks via LeadDev (vendor): https://leaddev.com/tech/workflow-metrics-make-elite-dev-teams
+
+Added 2026-10-25 for the sub-task split criteria:
+
+- Work breakdown structure, 100% rule and mutual exclusivity: https://en.wikipedia.org/wiki/Work_breakdown_structure and https://www.projectmanagement.com/wikis/397395/work-breakdown-structure--wbs-
+- Parnas, *On the criteria to be used in decomposing systems into modules* (CACM 1972): https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf (scanned PDF; cited from the paper's well-known argument, text not extracted)
+- Cataldo, Herbsleb et al., socio-technical congruence: https://par.nsf.gov/servlets/purl/10038372
+- Reinertsen, *The Principles of Product Development Flow*, batch size U-curve (via review): https://ardalis.com/principles-of-product-development-flow-book-review/
+- DORA 2024 report (AI and delivery stability): https://dora.dev/report/2024 (figures via secondary summaries, e.g. https://getdx.com/blog/2024-dora-report-summary-laura-tacho/)
+- Watanabe et al., agentic PRs with Claude Code (arXiv 2509.14745): https://arxiv.org/abs/2509.14745
 
 Not verified: the Scrum.org thread on splitting by API (page came back empty); Wake's "a few person-weeks" size figure (secondary source only).
