@@ -20,7 +20,7 @@ else
   for p in P1 P2 P3 P4 P5 P6 P7 P8 P9; do
     grep -q "^- \*\*$p " "$S/SKILL.md" || bad "SKILL.md has no rule line for $p"
   done
-  for h in "## Terms" "## Before writing" "## Rules" "## Before freezing"; do
+  for h in "## Terms" "## Before writing" "## Rules" "## Deciding whether to split" "## Before freezing"; do
     grep -qx "$h" "$S/SKILL.md" || bad "SKILL.md lacks heading '$h'"
   done
   # Evidence stays out of the body: no ticket ids.

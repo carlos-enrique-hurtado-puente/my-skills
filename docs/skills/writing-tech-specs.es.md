@@ -17,6 +17,14 @@ En Claude Code: `/writing-tech-specs`. En Codex: `$writing-tech-specs`. La skill
 - **Sin spec:** corre **Before writing**: siete cosas que averiguar (comportamiento observable actual, contratos y dueños, hechos del código que pasan a Supuestos, trabajo en paralelo sobre los mismos archivos, límites de plataforma, versión final del diseño, decisiones que necesitan al LT o a la PM) y lo que no hace falta reunir (líneas exactas, firmas, nombres de archivo). Luego redacta con las reglas.
 - **Con una spec:** corre **Before freezing**. La spec puede ser texto pegado, un archivo local, una página de Confluence (se lee con las herramientas de Atlassian si están conectadas), un ticket de Jira o cualquier cosa legible. Si no puede leer la fuente, lo dice y pide que pegues el texto. La respuesta es una línea `yes` / `no` / `n.a.` por principio; cada `no` cita la spec y da una corrección o una decisión abierta con dueño y momento; al final dice si se puede congelar. La revisión no reescribe la spec salvo que lo pidas.
 
+## Decidir si dividir una spec
+
+No hay umbral de tamaño. Cuando preguntas si dividir, la skill lo trata como una decisión que se toma en conjunto, partiendo de unos principios (a favor: no se revisa de una sentada, más de un resultado entregable, partes con madurez distinta, una incógnita grande, superficie grande o dispersa; en contra: el contrato que crea el corte, partes que no se despliegan solas; y cortar por comportamiento antes que por repositorio). La respuesta tiene cuatro partes: una recomendación en una línea; las opciones, incluida "no dividir", cada una con lo que crea y lo que queda bloqueado; lo que la skill necesita de ti y no puede ver; y la decisión como fila Propuesta con las alternativas descartadas. Las fuentes y el nivel de respaldo de cada principio están en `references/content.md` (P4).
+
+```text
+/writing-tech-specs ¿dividimos ./specs/export-and-retention.md?
+```
+
 ## Qué hay en la skill
 
 | Archivo | Contenido |

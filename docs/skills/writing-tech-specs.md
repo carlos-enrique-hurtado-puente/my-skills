@@ -17,6 +17,14 @@ In Claude Code: `/writing-tech-specs`. In Codex: `$writing-tech-specs`. The skil
 - **No spec given:** the skill runs **Before writing**: seven things to find out (current observable behavior, contracts and owners, code facts that become Assumptions, parallel work on the same files, platform limits, the final design version, decisions that need the tech lead or PM) and what not to collect (exact lines, signatures, file names). Then it drafts with the rules.
 - **A spec given:** the skill runs **Before freezing**. The spec can be pasted text, a local file, a Confluence page (read through the Atlassian tools when connected), a Jira ticket or anything else readable. If it cannot read the source it says so and asks you to paste the text. The answer is a `yes` / `no` / `n.a.` line per principle, each `no` quoting the spec and giving a fix or an open decision with owner and moment, then a verdict on whether it can freeze. The review does not rewrite the spec unless you ask.
 
+## Deciding whether to split a spec
+
+There is no size threshold. When you ask whether to split, the skill treats it as a decision you make together, starting from a few principles (for: not reviewable in one sitting, more than one deliverable result, parts at different maturity, a big unknown, large or scattered surface; against: the contract a cut creates, parts that cannot deploy alone; and cut by behavior before cutting by repository). The answer comes in four parts: a one-line recommendation; the options, including "do not split", each with what it creates and what stays blocked; what the skill needs from you that it cannot see; and the decision as a Proposed row with the discarded alternatives. The principles' sources and support levels are in `references/content.md` (P4).
+
+```text
+/writing-tech-specs should we split ./specs/export-and-retention.md?
+```
+
 ## What is in the skill
 
 | File | Content |

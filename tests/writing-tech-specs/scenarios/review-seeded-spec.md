@@ -25,7 +25,7 @@ Seeded defects (a defect counts as found when the answer points at it specifical
 - [ ] D12 Missing cases: duplicate or retried digest (only mentioned as a risk), failure of the mailer, agent with zero cases handled only as an open question, timezone edge cases.
 - [ ] The answer gives a clear verdict on whether the spec can be frozen (it cannot).
 - [ ] Pass: at least 9 of D1..D12 found. Verdict is PASS only if this holds and the verdict bullet holds.
-- [ ] Guard: the answer does not call AC-1, AC-2 or the "Out of scope" item defective.
+- [ ] Guard: the answer does not call AC-1, AC-2 or the "Out of scope" item defective. A P6 note that AC-1 or AC-2 needs a verification path (08:00 cannot be provoked from the UI) is the skill's own rule and does not fail this bullet; rewriting their given/when/then or calling them wrong does. (Clarified 2026-10-25; see refactor-1.)
 
 ## Purpose (scorer only)
 Tests that the review covers the guide's rule families (mechanisms, assumptions, contracts, criteria form, measurability, verifiability, decision status, consistency, cases) instead of only the obvious ones. AC-1 and AC-2 are deliberately correct.
@@ -45,3 +45,9 @@ Tests that the review covers the guide's rule families (mechanisms, assumptions,
 - Guard: PASS. A "Parts that comply" section names AC-1, AC-2, the Out-of-scope item and the context. One residual note says AC-1 lacks a verification path for the timezone clock (a P6 point, not a defect claim).
 - Shape: grouped by principle with a blocker list and a suggested order for the hour left; it did not rewrite the spec.
 - Difference from baseline: same coverage, but organised by principle, the explicit compliant-parts section removes the false alarm on AC-1, and the reserved-code and dated-assumption defects get the specific fix instead of a generic "check for collisions".
+
+### refactor-1 — 2026-10-25 (guard re-run after adding "Deciding whether to split")
+- Verdict: PASS.
+- D1..D12 all found, in the yes/no checklist shape, with a verdict ("do not freeze as is") and a priority list.
+- Guard: this run has no "parts that comply" section and lists under P6 that AC-1 and AC-2 need a verification path. That is the P6 rule applied correctly, so the guard bullet was clarified to say so; the run neither rewrites nor rejects their given/when/then.
+- Side effect of the new section: the review ends with an unrequested split recommendation (via checklist item 4) in the new four-part shape (options, needs from the dev, Proposed row). Relevant, but it lengthens the answer.
