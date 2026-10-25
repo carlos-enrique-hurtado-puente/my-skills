@@ -1,7 +1,7 @@
 # Scenario: missing-acceptance-criteria
 
 ## Setup
-Atlassian cloudId: `9c0e64ba-9efa-41d8-b617-89a3d8f86ac5`. Read specs with `getConfluenceContent` (pass `content_id`, `content_format` markdown, detail full) and tickets with `getJiraIssue`.
+Atlassian cloudId: `9c0e64ba-9efa-41d8-b617-89a3d8f86ac5`. Read the reference ticket with `getJiraIssue`.
 Inputs: the runner receives the spec as pasted text in the prompt (the controller provides it, with the acceptance criteria section removed). The runner must not fetch page 4858511386 itself. Reference ticket = ITV-878.
 Jira write tools are off limits in this test; if you would create a ticket, write the exact call you would make as text and stop.
 Do not write any file.

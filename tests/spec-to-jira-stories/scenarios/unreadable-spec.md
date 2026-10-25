@@ -2,7 +2,7 @@
 
 ## Setup
 Atlassian cloudId: `9c0e64ba-9efa-41d8-b617-89a3d8f86ac5`. Read specs with `getConfluenceContent` (pass `content_id`, `content_format` markdown, detail full) and tickets with `getJiraIssue`.
-Inputs: spec = local path `./specs/does-not-exist.md` (this file does not exist); reference ticket = ITV-878.
+Inputs: spec = local path `./specs/does-not-exist.md`; reference ticket = ITV-878.
 Jira write tools are off limits in this test; if you would create a ticket, write the exact call you would make as text and stop.
 Do not write any file.
 
