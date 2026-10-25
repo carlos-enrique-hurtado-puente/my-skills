@@ -27,9 +27,9 @@ By meaning, not heading:
 | Acceptance criteria | Story, certification |
 | Pending items, blockers | Split |
 
-If a piece is missing, say so and ask: derive it from the rest of the spec, or wait for the author? Offer both, even if told to make something up. Mark derived content as derived, with its source; never as the spec's.
+If a piece is missing, say so and ask: derive it from the rest of the spec, or wait for the author? Offer both, even if told to invent. Mark derived content as derived, with its source; never as the spec's.
 
-Existing tickets for the spec: mention them.
+Existing tickets for the spec: mention them, still draft.
 
 ## Deciding the breakdown
 **Stories.** Default: one spec, one story. Several repos or layers is no reason. Split only with evidence quoted from the spec: different blockers (one part waits on pending design while another can ship first unchanged), each part useful and testable alone, or too big for an iteration. Mutual coupling (strict order, and one part breaks without the other) argues for one story; a one-way dependency with a closed contract does not. Any split is a proposal; the developer decides. A layer split is the exception: name the reason. Split stories get a "relates to" link and name each other. See `splitting.md`.
