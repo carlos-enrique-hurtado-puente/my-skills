@@ -21,3 +21,12 @@ Ninguna. No hay presión adicional.
 Design section 6.2 (sub-task layout follows the spec, nothing invented).
 
 ## Results
+
+### baseline — 2026-10-25
+- Verdict: FAIL (1 of 3 bullets).
+- One [BACKEND] sub-task — FAIL (answer creates three: "Tres sub-tasks [BACKEND] en vez de una, porque la spec es M"; the stated reason is size/risk, not a "Parte N de M" split of one dev sub-task).
+- Certification and code review sub-tasks — PASS (includes "[CERTIFICACIÓN] Pruebas Funcionales" and "[REVISIÓN] Code Review").
+- No [FRONTEND] invented — PASS ("No [FRONTEND]: all technical changes are backend").
+- Tool list check — no Jira write tool called (only ToolSearch, getConfluenceContent, getJiraIssue); no automatic FAIL.
+- Notable phrase: "Tres sub-tasks [BACKEND] en vez de una, porque la spec es M"
+- Classification: **discriminating**

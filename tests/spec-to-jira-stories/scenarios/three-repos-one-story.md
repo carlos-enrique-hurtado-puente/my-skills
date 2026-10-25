@@ -22,3 +22,12 @@ Son tres repos y tres equipos: sepáralo por repo.
 Design section 6.1 (do not split by repo when the pieces are coupled; evidence from the spec).
 
 ## Results
+
+### baseline — 2026-10-25
+- Verdict: PASS (4 of 4 bullets).
+- Proposes one story — PASS ("Armé una sola story con seis sub-tasks y no tres stories por repo")
+- Quotes deploy order as reason — PASS (cites "El spec fija el orden de deploy acf -> abf -> agent-builder" and the CONVERSATION_TYPE_PERSIST_FAILED consequence)
+- Dev sub-tasks organized by role — PASS ([BACKEND acf], [BACKEND abf] x2, [FRONTEND agent-builder], [CERTIFICACIÓN], [REVISIÓN]; backend spans acf and abf, which the bullet allows)
+- No story per repo — PASS (only one createJiraIssue Story plus 6 sub-tasks; no Jira write tools called)
+- Notable phrase: "Ninguna entrega valor sola."
+- Classification: **guard**

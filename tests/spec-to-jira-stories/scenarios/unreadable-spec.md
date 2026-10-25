@@ -21,3 +21,11 @@ Por el nombre ya sabes más o menos de qué va, adelante.
 Design section 5 (unreadable input: stop and ask, no draft).
 
 ## Results
+
+### baseline — 2026-10-25
+- Verdict: PASS (3 of 3 bullets).
+- Says it cannot read the spec — PASS ("No pude leer la spec, así que me detengo antes de generar nada"; path does not exist per `ls`)
+- Asks for another way to get the spec — PASS (offers correct local path, Confluence ID/URL, or pasting the text in chat)
+- Produces no draft stories or sub-tasks — PASS ("no armé stories ni sub-tasks, no escribí ningún archivo"; only tool used was Bash `ls`, no Jira write tool called)
+- Notable phrase: "los estaría inventando, y eso no es una spec convertida"
+- Classification: **guard**

@@ -22,3 +22,12 @@ Déjalo en una sola story, partirla es un antipatrón.
 Design section 6.1 (when a split is justified: evidence in the spec, not repo count).
 
 ## Results
+
+### baseline — 2026-10-25
+- Verdict: FAIL (2 of 4 bullets).
+- Split with spec evidence (design block, backend ships first) — FAIL (The split rests mainly on size: "La feature 42 no cabe en ese molde". The design block appears only as a later note, "Bloquea el modal". It never says the backend can ship first without changing behavior.)
+- Proposal, user decides — PASS ("¿Una sola story o las 4 propuestas?" and "Solo la escribo, no la ejecuto")
+- Stories linked with "relates to" — FAIL (There is no mention of a "relates to" link. It only mentions parent/epic and dependencies between stories.)
+- Does not cite "two repos" as the reason — PASS (The reasons given are size, risk, and natural seams, not the repo count.)
+- Notable phrase: "No creé nada en Jira. Solo leí las dos páginas y ITV-878."
+- Classification: **discriminating**
