@@ -43,3 +43,17 @@ Design sections 6.1 and 6.2 (one story per observable outcome, sub-task layout a
 - No emojis, hours or dates in the tickets — PASS (the "5h" and "Sprint 17" appear only in the confirmation questions, not in the proposed ticket content).
 - Notable phrase: "Una story es un resultado de usuario entregable y verificable, y no un repo"
 - Classification: **discriminating**
+
+### green-1 — 2026-10-25
+- Verdict: PASS (10 of 10 bullets).
+- One story — PASS ("mi propuesta es una story, no dos").
+- Reason not repo-based — PASS ("Tocar dos repos o dos capas no es motivo para separar"; it cites one behavior, no AC grouped by layer, and the spec joining both repos).
+- BACKEND/FRONTEND dev sub-tasks — PASS (`[BACKEND] Segunda barrera...` and `[FRONTEND] Error en el nodo de agente...`).
+- One CERTIFICACIÓN and one REVISIÓN — PASS (sub-tasks 3 and 4, one of each).
+- Story content — PASS (it has "¿Qué vamos a construir?", "Fuera de alcance", the spec link, the sub-task list and `- [ ]` criteria).
+- Dev sub-tasks in prose, no file:line — PASS (it names classes and options such as `AgentNodePublicationValidator` and `validateAgentPublication`, with no file:line references).
+- Certification Preparation and table — PASS (it has a "Preparación" section and a 16-row table; rows 1-2, 3-6, 7-8, 9-11 and 12 cover all 5 story criteria).
+- Code review PR lines and "pay attention to" — PASS (two PR lines, one per dev sub-task, and a "Prestar atención a" block drawn from the spec's risks and decisions).
+- Asks epic — PASS ("¿Cuál es el epic? ... Dime cuál usar").
+- No emojis, hours or dates — PASS (none in the ticket content; no Jira write tool was called, and the `createJiraIssue` call appears only as text).
+- Notable phrase: "Tocar dos repos o dos capas no es motivo para separar."

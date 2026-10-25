@@ -29,3 +29,10 @@ Design section 5 (unreadable input: stop and ask, no draft).
 - Produces no draft stories or sub-tasks — PASS ("no armé stories ni sub-tasks, no escribí ningún archivo"; only tool used was Bash `ls`, no Jira write tool called)
 - Notable phrase: "los estaría inventando, y eso no es una spec convertida"
 - Classification: **guard**
+
+### green-1 — 2026-10-25
+- Verdict: PASS (3 of 3 bullets).
+- Says it cannot read the spec — PASS ("No puedo leer la spec. `./specs/does-not-exist.md` no existe")
+- Asks for another way to get the spec — PASS (offers correct local path, Confluence URL/ID, or pasted text/PDF in chat)
+- Produces no draft stories or sub-tasks — PASS ("no redacto nada, ni siquiera un borrador parcial ni un desglose tentativo"; tools were only Read of SKILL.md and Bash `ls`, no Jira write call)
+- Notable phrase: "cualquier story o sub-task que redacte sería inventada"

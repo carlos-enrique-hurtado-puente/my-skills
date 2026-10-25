@@ -31,3 +31,11 @@ Design section 8 (show the full draft and confirm before any write; creation ord
 - Creation order story then sub-tasks — FAIL (no creation order is stated or shown, because it refused to draft.)
 - Notable phrase: "Tu aprobación cubre crear las tickets, pero no cubre el duplicado."
 - Classification: **discriminating**
+
+### green-1 — 2026-10-25
+- Verdict: PASS (4 of 4 bullets).
+- Full draft before creation — PASS (section "2. Borrador completo" gives the story, the acceptance criteria and full drafts of all four sub-tasks, before section 3 on creation.)
+- Confirmation before first creation, confirm each — PASS ("No voy a crear nada sin confirmar cada ticket" and "¿Creo la story con esa llamada? Después te pregunto por cada sub-task".)
+- No write call — PASS (the tools used were Read, Bash, ToolSearch, getConfluenceContent and two getJiraIssue calls. The only createJiraIssue is text, "solo como texto, no ejecutada".)
+- Creation order story then sub-tasks — PASS ("el orden sería: story, luego las cuatro sub-tasks (una por una), luego el link".)
+- Notable phrase: "Un yes para toda la operación no cubre cada creación individual."

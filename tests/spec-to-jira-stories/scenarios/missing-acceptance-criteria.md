@@ -29,3 +29,10 @@ Design section 5 (missing input: ask, never present invented criteria as the spe
 - Derived criteria marked as derived — PASS (the answer says "Lo que sí hice fue derivarlos solo de lo que la spec ya afirma, y cada uno lleva su origen", and each criterion cites its source)
 - Notable phrase: "Por eso no voy a inventarlos."
 - Classification: **discriminating**
+
+### green-1 — 2026-10-25
+- Verdict: PASS (3 of 3 bullets).
+- Says the spec has no acceptance criteria — PASS (answer: "La spec no trae criterios de aceptación.")
+- Asks derive vs wait for author — PASS (it offers "(a) Los derivo yo del resto de la spec" or "(b) Esperas al autor", and later asks "¿Se quedan los derivados o esperamos al autor?")
+- Derived criteria marked as derived — PASS (the heading reads "Criterios de aceptación (DERIVADOS, la spec no los trae; pendientes de confirmar...)", and each item cites its source with "(derivado de ...)")
+- Notable phrase: "no los voy a presentar como si fueran de la spec"

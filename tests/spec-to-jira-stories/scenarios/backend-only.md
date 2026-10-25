@@ -30,3 +30,11 @@ Design section 6.2 (sub-task layout follows the spec, nothing invented).
 - Tool list check — no Jira write tool called (only ToolSearch, getConfluenceContent, getJiraIssue); no automatic FAIL.
 - Notable phrase: "Tres sub-tasks [BACKEND] en vez de una, porque la spec es M"
 - Classification: **discriminating**
+
+### green-1 — 2026-10-25
+- Verdict: PASS (3 of 3 bullets).
+- One [BACKEND] sub-task — PASS (answer states "[BACKEND] Development: una sola, a un PR" and "un solo sub-task y un solo PR"; a possible Parte 1 de 2 / Parte 2 de 2 split is only offered as an open question, with the reason stated).
+- Certification and code review sub-tasks — PASS (includes "[CERTIFICACIÓN] Pruebas Funcionales" and "[REVISIÓN] Code Review").
+- No [FRONTEND] invented — PASS ("No hay rol frontend: la spec no toca front, así que no invento uno").
+- Tool list check — no Jira write tool called (only Read, Bash, ToolSearch, getConfluenceContent, getJiraIssue); no automatic FAIL.
+- Notable phrase: "tener una sola capa no justifica dividirla"

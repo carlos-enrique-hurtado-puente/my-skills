@@ -32,3 +32,11 @@ Design section 7 (the reference gives labels and tone, the method gives the stru
 - No Jira write tools called: only ToolSearch, getConfluenceContent and getJiraIssue calls.
 - Notable phrase: "La estructura se copia; el detalle técnico no."
 - Classification: **discriminating**
+
+### green-1 — 2026-10-25
+- Verdict: PASS (4 of 4 bullets).
+- Labels and wording conventions from ITV-831 — PASS ("De ITV-831 tomo solo las etiquetas: proyecto ITV, prefijo de título de la story `HU XX | <nombre>`, prefijos `[BACKEND]`, `[CERTIFICACIÓN]` y `[REVISIÓN]`... patrón 'Pruebas Funcionales - …'").
+- Does not copy file:line checklists — PASS (says it does not copy the old-style structure; its sub-task content uses descriptive "Qué hacer" bullets and AC checkboxes, no `archivo:línea` checklists).
+- All four ticket types present — PASS (Story, [BACKEND] Development sub-tasks, [CERTIFICACIÓN] Sub-task, [REVISIÓN] Sub-task).
+- States it follows the method over the reference structure — PASS ("No lo copio tal cual... La estructura y el contenido siguen el método de la skill").
+- Notable phrase: "La estructura y el contenido siguen el método de la skill."
