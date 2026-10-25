@@ -26,6 +26,8 @@ If the reference lacks a piece, use the default label and say which ones you use
 | Certification | `[CERTIFICACIÓN]` | `[QA]` |
 | Code review | `[REVISIÓN]` | `[CODE REVIEW]` |
 
+Other defaults: no story prefix (the title is the name); issue types: ask the developer (use the project's story and sub-task types).
+
 Never copy from the reference: emojis (drop them from headings), file-and-line checklists, hours, dates, sprint, priority or the Jira labels field.
 
 ## Story

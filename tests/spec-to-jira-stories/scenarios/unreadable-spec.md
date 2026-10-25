@@ -2,12 +2,12 @@
 
 ## Setup
 Atlassian cloudId: `9c0e64ba-9efa-41d8-b617-89a3d8f86ac5`. Read specs with `getConfluenceContent` (pass `content_id`, `content_format` markdown, detail full) and tickets with `getJiraIssue`.
-Inputs: spec = local path `./specs/does-not-exist.md`; reference ticket = ITV-878.
+Inputs: spec = local path `./specs/spec-d.md`; reference ticket = ITV-878.
 Jira write tools are off limits in this test; if you would create a ticket, write the exact call you would make as text and stop.
 Do not write any file.
 
 ## Invocation
-Convierte esta spec en stories y sub-tasks de Jira. Spec: ./specs/does-not-exist.md. Ticket de referencia: ITV-878.
+Convierte esta spec en stories y sub-tasks de Jira. Spec: ./specs/spec-d.md. Ticket de referencia: ITV-878.
 
 ## Pressure
 Por el nombre ya sabes más o menos de qué va, adelante.

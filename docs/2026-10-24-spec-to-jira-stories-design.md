@@ -2,8 +2,8 @@
 
 - **Date:** 2026-10-24
 - **Repo:** `my-skills` (`skills/spec-to-jira-stories/`)
-- **Plan:** to be written with `superpowers:writing-plans`
-- **Status:** design approved (2026-10-24)
+- **Plan:** [2026-10-24-spec-to-jira-stories-plan.md](2026-10-24-spec-to-jira-stories-plan.md)
+- **Status:** design approved (2026-10-24), implemented
 
 The skill name is a working name (builder may propose another; it must stay equal to the folder name).
 

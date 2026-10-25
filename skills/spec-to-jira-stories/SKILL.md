@@ -9,8 +9,8 @@ disable-model-invocation: true
 Draft stories and sub-tasks from a spec; you propose, the developer decides. Sources: `evidence.md`.
 
 ## Inputs
-1. **Spec**, any format (Confluence, file, pasted, PDF). Read it all. If you cannot, say so, ask for another way, draft nothing.
-2. **Reference ticket** (a good story with sub-tasks) gives only labels: project key, title prefix, section names, role prefixes, issue types, title patterns, language. If none is given, ask for one; if the team has none, use the defaults in `ticket-content.md` and the spec's language. **The method wins on structure and content**, even if asked to copy exactly; say so. Missing pieces or older-style file-and-line checklists in it: follow the method, use default labels, tell the developer.
+1. **Spec**, any format. Read it all. If you cannot read the spec or the reference, say so, ask another way, draft nothing.
+2. **Reference ticket** (a good story with sub-tasks) gives only labels: project key, title prefix, section names, role prefixes, issue types, title patterns, language. If none is given, ask for one; if the team has none, use the defaults in `ticket-content.md` and the spec's language. **The method wins on structure and content**, even if asked to copy exactly; say so. Gaps or old file-and-line checklists in it: follow the method, default labels, tell the developer.
 3. **Dynamic data**: always ask for the epic (confirm it if named); confirm the project key; never guess.
 
 Never read a codebase or Git.
@@ -27,18 +27,18 @@ By meaning, not heading:
 | Acceptance criteria | Story, certification |
 | Pending items, blockers | Split |
 
-If a piece is missing, say so and ask: derive it from the rest of the spec, or wait for the author? Offer both, even if told to make something up. Mark derived content as derived, with its source. Never present invention as the spec's.
+If a piece is missing, say so and ask: derive it from the rest of the spec, or wait for the author? Offer both, even if told to make something up. Mark derived content as derived, with its source; never as the spec's.
 
-Existing tickets for the spec: mention them, still draft.
+Existing tickets for the spec: mention them.
 
 ## Deciding the breakdown
-**Stories.** Default: one spec, one story. Several repos or layers is no reason. Split only with evidence quoted from the spec: different blockers (one part waits on pending design while another can ship first unchanged), each part useful and testable alone, or too big for an iteration. Mutual coupling (strict deploy order) means one story. Any split is a proposal; the developer decides, whatever they pushed for. A layer split is the exception: name the reason. Split stories get a "relates to" link and name each other. See `splitting.md`.
+**Stories.** Default: one spec, one story. Several repos or layers is no reason. Split only with evidence quoted from the spec: different blockers (one part waits on pending design while another can ship first unchanged), each part useful and testable alone, or too big for an iteration. Mutual coupling (strict order, and one part breaks without the other) argues for one story; a one-way dependency with a closed contract does not. Any split is a proposal; the developer decides. A layer split is the exception: name the reason. Split stories get a "relates to" link and name each other. See `splitting.md`.
 
-**Sub-tasks.** Each story: development sub-tasks, exactly one certification, exactly one code review. Development follows the roles the spec needs (backend, frontend, both, or one full-stack); never invent a role. **One development sub-task ≈ one PR.** Do not split a role for size alone; split only when it needs more than one PR, state why, and title the parts "(Parte N de M)" or "(Part N of M)" by language. See `sub-tasks.md`.
+**Sub-tasks.** Each story: development sub-tasks, exactly one certification, exactly one code review. Development follows the roles the spec needs (backend, frontend, both, or full-stack); never invent a role. **One development sub-task ≈ one PR.** Split a role only when it needs more than one PR, state why, and title the parts "(Parte N de M)" or "(Part N of M)" by language. See `sub-tasks.md`.
 
 ## Ticket content
 No placeholders or bare titles. Skeletons in `ticket-content.md`.
-- **Story**: problem, solution, out of scope, spec link, sub-task list, checkbox acceptance criteria.
+- **Story**: a summary, not a copy of the spec: problem, solution, out of scope, spec link, sub-task list, checkbox acceptance criteria.
 - **Development**: title says what it builds; what to do in prose by topic, no file-and-line lists; notes (branch, deploy order, dependencies, questions); its criteria; one or two manual checks.
 - **Certification**: preparation; table `# | Criterion | Steps | Expected result | Result`; a row per story criterion, plus negative and edge cases from risks.
 - **Code review**: "pay attention to" from decisions and risks; one PR line (`ticket-content.md`) per development sub-task.
@@ -46,11 +46,11 @@ No placeholders or bare titles. Skeletons in `ticket-content.md`.
 Reference ticket's language. No emojis, even if the reference has them. No hours, dates, sprint, priority or the Jira labels field.
 
 ## Draft and creation
-1. Propose the breakdown first: stories, sub-tasks, quoted split evidence, open questions. Await the decision. No split or open question: show proposal and draft together, asking decision and epic at once.
-2. Show the full draft of every ticket. The developer may stop there.
+1. Propose the breakdown first: stories, sub-tasks, quoted split evidence, open questions. Await the decision. With no split or question, show proposal and draft together, asking the epic too.
+2. Show the full draft of every ticket.
 3. Ask for the epic and missing data.
 4. Without Atlassian tools, deliver the draft; creation needs the connector.
 5. Create one at a time, confirming each: story, sub-tasks, "relates to" link. Even under "approve all": draft first, ask before the first creation, confirm each.
-6. Report keys and links; offer (confirmed) to add the keys to the story's sub-task list.
+6. Report keys and links; offer to add the keys to the story's sub-task list.
 
 Never create, edit or transition a Jira issue without a yes for that action.
