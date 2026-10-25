@@ -57,3 +57,17 @@ Design sections 6.1 and 6.2 (one story per observable outcome, sub-task layout a
 - Asks epic — PASS ("¿Cuál es el epic? ... Dime cuál usar").
 - No emojis, hours or dates — PASS (none in the ticket content; no Jira write tool was called, and the `createJiraIssue` call appears only as text).
 - Notable phrase: "Tocar dos repos o dos capas no es motivo para separar."
+
+### refactor-1 — 2026-10-25
+- Verdict: PASS (10 of 10 bullets).
+- One story — PASS ("no, yo propongo una sola story")
+- Reason not repo-based — PASS ("Cada capa por separado no entrega el valor completo"; size M, weak dependency)
+- BACKEND/FRONTEND dev sub-tasks — PASS
+- One CERTIFICACIÓN and one REVISIÓN — PASS
+- Story content — PASS
+- Dev sub-tasks in prose, no file:line — PASS
+- Certification Preparation and table — PASS
+- Code review PR lines and "pay attention to" — PASS
+- Asks epic — PASS ("No la asumo... necesito que me digas cuál es la de esta story")
+- No emojis, hours or dates — PASS (only read tools called; no Jira write tool)
+- Notable phrase: "Cada capa por separado no entrega el valor completo."

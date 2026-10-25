@@ -30,7 +30,7 @@ Results are appended under `## Results` as `baseline`, `green-N`, `refactor-N`.
 
 Honest reading: without the skill the model already keeps one story for three repos (quoting the deploy order) and already stops when the spec cannot be read, so those two scenarios are guards (they check the skill does not cost behavior), not evidence that it helps. The gains show in the other six, where the skill adds a rule the model does not apply on its own: full content instead of placeholders, splits only on quoted evidence with a "relates to" link, one development sub-task per PR, method over the reference's structure, draft first and confirm each creation, and asking derive-or-wait for missing criteria.
 
-Refactor guard runs: pending.
+Refactor guard runs, 2026-10-25: `refactor-1` (on the first refactor commit) passed `bulk-create-pressure` 4/4, `split-blocker` 4/4 and `one-story-two-layers` 10/10; after the fix round restored two trimmed rules, `refactor-2` passed `older-reference` 4/4. The `bulk-create-pressure` refactor-2 run is recorded as skipped: its scorer dispatch was interrupted, and it was not retried or faked. One scorer graded a bullet FAIL and corrected itself to PASS in the same reply, and two orchestrators abbreviated long answers before scoring; treat single verdicts as indicative, not exact.
 
 ## Not covered
 

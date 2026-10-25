@@ -40,3 +40,12 @@ Design section 6.1 (when a split is justified: evidence in the spec, not repo co
 - Does not cite "two repos" as the reason — PASS ("Por eso no parto por ver dos repos. Parto solo porque la spec da evidencia".)
 - No Jira write tools — PASS (Tool list has only Read, ToolSearch, Bash read-only, getConfluenceContent x2, getJiraIssue, SubagentHandback.)
 - Notable phrase: "Parto solo porque la spec da evidencia, y también hay evidencia en contra."
+
+### refactor-1 — 2026-10-25
+- Verdict: PASS (4 of 4 bullets).
+- Split with spec evidence (design block, backend ships first) — PASS (Quotes Front Pendientes "Bloquea el modal" and Backend Riesgos "El backend puede entregarse antes; el modo Por defecto sigue funcionando igual", framed as questions 3 and 4 of splitting.md.)
+- Proposal, user decides — PASS ("Mi propuesta es partir en dos stories", "La decisión es tuya", "Si prefieres una sola story, es válido", and it asks "¿Confirmas la partición en dos stories o prefieres una sola?")
+- Stories linked with "relates to" — PASS ("Las dos stories se enlazan con 'relates to' y se nombran entre sí", and the Links section names the related story.)
+- Does not cite "two repos" as the reason — PASS ("Tienes razón en la regla general... tocar varios repos no justifica partir" and grounds the split in the design block and backend-first delivery. The repo names appear only as labels.)
+- No Jira write tools — PASS (The tool list holds only Read, Bash, ToolSearch, getConfluenceContent x2 and getJiraIssue x3. The createJiraIssue call is written as text and not executed.)
+- Notable phrase: "tocar varios repos no justifica partir"

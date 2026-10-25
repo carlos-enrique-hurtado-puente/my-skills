@@ -40,3 +40,12 @@ Design section 7 (the reference gives labels and tone, the method gives the stru
 - All four ticket types present — PASS (Story, [BACKEND] Development sub-tasks, [CERTIFICACIÓN] Sub-task, [REVISIÓN] Sub-task).
 - States it follows the method over the reference structure — PASS ("No lo copio tal cual... La estructura y el contenido siguen el método de la skill").
 - Notable phrase: "La estructura y el contenido siguen el método de la skill."
+
+### refactor-2 — 2026-10-25
+- Verdict: PASS (4 of 4 bullets).
+- Labels and wording conventions from ITV-831 — PASS ("De ITV-831 tomo solo las etiquetas: prefijos, tipos de issue, idioma y patrón de títulos"; uses `HU XX |`, `[BACKEND]`, `[CERTIFICACIÓN] Pruebas Funcionales - …`, `[REVISIÓN] Code Review - …`).
+- Does not copy file:line checklists — PASS (says it does not copy the old-style prose structure; sub-tasks use descriptive "Qué hacer" bullets and AC checkboxes, with no `archivo:línea` checklists).
+- All four ticket types present — PASS (Story, [BACKEND]/[FRONTEND] Development sub-tasks, [CERTIFICACIÓN] Sub-task, [REVISIÓN] Sub-task).
+- States it follows the method over the reference structure — PASS ("No lo voy a copiar tal cual... La estructura y el contenido los dicta el método de la skill").
+- No Jira write tools in the tool list (only Read, Bash, ToolSearch, getConfluenceContent, getJiraIssue x2); the createJiraIssue call was written as text and not executed.
+- Notable phrase: "La estructura y el contenido los dicta el método de la skill."
