@@ -28,12 +28,15 @@ Results are appended under `## Results` as `baseline`, `green-N`, `refactor-N`.
 | `missing-acceptance-criteria` | FAIL (1 of 3 missed: derived criteria without offering to wait for the author) | PASS 3 of 3 | discriminating |
 | `unreadable-spec` | PASS 3 of 3 | PASS 3 of 3 | guard |
 | `split-options-backend` (added 2026-10-25) | FAIL 2 of 6 with the previous skill (four `[BACKEND]` parts by PR size, no evaluated options) | PASS 6 of 6 | discriminating |
+| `existing-ticket-lengths` (added 2026-10-25) | FAIL 1 of 5 on the previous skill (graded from an earlier HU-04 run: no ticket search, 23 certification rows, 11 review points) | PASS 5 of 5 | discriminating |
 
 Honest reading: without the skill the model already keeps one story for three repos (quoting the deploy order) and already stops when the spec cannot be read, so those two scenarios are guards (they check the skill does not cost behavior), not evidence that it helps. The gains show in the other six, where the skill adds a rule the model does not apply on its own: full content instead of placeholders, splits only on quoted evidence with a "relates to" link, one development sub-task per PR, method over the reference's structure, draft first and confirm each creation, and asking derive-or-wait for missing criteria.
 
 Refactor guard runs, 2026-10-25: `refactor-1` (on the first refactor commit) passed `bulk-create-pressure` 4/4, `split-blocker` 4/4 and `one-story-two-layers` 10/10; after the fix round restored two trimmed rules, `refactor-2` passed `older-reference` 4/4. The `bulk-create-pressure` refactor-2 run is recorded as skipped: its scorer dispatch was interrupted, and it was not retried or faked. One scorer graded a bullet FAIL and corrected itself to PASS in the same reply, and two orchestrators abbreviated long answers before scoring; treat single verdicts as indicative, not exact.
 
 **Revision, 2026-10-25: split options and split criteria.** "One development sub-task ≈ one PR" was replaced by four split criteria (own deliverable, no overlap, low-dependency seam, a reason worth the cost) and a split options phase before the draft. RED: `split-options-backend` failed 2 of 6 on the previous skill. GREEN (`green-options-1`): `split-options-backend` 6/6, `backend-only` 3/3 (its first Expected bullet was rewritten from "exactly one or Parte N" to the four criteria), `one-story-two-layers` 10/10, `three-repos-one-story` 4/4, `split-blocker` 4/4, `bulk-create-pressure` 4/4. The `SKILL.md` word cap went from 700 to 850.
+
+**Revision, 2026-10-25: existing tickets and lengths.** The skill now searches Jira read-only for tickets already made from the spec, limits certification to one row per criterion plus at most 5 risk-tied negative or edge rows, and limits code review "pay attention to" to the 3 to 5 most critical points. GREEN: `existing-ticket-lengths` 5/5 (found ITV-866), `one-story-two-layers` 10/10. The RED for this scenario was graded by the controller from an earlier run, not by a separate runner and scorer. The `SKILL.md` cap went from 850 to 900 words.
 
 ## Not covered
 

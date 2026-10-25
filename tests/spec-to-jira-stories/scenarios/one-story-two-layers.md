@@ -85,3 +85,16 @@ Design sections 6.1 and 6.2 (one story per observable outcome, sub-task layout a
 - Asks epic — PASS ("¿Cuál es la épica? No asumo ITV-49")
 - No emojis, hours or dates — PASS (none in the ticket content; the tools called were Read, Bash, ToolSearch, getConfluenceContent and getJiraIssue, so no Jira write tool was called)
 - Notable phrase: "Tocar dos repos... no es motivo para separar"
+
+### green-lengths-1 — 2026-10-25
+- Verdict: PASS (10 of 10 bullets).
+- One story — PASS ("**Recomiendo A.**" for "Una story", after "No por defecto")
+- Reason not repo-based — PASS ("Tocar dos repos no es motivo para dividir"; it cites the single spec, a one-way dependency and weak standalone value)
+- BACKEND/FRONTEND dev sub-tasks — PASS (`[BACKEND] Segunda barrera...` and `[FRONTEND] Error en el nodo de agente...`)
+- One CERTIFICACIÓN and one REVISIÓN — PASS (sub-tasks 3 and 4, one of each)
+- Story content — PASS (it has "Qué vamos a construir" with problem and solution, "Fuera de alcance", the spec link, the sub-task list and `- [ ]` criteria)
+- Dev sub-tasks in prose, no file:line — PASS (the "Qué hacer" sections are prose; the only path is the Firestore collection `agent-builder-flows`)
+- Certification Preparation and table — PASS (it has "Preparación" and a 13-row table; rows 1-2, 3-4, 5, 6-7 and 8 cover all 5 story criteria)
+- Code review PR lines and "pay attention to" — PASS (two PR lines, one per dev sub-task, and a "Presta atención a" block drawn from the spec's decisions and risks)
+- Asks epic — PASS ("**Epic:** ¿cuál? No lo asumo.")
+- No emojis, hours or dates — PASS (none in the ticket content; the tools called were reads and a JQL search, so no Jira write tool was called)

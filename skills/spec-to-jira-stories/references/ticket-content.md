@@ -106,7 +106,7 @@ Parent: <story>
 | 3 | <edge case from the spec's risks> | ... | ... | |
 ```
 
-Every acceptance criterion of the story gives at least one row; no row without a criterion. Add negative cases and edge cases from the spec's risks, tied to the criterion they protect.
+Every acceptance criterion of the story gives at least one row; no row without a criterion. Add at most 5 negative or edge rows, each tied to a risk or decision quoted from the spec and to the criterion it protects. If the developer wants more coverage, list the other candidate cases and let them pick; do not add invented edge cases. Calibration: the source team's certification for HU-04 (ITV-869) has 10 rows.
 
 ## Code review sub-task
 
@@ -125,4 +125,4 @@ Parent: <story>
 - PR #[pendiente] (English: PR #[pending]) — [<repo>] <what changes>   (one line per expected PR; at least one per development sub-task)
 ```
 
-Example "pay attention to" item (Spanish, AtomChat): "que `normalizeRecoveryConfig` quede completamente eliminado".
+Keep "pay attention to" to the 3 to 5 most critical decisions and risks: the ones where a mistake breaks behavior silently or costs data. Example item (Spanish, AtomChat): "que `normalizeRecoveryConfig` quede completamente eliminado".

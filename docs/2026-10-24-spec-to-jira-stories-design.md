@@ -154,7 +154,7 @@ Basis: ISTQB test case components (preconditions, steps, observable expected res
 - Parent story.
 - Preparation: data and environment QA needs before starting.
 - Table: `# | Criterion | Steps | Expected result | Result (Cumple / No cumple / No aplica)`.
-- Every acceptance criterion of the story gives at least one row; no row without a criterion. Add negative cases (what must not happen) and edge cases from the spec's risks.
+- Every acceptance criterion of the story gives at least one row; no row without a criterion. Add at most 5 negative (what must not happen) or edge rows, each tied to a risk or decision quoted from the spec; more only if the developer picks them from a list the skill offers (revised 2026-10-25: a run on HU-04 produced 23 rows against the team's 10 in ITV-869).
 
 ### 7.4 Code review sub-task
 
@@ -162,12 +162,12 @@ Basis: Google, what to look for in a code review (design and functionality first
 
 - Type and prefix from the reference ticket (AtomChat: type "Sub-task", `[REVISIÓN] Code Review — HU <name>`).
 - Parent story.
-- "Pay attention to": the spec's key decisions and risks the reviewer must check (for example "que `normalizeRecoveryConfig` quede completamente eliminado").
+- "Pay attention to": the 3 to 5 most critical decisions and risks the reviewer must check (revised 2026-10-25: a run on HU-04 produced 11) (for example "que `normalizeRecoveryConfig` quede completamente eliminado").
 - One line per expected PR: `PR #[pendiente] — [repo] what changes`. One PR per development sub-task.
 
 ## 8. Flow and output
 
-1. Read the spec and the reference ticket. Report anything unreadable or missing.
+1. Read the spec and the reference ticket. Report anything unreadable or missing. Search Jira read-only (JQL on the spec's link or title) for tickets already made from this spec; mention them and still draft (added 2026-10-25: the HU-04 run missed ITV-866).
 2. Split options phase (6.2): offer 2 or 3 breakdown options with criteria, evidence and cost, mark one recommended, and wait for the developer's choice. Ask the questions the spec does not answer.
 3. Show the full draft on screen: every ticket with its content.
 4. Ask for the dynamic data Jira needs (epic, and anything else missing).

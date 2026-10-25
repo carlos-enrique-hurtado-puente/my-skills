@@ -29,7 +29,7 @@ By meaning, not heading:
 
 If a piece is missing, say so and ask: derive it from the rest of the spec, or wait for the author? Offer both, even if told to invent. Mark derived content as derived, with its source; never as the spec's.
 
-Existing tickets for the spec: mention them, still draft.
+Existing tickets: before drafting, search Jira read-only (JQL on the spec's link or title); mention what you find, still draft.
 
 ## Deciding the breakdown
 **Stories.** Default: one spec, one story. Several repos or layers is no reason. Split only with evidence quoted from the spec: different blockers (one part waits on pending design while another can ship first unchanged), each part useful and testable alone, or too big for an iteration. Mutual coupling (strict order, and one part breaks without the other) argues for one story; a one-way dependency with a closed contract does not. Any split is a proposal; the developer decides. A layer split is the exception: name the reason. Split stories get a "relates to" link and name each other. See `splitting.md`.
@@ -40,8 +40,8 @@ Existing tickets for the spec: mention them, still draft.
 No placeholders or bare titles. Skeletons in `ticket-content.md`.
 - **Story**: a summary, not a copy of the spec: problem, solution, out of scope, spec link, sub-task list, checkbox acceptance criteria.
 - **Development**: title says what it builds; what to do in prose by topic, no file-and-line lists; notes (branch, deploy order, dependencies, questions); its criteria; one or two manual checks.
-- **Certification**: preparation; table `# | Criterion | Steps | Expected result | Result`; a row per story criterion, plus negative and edge cases from risks.
-- **Code review**: "pay attention to" from decisions and risks; one PR line (`ticket-content.md`) per expected PR, at least one per development sub-task.
+- **Certification**: preparation; table `# | Criterion | Steps | Expected result | Result`; a row per story criterion, plus at most 5 negative or edge rows, each tied to a risk or decision quoted from the spec; more only if the developer picks them from a list you offer.
+- **Code review**: "pay attention to": the 3 to 5 most critical decisions and risks; one PR line (`ticket-content.md`) per expected PR, at least one per development sub-task.
 
 Reference ticket's language. No emojis, even if the reference has them. No hours, dates, sprint, priority or the Jira labels field.
 
