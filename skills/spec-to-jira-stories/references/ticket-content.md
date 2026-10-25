@@ -16,7 +16,7 @@ The reference ticket supplies only labels. Read them in one pass and keep them i
 
 Read the reference's sub-tasks by key through the Atlassian tools, or ask the developer to paste them.
 
-If the reference lacks a piece, use the default label and say which ones you used:
+If the reference lacks a piece, use the default label and say which ones you used. If the developer gives no reference ticket, ask for one; if the team has none, use these defaults throughout, write in the spec's language, and say so. Fixed strings in the skeletons below follow the reference ticket's language, shown as Spanish / English:
 
 | Piece | Spanish default | English default |
 |---|---|---|
@@ -62,7 +62,7 @@ Basis: Google small CLs and CL descriptions (what plus why); Wake SMART (specifi
 
 ```
 Type: <development issue type from the reference>
-Title: <role-prefix> <what it builds, as a short statement> [(Parte N de M)]
+Title: <role-prefix> <what it builds, as a short statement> [(Parte N de M) | (Part N of M)]
 
 <Links>
 - Spec: <link>
@@ -83,7 +83,7 @@ Title: <role-prefix> <what it builds, as a short statement> [(Parte N de M)]
 - <one or two manual checks a developer can run>
 ```
 
-Example title: "Segunda barrera: validar que el agente exista y esté publicado al publicar el flujo". No `file.ts:123` lists; name a module or concept only when the spec fixes it.
+Example title (Spanish, AtomChat): "Segunda barrera: validar que el agente exista y esté publicado al publicar el flujo". No `file.ts:123` lists; name a module or concept only when the spec fixes it.
 
 ## Certification sub-task
 
@@ -91,20 +91,20 @@ Basis: ISTQB test case components (preconditions, steps, observable expected res
 
 ```
 Type: <certification issue type from the reference>
-Title: <certification prefix> Pruebas Funcionales — <story-prefix> <name>
+Title: <certification prefix> Pruebas Funcionales — <story-prefix> <name>   (Spanish; English: <certification prefix> Functional tests — <story-prefix> <name>)
 Parent: <story>
 
 <Preparation>
 - <data and environment QA needs before starting>
 
-| # | Criterion | Steps | Expected result | Result (Cumple / No cumple / No aplica) |
+| # | Criterion | Steps | Expected result | Result (Spanish: Cumple / No cumple / No aplica; English: Pass / Fail / N/A) |
 |---|---|---|---|---|
 | 1 | <story criterion> | <steps> | <observable result> | |
 | 2 | <negative case: what must not happen> | ... | ... | |
 | 3 | <edge case from the spec's risks> | ... | ... | |
 ```
 
-Every acceptance criterion of the story gives at least one row; no row without a criterion. Add negative cases and edge cases from the spec's risks, tied to the criterion they protect. English result values: Pass / Fail / N/A.
+Every acceptance criterion of the story gives at least one row; no row without a criterion. Add negative cases and edge cases from the spec's risks, tied to the criterion they protect.
 
 ## Code review sub-task
 
@@ -112,7 +112,7 @@ Basis: Google, what to look for in a code review (design and functionality first
 
 ```
 Type: <code review issue type from the reference>
-Title: <code review prefix> Code Review — <story-prefix> <name>
+Title: <code review prefix> Code Review — <story-prefix> <name>   (Spanish; English: <code review prefix> <story-prefix> <name>)
 Parent: <story>
 
 <Pay attention to>
@@ -120,7 +120,7 @@ Parent: <story>
 - ...
 
 <PRs>
-- PR #[pendiente] — [<repo>] <what changes>   (one line per development sub-task)
+- PR #[pendiente] (English: PR #[pending]) — [<repo>] <what changes>   (one line per development sub-task)
 ```
 
-Example "pay attention to" item: "que `normalizeRecoveryConfig` quede completamente eliminado".
+Example "pay attention to" item (Spanish, AtomChat): "que `normalizeRecoveryConfig` quede completamente eliminado".
