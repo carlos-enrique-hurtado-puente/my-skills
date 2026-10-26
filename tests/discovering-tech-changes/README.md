@@ -6,7 +6,7 @@ Pressure scenarios for the `discovering-tech-changes` skill, in the superpowers:
 
 - `check-scenarios.sh`: checks the scenario files and the fixture traps. Run from anywhere: `bash tests/discovering-tech-changes/check-scenarios.sh`.
 - `scenarios/<id>.md`: ten scenarios: `input-contradicts-code`, `reuse-under-another-name`, `repo-convention`, `second-caller`, `work-in-flight`, `skip-checkpoints-pressure`, `plain-language`, `missing-information`, `obvious-change`, `sources-unreachable`.
-- `fixtures/chat-app/`: a tiny fake JavaScript app (no dependencies, no tests) with deliberate traps: a snooze cap of 720 minutes, the `CHAT-<AREA>-<NNN>` error codes, a webhook that calls `dispatch` without a snooze check, and an in-flight spec touching `dispatcher.js`.
+- `fixtures/chat-app/`: a tiny fake JavaScript app (no dependencies, no tests) with deliberate traps: a snooze cap of 720 minutes, the `CHAT-<AREA>-<NNN>` error codes, a webhook that calls `dispatch` without a snooze check, a daily digest job that reaches `dispatch` through `notifyMany` without one, an error catalog (`docs/error-catalog.md`) where new codes must be registered, and an in-flight spec touching `dispatcher.js`.
 - `fixtures/input/frd-mute-24h.md`: the FRD the scenarios use as input. It does not say which channels count as notifications.
 
 ## Scenario format

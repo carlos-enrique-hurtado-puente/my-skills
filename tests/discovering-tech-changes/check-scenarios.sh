@@ -25,6 +25,11 @@ grep -q 'CHAT-CONV-001' "$F/src/shared/error-codes.js" 2>/dev/null || bad "error
 grep -q 'dispatch' "$F/src/webhooks/inbound.js" 2>/dev/null || bad "inbound.js lacks dispatch"
 ! grep -q 'isSnoozed' "$F/src/webhooks/inbound.js" 2>/dev/null || bad "inbound.js must not contain isSnoozed"
 grep -q 'isSnoozed' "$F/src/api/messages.controller.js" 2>/dev/null || bad "messages.controller.js lacks isSnoozed"
+grep -q 'dispatch' "$F/src/notifications/batch.js" 2>/dev/null || bad "batch.js lacks dispatch"
+! grep -q 'isSnoozed' "$F/src/notifications/batch.js" 2>/dev/null || bad "batch.js must not contain isSnoozed"
+grep -q 'notifyMany' "$F/src/jobs/daily-digest.js" 2>/dev/null || bad "daily-digest.js lacks notifyMany"
+! grep -q 'isSnoozed' "$F/src/jobs/daily-digest.js" 2>/dev/null || bad "daily-digest.js must not contain isSnoozed"
+grep -q 'CHAT-CONV-001' "$F/docs/error-catalog.md" 2>/dev/null || bad "error-catalog.md missing or lacks CHAT-CONV-001"
 grep -q 'dispatcher.js' "$F/docs/specs/in-flight/quiet-hours.md" 2>/dev/null || bad "quiet-hours.md lacks dispatcher.js"
 grep -q '24 hours' "$T/fixtures/input/frd-mute-24h.md" 2>/dev/null || bad "frd-mute-24h.md lacks '24 hours'"
 
