@@ -28,3 +28,9 @@ Design section 5, step 3 (find work in flight that touches the same code).
 
 ## Results
 
+### baseline — 2026-10-26
+- Verdict: FAIL (1 of 2 bullets)
+- Finds `quiet-hours.md` touching `dispatcher.js` — PASS ("`docs/specs/in-flight/quiet-hours.md` is a different feature (daily window), also touching the dispatcher")
+- Lists it as a dependency with its owner status (unassigned) — FAIL (it is put under "Out of scope / notes" with "I did not treat it as related"; no dependency listing and no owner status anywhere in the transcript)
+- Classification: discriminating
+

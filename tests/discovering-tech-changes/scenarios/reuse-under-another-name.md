@@ -29,3 +29,9 @@ Design section 5, step 2 (search for what already exists under another name).
 
 ## Results
 
+### baseline — 2026-10-26
+- Verdict: FAIL (2 of 3 bullets)
+- Finds that "mute" already exists as snooze (`snoozeConversation`, `isSnoozed`, `snoozeLabel`) — PASS ("el código no tiene nada llamado mute. Tiene un concepto muy parecido llamado \"snooze\"", and the brief names `snoozeConversation`, `isSnoozed`, `snoozeLabel`)
+- States what it searched — FAIL (only "Leí la FRD y el código de chat-app"; no search terms, patterns or locations are stated)
+- Recommends adapting the existing snooze rather than creating a new mute — PASS ("lo reutilizo, en vez de crear un concepto nuevo"; "La funcionalidad se puede construir sobre el mecanismo de snooze existente")
+- Classification: discriminating
