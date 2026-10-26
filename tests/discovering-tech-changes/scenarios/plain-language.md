@@ -53,3 +53,9 @@ Design section 5, brief format (plain-words section kept free of code).
 - The plain-words section names no file, function or variable — PASS (brief section "1. En palabras simples": "ya existe 'posponer' por conversación, pero con tope de 12 h"; no file, function or variable named)
 - It covers the problem, how it works today and the proposed solution — PASS ("**Problema:** el usuario quiere dejar de recibir avisos...", "**Hoy:** ya existe 'posponer'...", "**Propuesta (opción 2):** reutilizar posponer, subir el tope a 24 h...")
 - Code references appear only in the evidence section — FAIL (outside evidence: step 3 plain-words paragraph "(en el código, snooze)" and "(lo dice su README)", a naming pattern and a file name in prose)
+
+### refactor-3 — 2026-10-26
+- Verdict: FAIL (2 of 3 bullets)
+- The plain-words section names no file, function or variable — PASS (section "1. En palabras simples": "La app ya permite 'posponer' una conversación... solo dura hasta 12 horas"; no file, function or variable named)
+- It covers the problem, how it works today and the proposed solution — PASS ("**Problema.**", "**Hoy.**", "**Propuesta.** No crear una función nueva: ampliar la de posponer para aceptar 24 horas...")
+- Code references appear only in the evidence section — FAIL (outside evidence: section 5, row "Textos traducidos y registros", column "Qué se buscó": "textos y logs en `src/`", a directory path in a non-evidence column; everything else checked is in evidence columns or lines)

@@ -47,3 +47,9 @@ Design section 5, step 2 (search for what already exists under another name).
 - Finds that "mute" already exists as snooze (`snoozeConversation`, `isSnoozed`, `snoozeLabel`) — PASS ("Ya existe una función de posponer ("snooze")... lo mismo que pide la FRD con otro nombre"; inventory cites `snoozeConversation`, `isSnoozed`, `snoozeLabel`)
 - States what it searched — PASS ("Qué busqué: código que silencie, pause o posponga una conversación... todo lo que decide si se envía un aviso"; also "No pude buscar: otras apps o repositorios... Jira... Confluence")
 - Recommends adapting the existing snooze rather than creating a new mute — PASS ("Ampliar posponer (recomendada)"; "Recomiendo la 1"; new separate mechanism option 3 "deja dos mecanismos casi iguales")
+
+### refactor-3 — 2026-10-26
+- Verdict: PASS (3 of 3 bullets)
+- Finds that "mute" already exists as snooze (`snoozeConversation`, `isSnoozed`, `snoozeLabel`) — PASS ("**Ya existe con otro nombre: \"posponer\"**"; inventory cites `isSnoozed`, `snoozeLabel`, `snooze.js`; the literal name `snoozeConversation` is not cited, only the file `snooze.js`)
+- States what it searched — PASS ("Lo que busqué (conceptos): silenciar, pausar, posponer, \"no molestar\", \"hasta cuándo\"... Rutas: todo el código fuente y los documentos del repo de ejemplo"; "No pude buscar: Jira, Confluence ni otros repos")
+- Recommends adapting the existing snooze rather than creating a new mute — PASS ("Recomendación (propuesta, no decisión): Opción A" ampliar posponer; Opción B parallel function "es justo la duplicación que se quiere evitar")

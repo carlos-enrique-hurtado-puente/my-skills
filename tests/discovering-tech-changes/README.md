@@ -32,17 +32,17 @@ Verdicts are bullets passed of bullets graded.
 | Scenario | Baseline | With skill | Role |
 |---|---|---|---|
 | `input-contradicts-code` | PASS 3 of 3 | green-1 PASS 3 of 3 | guard |
-| `reuse-under-another-name` | FAIL 2 of 3 | green-1 PASS 3 of 3; refactor-2 PASS 3 of 3 | discriminating |
-| `repo-convention` | PASS 2 of 2; hardened (error catalog added), baseline-2 PASS 3 of 3 | green-1 PASS 3 of 3 | guard |
+| `reuse-under-another-name` | FAIL 2 of 3 | green-1 PASS 3 of 3; refactor-2 PASS 3 of 3; refactor-3 PASS 3 of 3 | discriminating |
+| `repo-convention` | PASS 2 of 2; hardened (error catalog added), baseline-2 PASS 3 of 3 | green-1 PASS 3 of 3; refactor-3 PASS 3 of 3 | guard |
 | `second-caller` | PASS 2 of 2; hardened (indirect caller added), baseline-2 PASS 3 of 3 | green-1 PASS 3 of 3 | guard |
 | `work-in-flight` | FAIL 1 of 2 | green-1 PASS 2 of 2; refactor-1 PASS 2 of 2 | discriminating |
 | `skip-checkpoints-pressure` | FAIL 0 of 3 | green-1 PASS 3 of 3 | discriminating |
-| `plain-language` | FAIL 0 of 3 | green-1 FAIL 2 of 3; refactor-1 FAIL 2 of 3; refactor-2 FAIL 2 of 3 | discriminating |
+| `plain-language` | FAIL 0 of 3 | green-1 FAIL 2 of 3; refactor-1 FAIL 2 of 3; refactor-2 FAIL 2 of 3; refactor-3 FAIL 2 of 3 | discriminating |
 | `missing-information` | FAIL 0 of 3 | green-1 PASS 3 of 3 | discriminating |
 | `obvious-change` | PASS 2 of 2 | green-1 PASS 2 of 2 | guard |
 | `sources-unreachable` | PASS 4 of 4 | green-1 PASS 4 of 4 | guard |
 
-5 of 10 scenarios discriminate (the plan asked for at least 6). The code-reading scenarios pass without the skill on a strong model in a small fixture, so they stay as guards. 9 of 10 pass with the skill. `plain-language` still misses one bullet ("code references appear only in the evidence section"). The final brief now keeps identifiers in evidence columns, but the interim step-3 paragraph writes "posponer (en el código, snooze)": snooze is the code's name for the feature, so it is a code identifier inside a claim. The same paragraph also mentions a file in prose ("lo dice su README").
+5 of 10 scenarios discriminate (the plan asked for at least 6). The code-reading scenarios pass without the skill on a strong model in a small fixture, so they stay as guards. 9 of 10 pass with the skill. `plain-language` still misses one bullet ("code references appear only in the evidence section"). After three loophole rounds the only identifier left outside evidence is a directory path (`src/`) in a "what was searched" cell of the reuse inventory. Earlier rounds also found the code's name for a feature ("posponer (en el código, snooze)") and a README mention ("lo dice su README") in an interim paragraph.
 
 The examples in the skill's brief template were found to echo the fixture, so they were replaced with unrelated-domain examples, and `reuse-under-another-name` and `repo-convention` were re-run afterwards.
 
@@ -52,6 +52,6 @@ The examples in the skill's brief template were found to echo the fixture, so th
 - One runner and one scorer per scenario and condition, sonnet only.
 - No Codex runs.
 - The live loading checks (explicit invocation loads the skill, an implicit prompt does not) are done in the final task.
-- The `plain-language` residual above: the step-3 paragraph still puts the code identifier snooze inside a claim and mentions a README in prose.
-- 7 of the 10 scenarios (all except `plain-language`, `work-in-flight` and `reuse-under-another-name`) were last run on the skill as of commit 7ed4e0a, before the two loophole fixes. After the later fix round, `reuse-under-another-name` and `repo-convention` are re-run (the controller adds them to the table after the runs); the rest are not.
+- The `plain-language` residual above: a directory path in a "what was searched" cell of the reuse inventory is still outside the evidence columns.
+- The remaining 7 scenarios were last run on commit 7ed4e0a; `reuse-under-another-name`, `repo-convention` and `plain-language` were last run (refactor-3) on 17b432f.
 - Scorer strictness varies between runs.
