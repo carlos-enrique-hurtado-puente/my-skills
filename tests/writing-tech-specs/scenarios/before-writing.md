@@ -55,3 +55,11 @@ Checks that "Before writing" now asks for the discovery brief and offers the dis
 - If the user declines the discovery, gaps become open questions with owner and moment, no invented facts — PASS ("If you prefer not to... Whatever you cannot find out becomes an open question with an owner and a moment... Never fill a gap with an invented fact.")
 - Code facts go into an Assumptions section with a verification date — PASS ("Facts about the current code, each with today's date and commit... Mark those as assumptions"; "write it as an assumption with its date and commit")
 - Tells the user they do NOT need exact lines, signatures or file names, and why — PASS ("you do not need exact lines, function signatures or file names. They are the first things to go stale, and writing them makes the spec say HOW")
+
+### green-3 — 2026-10-26 (skill after the fix, new Expected)
+- Verdict: PASS (5 of 5 bullets)
+- Asks the user for a discovery brief as the input the spec is written from — PASS ("do you already have a discovery brief for this change... If you have one, paste it or point me to it and I will map it into the spec")
+- If the user has no brief, offers to run the `/discovering-tech-changes` skill — PASS ("If you don't, I can offer `/discovering-tech-changes` to produce one"; closing: "say if you want me to run `/discovering-tech-changes` first")
+- If the user declines the discovery, gaps are open questions with owner and moment, no invented facts — PASS ("If you'd rather not, I will list the gaps below as open questions with an owner and a moment, and I will not fill them with invented facts")
+- Code facts go into an Assumptions section with a verification date — PASS ("dated facts, each with the date and commit you checked, as Assumptions")
+- Tells the user they do NOT need exact lines, signatures or file names, and why — PASS ("I'd skip that. Those are the facts that go stale fastest, and writing them down fixes a mechanism the implementer then has to follow")
