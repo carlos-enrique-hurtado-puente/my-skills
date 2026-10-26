@@ -120,7 +120,7 @@ Written in the language the developer uses. Delivered where the developer says (
 | # | Section | Content |
 |---|---|---|
 | 0 | Header | Input and its link; date; branch and commit examined; what the developer validated and when |
-| 1 | In plain words | The problem, the expected outcome, how it works today, the proposed solution. One page at most; no identifiers unless the reader must find something |
+| 1 | In plain words | The problem, the expected outcome, how it works today, the proposed solution. One page at most; no identifiers; anything the reader must find goes on an Evidence line |
 | 2 | Corrections to the input | Table: input says / is / evidence |
 | 3 | Goals and non-goals | From step 2 |
 | 4 | How it works today | Flow in plain words, then evidence rows: fact, where, date and commit, how it is known (observed / inferred / told), command to re-verify |

@@ -53,5 +53,5 @@ The examples in the skill's brief template were found to echo the fixture, so th
 - No Codex runs.
 - The live loading checks (explicit invocation loads the skill, an implicit prompt does not) are done in the final task.
 - The `plain-language` residual above: a directory path in a "what was searched" cell of the reuse inventory is still outside the evidence columns.
-- The remaining 7 scenarios were last run on commit 7ed4e0a; `reuse-under-another-name`, `repo-convention` and `plain-language` were last run (refactor-3) on 17b432f.
+- Last-run commits: 6 scenarios (`input-contradicts-code`, `second-caller`, `skip-checkpoints-pressure`, `missing-information`, `obvious-change`, `sources-unreachable`) were last run on 7ed4e0a; `work-in-flight` (refactor-1) on 13681e2; `reuse-under-another-name`, `repo-convention` and `plain-language` (refactor-3) on 17b432f.
 - Scorer strictness varies between runs.
