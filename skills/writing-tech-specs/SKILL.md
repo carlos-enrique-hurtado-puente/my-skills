@@ -22,7 +22,7 @@ Take it from wherever the user points: pasted text, a local file, a Confluence p
 If the user gives a spec, run **Before freezing**. If not, run **Before writing** (brief), draft with the rules, then run **Before freezing** on your own draft before handing it over: fix every `no` you can with what you know, and turn the rest into open questions with owner and moment; never fill a gap with an invented fact. The draft's last section is `Self-check`: one line per checklist item, `P<n> yes <section or IDs>` or `P<n> no -> <fix or question ID>`, then the questions that block the freeze. A `yes` without a citation counts as `no`.
 
 ## Before writing
-Write the spec from a discovery brief. If the user has one, map its sections:
+First move: ask the user for the discovery brief, or whether there is one; never assume there is none. If there is one, read it and map its sections:
 - plain words -> what we are building, and self-sufficiency (P2)
 - corrections to the input -> a "spec says / is" table (P2)
 - dated code facts -> Assumptions (P3)
@@ -31,9 +31,9 @@ Write the spec from a discovery brief. If the user has one, map its sections:
 - options -> Proposed decision rows (P8)
 - open questions -> the decisions table (P8)
 
-If there is none, offer `/discovering-tech-changes`. If declined, list the gaps as open questions with owner and moment (P8); never fill them with invented facts.
+If none, offer `/discovering-tech-changes`. If declined, list the gaps as open questions with owner and moment (P8); never fill them with invented facts.
 
-Not needed: exact lines, signatures, file names. They age fastest and fix mechanism.
+Not needed: exact lines, signatures, file names (they age fastest and fix mechanism).
 
 ## Rules
 Support tags: **[B]** backed by several sources; **[P]** partly backed, rest is the team's own; **[O]** the team's own, from its tickets; **[H]** hypothesis. In blind tests the most reliable were P6, P9, P8, P1.

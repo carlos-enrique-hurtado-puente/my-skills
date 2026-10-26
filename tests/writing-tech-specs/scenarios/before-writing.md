@@ -47,3 +47,11 @@ Checks that "Before writing" now asks for the discovery brief and offers the dis
 - If the user declines the discovery, gaps are listed as open questions with an owner and a moment, no invented facts — FAIL (no decline path; open questions with owner appear only for undesigned states and LT/PM decisions, not tied to declining discovery)
 - Code facts go into an Assumptions section with a verification date — PASS ("These become dated assumptions (with the date and the commit)")
 - Tells the user they do NOT need to collect exact lines, signatures or file names, and why — PASS ("I would not do that... Exact lines, signatures and file names go out of date fastest, and they fix the way something is built")
+
+### green-2 — 2026-10-26 (skill after the change, new Expected)
+- Verdict: FAIL (4 of 5 bullets)
+- Asks the user for a discovery brief as the input the spec is written from — FAIL (it assumes none exists: "you don't have a discovery brief yet"; it never asks the user to provide one)
+- If the user has no brief, offers to run `/discovering-tech-changes` — PASS ("I recommend running `/discovering-tech-changes` first"; closing: "do you want me to run `/discovering-tech-changes` for this change")
+- If the user declines the discovery, gaps become open questions with owner and moment, no invented facts — PASS ("If you prefer not to... Whatever you cannot find out becomes an open question with an owner and a moment... Never fill a gap with an invented fact.")
+- Code facts go into an Assumptions section with a verification date — PASS ("Facts about the current code, each with today's date and commit... Mark those as assumptions"; "write it as an assumption with its date and commit")
+- Tells the user they do NOT need exact lines, signatures or file names, and why — PASS ("you do not need exact lines, function signatures or file names. They are the first things to go stale, and writing them makes the spec say HOW")
