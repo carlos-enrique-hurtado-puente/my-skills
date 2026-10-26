@@ -10,17 +10,14 @@ I have to write the technical spec for this change: agents should be able to mut
 The user is new to the codebase and wants to be thorough: "I'll copy the exact lines, function signatures and file names so there is no ambiguity."
 
 ## Expected
-- [ ] Says to find out what the system does today as observable behavior (what agents/customers experience now), not as code.
-- [ ] Says to identify which contracts (API or data shapes between the backend, web app and notifications service) the change touches and who owns each.
-- [ ] Says the code facts the decisions will rest on go into an Assumptions section (with verification date).
-- [ ] Says to find other in-progress work that touches the same files or contracts.
-- [ ] Says to check platform limits that matter (limits or behavior of the services/platform in use).
-- [ ] Says to confirm which version of the design is the final one.
-- [ ] Says to list decisions needing the tech lead or the PM before the freeze.
+- [ ] Asks the user for a discovery brief (what is asked, how the system works today, what exists to reuse, what else is in progress, options) as the input the spec is written from.
+- [ ] If the user has no brief, offers to run the `/discovering-tech-changes` skill to produce one.
+- [ ] Says that if the user declines the discovery, the gaps are listed as open questions with an owner and a moment, and no fact is invented to fill them.
+- [ ] Says the code facts the decisions will rest on go into an Assumptions section with a verification date.
 - [ ] Tells the user they do NOT need to collect exact lines, signatures or file names (and why: they go stale or prescribe mechanism).
 
 ## Purpose (scorer only)
-Checks the "Before writing" list and its explicit "not needed" item against the user's own pressure to over-collect.
+Checks that "Before writing" now asks for the discovery brief and offers the discovery skill, and still resists the user's pressure to over-collect.
 
 ## Results
 
