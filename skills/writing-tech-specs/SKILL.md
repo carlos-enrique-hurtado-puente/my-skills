@@ -19,17 +19,19 @@ Goal: a spec that needs few changes after freeze. This file holds the rules and 
 ## Where the spec is
 Take it from wherever the user points: pasted text, a local file, a Confluence page (read it with the Atlassian tools if connected), a Jira ticket or any other source. Read the whole spec before judging it. If you cannot read it (no access, not connected), say so and ask for the text; never review from a title or from memory. Linked sibling or provider specs: read them if reachable, otherwise list them as unverified.
 
-If the user gives a spec, run **Before freezing**. If not, run **Before writing**, draft with the rules, then run **Before freezing** on your own draft before handing it over: fix every `no` you can with what you know, and turn the rest into open questions with owner and moment; never fill a gap with an invented fact. The draft's last section is `Self-check`: one line per checklist item, `P<n> yes <section or IDs>` or `P<n> no -> <fix or question ID>`, then the questions that block the freeze. A `yes` without a citation counts as `no`.
+If the user gives a spec, run **Before freezing**. If not, run **Before writing** (brief), draft with the rules, then run **Before freezing** on your own draft before handing it over: fix every `no` you can with what you know, and turn the rest into open questions with owner and moment; never fill a gap with an invented fact. The draft's last section is `Self-check`: one line per checklist item, `P<n> yes <section or IDs>` or `P<n> no -> <fix or question ID>`, then the questions that block the freeze. A `yes` without a citation counts as `no`.
 
 ## Before writing
-Find out, by asking the user or reading the code; never invent:
-1. What the system does today, as observable behavior (P1, P2).
-2. Which contracts the change touches and who owns each (P9).
-3. Which code facts the decisions will rest on; they become Assumptions (P3).
-4. What other work in progress touches the same files or contracts (P3, P9).
-5. Which platform limits matter (P3).
-6. Which version of the design is the final one (P3).
-7. Which decisions need the LT or the PM before the freeze (P8).
+Write the spec from a discovery brief. If the user has one, map its sections:
+- plain words -> what we are building, and self-sufficiency (P2)
+- corrections to the input -> a "spec says / is" table (P2)
+- dated code facts -> Assumptions (P3)
+- reuse reasons -> beside each fixed mechanism (P1)
+- surroundings -> contracts and work in flight (P9, P3)
+- options -> Proposed decision rows (P8)
+- open questions -> the decisions table (P8)
+
+If there is none, offer `/discovering-tech-changes`. If declined, list the gaps as open questions with owner and moment (P8); never fill them with invented facts.
 
 Not needed: exact lines, signatures, file names. They age fastest and fix mechanism.
 

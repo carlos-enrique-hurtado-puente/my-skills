@@ -39,3 +39,11 @@ Checks that "Before writing" now asks for the discovery brief and offers the dis
 - Observable behavior, contracts and owners, dated Assumptions, work in flight, platform limits, final design version (asks for version/link/date and checks each state against it), LT/PM decisions with owner and blocking flag — all PASS.
 - Not collecting exact lines/signatures/file names — PASS: "Skip exact lines, function signatures and file names. They go stale fastest, and they lock in a mechanism without saying why."
 - The runner also resisted the user's stated plan to copy exact lines.
+
+### red-2 — 2026-10-26 (skill before the change, new Expected)
+- Verdict: FAIL (2 of 5 bullets)
+- Asks the user for a discovery brief as the input the spec is written from — FAIL (no brief is requested; it only lists items to find out: "Find each item out by asking people or reading the code")
+- If the user has no brief, offers to run the `/discovering-tech-changes` skill — FAIL (the skill is never mentioned)
+- If the user declines the discovery, gaps are listed as open questions with an owner and a moment, no invented facts — FAIL (no decline path; open questions with owner appear only for undesigned states and LT/PM decisions, not tied to declining discovery)
+- Code facts go into an Assumptions section with a verification date — PASS ("These become dated assumptions (with the date and the commit)")
+- Tells the user they do NOT need to collect exact lines, signatures or file names, and why — PASS ("I would not do that... Exact lines, signatures and file names go out of date fastest, and they fix the way something is built")

@@ -14,7 +14,7 @@ In Claude Code: `/writing-tech-specs`. In Codex: `$writing-tech-specs`. The skil
 /writing-tech-specs review https://<site>.atlassian.net/wiki/spaces/ENG/pages/12345
 ```
 
-- **No spec given:** the skill runs **Before writing**: seven things to find out (current observable behavior, contracts and owners, code facts that become Assumptions, parallel work on the same files, platform limits, the final design version, decisions that need the tech lead or PM) and what not to collect (exact lines, signatures, file names). Then it drafts with the rules and checks its own draft against the Before freezing list: the draft ends with a `Self-check` section, one line per principle citing where it is met, or the fix or open question when it is not.
+- **No spec given:** the skill runs **Before writing**: it needs a discovery brief and points to [`discovering-tech-changes`](discovering-tech-changes.md) to make one. It maps the brief's sections to the rules (plain words to what we are building, corrections to a "spec says / is" table, dated code facts to Assumptions, reuse reasons beside fixed mechanisms, surroundings to contracts and work in flight, options and open questions to the decisions table). If the user declines, the gaps become open questions with owner and moment, never invented facts. Exact lines, signatures and file names are not needed. Then it drafts with the rules and checks its own draft against the Before freezing list: the draft ends with a `Self-check` section, one line per principle citing where it is met, or the fix or open question when it is not.
 - **A spec given:** the skill runs **Before freezing**. The spec can be pasted text, a local file, a Confluence page (read through the Atlassian tools when connected), a Jira ticket or anything else readable. If it cannot read the source it says so and asks you to paste the text. The answer is a `yes` / `no` / `n.a.` line per principle, each `no` quoting the spec and giving a fix or an open decision with owner and moment, then a verdict on whether it can freeze. The review does not rewrite the spec unless you ask.
 
 ## Deciding whether to split a spec
@@ -29,7 +29,7 @@ There is no size threshold. When you ask whether to split, the skill treats it a
 
 | File | Content |
 |---|---|
-| `SKILL.md` | Terms defined once, Before writing, the nine rules with their support level, the Before freezing checklist |
+| `SKILL.md` | Terms defined once, Before writing (takes the discovery brief), the nine rules with their support level, the Before freezing checklist |
 | `references/content.md` | P1 to P4: why, the team's cases, sources, before → after |
 | `references/statements.md` | P5 to P7 |
 | `references/decisions-contracts.md` | P8 and P9 |
