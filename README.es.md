@@ -64,6 +64,7 @@ Desde la raíz del repo:
 bash tests/install/test-install.sh   # install.sh con un HOME temporal
 bash tests/spec-to-jira-stories/check-structure.sh
 bash tests/discovering-tech-changes/check-structure.sh
+bash tests/discovering-tech-changes/check-scenarios.sh
 ```
 
 Los tests de cada skill están en su página de docs.

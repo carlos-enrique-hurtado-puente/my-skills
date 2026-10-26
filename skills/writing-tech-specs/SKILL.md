@@ -27,11 +27,11 @@ First move: ask the user for the discovery brief, or whether there is one; never
 - corrections to the input -> a "spec says / is" table (P2)
 - dated code facts -> Assumptions (P3)
 - reuse reasons -> beside each fixed mechanism (P1)
-- surroundings -> contracts and work in flight (P9, P3)
+- surroundings -> contracts and work in flight (P9, P3); platform limits and design version -> Assumptions (P3)
 - options -> Proposed decision rows (P8)
 - open questions -> the decisions table (P8)
 
-If none, offer `/discovering-tech-changes`. If declined, list the gaps as open questions with owner and moment (P8); never fill them with invented facts.
+If none, offer `/discovering-tech-changes`. If declined, list the brief sections the user lacks (today's behavior, contracts and owners, work in flight, platform limits, design version) as open questions with owner and moment (P8); never fill them with invented facts.
 
 Not needed: exact lines, signatures, file names (they age fastest and fix mechanism).
 

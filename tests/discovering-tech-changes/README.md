@@ -51,7 +51,8 @@ The examples in the skill's brief template were found to echo the fixture, so th
 - Large real codebases and real Jira or Confluence reading.
 - One runner and one scorer per scenario and condition, sonnet only.
 - No Codex runs.
-- The live loading checks (explicit invocation loads the skill, an implicit prompt does not) are done in the final task.
+- The live loading checks are pending and must be done by the user before merging (they need a fresh Claude Code or Codex session): `/discovering-tech-changes` in Claude Code and `$discovering-tech-changes` in Codex must load the skill, and an implicit prompt such as "help me understand this FRD before the spec" must not.
+- Runs before the wording change in `references/steps.md` (callers and in-flight specs lines) used the earlier wording; no re-run was done.
 - The `plain-language` residual above: a directory path in a "what was searched" cell of the reuse inventory is still outside the evidence columns.
 - Last-run commits: 6 scenarios (`input-contradicts-code`, `second-caller`, `skip-checkpoints-pressure`, `missing-information`, `obvious-change`, `sources-unreachable`) were last run on 7ed4e0a; `work-in-flight` (refactor-1) on 13681e2; `reuse-under-another-name`, `repo-convention` and `plain-language` (refactor-3) on 17b432f.
 - Scorer strictness varies between runs.

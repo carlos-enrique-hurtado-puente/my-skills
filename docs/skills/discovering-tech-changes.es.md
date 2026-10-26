@@ -11,7 +11,7 @@ En Claude Code: `/discovering-tech-changes`. En Codex: `$discovering-tech-change
 ```text
 /discovering-tech-changes ayúdame a entender este FRD antes de escribir la spec: https://<sitio>.atlassian.net/wiki/spaces/ENG/pages/12345
 /discovering-tech-changes ABC-123: ¿qué hace el código hoy y qué puedo reutilizar?
-/discovering-tech-changes ./docs/frd-mute.md, profundidad reducida, es un cambio pequeño
+/discovering-tech-changes ./docs/frd-export-limits.md, profundidad reducida, es un cambio pequeño
 ```
 
 - **Entrada:** texto pegado, un archivo local, una página de Confluence, un ticket de Jira (con las herramientas de Atlassian) o un diseño. La skill lo lee completo; si no puede, lo dice y pide el texto. Nunca trabaja a partir de un título ni de memoria.
@@ -73,4 +73,4 @@ bash tests/discovering-tech-changes/check-structure.sh
 bash tests/discovering-tech-changes/check-scenarios.sh
 ```
 
-Diez escenarios de presión (se ejecutan a mano con un runner y un evaluador aparte) y su resultado están en [`tests/discovering-tech-changes/`](../../tests/discovering-tech-changes/README.md). Resultado: 9 de 10 escenarios pasan con la skill; 5 de 10 discriminan frente a la línea base (los demás son guardas que un modelo fuerte también pasa sin la skill). El escenario `plain-language` aún pierde un punto: queda una ruta de directorio fuera de las columnas de evidencia, en una celda de "qué se buscó".
+Diez escenarios de presión (se ejecutan a mano con un runner y un evaluador aparte) y su resultado están en [`tests/discovering-tech-changes/`](../../tests/discovering-tech-changes/README.md). Resultado: 9 de 10 escenarios pasan con la skill (ejecuciones sobre commits mixtos de la skill; ver «No cubierto» en el README de tests); 5 de 10 discriminan frente a la línea base (los demás son guardas que un modelo fuerte también pasa sin la skill). El escenario `plain-language` aún pierde un punto: queda una ruta de directorio fuera de las columnas de evidencia, en una celda de "qué se buscó".

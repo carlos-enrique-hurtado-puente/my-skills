@@ -40,7 +40,7 @@ Start the **corrections to the input** list (input says / is / evidence). Steps 
 ## Step 3. How it works today
 
 **Agent.** Explain the flow as **observable behavior** first (what the user or the system sees), then the path in code as support. Trace the complete flow, not only the local piece. Also look for:
-- who else calls this path (jobs, migrations, batch senders, webhooks, other screens);
+- who else calls this path (scheduled jobs, migrations, other entry points);
 - who else reads or writes the same data, including other repos;
 - side effects of writing it (triggers, timeouts, listeners);
 - wire contracts to other repos;
@@ -71,7 +71,7 @@ At the checkpoint, the code path goes in an evidence table or line under the exp
 ## Step 5. Surroundings of the change
 
 **Agent.** Find what else is moving around the change:
-- other specs and work in progress touching the same files, flows or contracts (the epic, the sprint, Confluence specs in the same space, open branches, in-flight spec folders in the repo);
+- other specs and work in progress touching the same files, flows or contracts (the epic, the sprint, Confluence specs in the same space, open branches, spec documents kept in the repo);
 - contracts with sibling specs, checked against the provider's implementation or frozen spec, not against a plan;
 - deploy order across repos;
 - platform limits;

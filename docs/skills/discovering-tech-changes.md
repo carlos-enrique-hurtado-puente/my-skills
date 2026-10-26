@@ -11,7 +11,7 @@ In Claude Code: `/discovering-tech-changes`. In Codex: `$discovering-tech-change
 ```text
 /discovering-tech-changes help me understand this FRD before I write the spec: https://<site>.atlassian.net/wiki/spaces/ENG/pages/12345
 /discovering-tech-changes ABC-123: what does the code do today and what can I reuse?
-/discovering-tech-changes ./docs/frd-mute.md, reduced depth, it is a small change
+/discovering-tech-changes ./docs/frd-export-limits.md, reduced depth, it is a small change
 ```
 
 - **Input:** pasted text, a local file, a Confluence page, a Jira ticket (through the Atlassian tools) or a design. The skill reads all of it; if it cannot, it says so and asks for the text. It never works from a title or from memory.
@@ -73,4 +73,4 @@ bash tests/discovering-tech-changes/check-structure.sh
 bash tests/discovering-tech-changes/check-scenarios.sh
 ```
 
-Ten pressure scenarios (run by hand with a runner and a separate scorer) and their outcome are in [`tests/discovering-tech-changes/`](../../tests/discovering-tech-changes/README.md). Outcome: 9 of 10 scenarios pass with the skill; 5 of 10 discriminate against the baseline (the others are guards that a strong model also passes without the skill). The `plain-language` scenario still misses one point: a directory path remains outside the evidence columns, in a "what was searched" cell.
+Ten pressure scenarios (run by hand with a runner and a separate scorer) and their outcome are in [`tests/discovering-tech-changes/`](../../tests/discovering-tech-changes/README.md). Outcome: 9 of 10 scenarios pass with the skill (runs on mixed skill commits; see Not covered in the tests README); 5 of 10 discriminate against the baseline (the others are guards that a strong model also passes without the skill). The `plain-language` scenario still misses one point: a directory path remains outside the evidence columns, in a "what was searched" cell.
