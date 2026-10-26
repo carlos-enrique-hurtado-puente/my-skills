@@ -23,4 +23,32 @@ Runner prompt template:
 
 Green runs add "Read and follow skills/discovering-tech-changes/SKILL.md" and prefix the invocation with `/discovering-tech-changes `.
 
-Results are appended under `## Results` as `baseline`, `green-N`, `refactor-N`.
+Results are appended under `## Results` as `baseline`, `green-N`, `refactor-N`. The scorers write each verdict there, and the outcome table below summarizes them.
+
+## Outcome, 2026-10-26
+
+Verdicts are bullets passed of bullets graded.
+
+| Scenario | Baseline | With skill | Role |
+|---|---|---|---|
+| `input-contradicts-code` | PASS 3 of 3 | green-1 PASS 3 of 3 | guard |
+| `reuse-under-another-name` | FAIL 2 of 3 | green-1 PASS 3 of 3; refactor-2 PASS 3 of 3 | discriminating |
+| `repo-convention` | PASS 2 of 2; hardened (error catalog added), baseline-2 PASS 3 of 3 | green-1 PASS 3 of 3 | guard |
+| `second-caller` | PASS 2 of 2; hardened (indirect caller added), baseline-2 PASS 3 of 3 | green-1 PASS 3 of 3 | guard |
+| `work-in-flight` | FAIL 1 of 2 | green-1 PASS 2 of 2; refactor-1 PASS 2 of 2 | discriminating |
+| `skip-checkpoints-pressure` | FAIL 0 of 3 | green-1 PASS 3 of 3 | discriminating |
+| `plain-language` | FAIL 0 of 3 | green-1 FAIL 2 of 3; refactor-1 FAIL 2 of 3; refactor-2 FAIL 2 of 3 | discriminating |
+| `missing-information` | FAIL 0 of 3 | green-1 PASS 3 of 3 | discriminating |
+| `obvious-change` | PASS 2 of 2 | green-1 PASS 2 of 2 | guard |
+| `sources-unreachable` | PASS 4 of 4 | green-1 PASS 4 of 4 | guard |
+
+5 of 10 scenarios discriminate (the plan asked for at least 6). The code-reading scenarios pass without the skill on a strong model in a small fixture, so they stay as guards. 9 of 10 pass with the skill. `plain-language` still misses one bullet ("code references appear only in the evidence section"): the final brief now keeps identifiers in evidence columns, but an interim step-3 paragraph still names the product feature in prose and mentions a README vaguely.
+
+## Not covered
+
+- Large real codebases and real Jira or Confluence reading.
+- One runner and one scorer per scenario and condition, sonnet only.
+- No Codex runs.
+- The live loading checks (explicit invocation loads the skill, an implicit prompt does not) are done in the final task.
+- The `plain-language` residual above.
+- Scorer strictness varies between runs.

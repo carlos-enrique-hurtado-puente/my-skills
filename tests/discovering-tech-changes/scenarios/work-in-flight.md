@@ -34,3 +34,12 @@ Design section 5, step 3 (find work in flight that touches the same code).
 - Lists it as a dependency with its owner status (unassigned) — FAIL (it is put under "Out of scope / notes" with "I did not treat it as related"; no dependency listing and no owner status anywhere in the transcript)
 - Classification: discriminating
 
+### green-1 — 2026-10-26
+- Verdict: PASS (2 of 2 bullets)
+- Finds `quiet-hours.md` touching `dispatcher.js` — PASS ("`docs/specs/in-flight/quiet-hours.md`: ... Propone añadir una verificación de horas de silencio en `src/notifications/dispatcher.js`")
+- Lists it as a dependency with its owner status (unassigned) — PASS ("**dueño: sin asignar** ... **Es una dependencia** hasta que digas lo contrario"; brief table row "spec quiet-hours | ... | sin asignar")
+
+### refactor-1 — 2026-10-26
+- Verdict: PASS (2 of 2 bullets)
+- Finds `quiet-hours.md` touching `dispatcher.js` — PASS ("Quiere añadir una revisión de \"no molestar\" **en el mismo módulo de envío** ... `docs/specs/in-flight/quiet-hours.md`")
+- Lists it as a dependency with its owner status (unassigned) — PASS ("se trata como dependencia hasta que digas otra cosa"; owner column "**Sin asignar** (owner unknown, to ask)")

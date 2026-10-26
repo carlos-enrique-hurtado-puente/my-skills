@@ -43,3 +43,9 @@ Design section 5, step 2 (find other callers affected by the change).
 - Reports it as a gap that affects the feature — PASS ("Caminos que ignoran el snooze (el mute no silenciaría todo)")
 - Finds the daily digest path (`runDigest` -> `notifyMany` -> `dispatch`) as well as `handleInbound`, and reports both as paths that ignore the snooze — PASS ("`src/jobs/daily-digest.js` -> `src/notifications/batch.js` -> `dispatch` para todas las conversaciones", listed under "Por eso siguen notificando" with the inbound webhook)
 - Classification: guard
+
+### green-1 — 2026-10-26
+- Verdict: PASS (3 of 3 bullets)
+- Finds that `handleInbound` calls `dispatch` without a snooze check — PASS ("El webhook de mensajes que llegan de canales externos (`handleInbound`): **no** lo revisa; llama directo al despachador")
+- Reports it as a gap that affects the feature — PASS ("hoy un snooze no frena el webhook ni el resumen diario"; option A risk: "siguen notificando (incumple la FRD)")
+- Finds the daily digest path (`runDigest` -> `notifyMany` -> `dispatch`) as well as `handleInbound`, and reports both as paths that ignore the snooze — PASS ("El resumen diario (`runDigest`, vía `notifyMany`): **no** lo revisa"; E5: "Webhook y resumen diario llaman a `dispatch` sin revisar snooze")
