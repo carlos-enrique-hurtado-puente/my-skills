@@ -14,7 +14,7 @@ In Claude Code: `/writing-tech-specs`. In Codex: `$writing-tech-specs`. The skil
 /writing-tech-specs review https://<site>.atlassian.net/wiki/spaces/ENG/pages/12345
 ```
 
-- **No spec given:** the skill runs **Before writing**: seven things to find out (current observable behavior, contracts and owners, code facts that become Assumptions, parallel work on the same files, platform limits, the final design version, decisions that need the tech lead or PM) and what not to collect (exact lines, signatures, file names). Then it drafts with the rules.
+- **No spec given:** the skill runs **Before writing**: seven things to find out (current observable behavior, contracts and owners, code facts that become Assumptions, parallel work on the same files, platform limits, the final design version, decisions that need the tech lead or PM) and what not to collect (exact lines, signatures, file names). Then it drafts with the rules and checks its own draft against the Before freezing list: the draft ends with a `Self-check` section, one line per principle citing where it is met, or the fix or open question when it is not.
 - **A spec given:** the skill runs **Before freezing**. The spec can be pasted text, a local file, a Confluence page (read through the Atlassian tools when connected), a Jira ticket or anything else readable. If it cannot read the source it says so and asks you to paste the text. The answer is a `yes` / `no` / `n.a.` line per principle, each `no` quoting the spec and giving a fix or an open decision with owner and moment, then a verdict on whether it can freeze. The review does not rewrite the spec unless you ask.
 
 ## Deciding whether to split a spec

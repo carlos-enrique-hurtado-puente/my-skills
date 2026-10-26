@@ -19,7 +19,7 @@ Goal: a spec that needs few changes after freeze. This file holds the rules and 
 ## Where the spec is
 Take it from wherever the user points: pasted text, a local file, a Confluence page (read it with the Atlassian tools if connected), a Jira ticket or any other source. Read the whole spec before judging it. If you cannot read it (no access, not connected), say so and ask for the text; never review from a title or from memory. Linked sibling or provider specs: read them if reachable, otherwise list them as unverified.
 
-If the user gives a spec, run **Before freezing**. If not, run **Before writing**, then draft with the rules.
+If the user gives a spec, run **Before freezing**. If not, run **Before writing**, draft with the rules, then run **Before freezing** on your own draft before handing it over: fix every `no` you can with what you know, and turn the rest into open questions with owner and moment; never fill a gap with an invented fact. The draft's last section is `Self-check`: one line per checklist item, `P<n> yes <section or IDs>` or `P<n> no -> <fix or question ID>`, then the questions that block the freeze. A `yes` without a citation counts as `no`.
 
 ## Before writing
 Find out, by asking the user or reading the code; never invent:
@@ -49,7 +49,7 @@ Support tags: **[B]** backed by several sources; **[P]** partly backed, rest is 
   - A criterion needing a real channel, credential or live data says so and who provides it.
   - A criterion about a model's behavior states cases, runs per case and what counts as met, and how to force the case when testing a safeguard.
 - **P7 [P] Close the cases.** For each behavior ask: a dependency fails? the user acts meanwhile, or the call is retried or duplicated, or client state is restarted? what does the previous mode receive? extremes and malformed input? One term per concept; no two statements contradict, criteria and decisions first.
-- **P8 [B] Decision status.** Each decision is Decided or Proposed, with who. Each open question is: before freeze (blocks), during implementation (has an owner), or out of scope. Record discarded alternatives with reasons. Nothing is "agreed" while pending validation; resolved items are updated everywhere they appeared as open.
+- **P8 [B] Decision status.** Each decision is Decided or Proposed, with who. Each open question is: before freeze (blocks), during implementation (has an owner), or out of scope. Record discarded alternatives with reasons. Nothing is "agreed" while pending validation; resolved items are updated everywhere they appeared as open. Keep decisions and questions in one table: item | status | who | when it is resolved (before freeze, during implementation, out of scope; `n.a.` only for Decided rows).
 - **P9 [B, adapted] Contracts.** One home: the producer's spec; others link it. The consumer writes "I need" as a proposal until the provider freezes, and does not build unfrozen fields. A change across components is planned as add new beside old, migrate, remove old, with deploy order, or states that both always deploy together. Sibling specs: a table of which phase needs which, plus merge order if they touch the same files.
 
 ## Deciding whether to split

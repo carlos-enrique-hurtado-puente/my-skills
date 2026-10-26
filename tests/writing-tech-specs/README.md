@@ -15,13 +15,14 @@ Each run uses two separate agents. The **runner** gets only `Setup`, `Invocation
 
 Results are appended under `## Results` as `baseline`, `green-N`, `refactor-N`.
 
-## Outcome, 2026-10-24 (split-decision added 2026-10-25)
+## Outcome, 2026-10-24 (split-decision and draft-self-check added 2026-10-25)
 
 | Scenario | Baseline | With skill (1 run) | Role |
 |---|---|---|---|
 | `before-writing` | FAIL (4 of 8 bullets: no dated assumptions, no work in flight, no platform limits, and it advised collecting exact lines, signatures and file names) | PASS 8 of 8 | discriminating |
 | `consumer-spec` | FAIL (2 of 5: defined its own shape and built the form before the open questions were answered; no deployable steps) | PASS 5 of 5 | discriminating |
 | `split-decision` | FAIL in 2 of 2 runs (3 bullets: one verdict, no options or "do not split", no questions for the dev, no recorded decision) | PASS 3 of 3 | discriminating |
+| `draft-self-check` | FAIL in 2 of 2 (no self-check; criteria without "when"; decisions without a resolution moment) | PASS 2 of 3 after two iterations (the third run has one false `yes` in its self-check) | discriminating; needs the team's FRD and a code snapshot, not reproducible from this repo |
 | `review-seeded-spec` | Finds 12 of 12 seeded defects but flags the correct AC-1 | PASS: 12 of 12, correct parts named | guard |
 
 Honest reading: the model already reviews a seeded spec well without the skill, so that scenario is a guard (checks the skill does not cost coverage or add false alarms), not evidence that the skill helps. The gains show in the two scenarios where the skill adds a rule the model does not apply on its own: dated assumptions plus "do not collect lines and signatures", and one home for a contract with no building on unfrozen fields.

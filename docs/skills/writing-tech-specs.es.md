@@ -14,7 +14,7 @@ En Claude Code: `/writing-tech-specs`. En Codex: `$writing-tech-specs`. La skill
 /writing-tech-specs revisa https://<sitio>.atlassian.net/wiki/spaces/ENG/pages/12345
 ```
 
-- **Sin spec:** corre **Before writing**: siete cosas que averiguar (comportamiento observable actual, contratos y dueños, hechos del código que pasan a Supuestos, trabajo en paralelo sobre los mismos archivos, límites de plataforma, versión final del diseño, decisiones que necesitan al LT o a la PM) y lo que no hace falta reunir (líneas exactas, firmas, nombres de archivo). Luego redacta con las reglas.
+- **Sin spec:** corre **Before writing**: siete cosas que averiguar (comportamiento observable actual, contratos y dueños, hechos del código que pasan a Supuestos, trabajo en paralelo sobre los mismos archivos, límites de plataforma, versión final del diseño, decisiones que necesitan al LT o a la PM) y lo que no hace falta reunir (líneas exactas, firmas, nombres de archivo). Luego redacta con las reglas y revisa su propio borrador con la lista Before freezing: el borrador termina con una sección `Self-check`, una línea por principio que cita dónde se cumple, o la corrección o pregunta abierta cuando no.
 - **Con una spec:** corre **Before freezing**. La spec puede ser texto pegado, un archivo local, una página de Confluence (se lee con las herramientas de Atlassian si están conectadas), un ticket de Jira o cualquier cosa legible. Si no puede leer la fuente, lo dice y pide que pegues el texto. La respuesta es una línea `yes` / `no` / `n.a.` por principio; cada `no` cita la spec y da una corrección o una decisión abierta con dueño y momento; al final dice si se puede congelar. La revisión no reescribe la spec salvo que lo pidas.
 
 ## Decidir si dividir una spec
