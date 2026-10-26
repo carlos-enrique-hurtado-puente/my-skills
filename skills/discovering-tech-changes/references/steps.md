@@ -17,7 +17,7 @@ Sources: Claude Code best practices (skip the plan when the diff fits in a sente
 ## Step 1. Intake and contrast of the input
 
 **Agent.** Read the whole input: pasted text, a file, a Confluence page or a Jira ticket (through the Atlassian tools when connected). If it cannot be read, say so and ask for the text; never work from a title or from memory. Restate in plain words what is asked and the expected outcome. Mark:
-- omissions: a trigger without a response, an operation without its reverse (pause without resume, create without delete), a state without how it ends;
+- omissions: a trigger without a response, an operation without its reverse (archive without restore, create without delete), a state without how it ends;
 - ambiguity: vague quantifiers ("fast", "some", "usually");
 - contradictions: two criteria that cannot both hold; a design showing values the system rejects.
 
@@ -49,6 +49,8 @@ Start the **corrections to the input** list (input says / is / evidence). Steps 
 - the git history of the zone when behavior is surprising.
 
 Label each fact observed (where, date, commit), inferred, or told by the developer.
+
+At the checkpoint, the code path goes in an evidence table or line under the explanation, not in the explanation itself. A code's own name for a feature is an identifier too: in the prose use the word the product shows its users, and put the code's name in the evidence.
 
 **Signals.** A code path with more than one caller; a field written by more than one repo; a flag whose commit message does not explain it; a zone with no tests.
 

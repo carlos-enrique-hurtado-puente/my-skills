@@ -10,15 +10,15 @@ Goal: before the spec, the developer knows, in plain words, what is asked, how t
 
 ## Start
 1. **Input.** Take it from wherever the user points (text, file, Confluence, Jira through the Atlassian tools, a design). Read all of it. If you cannot read it, say so and ask for the text; never work from a title or from memory.
-2. **Depth.** Ask before step 1: **full** (steps 1 to 7) or **reduced** (steps 3 and 4 plus a short brief) for a change the developer can describe in one sentence. Say which looks fitting and why, then wait. The developer chooses, even when the change looks obvious.
+2. **Depth.** Ask before step 1: **full** (steps 1 to 7) or **reduced** (steps 3 and 4 plus a short brief) for a change the developer can describe in one sentence. Say which fits and why, then wait; the developer chooses, even for an obvious change.
 3. **Read-only.** Never write to the user's repo, Jira or Confluence. For git use `git --no-optional-locks`.
 
 ## Steps
-Each step ends at its **checkpoint**: stop, show the result in plain words, ask, and wait for the developer's answer. Even when told to hurry or to "just give the brief": keep checkpoints short, never skip them. Revisit steps 3 to 6 when something learned changes an earlier answer. Signals, questions and sources per step: `steps.md`.
+Each step ends at its **checkpoint**: stop, show the result in plain words, ask, and wait for the developer's answer. Even when told to hurry or to "just give the brief": keep checkpoints short, never skip them. Revisit steps 3 to 6 when something learned changes them. Signals, questions and sources per step: `steps.md`.
 
 1. **Intake.** Restate what is asked and the outcome. Mark omissions (a trigger without a response, an operation without its reverse), ambiguity and contradictions. Start the corrections list (input says / is). Checkpoint: is this what is asked?
-2. **Framing.** Goals, non-goals (reasonable goals deliberately excluded), how success will be known. Checkpoint: developer confirms goals and non-goals.
-3. **How it works today.** Observable behavior first, then the code path as support. Trace the whole flow: every caller of the path, other readers and writers of the data, side effects, contracts, silent drops, tests, git history. Checkpoint: developer corrects the explanation. This builds the mental model; do not rush it.
+2. **Framing.** Goals, non-goals (reasonable goals deliberately excluded), how success is known. Checkpoint: developer confirms goals and non-goals.
+3. **How it works today.** Observable behavior first; the code path goes in evidence lines, not the prose. Trace the whole flow: every caller, other readers and writers of the data, side effects, contracts, silent drops, tests, history. Checkpoint: developer corrects the explanation. It builds the mental model; never rush it.
 4. **Reuse and conventions.** For each needed behavior, search for code that already does it or nearly does, by behavior, not only by the input's words; it may exist under another name. Record conventions (error-code naming, UI patterns, i18n) and where existing patterns fall short. Per item: reuse, adapt or create, with the reason; flag where reuse would bend shared code. Checkpoint: developer confirms the inventory.
 5. **Surroundings.** Other specs, branches and work in progress touching the same files, flows or contracts; contracts checked against the provider's code or frozen spec; deploy order; limits; final design. Checkpoint: developer confirms the list and the owner of each dependency.
 6. **Options.** Two or three, including a smaller one and "keep as is" when meaningful: what each reuses, creates, risks, blocks. Recommend one with the reason. Checkpoint: developer chooses the direction.
@@ -30,7 +30,7 @@ Sections, filled as in `brief-template.md`: 0 header (input, date, commit, depth
 Write it in the developer's language. Deliver in chat by default and offer a file; Confluence only on request.
 
 ## Rules
-- **Plain words first.** Explain so the developer follows without opening the code. State every claim, question, search and input reference in plain words; identifiers and quoted input strings go only in evidence columns or rows. A list of names is not an explanation.
+- **Plain words first.** Explain so the developer follows without opening the code. State every claim, question, search and input reference in plain words; identifiers (including code names for features; use the product's word) and quoted input go only in evidence columns or rows. A list of names is not an explanation.
 - **Label every fact**: observed in code (where, date, commit), inferred (from what), or told by the developer.
 - **Never invent.** A gap in the input or the code becomes an open question with an owner and a moment (before freeze, during implementation, out of scope). Do not pick an answer for it; you may add a proposal, marked as a proposal.
 - **Propose and recommend, never decide.** The developer decides; the decision is recorded in the spec.
