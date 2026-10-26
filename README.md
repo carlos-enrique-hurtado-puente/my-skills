@@ -12,6 +12,7 @@ Personal skills for coding agents (Claude Code, Codex). One repo, many skills, i
 | `express-best-practices` | Rules for writing, changing and reviewing Express.js code on Express 4 or 5: middleware, routes, errors, sessions, security, production. | `/express-best-practices` (Claude Code), `$express-best-practices` (Codex) | [docs/skills/express-best-practices.md](docs/skills/express-best-practices.md) |
 | `writing-tech-specs` | Prepare, write and review technical specs: what to gather before writing and a nine-principle checklist before freezing. | `/writing-tech-specs` (Claude Code), `$writing-tech-specs` (Codex) | [docs/skills/writing-tech-specs.md](docs/skills/writing-tech-specs.md) |
 | `spec-to-jira-stories` | Turn a technical spec into Jira stories and sub-tasks (development, certification, code review) and create them after confirmation. | `/spec-to-jira-stories` (Claude Code), `$spec-to-jira-stories` (Codex) | [docs/skills/spec-to-jira-stories.md](docs/skills/spec-to-jira-stories.md) |
+| `discovering-tech-changes` | Understand a requirement and the code it touches and prepare a discovery brief before writing the tech spec. | `/discovering-tech-changes` (Claude Code), `$discovering-tech-changes` (Codex) | [docs/skills/discovering-tech-changes.md](docs/skills/discovering-tech-changes.md) |
 
 Skills run only when you invoke them explicitly.
 
@@ -60,6 +61,7 @@ From the repo root:
 ```bash
 bash tests/install/test-install.sh   # install.sh with a temporary HOME
 bash tests/spec-to-jira-stories/check-structure.sh
+bash tests/discovering-tech-changes/check-structure.sh
 ```
 
 Each skill's own tests are listed on its docs page.

@@ -49,6 +49,7 @@ bash tests/stack-code-review/check-structure.sh
 bash tests/stack-code-review/test-detect-base.sh
 bash tests/stack-code-review/test-detect-stacks.sh
 bash tests/spec-to-jira-stories/check-structure.sh
+bash tests/discovering-tech-changes/check-structure.sh
 ```
 
 ## Git workflow

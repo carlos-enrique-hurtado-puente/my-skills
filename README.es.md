@@ -14,6 +14,7 @@ Skills personales para agentes de código (Claude Code, Codex). Un repo, muchas 
 | `express-best-practices` | Reglas para escribir, cambiar y revisar código Express.js en Express 4 o 5: middleware, rutas, errores, sesiones, seguridad, producción. | `/express-best-practices` (Claude Code), `$express-best-practices` (Codex) | [docs/skills/express-best-practices.es.md](docs/skills/express-best-practices.es.md) |
 | `writing-tech-specs` | Preparar, escribir y revisar specs técnicas: qué reunir antes de escribir y una lista de nueve principios antes de congelar. | `/writing-tech-specs` (Claude Code), `$writing-tech-specs` (Codex) | [docs/skills/writing-tech-specs.es.md](docs/skills/writing-tech-specs.es.md) |
 | `spec-to-jira-stories` | Convertir una spec técnica en historias y sub-tareas de Jira (desarrollo, certificación, code review) y crearlas tras confirmación. | `/spec-to-jira-stories` (Claude Code), `$spec-to-jira-stories` (Codex) | [docs/skills/spec-to-jira-stories.es.md](docs/skills/spec-to-jira-stories.es.md) |
+| `discovering-tech-changes` | Entender un requerimiento y el código que toca, y preparar un brief de descubrimiento antes de escribir la spec técnica. | `/discovering-tech-changes` (Claude Code), `$discovering-tech-changes` (Codex) | [docs/skills/discovering-tech-changes.es.md](docs/skills/discovering-tech-changes.es.md) |
 
 Las skills solo se ejecutan cuando las invocas de forma explícita.
 
@@ -62,6 +63,7 @@ Desde la raíz del repo:
 ```bash
 bash tests/install/test-install.sh   # install.sh con un HOME temporal
 bash tests/spec-to-jira-stories/check-structure.sh
+bash tests/discovering-tech-changes/check-structure.sh
 ```
 
 Los tests de cada skill están en su página de docs.
