@@ -1,6 +1,6 @@
 # Evidence
 
-Load this file to justify a step or to say how strong its support is. Status: **read** = the page or paper was read in this work; **summary** = only secondary descriptions were seen; **snippet** = a short excerpt only; **press coverage** = only news reports of the study. A link on a summary, snippet or press-coverage row is for lookup; it was not opened in this work.
+Load this file to justify a step or to say how strong its support is. Status: **read** = the page or paper was read in this work; **summary** = only secondary descriptions were seen; **snippet** = a short excerpt only; **press coverage** = only news reports of the study. A link on a summary, snippet or press-coverage row is where that material was seen; the original work was not read in full.
 
 ## Sources
 
@@ -13,11 +13,11 @@ Load this file to justify a step or to say how strong its support is. Status: **
 | Osmani, comprehension debt: https://addyosmani.com/blog/comprehension-debt/ | read | Framing only; the study above is its only evidence, the rest is opinion |
 | Metz, The wrong abstraction: https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction | read | Reuse is not always right: duplication is cheaper than a wrong abstraction once proven wrong; it does not say "do not reuse" (step 4) |
 | Conceptual model of code comprehension: https://arxiv.org/html/2310.11301 | read | Letovsky's mental model; Littman's systematic strategy (tracing the whole flow did better on a modification task) (step 3) |
-| Naur, Programming as Theory Building: https://pages.cs.wisc.edu/~remzi/Naur.pdf | summary | A program is a theory held by people; a plain-language mental model as the goal (step 3) |
+| Naur, Programming as Theory Building: https://neonvagabond.xyz/mirrors/naur1985programming.html | summary | A program is a theory held by people; a plain-language mental model as the goal (step 3) |
 | Feathers, Working Effectively with Legacy Code | summary | Characterize actual behavior before changing it (step 3) |
 | Wiegers, via Jama; Ferrari and Gnesi | summary | Omissions and ambiguity; ambiguity often points to unspoken knowledge (step 1) |
-| Example Mapping: https://cucumber.io/blog/bdd/example-mapping-introduction/ | snippet | Open questions kept apart so the session continues (step 7) |
-| GitClear, AI and code quality: https://www.gitclear.com/coding_on_copilot_data_shows_ais_downward_pressure_on_code_quality | press coverage | More duplicated code, less refactoring in AI-assisted codebases; correlational; no study measured coding agents specifically (step 4) |
+| Example Mapping: https://www.cucumber.io/docs/bdd/example-mapping | snippet | Open questions kept apart so the session continues (step 7) |
+| GitClear 2025 report, via DevClass: https://devclass.com/2025/02/20/ai-is-eroding-code-quality-states-new-in-depth-report/ | press coverage | More duplicated code, less refactoring in AI-assisted codebases; correlational; no study measured coding agents specifically (step 4) |
 
 ## Dropped claims
 
