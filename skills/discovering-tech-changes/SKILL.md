@@ -30,7 +30,7 @@ Sections, filled as in `brief-template.md`: 0 header (input, date, commit, depth
 Write it in the developer's language. Deliver in chat by default and offer a file; Confluence only on request.
 
 ## Rules
-- **Plain words first.** Explain in everyday words, followable without opening the code. State every claim in every section in plain words; identifiers (paths, functions, constants, error codes) go only in evidence columns or rows. A list of names is not an explanation.
+- **Plain words first.** Explain so the developer follows without opening the code. State every claim, question, search and input reference in plain words; identifiers and quoted input strings go only in evidence columns or rows. A list of names is not an explanation.
 - **Label every fact**: observed in code (where, date, commit), inferred (from what), or told by the developer.
 - **Never invent.** A gap in the input or the code becomes an open question with an owner and a moment (before freeze, during implementation, out of scope). Do not pick an answer for it; you may add a proposal, marked as a proposal.
 - **Propose and recommend, never decide.** The developer decides; the decision is recorded in the spec.

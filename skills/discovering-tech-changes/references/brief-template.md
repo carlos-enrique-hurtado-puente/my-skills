@@ -6,7 +6,7 @@ Written in the developer's language. Delivered where the developer says (chat, a
 
 | # | Section | Content |
 |---|---|---|
-| 0 | Header | Input and its link; date; branch and commit examined; depth (full or reduced); what the developer validated at each checkpoint and when |
+| 0 | Header | Input by title and kind, with an Evidence line for its path or link; date; branch and commit examined; depth (full or reduced); what the developer validated at each checkpoint and when |
 | 1 | In plain words | The problem, the expected outcome, how it works today, the proposed solution. One page at most; no identifiers unless the reader must find something |
 | 2 | Corrections to the input | Table: input says / is / evidence |
 | 3 | Goals and non-goals | From step 2 |
@@ -20,17 +20,24 @@ A reduced-depth brief keeps sections 0, 1, 4, 5 and 8.
 
 ## How to fill each section
 
-**Claims in plain words, identifiers only as evidence.** Outside the evidence rows of section 4, every section (corrections, reuse inventory, surroundings, options, open questions) states each item in plain words. Identifiers (file paths, function names, constants, error codes, naming patterns) go only in the Evidence column or in the evidence rows, never in the sentence that states the claim. Write "the input says retries are unlimited, but the system stops after three attempts" and put the constant and its file in Evidence.
+**Claims in plain words, identifiers only as evidence.** Outside the evidence rows of section 4, every section (corrections, reuse inventory, surroundings, options, open questions) states each item in plain words. Identifiers (file paths, function names, constants, error codes, naming patterns) go only in the Evidence column or in the evidence rows, never in the sentence that states the claim. This holds for what the input itself names too: the claim paraphrases it ("the error name the requirement proposes"), and the exact quoted string goes only in Evidence.
 
-- **0 Header.** Name the commit with `git --no-optional-locks rev-parse --short HEAD`. List each checkpoint and the developer's answer in one line.
+Example, corrections table:
+
+| Input says | Is | Evidence |
+|---|---|---|
+| Retries are unlimited | The system stops after three attempts and drops the message without an error | Input: "retry until delivered". Code: `RETRY_LIMIT = 3` in `src/queue/retry.js`; section 4, row 2 |
+| A new error name for the failure | The repo names errors by area and number; the proposed name does not follow it | Input: `QUEUE_RETRY_FAILED`. Convention: `src/shared/error-codes.js` |
+
+- **0 Header.** Name the input in plain words by its title and kind ("the requirement for X, an FRD"); its path or link goes on an Evidence line. Name the commit with `git --no-optional-locks rev-parse --short HEAD`. List each checkpoint and the developer's answer in one line.
 - **1 In plain words.** Write it so the developer understands it without opening the code: what the user or the system sees, in everyday words. If a sentence only makes sense with a file name or a constant in it, rewrite it. Say when the asked behavior already exists under another name.
 - **2 Corrections.** One row per claim of the input that the code, the design or the developer contradicts. "Says" and "is" are plain words; the Evidence column holds the identifiers and points to the section 4 row.
 - **3 Goals and non-goals.** Non-goals are reasonable goals deliberately excluded, not negations.
 - **4 How it works today.** Plain-words flow first, including every caller of the path and silent behavior. Then the evidence rows (below).
-- **5 Reuse inventory.** One row per needed behavior; "existing" names what the code does in plain words, the Evidence column names where. "What was searched" lists terms and paths; "not searched" is stated, never implied by an empty row. Conventions get their own rows (error codes, UI patterns, i18n), each with an example from the repo.
+- **5 Reuse inventory.** One row per needed behavior; "existing" names what the code does in plain words, the Evidence column names where. "What was searched" gives plain concepts and words ("the words pause, hold, silence; anything that sends notifications"); the exact search strings, function names and patterns go in Evidence; "not searched" is stated, never implied by an empty row. Conventions get their own rows (error codes, UI patterns, i18n), each with an example from the repo.
 - **6 Surroundings.** One row per item: what it is and what it touches in plain words, its state (in flight, frozen, merged), its owner or "owner unknown", and in Evidence its link or path. Sources that could not be reached are listed with what was asked of the developer instead.
 - **7 Options.** In plain words. Two or three, with reuse, creation, risks, what stays blocked; one recommended with the reason. Nothing here is decided.
-- **8 Open questions.** Every gap: an item in plain words, an owner (a role or a person the developer names; "to assign" only if the developer does not know), and a moment: before freeze, during implementation, or out of scope. A proposal may sit beside a question, marked as a proposal. Evidence holds what the question rests on.
+- **8 Open questions.** Every gap: the question in plain words (identifiers and quoted input only in Evidence), an owner (a role or a person the developer names; "to assign" only if the developer does not know), and a moment: before freeze, during implementation, or out of scope. A proposal may sit beside a question, marked as a proposal. Evidence holds what the question rests on.
 
 ## Facts from code
 
