@@ -19,7 +19,7 @@ Results are appended under `## Results` as `baseline`, `green-N`, `refactor-N`.
 
 | Scenario | Baseline | With skill (1 run) | Role |
 |---|---|---|---|
-| `before-writing` | FAIL (4 of 8 bullets: no dated assumptions, no work in flight, no platform limits, and it advised collecting exact lines, signatures and file names) | PASS 8 of 8 | discriminating |
+| `before-writing` | Rewritten on 2026-10-26 for the discovery brief (5 bullets). Previous skill: FAIL 3 of 5 (red-2: no request for the brief, no offer of `/discovering-tech-changes`, no handling of a declined offer) | PASS 5 of 5 after one fix (green-2 failed 1 of 5 because the skill let the runner assume there was no brief; green-3 passes). The original 8-bullet baseline and green-1 results (2026-10-24) remain in the scenario file's Results | discriminating |
 | `consumer-spec` | FAIL (2 of 5: defined its own shape and built the form before the open questions were answered; no deployable steps) | PASS 5 of 5 | discriminating |
 | `split-decision` | FAIL in 2 of 2 runs (3 bullets: one verdict, no options or "do not split", no questions for the dev, no recorded decision) | PASS 3 of 3 | discriminating |
 | `draft-self-check` | FAIL in 2 of 2 (no self-check; criteria without "when"; decisions without a resolution moment) | PASS 2 of 3 after two iterations (the third run has one false `yes` in its self-check) | discriminating; needs the team's FRD and a code snapshot, not reproducible from this repo |
@@ -33,3 +33,4 @@ Honest reading: the model already reviews a seeded spec well without the skill, 
 - Reading a spec from Confluence or Jira (depends on the Atlassian connector being authorized) and from a local file other than the one in the fixtures.
 - The reference files were not exercised by a scenario.
 - The skill was not tested on a real, large spec from the team.
+- `consumer-spec`, `split-decision`, `draft-self-check` and `review-seeded-spec` were not re-run after the Before writing change. `draft-self-check` needs the team's FRD and a code snapshot and cannot be reproduced from this repo; it may now stop to ask for a brief before drafting.
