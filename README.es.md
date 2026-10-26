@@ -65,3 +65,7 @@ bash tests/spec-to-jira-stories/check-structure.sh
 ```
 
 Los tests de cada skill están en su página de docs.
+
+## Licencia
+
+[MIT](LICENSE)
