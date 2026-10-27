@@ -4,6 +4,8 @@
 
 Convierte una spec técnica en historias y sub-tareas de Jira (desarrollo, certificación, code review), muestra el borrador completo y crea los tickets solo después de que confirmes cada uno. Fuente: [`skills/spec-to-jira-stories/`](../../skills/spec-to-jira-stories/SKILL.md). Se calibró con los tickets del equipo de AtomChat y se apoya en fuentes citadas sobre división de historias, PRs pequeños y diseño de pruebas.
 
+Acepta cualquier spec. Una spec escrita con [`writing-tech-specs`](writing-tech-specs.es.md) trae tabla de decisiones, IDs de criterios y lista de tareas de despliegue; la skill avisa de las decisiones que aún bloquean el freeze, conserva los IDs y pone cada tarea de despliegue dentro de la sub-tarea de desarrollo que la necesita.
+
 ## Uso
 
 En Claude Code: `/spec-to-jira-stories`. En Codex: `$spec-to-jira-stories`. La skill es solo manual: nunca se carga con un prompt implícito.

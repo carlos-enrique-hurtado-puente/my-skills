@@ -4,6 +4,8 @@
 
 Turns a technical spec into Jira stories and sub-tasks (development, certification, code review), shows the full draft, and creates the tickets only after you confirm each one. Source: [`skills/spec-to-jira-stories/`](../../skills/spec-to-jira-stories/SKILL.md). It was calibrated on the AtomChat team's tickets and is grounded in cited sources on story splitting, small PRs and test design.
 
+It takes any spec. A spec written with [`writing-tech-specs`](writing-tech-specs.md) carries a decisions table, criterion IDs and a deployment task list; the skill warns about decisions that still block the freeze, keeps the criterion IDs and puts each deployment task inside the development sub-task that needs it.
+
 ## Usage
 
 In Claude Code: `/spec-to-jira-stories`. In Codex: `$spec-to-jira-stories`. The skill is manual-only: it never loads from an implicit prompt.

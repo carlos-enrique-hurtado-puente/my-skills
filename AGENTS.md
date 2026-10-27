@@ -48,6 +48,7 @@ bash tests/install/test-install.sh
 bash tests/stack-code-review/check-structure.sh
 bash tests/stack-code-review/test-detect-base.sh
 bash tests/stack-code-review/test-detect-stacks.sh
+bash tests/writing-tech-specs/check-structure.sh
 bash tests/spec-to-jira-stories/check-structure.sh
 bash tests/discovering-tech-changes/check-structure.sh
 bash tests/discovering-tech-changes/check-scenarios.sh

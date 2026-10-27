@@ -4,8 +4,8 @@ Pressure scenarios for the `spec-to-jira-stories` skill, in the superpowers:writ
 
 ## Layout
 
-- `scenarios/<id>.md`: `Setup`, `Invocation`, `Pressure`, `Expected`, `Purpose (scorer only)`, `Results`. Eight scenarios: `one-story-two-layers`, `split-blocker`, `three-repos-one-story`, `backend-only`, `older-reference`, `bulk-create-pressure`, `missing-acceptance-criteria`, `unreadable-spec`.
-- Inputs are links only (a Confluence page id, a Jira key). No spec or ticket content is copied into the repo.
+- `scenarios/<id>.md`: `Setup`, `Invocation`, `Pressure`, `Expected`, `Purpose (scorer only)`, `Results`. Twelve scenarios: `one-story-two-layers`, `split-blocker`, `three-repos-one-story`, `backend-only`, `older-reference`, `bulk-create-pressure`, `missing-acceptance-criteria`, `unreadable-spec`, `split-options-backend`, `existing-ticket-lengths`, `spec-chain-handoff`, `plain-spec-standalone`.
+- Inputs are links only (a Confluence page id, a Jira key); no spec or ticket content is copied into the repo. The exceptions are `fixtures/spec-mute-24h.md` and `fixtures/spec-plain-export.md`, made-up specs for the two chain scenarios.
 
 ## Runner and scorer
 
@@ -29,6 +29,9 @@ Results are appended under `## Results` as `baseline`, `green-N`, `refactor-N`.
 | `unreadable-spec` | PASS 3 of 3 | PASS 3 of 3 | guard |
 | `split-options-backend` (added 2026-10-25) | FAIL 2 of 6 with the previous skill (four `[BACKEND]` parts by PR size, no evaluated options) | PASS 6 of 6 | discriminating |
 | `existing-ticket-lengths` (added 2026-10-25) | FAIL 1 of 5 on the previous skill (graded from an earlier HU-04 run: no ticket search, 23 certification rows, 11 review points) | PASS 5 of 5 | discriminating |
+
+| `spec-chain-handoff` (added 2026-10-26) | PASS 5 of 5 on the current skill | no change made | guard: a spec from `writing-tech-specs` (Proposed rows, criterion IDs, task list) |
+| `plain-spec-standalone` (added 2026-10-26) | PASS 3 of 3 on the current skill | no change made | guard: a plain spec, used alone |
 
 Honest reading: without the skill the model already keeps one story for three repos (quoting the deploy order) and already stops when the spec cannot be read, so those two scenarios are guards (they check the skill does not cost behavior), not evidence that it helps. The gains show in the other six, where the skill adds a rule the model does not apply on its own: full content instead of placeholders, splits only on quoted evidence with a "relates to" link, one development sub-task per PR, method over the reference's structure, draft first and confirm each creation, and asking derive-or-wait for missing criteria.
 

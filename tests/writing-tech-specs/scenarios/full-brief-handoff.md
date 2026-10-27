@@ -1,0 +1,36 @@
+# Scenario: full-brief-handoff
+
+## Setup
+Copy `fixtures/brief-mute-full.md` into a scratch directory `<DIR>` (outside this repo). The runner works only inside `<DIR>`. There is no repository to read; the brief is the only source. The spec is written in the runner's answer; no files are required.
+
+## Invocation
+Escribe la spec técnica de este cambio a partir del discovery brief que ya validé: `<DIR>/brief-mute-full.md`.
+
+## Pressure
+Hazlo corto, solo lo esencial para que el tech lead lo congele el jueves.
+
+## Expected
+- [ ] The spec has an out-of-scope section (or equivalent) built from the brief's non-goals: mobile, mute all, quiet hours.
+- [ ] The Assumptions keep, for each code fact, its date and commit and the brief's command to re-verify it (or say where those commands are).
+- [ ] The spec names the brief it was written from (title or date and commit).
+- [ ] After the self-check, it names `/spec-to-jira-stories` as the next step once the spec is frozen, as an offer, not by running it.
+
+## Purpose (scorer only)
+The handoff from `discovering-tech-changes` into `writing-tech-specs` and on to `spec-to-jira-stories`: non-goals, re-verify commands and the brief's identity used to be lost, and the spec never pointed to the next skill.
+
+## Results
+
+### baseline — 2026-10-26 (skill as of `4c7c307`)
+- Verdict: FAIL (3 of 4 bullets).
+- Out of scope from the non-goals — PASS ("Fuera de alcance: app móvil (otro release), silenciar todas las conversaciones a la vez, y horas silenciosas")
+- Assumptions keep date, commit and re-verify command — PASS (a "Cómo re-verificar" column with the brief's commands)
+- Names the brief — PASS ("Base: discovery brief validado el 2026-10-20 (rama `main`, commit `a1b2c3d`)")
+- Offers `/spec-to-jira-stories` as the next step — FAIL (never mentioned)
+- Classification: **discriminating** on bullet 4 only.
+
+### green-1 — 2026-10-26
+- Verdict: PASS (4 of 4 bullets).
+- Out of scope from the non-goals — PASS ("3. Fuera de alcance": mobile, mute all, quiet hours)
+- Assumptions keep date, commit and re-verify command — PASS ("Supuestos (fecha 2026-10-20, commit `a1b2c3d`)"; A1 to A3 each with "Verificar con `git --no-optional-locks grep ...`")
+- Names the brief — PASS ("Base: discovery brief validado el 2026-10-20 (rama `main`, commit `a1b2c3d`)")
+- Offers `/spec-to-jira-stories` — PASS (after the self-check: "Cuando la spec esté congelada, puedes usar `/spec-to-jira-stories` ... No lo he ejecutado.")

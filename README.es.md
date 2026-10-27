@@ -18,6 +18,16 @@ Skills personales para agentes de código (Claude Code, Codex). Un repo, muchas 
 
 Las skills solo se ejecutan cuando las invocas de forma explícita.
 
+### Del requerimiento a los tickets
+
+Tres skills forman una cadena, y cada una también funciona sola:
+
+1. `discovering-tech-changes` convierte un requerimiento y el código que toca en un discovery brief.
+2. `writing-tech-specs` escribe la spec desde ese brief (o sin él, dejando los huecos como preguntas abiertas) y la revisa antes del freeze. Luego ofrece `/spec-to-jira-stories`.
+3. `spec-to-jira-stories` convierte cualquier spec en historias y sub-tareas de Jira. Si la spec tiene tabla de decisiones, avisa de las filas que aún bloquean el freeze.
+
+Cada skill lee el documento de la anterior si se lo das, y nunca necesita que la anterior se haya ejecutado. La siguiente la inicias tú.
+
 ## Estructura
 
 ```
@@ -62,6 +72,7 @@ Desde la raíz del repo:
 
 ```bash
 bash tests/install/test-install.sh   # install.sh con un HOME temporal
+bash tests/writing-tech-specs/check-structure.sh
 bash tests/spec-to-jira-stories/check-structure.sh
 bash tests/discovering-tech-changes/check-structure.sh
 bash tests/discovering-tech-changes/check-scenarios.sh

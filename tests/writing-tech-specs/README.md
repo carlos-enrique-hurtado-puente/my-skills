@@ -5,6 +5,7 @@ Pressure scenarios and a structure check for the `writing-tech-specs` skill, in 
 ## Layout
 
 - `check-structure.sh` checks frontmatter, manual-only invocation, the nine rule lines, the checklist headings, that the references exist, that no ticket id sits in `SKILL.md` and that no person's name leaks into the skill.
+- `fixtures/brief-mute-full.md` and `fixtures/brief-mute-reduced.md`: made-up discovery briefs, full and reduced depth (used by `full-brief-handoff` and `reduced-brief`).
 - `fixtures/large-spec.md`: a summary of a large spec whose parts are at different maturity (used by `split-decision`).
 - `fixtures/seeded-spec.md`: a made-up spec with twelve seeded defects (D1 to D12, listed in the scenario's `Expected`) and a few deliberately correct parts. `fixtures/provider-spec-excerpt.md`: a backend spec with open questions.
 - `scenarios/<id>.md`: `Setup`, `Invocation`, `Pressure`, `Expected`, `Purpose (scorer only)`, `Results`.
@@ -23,6 +24,8 @@ Results are appended under `## Results` as `baseline`, `green-N`, `refactor-N`.
 | `consumer-spec` | FAIL (2 of 5: defined its own shape and built the form before the open questions were answered; no deployable steps) | PASS 5 of 5 | discriminating |
 | `split-decision` | FAIL in 2 of 2 runs (3 bullets: one verdict, no options or "do not split", no questions for the dev, no recorded decision) | PASS 3 of 3 | discriminating |
 | `draft-self-check` | FAIL in 2 of 2 (no self-check; criteria without "when"; decisions without a resolution moment) | PASS 2 of 3 after two iterations (the third run has one false `yes` in its self-check) | discriminating; needs the team's FRD and a code snapshot, not reproducible from this repo |
+| `full-brief-handoff` (added 2026-10-26) | FAIL 3 of 4 (out of scope, re-verify commands and the brief's name already kept; never offered `/spec-to-jira-stories`) | PASS 4 of 4 | discriminating on the next-step offer |
+| `reduced-brief` (added 2026-10-26) | FAIL 2 of 3 (named the missing contracts, work in flight and design version, but not goals, non-goals or options) | PASS 3 of 3 | discriminating |
 | `review-seeded-spec` | Finds 12 of 12 seeded defects but flags the correct AC-1 | PASS: 12 of 12, correct parts named | guard |
 
 Honest reading: the model already reviews a seeded spec well without the skill, so that scenario is a guard (checks the skill does not cost coverage or add false alarms), not evidence that the skill helps. The gains show in the two scenarios where the skill adds a rule the model does not apply on its own: dated assumptions plus "do not collect lines and signatures", and one home for a contract with no building on unfrozen fields.
@@ -34,3 +37,4 @@ Honest reading: the model already reviews a seeded spec well without the skill, 
 - The reference files were not exercised by a scenario.
 - The skill was not tested on a real, large spec from the team.
 - `consumer-spec`, `split-decision`, `draft-self-check` and `review-seeded-spec` were not re-run after the Before writing change. `draft-self-check` needs the team's FRD and a code snapshot and cannot be reproduced from this repo; it may now stop to ask for a brief before drafting.
+- The `/spec-to-jira-stories` offer at the end of a review (Before freezing on a given spec) was added with the draft offer but not exercised by a scenario; only the draft path was tested.
