@@ -19,7 +19,7 @@ Goal: a spec that needs few changes after freeze. This file holds the rules and 
 ## Where the spec is
 Take it from wherever the user points: pasted text, a local file, a Confluence page (read it with the Atlassian tools if connected), a Jira ticket or any other source. Read the whole spec before judging it. If you cannot read it (no access, not connected), say so and ask for the text; never review from a title or from memory. Linked sibling or provider specs: read them if reachable, otherwise list them as unverified.
 
-If the user gives a spec, run **Before freezing**. If not, run **Before writing** (brief), draft with the rules, then run **Before freezing** on your own draft before handing it over: fix every `no` you can with what you know, and turn the rest into open questions with owner and moment; never fill a gap with an invented fact. The draft's last section is `Self-check`: one line per checklist item, `P<n> yes <section or IDs>` or `P<n> no -> <fix or question ID>`, then the questions that block the freeze. A `yes` without a citation counts as `no`. After the self-check, name `/spec-to-jira-stories` as the next step once the spec is frozen: offer it, never run it.
+If the user gives a spec, run **Before freezing**. If not, run **Before writing** (brief), draft with the rules, then run **Before freezing** on your own draft before handing it over: fix every `no` you can with what you know, and turn the rest into open questions with owner and moment; never fill a gap with an invented fact. The draft's last section is `Self-check`: one line per checklist item, `P<n> yes <section or IDs>` or `P<n> no -> <fix or question ID>`, then the questions that block the freeze. A `yes` without a citation counts as `no`.
 
 ## Before writing
 First move: ask the user for the discovery brief, or whether there is one; never assume there is none. If there is one, read it and map its sections:
@@ -70,7 +70,7 @@ Answer in this order:
 4. The decision as a P8 row: Proposed until the dev or LT confirms, who decides, discarded alternatives with reason.
 
 ## Before freezing
-Walk the spec through the checklist. Answer each line `yes`, `no` or `n.a.`; every `no` carries the spec's own words or section, and the fix or an open decision with owner and moment (P8). Ask that someone who did not write it reads it too: if they cannot follow it without asking, P2 fails. Reviewing is read-only: propose fixes, rewrite the spec only if asked. Finish with whether it can freeze and the `no` items that block it, then offer `/spec-to-jira-stories` for after the freeze. Do not invent defects in parts that comply.
+Walk the spec through the checklist. Answer each line `yes`, `no` or `n.a.`; every `no` carries the spec's own words or section, and the fix or an open decision with owner and moment (P8). Ask that someone who did not write it reads it too: if they cannot follow it without asking, P2 fails. Reviewing is read-only: propose fixes, rewrite the spec only if asked. Finish with whether it can freeze and the `no` items that block it. Do not invent defects in parts that comply.
 
 1. **P1** Each mechanism has its reason as behavior, or is marked a suggestion?
 2. **P2** Understandable by someone absent? Terms defined, fixed vs. free said, clean of leftovers?

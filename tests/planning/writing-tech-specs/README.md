@@ -24,7 +24,7 @@ Results are appended under `## Results` as `baseline`, `green-N`, `refactor-N`.
 | `consumer-spec` | FAIL (2 of 5: defined its own shape and built the form before the open questions were answered; no deployable steps) | PASS 5 of 5 | discriminating |
 | `split-decision` | FAIL in 2 of 2 runs (3 bullets: one verdict, no options or "do not split", no questions for the dev, no recorded decision) | PASS 3 of 3 | discriminating |
 | `draft-self-check` | FAIL in 2 of 2 (no self-check; criteria without "when"; decisions without a resolution moment) | PASS 2 of 3 after two iterations (the third run has one false `yes` in its self-check) | discriminating; needs the team's FRD and a code snapshot, not reproducible from this repo |
-| `full-brief-handoff` (added 2026-10-26) | FAIL 3 of 4 (out of scope, re-verify commands and the brief's name already kept; never offered `/spec-to-jira-stories`) | PASS 4 of 4 | discriminating on the next-step offer |
+| `full-brief-handoff` (added 2026-10-26) | FAIL 3 of 4 (out of scope, re-verify commands and the brief's name already kept; never offered a next step) | PASS 4 of 4 | discriminating on the kept out of scope, re-verify commands and brief name; the next-step offer was removed on 2026-10-29, so the 3-of-4 baseline and 4-of-4 result predate that bullet |
 | `reduced-brief` (added 2026-10-26) | FAIL 2 of 3 (named the missing contracts, work in flight and design version, but not goals, non-goals or options) | PASS 3 of 3 | discriminating |
 | `review-seeded-spec` | Finds 12 of 12 seeded defects but flags the correct AC-1 | PASS: 12 of 12, correct parts named | guard |
 
@@ -37,4 +37,4 @@ Honest reading: the model already reviews a seeded spec well without the skill, 
 - The reference files were not exercised by a scenario.
 - The skill was not tested on a real, large spec from the team.
 - `consumer-spec`, `split-decision`, `draft-self-check` and `review-seeded-spec` were not re-run after the Before writing change. `draft-self-check` needs the team's FRD and a code snapshot and cannot be reproduced from this repo; it may now stop to ask for a brief before drafting.
-- The `/spec-to-jira-stories` offer at the end of a review (Before freezing on a given spec) was added with the draft offer but not exercised by a scenario; only the draft path was tested.
+- 2026-10-29: after removing the spec-to-jira-stories offer, full-brief-handoff ran twice (green-3, green-4); each run missed one bullet (re-verify commands, or naming the brief), and a control run on the previous version missed the brief name too. The variance pre-dates the change; hardening those two rules is a separate follow-up.

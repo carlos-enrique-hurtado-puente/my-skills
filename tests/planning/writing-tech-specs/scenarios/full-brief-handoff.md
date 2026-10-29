@@ -13,10 +13,9 @@ Hazlo corto, solo lo esencial para que el tech lead lo congele el jueves.
 - [ ] The spec has an out-of-scope section (or equivalent) built from the brief's non-goals: mobile, mute all, quiet hours.
 - [ ] The Assumptions keep, for each code fact, its date and commit and the brief's command to re-verify it (or say where those commands are).
 - [ ] The spec names the brief it was written from (title or date and commit).
-- [ ] After the self-check, it names `/spec-to-jira-stories` as the next step once the spec is frozen, as an offer, not by running it.
 
 ## Purpose (scorer only)
-The handoff from `discovering-tech-changes` into `writing-tech-specs` and on to `spec-to-jira-stories`: non-goals, re-verify commands and the brief's identity used to be lost, and the spec never pointed to the next skill.
+The handoff from `discovering-tech-changes` into `writing-tech-specs`: non-goals, re-verify commands and the brief's identity used to be lost.
 
 ## Results
 
@@ -34,3 +33,18 @@ The handoff from `discovering-tech-changes` into `writing-tech-specs` and on to 
 - Assumptions keep date, commit and re-verify command — PASS ("Supuestos (fecha 2026-10-20, commit `a1b2c3d`)"; A1 to A3 each with "Verificar con `git --no-optional-locks grep ...`")
 - Names the brief — PASS ("Base: discovery brief validado el 2026-10-20 (rama `main`, commit `a1b2c3d`)")
 - Offers `/spec-to-jira-stories` — PASS (after the self-check: "Cuando la spec esté congelada, puedes usar `/spec-to-jira-stories` ... No lo he ejecutado.")
+
+### green-3 (handoff removed) — 2026-10-29
+- Verdict: FAIL (2 of 3 bullets).
+- Out-of-scope section from the non-goals — PASS ("## Out of scope": mobile app, "Muting all conversations at once", quiet hours)
+- Assumptions keep date, commit and re-verify command — FAIL (header "Assumptions (dated 2026-10-20, commit `a1b2c3d`)" keeps date and commit, but A1 to A5 carry no re-verify command and the spec never says where the brief's commands are; only "Revalidate if implementation starts after about 2026-11-10")
+- Names the brief — PASS ("Based on the discovery brief of 2026-10-20 (`main`, commit `a1b2c3d`)")
+- No mention of spec-to-jira-stories — PASS (not named; no ticket skill offered)
+
+### green-4 (handoff removed, second run) — 2026-10-29
+- Verdict: FAIL (2 of 3 bullets)
+- Out-of-scope section from the non-goals — PASS ("## 2. Out of scope": "Mobile app (separate release).", "Muting all conversations at once.", "Quiet hours by time of day")
+- Assumptions keep date, commit and re-verify command — PASS ("## 4. Assumptions (verified 2026-10-20, commit `a1b2c3d` ...)"; A1 to A3 each "Re-verify: `git --no-optional-locks grep ...`", A4 "Re-verify: `docs/error-catalog.md`")
+- Names the brief — FAIL (the spec body never says it was written from the discovery brief; the date and commit appear only as the Assumptions' verification stamp, and "validado el 2026-10-20" is only in the chat preface before the spec)
+- No mention of spec-to-jira-stories — PASS (not named anywhere in the output)
+- Note: a control run on the `main` version (with the offer) kept the re-verify commands too, so the green-3 miss on that bullet is run-to-run variance, not caused by removing the offer.
