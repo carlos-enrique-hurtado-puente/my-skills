@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Installs the skills in skills/*/ as symlinks for Claude Code and/or Codex.
+# Installs the skills in skills/<category>/*/ as flat symlinks (by skill name) for Claude Code and/or Codex.
 # Usage: bash install.sh [--claude] [--codex]   (no flag = both)
 REPO="$(cd "$(dirname "$0")" && pwd)"
 
@@ -27,6 +27,13 @@ link_skill() { # link_skill <skills-dir> <src>
     cur="$(readlink "$dest")"
     if [ "$cur" = "$src" ] || [ "$(physical "$dest")" = "$(physical "$src")" ]; then
       echo "ok: $dest already linked"
+    elif [ "${cur%/}" = "$REPO/skills/$name" ]; then # this skill's path before categories
+      if ln -sfn "$src" "$dest"; then
+        echo "relinked: $dest -> $src"
+      else
+        echo "warning: could not relink $dest (see the error above)" >&2
+        failed=1
+      fi
     else
       echo "warning: $dest is a symlink to $cur; leaving it untouched" >&2
     fi
@@ -40,7 +47,7 @@ link_skill() { # link_skill <skills-dir> <src>
   fi
 }
 
-for src in "$REPO"/skills/*/; do
+for src in "$REPO"/skills/*/*/; do
   src="${src%/}"
   [ -f "$src/SKILL.md" ] || continue
   [ "$do_claude" -eq 1 ] && link_skill "$HOME/.claude/skills" "$src"

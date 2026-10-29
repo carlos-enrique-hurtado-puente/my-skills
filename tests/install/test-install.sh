@@ -2,7 +2,7 @@
 # Tests for install.sh. Always runs with a temporary HOME.
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 INSTALL="$ROOT/install.sh"
-TARGET="$ROOT/skills/stack-code-review"
+TARGET="$ROOT/skills/code/stack-code-review"
 TMP=$(mktemp -d); trap 'rm -rf "$TMP"' EXIT
 nfail=0
 ok()  { echo "PASS: $1"; }
@@ -63,7 +63,7 @@ check "g: failed link warned, exit 1, codex still linked" $?
 # (h) existing link to the same skill spelled differently: accepted, no warning
 newhome; mkdir -p "$H/.claude/skills"; ln -s "$TARGET/" "$H/.claude/skills/stack-code-review"
 ln -s "$ROOT" "$TMP/alias$RANDOM" && ALIAS=$(ls -d "$TMP"/alias* | head -1)
-mkdir -p "$H/.agents/skills"; ln -s "$ALIAS/skills/stack-code-review" "$H/.agents/skills/stack-code-review"
+mkdir -p "$H/.agents/skills"; ln -s "$ALIAS/skills/code/stack-code-review" "$H/.agents/skills/stack-code-review"
 run
 [ "$RC" -eq 0 ] && [ -z "$ERR" ] && echo "$OUT" | grep -q "ok: $H/.claude/skills/stack-code-review" \
   && echo "$OUT" | grep -q "ok: $H/.agents/skills/stack-code-review"
@@ -82,6 +82,21 @@ run
 [ "$RC" -eq 0 ] && echo "$ERR" | grep -q "reviewing-angular-prs" && echo "$ERR" | grep -q "skills-backup/reviewing-angular-prs-" \
   && [ -f "$H/.claude/skills/reviewing-angular-prs/SKILL.md" ] && [ ! -L "$H/.claude/skills/reviewing-angular-prs" ]
 check "j: legacy reviewing-angular-prs warned, untouched" $?
+
+# (k) link to this skill's old flat path (before categories): relinked, no warning
+newhome; mkdir -p "$H/.claude/skills"; ln -s "$ROOT/skills/stack-code-review" "$H/.claude/skills/stack-code-review"
+run
+[ "$RC" -eq 0 ] && [ -z "$ERR" ] && points_to "$H/.claude/skills/stack-code-review" \
+  && echo "$OUT" | grep -q "relinked: $H/.claude/skills/stack-code-review"
+check "k: old flat-path link relinked to category path" $?
+
+# (l) every skill is linked flat, by name, whatever its category
+newhome; run --claude
+n=0; for s in "$ROOT"/skills/*/*/SKILL.md; do
+  d="${s%/SKILL.md}"; [ "$(readlink "$H/.claude/skills/$(basename "$d")")" = "$d" ] || n=1
+done
+[ "$RC" -eq 0 ] && [ "$n" -eq 0 ] && [ ! -e "$H/.claude/skills/code" ] && [ ! -e "$H/.claude/skills/planning" ]
+check "l: all skills linked flat, no category links" $?
 
 # unknown flag
 newhome; run --bogus

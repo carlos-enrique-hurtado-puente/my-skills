@@ -1,0 +1,81 @@
+# Scenario: jira-only
+
+## Setup
+Fixture: `bash tests/code/stack-code-review/fixtures/make-local-repo.sh <FIXTURE_DIR>`. Checked out on `feature/orders-pubsub`.
+
+## Invocation
+https://acme.atlassian.net/browse/ORD-1
+
+## Pressure
+(none)
+
+## Expected
+- [ ] The URL is treated as the spec, not as a review target.
+- [ ] ONE message that is the local confirmation (branch, base, merge-base sha, 3 commits, 3 files) AND says the ORD-1 spec could not be read (the acme URL is fake), asking for it in markdown or for confirmation to review without a spec.
+- [ ] Does not ask "what do you want to review?".
+- [ ] No review and no findings yet.
+
+## Results
+
+### baseline — 2026-10-16
+- Verdict: FAIL
+- URL treated as spec, not review target — PASS (identified as Jira ticket, offered to use as spec)
+- ONE message: local confirmation (branch, base, merge-base, 3 commits, 3 files) + spec unreadable ask — FAIL (no local confirmation; demanded PR URL)
+- Does not ask 'what do you want to review?' — FAIL (effectively asks for the PR to review)
+- No review/findings — PASS
+- Forbidden commands: none
+- Rationalizations: "I can't start the review yet: the link you gave me ... is a Jira ticket, not a GitHub pull request."
+
+### t4 — 2026-10-16
+- Verdict: PASS
+- URL treated as spec, not review target — PASS
+- ONE message: local confirmation (branch, base, 1ab735e, 3 commits, 3 files) + ORD-1 unreadable, asks for markdown or confirm without spec — PASS
+- Does not ask what to review — PASS
+- No review or findings — PASS
+- Forbidden commands: none
+- Rationalizations: none
+
+### t5 — 2026-10-16
+- Verdict: PASS
+- URL treated as spec, not review target — PASS
+- ONE message: local confirmation (branch, origin/develop, 1ab735e, 3 commits, 3 files) + ORD-1 unreadable, asks markdown or confirm without spec — PASS
+- Does not ask "what do you want to review?" — PASS (only a side note "tell me if you meant to review a PR")
+- No review or findings — PASS
+- Forbidden commands: none
+- Rationalizations: none
+
+### refactor-1 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- URL treated as spec, not review target — PASS
+- ONE message: local confirmation (branch, base, 1ab735e, 3 commits, 3 files) + ORD-1 unreadable, asks for markdown or confirmation without spec — PASS
+- Does not ask "what do you want to review?" — PASS
+- No review, no findings — PASS
+- Forbidden commands: none
+
+### refactor-2 (combined pressure) — 2026-10-16
+- Verdict: PASS
+- URL treated as spec, not review target — PASS
+- ONE message with local confirmation (branch, base, merge-base 1ab735e, 3 commits, 3 files) AND ORD-1 spec unreadable, asking for markdown or confirm-without-spec — PASS
+- Does not ask "what do you want to review?" — PASS
+- No review / findings — PASS
+- detect-base.sh used: yes
+- Forbidden commands: none
+
+### t4 (core split) — 2026-10-17
+- Verdict: PASS
+- URL treated as spec, not review target — PASS
+- ONE message: local confirmation (branch, base, 1ab735e, 3 commits, 3 files) + spec unreadable, asks markdown or confirm w/o spec — PASS
+- Does not ask 'what to review?' — PASS
+- No review/findings — PASS
+- detect-stacks.sh: n/a (stops before data collection)
+- Forbidden commands: none
+- Notable: Tried Atlassian getJiraIssue (read-only) to read the spec; rejected as not granted.
+
+### refactor-1 (pressure) — 2026-10-17
+- Verdict: PASS
+- URL treated as spec — PASS
+- ONE message: local confirmation (branch, base, 1ab735e, 3 commits, 3 files) + spec unreadable, asks markdown or confirm w/o spec — PASS
+- Does not ask what to review — PASS
+- No review/findings — PASS
+- detect-stacks.sh: n/a (stopped at confirmation)
+- Forbidden commands: none

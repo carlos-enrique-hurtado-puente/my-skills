@@ -5,15 +5,22 @@ Personal skills repo for coding agents (Claude Code, Codex). One repo, many skil
 ## Layout
 
 ```
-skills/<name>/          the skill itself; this folder is what gets symlinked and installed
-docs/skills/<name>.md   usage docs for the skill (+ <name>.es.md translation)
-docs/                   design and plan documents
-tests/<name>/           tests and pressure scenarios for the skill (never installed)
-tests/install/          tests for install.sh
-install.sh              links skills/*/ into ~/.claude/skills and ~/.agents/skills
+skills/<category>/<name>/          the skill itself; this folder is what gets symlinked and installed
+docs/skills/<category>/<name>.md   usage docs for the skill (+ <name>.es.md translation)
+docs/plans/                        design and plan documents
+tests/<category>/<name>/           tests and pressure scenarios for the skill (never installed)
+tests/install/                     tests for install.sh
+install.sh                         links skills/*/*/ flat, by skill name, into ~/.claude/skills and ~/.agents/skills
 ```
 
-Keep `skills/<name>/` limited to what the agent needs at runtime (`SKILL.md`, `agents/`, `references/`, `scripts/`). Docs and tests live outside it. Each skill is self-contained; do not share files across skills.
+Categories group skills by what they do:
+
+- `planning/`: from a requirement to a spec and Jira tickets (`discovering-tech-changes`, `writing-tech-specs`, `spec-to-jira-stories`).
+- `code/`: writing and reviewing code (`stack-code-review`, `express-best-practices`).
+
+A skill lives in the same category in `skills/`, `docs/skills/` and `tests/`. Categories exist only in the repo; installed skills are flat, so skill names must be unique across categories. Add a new category only when a skill fits neither.
+
+Keep `skills/<category>/<name>/` limited to what the agent needs at runtime (`SKILL.md`, `agents/`, `references/`, `scripts/`). Docs and tests live outside it. Each skill is self-contained; do not share files across skills.
 
 ## Conventions
 
@@ -28,16 +35,16 @@ Keep `skills/<name>/` limited to what the agent needs at runtime (`SKILL.md`, `a
 ## Adding a skill
 
 1. Write it with `superpowers:writing-skills`: run a baseline pressure scenario without the skill (RED), write the skill (GREEN), then close loopholes with more scenarios (REFACTOR). Scenario runners must not see the expected result; a separate scorer agent grades the run.
-2. Create `skills/<name>/SKILL.md` and make it manual-only (see Conventions).
-3. Put scripts' tests, fixtures and scenarios in `tests/<name>/`, with a `check-structure.sh` like `tests/stack-code-review/`.
-4. Add `docs/skills/<name>.md` (and `<name>.es.md`), and a row in the skills table of `README.md` and `README.es.md`.
+2. Pick its category (see Layout), create `skills/<category>/<name>/SKILL.md` and make it manual-only (see Conventions).
+3. Put scripts' tests, fixtures and scenarios in `tests/<category>/<name>/`, with a `check-structure.sh` like `tests/code/stack-code-review/`.
+4. Add `docs/skills/<category>/<name>.md` (and `<name>.es.md`), and a row in its category's skills table in `README.md` and `README.es.md`.
 5. Run `bash install.sh`, then check it loads: `/<name>` in Claude Code, `$<name>` in Codex. An implicit prompt must not load it.
 
-For larger changes use the usual flow: `superpowers:brainstorming` -> design in `docs/` -> `superpowers:writing-plans` -> `superpowers:subagent-driven-development`.
+For larger changes use the usual flow: `superpowers:brainstorming` -> design in `docs/plans/` -> `superpowers:writing-plans` -> `superpowers:subagent-driven-development`.
 
 ## Adding a stack to `stack-code-review`
 
-Create `skills/stack-code-review/stacks/<id>.md`; nothing else changes. The format, ownership rules and id rules are in [docs/skills/stack-code-review.md](docs/skills/stack-code-review.md). Then run `check-structure.sh` and `test-detect-stacks.sh`.
+Create `skills/code/stack-code-review/stacks/<id>.md`; nothing else changes. The format, ownership rules and id rules are in [docs/skills/code/stack-code-review.md](docs/skills/code/stack-code-review.md). Then run `check-structure.sh` and `test-detect-stacks.sh`.
 
 ## Tests
 
@@ -45,13 +52,15 @@ Run before committing anything that touches the matching area:
 
 ```bash
 bash tests/install/test-install.sh
-bash tests/stack-code-review/check-structure.sh
-bash tests/stack-code-review/test-detect-base.sh
-bash tests/stack-code-review/test-detect-stacks.sh
-bash tests/writing-tech-specs/check-structure.sh
-bash tests/spec-to-jira-stories/check-structure.sh
-bash tests/discovering-tech-changes/check-structure.sh
-bash tests/discovering-tech-changes/check-scenarios.sh
+bash tests/code/stack-code-review/check-structure.sh
+bash tests/code/stack-code-review/test-detect-base.sh
+bash tests/code/stack-code-review/test-detect-stacks.sh
+bash tests/code/express-best-practices/check-structure.sh
+bash tests/code/express-best-practices/test-detect-version.sh
+bash tests/planning/writing-tech-specs/check-structure.sh
+bash tests/planning/spec-to-jira-stories/check-structure.sh
+bash tests/planning/discovering-tech-changes/check-structure.sh
+bash tests/planning/discovering-tech-changes/check-scenarios.sh
 ```
 
 ## Git workflow
