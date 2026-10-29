@@ -8,19 +8,19 @@ Personal skills for coding agents (Claude Code, Codex). One repo, many skills, i
 
 Skills run only when you invoke them explicitly.
 
-### Planning: from requirement to tickets
+### Planning: from requirement to spec
 
 | Skill | Description | Invocation (manual) | Docs |
 |---|---|---|---|
 | `discovering-tech-changes` | Understand a requirement and the code it touches and prepare a discovery brief before writing the tech spec. | `/discovering-tech-changes` (Claude Code), `$discovering-tech-changes` (Codex) | [docs/skills/planning/discovering-tech-changes.md](docs/skills/planning/discovering-tech-changes.md) |
 | `writing-tech-specs` | Prepare, write and review technical specs: write from a discovery brief (see `discovering-tech-changes`) and check a nine-principle checklist before freezing. | `/writing-tech-specs` (Claude Code), `$writing-tech-specs` (Codex) | [docs/skills/planning/writing-tech-specs.md](docs/skills/planning/writing-tech-specs.md) |
-| `spec-to-jira-stories` | Turn a technical spec into Jira stories and sub-tasks (development, certification, code review) and create them after confirmation. | `/spec-to-jira-stories` (Claude Code), `$spec-to-jira-stories` (Codex) | [docs/skills/planning/spec-to-jira-stories.md](docs/skills/planning/spec-to-jira-stories.md) |
 
-These three skills form a chain, and each also works alone:
+These two skills form a chain, and each also works alone:
 
 1. `discovering-tech-changes` turns a requirement and the code it touches into a discovery brief.
-2. `writing-tech-specs` writes the spec from that brief (or without one, listing the gaps as open questions) and checks it before the freeze. It then offers `/spec-to-jira-stories`.
-3. `spec-to-jira-stories` turns any spec into Jira stories and sub-tasks. When the spec has a decisions table, it warns about rows that still block the freeze.
+2. `writing-tech-specs` writes the spec from that brief (or without one, listing the gaps as open questions) and checks it before the freeze.
+
+A ticket-creation skill can follow; this repo does not include one.
 
 Each skill reads the previous one's document if you give it, and never needs the previous skill to have run. You start the next one yourself.
 
@@ -80,7 +80,6 @@ bash tests/install/test-install.sh   # install.sh with a temporary HOME
 bash tests/code/stack-code-review/check-structure.sh
 bash tests/code/express-best-practices/check-structure.sh
 bash tests/planning/writing-tech-specs/check-structure.sh
-bash tests/planning/spec-to-jira-stories/check-structure.sh
 bash tests/planning/discovering-tech-changes/check-structure.sh
 bash tests/planning/discovering-tech-changes/check-scenarios.sh
 ```

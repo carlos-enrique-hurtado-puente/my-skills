@@ -15,7 +15,7 @@ install.sh                         links skills/*/*/ flat, by skill name, into ~
 
 Categories group skills by what they do:
 
-- `planning/`: from a requirement to a spec and Jira tickets (`discovering-tech-changes`, `writing-tech-specs`, `spec-to-jira-stories`).
+- `planning/`: from a requirement to a spec (`discovering-tech-changes`, `writing-tech-specs`).
 - `code/`: writing and reviewing code (`stack-code-review`, `express-best-practices`).
 
 A skill lives in the same category in `skills/`, `docs/skills/` and `tests/`. Categories exist only in the repo; installed skills are flat, so skill names must be unique across categories. Add a new category only when a skill fits neither.
@@ -58,7 +58,6 @@ bash tests/code/stack-code-review/test-detect-stacks.sh
 bash tests/code/express-best-practices/check-structure.sh
 bash tests/code/express-best-practices/test-detect-version.sh
 bash tests/planning/writing-tech-specs/check-structure.sh
-bash tests/planning/spec-to-jira-stories/check-structure.sh
 bash tests/planning/discovering-tech-changes/check-structure.sh
 bash tests/planning/discovering-tech-changes/check-scenarios.sh
 ```

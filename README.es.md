@@ -10,19 +10,19 @@ Skills personales para agentes de código (Claude Code, Codex). Un repo, muchas 
 
 Las skills solo se ejecutan cuando las invocas de forma explícita.
 
-### Planning: del requerimiento a los tickets
+### Planning: del requerimiento a la spec
 
 | Skill | Descripción | Invocación (manual) | Docs |
 |---|---|---|---|
 | `discovering-tech-changes` | Entender un requerimiento y el código que toca, y preparar un brief de descubrimiento antes de escribir la spec técnica. | `/discovering-tech-changes` (Claude Code), `$discovering-tech-changes` (Codex) | [docs/skills/planning/discovering-tech-changes.es.md](docs/skills/planning/discovering-tech-changes.es.md) |
 | `writing-tech-specs` | Preparar, escribir y revisar specs técnicas: escribir desde un discovery brief (ver `discovering-tech-changes`) y revisar una lista de nueve principios antes de congelar. | `/writing-tech-specs` (Claude Code), `$writing-tech-specs` (Codex) | [docs/skills/planning/writing-tech-specs.es.md](docs/skills/planning/writing-tech-specs.es.md) |
-| `spec-to-jira-stories` | Convertir una spec técnica en historias y sub-tareas de Jira (desarrollo, certificación, code review) y crearlas tras confirmación. | `/spec-to-jira-stories` (Claude Code), `$spec-to-jira-stories` (Codex) | [docs/skills/planning/spec-to-jira-stories.es.md](docs/skills/planning/spec-to-jira-stories.es.md) |
 
-Estas tres skills forman una cadena, y cada una también funciona sola:
+Estas dos skills forman una cadena, y cada una también funciona sola:
 
 1. `discovering-tech-changes` convierte un requerimiento y el código que toca en un discovery brief.
-2. `writing-tech-specs` escribe la spec desde ese brief (o sin él, dejando los huecos como preguntas abiertas) y la revisa antes del freeze. Luego ofrece `/spec-to-jira-stories`.
-3. `spec-to-jira-stories` convierte cualquier spec en historias y sub-tareas de Jira. Si la spec tiene tabla de decisiones, avisa de las filas que aún bloquean el freeze.
+2. `writing-tech-specs` escribe la spec desde ese brief (o sin él, dejando los huecos como preguntas abiertas) y la revisa antes del freeze.
+
+Puede seguir una skill para crear tickets; este repo no la incluye.
 
 Cada skill lee el documento de la anterior si se lo das, y nunca necesita que la anterior se haya ejecutado. La siguiente la inicias tú.
 
@@ -82,7 +82,6 @@ bash tests/install/test-install.sh   # install.sh con un HOME temporal
 bash tests/code/stack-code-review/check-structure.sh
 bash tests/code/express-best-practices/check-structure.sh
 bash tests/planning/writing-tech-specs/check-structure.sh
-bash tests/planning/spec-to-jira-stories/check-structure.sh
 bash tests/planning/discovering-tech-changes/check-structure.sh
 bash tests/planning/discovering-tech-changes/check-scenarios.sh
 ```
