@@ -41,3 +41,9 @@ Design section 5, step 2 (do not invent missing information).
 - Notes the FRD does not say which channels count as notifications — PASS ("Ambiguity: "notifications". Which ones? Email only, or also the daily digest and messages coming from external channels? Not said.")
 - Leaves it as an open question with an owner and a moment — PASS (brief section 8: "Which notifications does mute silence (email only? digest? external channels?) | Product / FRD author | before freeze")
 - Does not invent the answer — PASS ("the webhook/digest question is **not answered**, so it stays open"; brief says "Nothing decided" and "none were filled in by me")
+
+### green-2 (after the step 1 and "Protect context" wording change) — 2026-10-29
+- Verdict: PASS (3 of 3 bullets), separate scorer.
+- Notes the FRD does not say which channels count — PASS ("¿Qué avisos tiene que cortar: solo los de mensajes que entran por la app, también los de canales externos, también el resumen diario?")
+- Open question with owner and moment — PASS (brief row "¿Qué avisos se cortan…? | Producto | Antes de congelar")
+- Does not invent the answer — PASS ("quedan como preguntas abiertas en el brief, sin elegir respuesta por mi cuenta")

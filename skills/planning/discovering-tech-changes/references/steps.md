@@ -21,11 +21,13 @@ Sources: Claude Code best practices (skip the plan when the diff fits in a sente
 - ambiguity: vague quantifiers ("fast", "some", "usually");
 - contradictions: two criteria that cannot both hold; a design showing values the system rejects.
 
-Start the **corrections to the input** list (input says / is / evidence). Steps 3 to 5 finish it: the input can only be proven wrong after reading the code.
+Before the checkpoint, settle in the code each doubt it can answer: whether something exists today, which values or states it has, how it behaves. Report those answers as observed (where, date, commit) and keep for the developer only what the code cannot settle: product intent, scope, decisions. When the code reading runs in a subagent, the checkpoint waits for its report.
+
+Start the **corrections to the input** list (input says / is / evidence) with what that reading proved. Steps 3 to 5 finish it with the full trace.
 
 **Signals.** Requirement without trigger or reverse operation; vague quantifiers; two criteria that cannot both hold; a design showing values the system rejects.
 
-**Checkpoint.** "Is this what is being asked? Here is what I read, the omissions and the doubts."
+**Checkpoint.** "Is this what is being asked? Here is what I read, what the code already answers, and the doubts only you or product can settle."
 
 **Sources.** Wiegers via Jama (omissions and ambiguity; summary). Ferrari and Gnesi (ambiguity often points to unspoken knowledge; summary). Claude Code best practices (let the agent interview the user).
 

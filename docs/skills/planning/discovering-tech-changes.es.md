@@ -24,7 +24,7 @@ Cada paso termina en un punto de control: se detiene, muestra el resultado en le
 
 | # | Paso | Qué hace | Punto de control |
 |---|---|---|---|
-| 1 | Entrada | Reformula lo que se pide y el resultado; marca omisiones, ambigüedades y contradicciones; abre la lista de correcciones a la entrada | ¿Es esto lo que se pide? |
+| 1 | Entrada | Reformula lo que se pide y el resultado; marca omisiones, ambigüedades y contradicciones; resuelve en el código las dudas que el código puede responder (esperando cualquier búsqueda que haya delegado); abre la lista de correcciones a la entrada | ¿Es esto lo que se pide? Solo las dudas que el código no pudo resolver |
 | 2 | Encuadre | Objetivos, no objetivos y cómo se sabrá que se logró | ¿Confirmas objetivos y no objetivos? |
 | 3 | Cómo funciona hoy | Primero el comportamiento observable, luego el flujo completo: cada llamador, otros lectores y escritores del dato, efectos secundarios, contratos, descartes silenciosos, tests, historial | Corrige la explicación |
 | 4 | Reutilización y convenciones | Para cada comportamiento necesario, busca por comportamiento (puede existir con otro nombre); registra convenciones; reutilizar, adaptar o crear, con la razón | ¿Confirmas el inventario? |
@@ -73,4 +73,4 @@ bash tests/planning/discovering-tech-changes/check-structure.sh
 bash tests/planning/discovering-tech-changes/check-scenarios.sh
 ```
 
-Diez escenarios de presión (se ejecutan a mano con un runner y un evaluador aparte) y su resultado están en [`tests/planning/discovering-tech-changes/`](../../../tests/planning/discovering-tech-changes/README.md). Resultado: 9 de 10 escenarios pasan con la skill (ejecuciones sobre commits mixtos de la skill; ver «No cubierto» en el README de tests); 5 de 10 discriminan frente a la línea base (los demás son guardas que un modelo fuerte también pasa sin la skill). El escenario `plain-language` aún pierde un punto: queda una ruta de directorio fuera de las columnas de evidencia, en una celda de "qué se buscó".
+Once escenarios de presión (se ejecutan a mano con un runner y un evaluador aparte), una micro-prueba de decisión para el paso 1 mientras corre una búsqueda de código delegada, y su resultado están en [`tests/planning/discovering-tech-changes/`](../../../tests/planning/discovering-tech-changes/README.md). En la micro-prueba, el checkpoint del paso 1 esperó a la búsqueda en 5 de 5 ejecuciones tras el cambio del 2026-10-29, frente a 1 de 5 antes. Resultado de los diez primeros: 9 de 10 escenarios pasan con la skill (ejecuciones sobre commits mixtos de la skill; ver «No cubierto» en el README de tests); 5 de 10 discriminan frente a la línea base (los demás son guardas que un modelo fuerte también pasa sin la skill). El escenario `plain-language` aún pierde un punto: queda una ruta de directorio fuera de las columnas de evidencia, en una celda de "qué se buscó".

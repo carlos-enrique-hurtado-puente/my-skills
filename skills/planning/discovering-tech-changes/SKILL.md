@@ -6,17 +6,17 @@ disable-model-invocation: true
 
 # Discovering tech changes
 
-Goal: before the spec, the developer knows, in plain words, what is asked, how the system behaves today, what to reuse, what else is moving around it, and the options. You explore and propose; the developer validates each step and decides. Sources and support levels: `evidence.md`.
+Goal: before the spec, the developer knows, in plain words, what is asked, how the system behaves today, what to reuse, what else is moving around it, and the options. Sources and support levels: `evidence.md`.
 
 ## Start
-1. **Input.** Take it from wherever the user points (text, file, Confluence, Jira through the Atlassian tools, a design). Read all of it. If you cannot read it, say so and ask for the text; never work from a title or from memory.
+1. **Input.** Take it from wherever the user points (text, file, Confluence, Jira, a design). Read all of it. If you cannot read it, say so and ask for the text; never work from a title or from memory.
 2. **Depth.** Ask before step 1: **full** (steps 1 to 7) or **reduced** (steps 3 and 4 plus a short brief) for a change the developer can describe in one sentence. Say which fits and why, then wait; the developer chooses, even for an obvious change.
 3. **Read-only.** Never write to the user's repo, Jira or Confluence. For git use `git --no-optional-locks`.
 
 ## Steps
-Each step ends at its **checkpoint**: stop, show the result in plain words, ask, and wait for the developer's answer. Even when told to hurry or to "just give the brief": keep checkpoints short, never skip them. Revisit steps 3 to 6 when something learned changes them. Signals, questions and sources per step: `steps.md`.
+Each step ends at its **checkpoint**: stop, show the result in plain words, ask, and wait for the developer's answer. Even when told to hurry or to "just give the brief": keep checkpoints short, never skip them. Revisit steps 3 to 6 when something learned changes them. Per-step signals, questions and sources: `steps.md`.
 
-1. **Intake.** Restate what is asked and the outcome. Mark omissions (a trigger without a response, an operation without its reverse), ambiguity and contradictions. Start the corrections list (input says / is). Checkpoint: is this what is asked?
+1. **Intake.** Restate what is asked and the outcome. Mark omissions (a trigger without a response, an operation without its reverse), ambiguity and contradictions. Settle in the code what it can answer, as observed facts. Start the corrections list (input says / is). Checkpoint: is this what is asked?
 2. **Framing.** Goals, non-goals (reasonable goals deliberately excluded), how success is known. Checkpoint: developer confirms goals and non-goals.
 3. **How it works today.** Observable behavior first; the code path goes in evidence lines, not the prose. Trace the whole flow: every caller, other readers and writers of the data, side effects, contracts, silent drops, tests, history. Checkpoint: developer corrects the explanation. It builds the mental model; never rush it.
 4. **Reuse and conventions.** For each needed behavior, search for code that already does it or nearly does, by behavior, not only by the input's words; it may exist under another name. Record conventions (error-code naming, UI patterns, i18n) and where existing patterns fall short. Per item: reuse, adapt or create, with the reason; flag where reuse would bend shared code. Checkpoint: developer confirms the inventory.
@@ -33,11 +33,11 @@ Write it in the developer's language. Deliver in chat by default and offer a fil
 - **Plain words first.** Explain so the developer follows without opening the code. State every claim, question, search and input reference in plain words; identifiers (including code names for features; use the product's word) and quoted input go only in evidence columns or rows. A list of names is not an explanation.
 - **Label every fact**: observed in code (where, date, commit), inferred (from what), or told by the developer.
 - **Never invent.** A gap in the input or the code becomes an open question with an owner and a moment (before freeze, during implementation, out of scope). Do not pick an answer for it; you may add a proposal, marked as a proposal.
-- **Propose and recommend, never decide.** The developer decides; the decision is recorded in the spec.
+- **Propose and recommend, never decide.** The developer decides and the spec records it.
 - **Say what you searched.** For reuse, list the terms and paths searched and what could not be searched. Never claim "nothing to reuse" without it. When the needed behavior already exists under another name, say so plainly.
 - **Follow the repo's conventions** over inventing names, codes or patterns; say which.
 - **Nearby work is a dependency until the developer says otherwise.** Anything touching the same file, flow or contract is listed with its state and its owner (or "owner unknown, to ask"); never dismiss it as unrelated on your own.
 - **Unreachable sources.** When Jira, Confluence or other repos cannot be reached, say what could not be searched and ask the developer; never report "nothing found".
 - **Ask only what the code cannot answer.**
-- **Protect context.** Delegate wide searches to read-only subagents; report their conclusions.
+- **Protect context.** Delegate wide searches to read-only subagents; report their conclusions. Checkpoints wait for every launched search to report.
 - **Not a plan, not a spec.** No code steps or acceptance criteria. Hand the validated brief to `writing-tech-specs`.

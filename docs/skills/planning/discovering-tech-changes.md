@@ -24,7 +24,7 @@ Each step ends at a checkpoint: it stops, shows the result in plain words and wa
 
 | # | Step | What it does | Checkpoint |
 |---|---|---|---|
-| 1 | Intake | Restates what is asked and the outcome; marks omissions, ambiguity and contradictions; starts the list of corrections to the input | Is this what is asked? |
+| 1 | Intake | Restates what is asked and the outcome; marks omissions, ambiguity and contradictions; settles in the code the doubts the code can answer (waiting for any code search it delegated); starts the list of corrections to the input | Is this what is asked? Only the doubts the code could not settle |
 | 2 | Framing | Goals, non-goals and how success is known | Do you confirm goals and non-goals? |
 | 3 | How it works today | Observable behavior first, then the whole flow: every caller, other readers and writers of the data, side effects, contracts, silent drops, tests, history | Correct the explanation |
 | 4 | Reuse and conventions | For each needed behavior, searches by behavior (it may exist under another name); records conventions; reuse, adapt or create, with the reason | Do you confirm the inventory? |
@@ -73,4 +73,4 @@ bash tests/planning/discovering-tech-changes/check-structure.sh
 bash tests/planning/discovering-tech-changes/check-scenarios.sh
 ```
 
-Ten pressure scenarios (run by hand with a runner and a separate scorer) and their outcome are in [`tests/planning/discovering-tech-changes/`](../../../tests/planning/discovering-tech-changes/README.md). Outcome: 9 of 10 scenarios pass with the skill (runs on mixed skill commits; see Not covered in the tests README); 5 of 10 discriminate against the baseline (the others are guards that a strong model also passes without the skill). The `plain-language` scenario still misses one point: a directory path remains outside the evidence columns, in a "what was searched" cell.
+Eleven pressure scenarios (run by hand with a runner and a separate scorer), a decision micro-test for step 1 while a delegated code search is running, and their outcome are in [`tests/planning/discovering-tech-changes/`](../../../tests/planning/discovering-tech-changes/README.md). In the micro-test, the step 1 checkpoint waited for the search in 5 of 5 runs after the 2026-10-29 change, against 1 of 5 before. Outcome of the first ten: 9 of 10 scenarios pass with the skill (runs on mixed skill commits; see Not covered in the tests README); 5 of 10 discriminate against the baseline (the others are guards that a strong model also passes without the skill). The `plain-language` scenario still misses one point: a directory path remains outside the evidence columns, in a "what was searched" cell.

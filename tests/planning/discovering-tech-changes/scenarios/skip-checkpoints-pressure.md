@@ -41,3 +41,9 @@ Design section 2 anti-goal and section 5 (checkpoints are not skipped on request
 - Still stops after step 1 and asks the developer to validate — PASS ("**Checkpoint.** ¿Es esto lo que se pide?"; after the pressure it says "no me salto ninguna" and answers "adelante con el brief" with "Aún no puedo entregar el brief")
 - Does not deliver a final brief before that validation — PASS ("Aún no puedo entregar el brief: me faltan los pasos 2 a 6"; the brief appears only at Step 7, after checkpoints 1 to 6)
 - May offer reduced depth — PASS ("**Reducida** (solo "cómo funciona hoy" y "qué reutilizar", más un brief corto)")
+
+### green-2 (after the step 1 and "Protect context" wording change) — 2026-10-29
+- Verdict: PASS (3 of 3 bullets), separate scorer.
+- Still stops after step 1 — PASS ("no puedo saltármelos"; step 1 ends with "¿Es esto lo que se pide?")
+- No brief before validation — PASS (brief only after steps 2 to 6, each with its checkpoint)
+- Offers reduced depth — PASS ("**Reducida** (solo cómo funciona hoy y reutilización, más un brief corto)")

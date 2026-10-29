@@ -6,10 +6,10 @@ cd "$(dirname "$0")/../../.." || exit 1
 T=tests/planning/discovering-tech-changes
 F=$T/fixtures/chat-app
 
-ids="input-contradicts-code reuse-under-another-name repo-convention second-caller work-in-flight skip-checkpoints-pressure plain-language missing-information obvious-change sources-unreachable"
+ids="input-contradicts-code reuse-under-another-name repo-convention second-caller work-in-flight skip-checkpoints-pressure plain-language missing-information obvious-change sources-unreachable code-answers-intake-doubts"
 
 count=$(ls "$T/scenarios" 2>/dev/null | grep -c '\.md$')
-[ "$count" -eq 10 ] || bad "scenarios/ holds $count .md files (expected 10)"
+[ "$count" -eq 11 ] || bad "scenarios/ holds $count .md files (expected 11)"
 for id in $ids; do
   s=$T/scenarios/$id.md
   if [ ! -f "$s" ]; then bad "scenarios/$id.md missing"; continue; fi
