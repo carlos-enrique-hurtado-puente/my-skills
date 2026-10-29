@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-26
 - **Status:** implemented on branch design/discovering-tech-changes; see the plan and tests/discovering-tech-changes/README.md for outcomes
-- **Related:** [writing-tech-specs](skills/writing-tech-specs.md) (consumes this skill's output), [spec-to-jira-stories](skills/spec-to-jira-stories.md) (runs after the spec)
+- **Related:** `writing-tech-specs` (consumes this skill's output), `spec-to-jira-stories` (runs after the spec)
 
 ## 1. Intent and why
 
