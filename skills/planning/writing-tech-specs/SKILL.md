@@ -34,6 +34,8 @@ First move: ask the user for the discovery brief, or whether there is one; never
 
 If the brief is reduced or lacks any section above, name each missing section to the user (goals and non-goals, surroundings, options, platform limits, design version) and list it as an open question with owner and moment (P8).
 
+The brief is an input the spec never cites. Write each fact from it as the spec's own statement (code facts with their verification date and commit, without the brief's re-verify commands), and each missing section as a question about the topic itself ("platform limits for the 24 h window: unknown"). Anything about the brief goes to the user outside the spec.
+
 If none, offer `/discovering-tech-changes`. If declined, list the brief sections the user lacks (today's behavior, contracts and owners, work in flight, platform limits, design version) as open questions with owner and moment (P8); never fill them with invented facts.
 
 Not needed: exact lines, signatures, file names (they age fastest and fix mechanism).
