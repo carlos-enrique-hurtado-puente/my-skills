@@ -24,7 +24,7 @@ Results are appended under `## Results` as `baseline`, `green-N`, `refactor-N`.
 | `consumer-spec` | FAIL (2 of 5: defined its own shape and built the form before the open questions were answered; no deployable steps) | PASS 5 of 5 | discriminating |
 | `split-decision` | FAIL in 2 of 2 runs (3 bullets: one verdict, no options or "do not split", no questions for the dev, no recorded decision) | PASS 3 of 3 | discriminating |
 | `draft-self-check` | FAIL in 2 of 2 (no self-check; criteria without "when"; decisions without a resolution moment) | PASS 2 of 3 after two iterations (the third run has one false `yes` in its self-check) | discriminating; needs the team's FRD and a code snapshot, not reproducible from this repo |
-| `full-brief-handoff` (added 2026-10-26) | FAIL 3 of 4 (out of scope, re-verify commands and the brief's name already kept; never offered a next step) | PASS 4 of 4 | discriminating on the kept out of scope, re-verify commands and brief name; the next-step offer was removed on 2026-10-29, so the 3-of-4 baseline and 4-of-4 result predate that bullet |
+| `full-brief-handoff` (added 2026-10-26) | Out of scope and dated assumptions already kept without the skill | PASS 2 of 2 (green-3 and green-4, re-graded 2026-10-30 against the two remaining bullets) | guard; the next-step offer (removed 2026-10-29) and the re-verify-command and brief-name bullets (removed 2026-10-30) are history in the scenario file |
 | `reduced-brief` (added 2026-10-26) | FAIL 2 of 3 (named the missing contracts, work in flight and design version, but not goals, non-goals or options) | PASS 3 of 3 | discriminating |
 | `review-seeded-spec` | Finds 12 of 12 seeded defects but flags the correct AC-1 | PASS: 12 of 12, correct parts named | guard |
 
@@ -37,4 +37,4 @@ Honest reading: the model already reviews a seeded spec well without the skill, 
 - The reference files were not exercised by a scenario.
 - The skill was not tested on a real, large spec from the team.
 - `consumer-spec`, `split-decision`, `draft-self-check` and `review-seeded-spec` were not re-run after the Before writing change. `draft-self-check` needs the team's FRD and a code snapshot and cannot be reproduced from this repo; it may now stop to ask for a brief before drafting.
-- 2026-10-29: after removing the spec-to-jira-stories offer, full-brief-handoff ran twice (green-3, green-4); each run missed one bullet (re-verify commands, or naming the brief), and a control run on the previous version missed the brief name too. The variance pre-dates the change; hardening those two rules is a separate follow-up.
+- 2026-10-30: full-brief-handoff no longer asks the spec to name the brief or copy its re-verify commands (the brief is only an input). The two remaining bullets were re-graded on the recorded green-3 and green-4 outputs, not on a new run. The skill does not forbid naming the brief; green-3 still named it.

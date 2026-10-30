@@ -11,11 +11,10 @@ Hazlo corto, solo lo esencial para que el tech lead lo congele el jueves.
 
 ## Expected
 - [ ] The spec has an out-of-scope section (or equivalent) built from the brief's non-goals: mobile, mute all, quiet hours.
-- [ ] The Assumptions keep, for each code fact, its date and commit and the brief's command to re-verify it (or say where those commands are).
-- [ ] The spec names the brief it was written from (title or date and commit).
+- [ ] The Assumptions keep, for each code fact, its date and commit.
 
 ## Purpose (scorer only)
-The handoff from `discovering-tech-changes` into `writing-tech-specs`: non-goals, re-verify commands and the brief's identity used to be lost.
+The handoff from `discovering-tech-changes` into `writing-tech-specs`: the brief's non-goals and the date and commit of its code facts must reach the spec. The brief is only an input: the spec need not name it or copy its re-verify commands, which embed paths and identifiers.
 
 ## Results
 
@@ -48,3 +47,7 @@ The handoff from `discovering-tech-changes` into `writing-tech-specs`: non-goals
 - Names the brief — FAIL (the spec body never says it was written from the discovery brief; the date and commit appear only as the Assumptions' verification stamp, and "validado el 2026-10-20" is only in the chat preface before the spec)
 - No mention of spec-to-jira-stories — PASS (not named anywhere in the output)
 - Note: a control run on the `main` version (with the offer) kept the re-verify commands too, so the green-3 miss on that bullet is run-to-run variance, not caused by removing the offer.
+
+### Re-graded — 2026-10-30
+- The "re-verify command" and "names the brief" bullets were removed: the brief is only an input to write the spec, and the spec does not reference it. Re-verify commands stay in the brief; date and commit are enough to revalidate.
+- Against the two remaining bullets, green-3 and green-4 both PASS 2 of 2 on their recorded evidence above (out of scope from the non-goals; date and commit on the Assumptions). No new run.
