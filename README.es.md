@@ -15,7 +15,7 @@ Las skills solo se ejecutan cuando las invocas de forma explícita.
 | Skill | Descripción | Invocación (manual) | Docs |
 |---|---|---|---|
 | `discovering-tech-changes` | Entender un requerimiento y el código que toca, y preparar un brief de descubrimiento antes de escribir la spec técnica. | `/discovering-tech-changes` (Claude Code), `$discovering-tech-changes` (Codex) | [docs/skills/planning/discovering-tech-changes.es.md](docs/skills/planning/discovering-tech-changes.es.md) |
-| `writing-tech-specs` | Preparar, escribir y revisar specs técnicas: escribir desde un discovery brief (ver `discovering-tech-changes`) y revisar una lista de nueve principios antes de congelar. | `/writing-tech-specs` (Claude Code), `$writing-tech-specs` (Codex) | [docs/skills/planning/writing-tech-specs.es.md](docs/skills/planning/writing-tech-specs.es.md) |
+| `writing-tech-specs` | Preparar y escribir specs técnicas desde un discovery brief (ver `discovering-tech-changes`), revisando el borrador contra una lista de nueve principios antes de congelar. | `/writing-tech-specs` (Claude Code), `$writing-tech-specs` (Codex) | [docs/skills/planning/writing-tech-specs.es.md](docs/skills/planning/writing-tech-specs.es.md) |
 
 Estas dos skills forman una cadena, y cada una también funciona sola:
 

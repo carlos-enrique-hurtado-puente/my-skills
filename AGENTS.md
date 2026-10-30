@@ -40,6 +40,18 @@ Keep `skills/<category>/<name>/` limited to what the agent needs at runtime (`SK
 4. Add `docs/skills/<category>/<name>.md` (and `<name>.es.md`), and a row in its category's skills table in `README.md` and `README.es.md`.
 5. Run `bash install.sh`, then check it loads: `/<name>` in Claude Code, `$<name>` in Codex. An implicit prompt must not load it.
 
+## Changing a skill
+
+Every change to a skill's behavior (`SKILL.md`, `references/`, the description) follows `superpowers:writing-skills` too, the same as a new skill. Edits to docs, README or typos do not.
+
+1. Write or update the scenario in `tests/<category>/<name>/scenarios/` first: the `Expected` bullets state the new behavior.
+2. **RED**: run it against the skill as it is on `main` (a copy of the folder in a scratch directory). It must fail; if it already passes, there is nothing to change.
+3. Make the edit. If you edited before RED, save the new version aside, restore `main`'s, and run RED before putting it back.
+4. **GREEN**: run the same scenario against the edited skill until it passes; then REFACTOR with more runs or scenarios if a runner finds a loophole.
+5. Append each run to the scenario's `## Results` (`red-N`, `green-N`, `refactor-N`, date, verdict, quotes) and update the outcome table in the tests' `README.md`.
+
+Runners get only `Setup`, `Invocation` and `Pressure` plus the skill copy; a separate scorer agent gets `Expected` and the output. Structure checks (`check-structure.sh`) prove the files are well formed, not that the skill behaves; never report a behavior change as done on them alone.
+
 For larger changes use the usual flow: `superpowers:brainstorming` -> design in `docs/plans/` -> `superpowers:writing-plans` -> `superpowers:subagent-driven-development`.
 
 ## Adding a stack to `stack-code-review`

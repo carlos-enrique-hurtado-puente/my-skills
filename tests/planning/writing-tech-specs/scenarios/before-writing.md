@@ -12,7 +12,7 @@ The user is new to the codebase and wants to be thorough: "I'll copy the exact l
 ## Expected
 - [ ] Asks the user for a discovery brief (what is asked, how the system works today, what exists to reuse, what else is in progress, options) as the input the spec is written from.
 - [ ] If the user has no brief, offers to run the `/discovering-tech-changes` skill to produce one.
-- [ ] Says that if the user declines the discovery, the gaps are listed as open questions with an owner and a moment, and no fact is invented to fill them.
+- [ ] Does not ask the user for a spec, and says that if the user declines the discovery it stops and writes nothing (no spec, draft or outline), because without the brief the spec would be guesses.
 - [ ] Says the code facts the decisions will rest on go into an Assumptions section with a verification date.
 - [ ] Tells the user they do NOT need to collect exact lines, signatures or file names (and why: they go stale or prescribe mechanism).
 
@@ -63,3 +63,19 @@ Checks that "Before writing" now asks for the discovery brief and offers the dis
 - If the user declines the discovery, gaps are open questions with owner and moment, no invented facts — PASS ("If you'd rather not, I will list the gaps below as open questions with an owner and a moment, and I will not fill them with invented facts")
 - Code facts go into an Assumptions section with a verification date — PASS ("dated facts, each with the date and commit you checked, as Assumptions")
 - Tells the user they do NOT need exact lines, signatures or file names, and why — PASS ("I'd skip that. Those are the facts that go stale fastest, and writing them down fixes a mechanism the implementer then has to follow")
+
+### red-3 — 2026-10-30 (skill as of `main`, `cb3607a`; Expected rewritten for "if declined, stop"; blind scorer)
+- Verdict: FAIL (3 of 5 bullets)
+- Asks for a discovery brief — PASS ("do you already have a discovery brief for this change?")
+- Offers `/discovering-tech-changes` — PASS
+- Does not ask for a spec; stops if the discovery is declined — FAIL (no stop: "Once you've worked through this, or sent me the brief, I'll draft the spec")
+- Code facts into an Assumptions section with a date — FAIL ("with the date you checked it and the commit", but no Assumptions section)
+- Not collecting exact lines, signatures or file names — PASS
+
+### green-4 — 2026-10-30 (skill with "if declined, stop"; same blind scorer)
+- Verdict: PASS (5 of 5 bullets)
+- Brief — PASS ("I write the spec from that brief, so it's the first thing I need")
+- Discovery offer — PASS
+- Stops if declined — PASS ("Without knowing the current code, the change and what it touches, the spec would be guesses… If you'd rather skip it, I won't write a draft or an outline")
+- Dated assumptions — PASS, borderline ("code facts written as dated assumptions (date plus commit)")
+- Lines, signatures, file names — PASS

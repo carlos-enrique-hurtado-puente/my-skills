@@ -1,6 +1,6 @@
 ---
 name: writing-tech-specs
-description: Use when the user explicitly invokes /writing-tech-specs or $writing-tech-specs to prepare, write or review a technical spec for a software change, before the spec is frozen
+description: Use when the user explicitly invokes /writing-tech-specs or $writing-tech-specs to prepare and write a technical spec for a software change, before the spec is frozen
 disable-model-invocation: true
 ---
 
@@ -16,13 +16,13 @@ Goal: a spec that needs few changes after freeze. This file holds the rules and 
 - **Fixed / free**: fixed = the implementer must follow it, and the reason is written; free = the implementer's call.
 - **Criterion vs. task**: a criterion is observable behavior (given / when / then); a task is something a person must do (run a script, deploy an index, assign codes).
 
-## Where the spec is
-Take it from wherever the user points: pasted text, a local file, a Confluence page (read it with the Atlassian tools if connected), a Jira ticket or any other source. Read the whole spec before judging it. If you cannot read it (no access, not connected), say so and ask for the text; never review from a title or from memory. Linked sibling or provider specs: read them if reachable, otherwise list them as unverified.
+## How it starts
+The skill writes specs, and a spec starts from a discovery brief (made with `/discovering-tech-changes`): what the change is about, how the code works today and what has to change. Without it there is nothing to write from. Never ask the user for a spec. A requirement (FRD, user story, ticket or just an idea) is the discovery's input, not this skill's; when the user also gives one, use it only as context, such as the ticket link (P2), never as a source of facts the brief lacks. Take the brief from wherever the user points: pasted text, a local file, a Confluence page (read it with the Atlassian tools if connected) or any other source. Read it whole; if you cannot read it (no access, not connected), say so and ask for the text, never work from a title or from memory. Reviewing a spec someone else wrote is not this skill's job.
 
-If the user gives a spec, run **Before freezing**. If not, run **Before writing** (brief), draft with the rules, then run **Before freezing** on your own draft before handing it over: fix every `no` you can with what you know, and turn the rest into open questions with owner and moment; never fill a gap with an invented fact. The draft's last section is `Self-check`: one line per checklist item, `P<n> yes <section or IDs>` or `P<n> no -> <fix or question ID>`, then the questions that block the freeze. A `yes` without a citation counts as `no`.
+Run **Before writing** (brief), draft with the rules, then run **Before freezing** on your own draft before handing it over: fix every `no` you can with what you know, and turn the rest into open questions with owner and moment; never fill a gap with an invented fact. The draft's last section is `Self-check`: one line per checklist item, `P<n> yes <section or IDs>` or `P<n> no -> <fix or question ID>`, then the questions that block the freeze. A `yes` without a citation counts as `no`.
 
 ## Before writing
-First move: ask the user for the discovery brief, or whether there is one; never assume there is none. If there is one, read it and map its sections:
+First move: ask the user for the discovery brief, or whether there is one; never assume there is none. If there is a brief, read it and map its sections:
 - plain words -> what we are building, and self-sufficiency (P2)
 - goals and non-goals -> what we are building and an Out of scope section (P2)
 - corrections to the input -> a "spec says / is" table (P2)
@@ -36,7 +36,7 @@ If the brief is reduced or lacks any section above, name each missing section to
 
 The brief is an input the spec never cites. Write each fact from it as the spec's own statement (code facts with their verification date and commit, without the brief's re-verify commands), and each missing section as a question about the topic itself ("platform limits for the 24 h window: unknown"). Anything about the brief goes to the user outside the spec.
 
-If none, offer `/discovering-tech-changes`. If declined, list the brief sections the user lacks (today's behavior, contracts and owners, work in flight, platform limits, design version) as open questions with owner and moment (P8); never fill them with invented facts.
+If none, offer `/discovering-tech-changes`, whatever the user has in hand (FRD, user story, ticket or an idea). If declined, stop: write no spec, no draft and no outline. Say that without knowing the code, the change and what it touches the spec would be guesses, and that the spec can be written once there is a brief.
 
 Not needed: exact lines, signatures, file names (they age fastest and fix mechanism).
 
@@ -72,7 +72,7 @@ Answer in this order:
 4. The decision as a P8 row: Proposed until the dev or LT confirms, who decides, discarded alternatives with reason.
 
 ## Before freezing
-Walk the spec through the checklist. Answer each line `yes`, `no` or `n.a.`; every `no` carries the spec's own words or section, and the fix or an open decision with owner and moment (P8). Ask that someone who did not write it reads it too: if they cannot follow it without asking, P2 fails. Reviewing is read-only: propose fixes, rewrite the spec only if asked. Finish with whether it can freeze and the `no` items that block it. Do not invent defects in parts that comply.
+Walk your own draft through the checklist. Answer each line `yes`, `no` or `n.a.`; every `no` carries the spec's own words or section, and the fix or an open decision with owner and moment (P8). Ask that someone who did not write it reads it too: if they cannot follow it without asking, P2 fails. Finish with whether the draft can freeze and the `no` items that block it. Do not invent defects in parts that comply.
 
 1. **P1** Each mechanism has its reason as behavior, or is marked a suggestion?
 2. **P2** Understandable by someone absent? Terms defined, fixed vs. free said, clean of leftovers?

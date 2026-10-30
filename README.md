@@ -13,7 +13,7 @@ Skills run only when you invoke them explicitly.
 | Skill | Description | Invocation (manual) | Docs |
 |---|---|---|---|
 | `discovering-tech-changes` | Understand a requirement and the code it touches and prepare a discovery brief before writing the tech spec. | `/discovering-tech-changes` (Claude Code), `$discovering-tech-changes` (Codex) | [docs/skills/planning/discovering-tech-changes.md](docs/skills/planning/discovering-tech-changes.md) |
-| `writing-tech-specs` | Prepare, write and review technical specs: write from a discovery brief (see `discovering-tech-changes`) and check a nine-principle checklist before freezing. | `/writing-tech-specs` (Claude Code), `$writing-tech-specs` (Codex) | [docs/skills/planning/writing-tech-specs.md](docs/skills/planning/writing-tech-specs.md) |
+| `writing-tech-specs` | Prepare and write technical specs from a discovery brief (see `discovering-tech-changes`), checking the draft against a nine-principle checklist before freezing. | `/writing-tech-specs` (Claude Code), `$writing-tech-specs` (Codex) | [docs/skills/planning/writing-tech-specs.md](docs/skills/planning/writing-tech-specs.md) |
 
 These two skills form a chain, and each also works alone:
 

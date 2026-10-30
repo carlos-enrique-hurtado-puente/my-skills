@@ -2,7 +2,7 @@
 
 [English](writing-tech-specs.md) | **Español**
 
-Ayuda en dos momentos de la vida de una spec técnica: antes de escribirla (qué contexto reunir) y antes de congelarla (una lista de revisión basada en nueve principios). Fuente: [`skills/planning/writing-tech-specs/`](../../../skills/planning/writing-tech-specs/SKILL.md). Destila la guía del equipo para escribir specs (original en español, fuera de este repo).
+Ayuda a escribir una spec técnica: antes de escribirla (qué contexto reunir) y antes de congelarla (una lista basada en nueve principios que la skill aplica a su propio borrador). Fuente: [`skills/planning/writing-tech-specs/`](../../../skills/planning/writing-tech-specs/SKILL.md). Destila la guía del equipo para escribir specs (original en español, fuera de este repo).
 
 ## Uso
 
@@ -10,12 +10,9 @@ En Claude Code: `/writing-tech-specs`. En Codex: `$writing-tech-specs`. La skill
 
 ```text
 /writing-tech-specs tengo que escribir la spec para silenciar una conversación 24 h; ¿qué averiguo primero?
-/writing-tech-specs revisa esta spec antes de congelar: ./specs/digest.md
-/writing-tech-specs revisa https://<sitio>.atlassian.net/wiki/spaces/ENG/pages/12345
 ```
 
-- **Sin spec:** corre **Before writing**: necesita un discovery brief y apunta a [`discovering-tech-changes`](discovering-tech-changes.es.md) para hacerlo. Mapea las secciones del brief a las reglas (palabras simples a qué construimos, objetivos y no-objetivos a qué construimos y a una sección Fuera de alcance, correcciones a una tabla "la spec dice / es", hechos del código con fecha a Supuestos, razones de reuso junto a cada mecanismo fijo, entorno a contratos y trabajo en curso, opciones y preguntas abiertas a la tabla de decisiones). Si el brief es reducido o le falta una sección, la skill nombra cada sección que falta y la deja como pregunta abierta. Si el usuario declina el discovery, los huecos pasan a preguntas abiertas con dueño y momento, nunca a hechos inventados. No hacen falta líneas exactas, firmas ni nombres de archivo. El brief es solo un insumo: la spec escribe sus hechos como propios (los del código con fecha y commit) y nunca nombra ni cita el brief. Luego redacta con las reglas y revisa su propio borrador con la lista Before freezing: el borrador termina con una sección `Self-check`, una línea por principio que cita dónde se cumple, o la corrección o pregunta abierta cuando no.
-- **Con una spec:** corre **Before freezing**. La spec puede ser texto pegado, un archivo local, una página de Confluence (se lee con las herramientas de Atlassian si están conectadas), un ticket de Jira o cualquier cosa legible. Si no puede leer la fuente, lo dice y pide que pegues el texto. La respuesta es una línea `yes` / `no` / `n.a.` por principio; cada `no` cita la spec y da una corrección o una decisión abierta con dueño y momento; al final dice si se puede congelar y qué `no` lo bloquean. La revisión no reescribe la spec salvo que lo pidas.
+- La skill escribe la spec a partir de un discovery brief y nunca te pide una spec. El flujo es `discovering-tech-changes` -> `writing-tech-specs`: un FRD, una historia de usuario, un ticket o solo la idea entran al discovery, y si también los pasas aquí son solo contexto (por ejemplo, el link del ticket). Corre **Before writing**: pide el brief y apunta a [`discovering-tech-changes`](discovering-tech-changes.es.md) para hacerlo. Mapea las secciones del brief a las reglas (palabras simples a qué construimos, objetivos y no-objetivos a qué construimos y a una sección Fuera de alcance, correcciones a una tabla "la spec dice / es", hechos del código con fecha a Supuestos, razones de reuso junto a cada mecanismo fijo, entorno a contratos y trabajo en curso, opciones y preguntas abiertas a la tabla de decisiones). Si el brief es reducido o le falta una sección, la skill nombra cada sección que falta y la deja como pregunta abierta. Si el usuario declina el discovery, la skill se detiene y no escribe nada: sin conocer el código y el cambio, la spec serían suposiciones. No hacen falta líneas exactas, firmas ni nombres de archivo. El brief es solo un insumo: la spec escribe sus hechos como propios (los del código con fecha y commit) y nunca nombra ni cita el brief. Luego redacta con las reglas y revisa su propio borrador con la lista Before freezing: el borrador termina con una sección `Self-check`, una línea por principio que cita dónde se cumple, o la corrección o pregunta abierta cuando no.
 
 ## Decidir si dividir una spec
 

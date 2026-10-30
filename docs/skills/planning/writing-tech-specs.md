@@ -2,7 +2,7 @@
 
 **English** | [Español](writing-tech-specs.es.md)
 
-Helps at two moments of a technical spec's life: before writing it (what context to gather) and before freezing it (a checklist built on nine principles). Source: [`skills/planning/writing-tech-specs/`](../../../skills/planning/writing-tech-specs/SKILL.md). It is a distillation of the team's spec-writing guide (Spanish original, kept outside this repo).
+Helps write a technical spec: before writing it (what context to gather) and before freezing it (a checklist built on nine principles that the skill applies to its own draft). Source: [`skills/planning/writing-tech-specs/`](../../../skills/planning/writing-tech-specs/SKILL.md). It is a distillation of the team's spec-writing guide (Spanish original, kept outside this repo).
 
 ## Usage
 
@@ -10,12 +10,9 @@ In Claude Code: `/writing-tech-specs`. In Codex: `$writing-tech-specs`. The skil
 
 ```text
 /writing-tech-specs I need to write the spec for muting a conversation for 24 hours; what do I find out first?
-/writing-tech-specs review this spec before the freeze: ./specs/digest.md
-/writing-tech-specs review https://<site>.atlassian.net/wiki/spaces/ENG/pages/12345
 ```
 
-- **No spec given:** the skill runs **Before writing**: it needs a discovery brief and points to [`discovering-tech-changes`](discovering-tech-changes.md) to make one. It maps the brief's sections to the rules (plain words to what we are building, goals and non-goals to what we are building and an Out of scope section, corrections to a "spec says / is" table, dated code facts to Assumptions, reuse reasons beside fixed mechanisms, surroundings to contracts and work in flight, options and open questions to the decisions table). If the brief is reduced or lacks a section, the skill names each missing section and lists it as an open question. If the user declines the discovery, the gaps become open questions with owner and moment, never invented facts. Exact lines, signatures and file names are not needed. The brief is only an input: the spec states its facts as its own (code facts with date and commit) and never names or cites the brief. Then it drafts with the rules and checks its own draft against the Before freezing list: the draft ends with a `Self-check` section, one line per principle citing where it is met, or the fix or open question when it is not.
-- **A spec given:** the skill runs **Before freezing**. The spec can be pasted text, a local file, a Confluence page (read through the Atlassian tools when connected), a Jira ticket or anything else readable. If it cannot read the source it says so and asks you to paste the text. The answer is a `yes` / `no` / `n.a.` line per principle, each `no` quoting the spec and giving a fix or an open decision with owner and moment, then a verdict on whether it can freeze and the `no` items that block it. The review does not rewrite the spec unless you ask.
+- The skill writes the spec from a discovery brief and never asks you for a spec. The flow is `discovering-tech-changes` -> `writing-tech-specs`: an FRD, user story, ticket or bare idea goes into the discovery, and if you also pass it here it is only context (for example the ticket link). It runs **Before writing**: it asks for the brief and points to [`discovering-tech-changes`](discovering-tech-changes.md) to make one. It maps the brief's sections to the rules (plain words to what we are building, goals and non-goals to what we are building and an Out of scope section, corrections to a "spec says / is" table, dated code facts to Assumptions, reuse reasons beside fixed mechanisms, surroundings to contracts and work in flight, options and open questions to the decisions table). If the brief is reduced or lacks a section, the skill names each missing section and lists it as an open question. If the user declines the discovery, the skill stops and writes nothing: without knowing the code and the change, the spec would be guesses. Exact lines, signatures and file names are not needed. The brief is only an input: the spec states its facts as its own (code facts with date and commit) and never names or cites the brief. Then it drafts with the rules and checks its own draft against the Before freezing list: the draft ends with a `Self-check` section, one line per principle citing where it is met, or the fix or open question when it is not.
 
 ## Deciding whether to split a spec
 
