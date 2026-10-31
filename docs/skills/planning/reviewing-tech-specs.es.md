@@ -12,11 +12,11 @@ En Claude Code: `/reviewing-tech-specs`. En Codex: `$reviewing-tech-specs`. Solo
 /reviewing-tech-specs revisa ./spec-mute.md; su brief está en ~/.tech-specs/2026-09-01-mute-conversation/
 ```
 
-- La revisión lee la spec completa y el `brief.md` de la carpeta de la funcionalidad (nunca un `brief-superseded-*`). No lee código ni reescribe la spec.
+- La revisión lee la spec completa y el `brief.md` de la carpeta de la feature (nunca un `brief-superseded-*`). No lee código ni reescribe la spec.
 - Checklist: una línea `P1` a `P9`, `yes`, `no` o `n.a.`; cada `no` cita la spec y da el arreglo. No inventa defectos en lo que cumple.
 - Revisión de edad: cada fila de la sección "How it works today" del brief con más de 21 días, o sin fecha, se lista como hecho a re-verificar, con las decisiones de la spec que dependen de él. Un commit solo no da edad. Sin brief, la revisión dice que no puede comprobar la edad y apunta a `/discovering-tech-changes`.
 - El veredicto nunca dice "puede congelarse" sin más mientras los hechos estén viejos o no haya brief: congelar depende de hechos vigentes (sin brief, el siguiente paso es `/discovering-tech-changes`).
-- Informe: se guarda en `~/.tech-specs/<feature>/review-<YYYY-MM-DD>.md` con `## Verdict`, `## Checklist`, `## Facts to re-verify`, `## Next step`. El siguiente paso es `/verifying-spec-facts` si hay hechos por re-verificar, `/writing-tech-specs` con el informe si algún punto es `no`, y ambos en ese orden si pasan las dos cosas. Sin carpeta de la funcionalidad, el informe queda en la respuesta y no se escribe archivo.
+- Informe: se guarda en `~/.tech-specs/<feature>/review-<YYYY-MM-DD>.md` con `## Verdict`, `## Checklist`, `## Facts to re-verify`, `## Next step`. El siguiente paso es `/verifying-spec-facts` si hay hechos por re-verificar, `/writing-tech-specs` con el informe si algún punto es `no`, y ambos en ese orden si pasan las dos cosas. Sin carpeta de la feature, el informe queda en la respuesta y no se escribe archivo.
 
 ## Qué contiene el skill
 
