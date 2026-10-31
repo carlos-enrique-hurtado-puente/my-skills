@@ -17,9 +17,9 @@ Runners get `Setup`, `Invocation` and `Pressure` (fixtures in a scratch director
 
 | Scenario | Baseline (no skill) | With skill | Role |
 |---|---|---|---|
-| `old-facts` | FAIL 3 of 3 (age mentioned in prose; no checklist, no `/verifying-spec-facts`, no report file; invented form findings) | PASS 3 of 3 (report saved, four headings, facts with date and dependent decisions, next step `/verifying-spec-facts`) | discriminating |
+| `old-facts` | FAIL 3 of 3 (age mentioned in prose; no checklist, no `/verifying-spec-facts`, no report file; invented form findings) | PASS 3 of 3 (report saved, four headings, facts with date and dependent decisions, next step `/verifying-spec-facts`). Caveat: the 3/3 GREEN relied on the implementer checking the saved files where the scorer saw only chat replies. 2026-10-31: new bullet "verdict does not say it can freeze while facts are stale" passes red and green (1 run each), so it does not discriminate here | discriminating |
 | `undated-facts` | FAIL 1 of 1 (facts not trusted, but no hand-off, no report) | PASS 1 of 1 | discriminating |
-| `no-brief` | FAIL 1 of 1 (no checklist, no age statement, no pointer) | PASS 1 of 1 | discriminating |
+| `no-brief` | FAIL 1 of 1 (no checklist, no age statement, no pointer); 2026-10-31 bullet "no freeze on unchecked facts": FAIL 1 of 1 ("el texto puede congelarse") | PASS 1 of 1; new bullet PASS 1 of 1 | discriminating |
 | `review-seeded-spec` | FAIL 1 of 1 on report shape only (finds the defects without the skill) | PASS 1 of 1 (12 of 12, guard held) | guard |
 
 ## Not covered

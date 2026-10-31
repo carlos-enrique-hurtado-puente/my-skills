@@ -16,14 +16,14 @@ Goal: tell the tech lead whether the old facts a spec rests on still hold in tod
 
 ## Verify
 Take only the facts listed in `## Facts to re-verify`, each matched to its row in the brief's section `How it works today` (section 4). For each fact:
-1. Run the row's re-verify command, read-only, in the repository, and read the code the row points to.
+1. Run the row's re-verify command, read-only, in the repository (do not run a command that could write; mark that fact **cannot verify**), and read the code the row points to.
 2. Check the surroundings that could change it: other branches, specs and work in flight that touch the same code.
 3. Label it **holds**, **changed** or **cannot verify** (command fails, code missing, repository not available), with the evidence: command and result, or file and line.
 
 Compare the fact as the brief states it, in plain words, with what the code shows today. Do not trust the brief's own date or commit.
 
 ## Outcome
-- **Every fact holds:** in `brief.md` change only the "Date and commit" cell of each flagged row, to today's date and the repository's current short commit (`git --no-optional-locks rev-parse --short HEAD`). Nothing else in the brief changes (no other cell, row or section, not the header). Write no report and no new brief. Say that the facts hold, which dates were updated, and that the spec can go on to freeze on its facts.
+- **Every fact holds:** in `brief.md` change only the "Date and commit" cell of each flagged row, to today's date and the repository's current short commit (`git --no-optional-locks rev-parse --short HEAD`). Nothing else in the brief changes (no other cell, row or section, not the header). Write no report and no new brief. Say that the facts hold, which dates were updated, and that the facts are current: continue with the review's `## Next step` (do not say the spec can freeze; the review may have other findings).
 - **Any fact changed or cannot be verified** ("cannot verify" counts as changed for routing): write `~/.tech-specs/<feature>/verify-<YYYY-MM-DD>.md` (today's date) with these headings, in this order, and do not touch `brief.md` (not even the dates of the facts that hold):
   - `## Facts that changed`: for each one, the fact in plain words, what the brief says, what the code shows today, and the evidence. A "cannot verify" fact says why. Facts that hold are not listed.
   - `## Decisions affected`: the spec decisions that depend on each listed fact, taken from the review report.

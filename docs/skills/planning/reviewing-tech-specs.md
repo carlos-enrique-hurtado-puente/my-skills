@@ -15,6 +15,7 @@ In Claude Code: `/reviewing-tech-specs`. In Codex: `$reviewing-tech-specs`. Manu
 - The review reads the whole spec and the feature folder's `brief.md` (never a `brief-superseded-*`). It never reads code and does not rewrite the spec.
 - Checklist: one `P1` to `P9` line, `yes`, `no` or `n.a.`; every `no` quotes the spec and gives the fix. It does not invent defects in parts that comply.
 - Age check: each row of the brief's section "How it works today" older than 21 days, or with no date, is listed as a fact to re-verify, with the spec decisions that depend on it. A commit alone gives no age. Without a brief, the review says the age cannot be checked and points to `/discovering-tech-changes`.
+- The verdict never says plain "can freeze" while facts are stale or there is no brief: freezing is conditional on current facts (with no brief the next step is `/discovering-tech-changes`).
 - Report: saved at `~/.tech-specs/<feature>/review-<YYYY-MM-DD>.md` with `## Verdict`, `## Checklist`, `## Facts to re-verify`, `## Next step`. The next step is `/verifying-spec-facts` when there are facts to re-verify, `/writing-tech-specs` with the report when an item is `no`, both in that order if both apply. With no feature folder the report stays in the answer and no file is written.
 
 ## What is in the skill

@@ -22,7 +22,7 @@ Support tags: **[B]** backed by several sources; **[P]** partly backed, rest is 
 - **P1 [B] Behavior first.** A mechanism (library, file, function, way of implementing) is fixed only with its reason beside it, written as the behavior to preserve. Without a reason it is a suggestion, marked non-binding.
 - **P2 [P] Self-sufficient.** Define your own terms; mark what is fixed and what is free. Clean it: no template placeholders, no parts of other specs, no references the reader cannot open, criteria cited by stable ID, ticket linked, title matches the real scope.
 - **P3 [P] Today's behavior and dependencies.** List today's facts (behavior, platform limits, design version) without identifiers or dates. Link every decision justified by a fact to it, and say if it is changing in other work. Refer to what does not exist yet (log codes, field names, keys) by concept. Against a draft design: name the version, check each type, verb and state against the final design, list those without design as questions with an owner. Design reconciliation is barely tested.
-- **P4 [H] Size by prescriptive surface** (names, paths, signatures, lines fixed), not word count; a declared size or hours must match it, or reduce or split. Use it to size while writing; it does not predict risk. There is no threshold: whether to split is decided with the dev (see Deciding whether to split).
+- **P4 [H] Size by prescriptive surface** (names, paths, signatures, lines fixed), not word count; a declared size or hours must match it, or reduce or split. Use it to size while writing; it does not predict risk. There is no threshold: whether to split is decided with the dev (see `content.md`, P4).
 - **P5 [B shape, O rest] Criteria and tasks.** Criterion: given / when / then with an observable result; no collections, keys, flags, commands, and no path to the situation. Tasks in a separate list; an operational artifact (script, console policy, index) says where it lives and what evidence is attached. Every criterion and task has a destination: a ticket in this delivery, or out of scope with a reason.
 - **P6 [B form, O rest] Verifiability.**
   - Measurable: percentage, threshold, load or environment, where and over what window it is measured, plus an Evidence line; no baseline means "baseline pending: measure first".
@@ -60,10 +60,10 @@ Closing: if the code changed tomorrow, which parts stop being true, and are they
 
 ## Report
 Write the report to `~/.tech-specs/<feature>/review-<YYYY-MM-DD>.md` (today's date) in the folder of the brief. It never goes into the user's repository. With no feature folder, give the report in the answer and write no file. Headings, in this order:
-- `## Verdict`: can freeze yes or no, and the blocking `no` items.
+- `## Verdict`: can freeze yes or no, and the blocking `no` items. When `## Facts to re-verify` is not empty, or there is no brief, never write plain yes: write "can freeze once the facts are re-verified" (or "facts unchecked, no brief"); freezing is conditional on current facts.
 - `## Checklist`: one line per item, `P<n> yes`, `P<n> no` or `P<n> n.a.`; every `no` quotes the spec and gives the fix.
 - `## Facts to re-verify`: each row of the brief's section 4 older than 21 days or undated: the fact in plain words, its date or "undated", and the spec decisions that depend on it. Empty when none, or when there is no brief (then say why).
-- `## Next step`: `/verifying-spec-facts` when there are facts to re-verify; `/writing-tech-specs` with this report when a checklist item is `no`; both, in that order, when both apply. When neither, the spec can freeze.
+- `## Next step`: `/verifying-spec-facts` when there are facts to re-verify; `/writing-tech-specs` with this report when a checklist item is `no`; both, in that order, when both apply. When neither, and there was a brief, the spec can freeze. With no brief: `/discovering-tech-changes` (to get a brief, then re-verify); never say the spec can freeze on its facts.
 
 ## Out of scope
 Rewriting the spec, checking facts against the code, changes by the LT, PM or dev during implementation or code review, QA process.

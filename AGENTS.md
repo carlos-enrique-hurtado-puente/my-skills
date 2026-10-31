@@ -30,7 +30,7 @@ Keep `skills/<category>/<name>/` limited to what the agent needs at runtime (`SK
   - Codex: `agents/openai.yaml` with `policy: { allow_implicit_invocation: false }`.
 - The folder name must equal the `name` in the `SKILL.md` frontmatter.
 - Shell scripts must work on macOS bash 3.2 and be read-only toward the user's repo (for git use `git --no-optional-locks`).
-- Skills never write to the user's repositories; they write only under `~/.tech-specs/`.
+- Skills never write to the user's repositories; briefs and reports go under `~/.tech-specs/`.
 - `install.sh` never overwrites a real folder or a symlink pointing elsewhere; it warns and continues.
 
 ## Adding a skill
