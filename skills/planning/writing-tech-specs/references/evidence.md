@@ -10,7 +10,7 @@
 |---|---|
 | P1 behavior first | Backed |
 | P2 self-sufficient | Partial |
-| P3 assumptions, design reconciliation | Partial; reconciliation barely tested |
+| P3 today's behavior and dependencies, design reconciliation | Partial; reconciliation barely tested |
 | P4 size by surface | Hypothesis; weak as a predictor |
 | P5 criteria and tasks | Backed (shape); Own (the rest) |
 | P6 verifiability | Backed (measurable form); Own (the rest) |

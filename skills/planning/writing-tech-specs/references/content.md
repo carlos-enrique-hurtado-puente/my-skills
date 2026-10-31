@@ -52,15 +52,14 @@ Cleanup before freezing: someone reading without context cannot tell what is cur
 
 **Limit.** No need to label every line. Mark the constraints and say in one sentence what the implementer decides.
 
-## P3. Assumptions with dates; refer to what does not exist yet by concept
+## P3. Today's behavior and dependencies; refer to what does not exist yet by concept
 
-**Support: Partial.** GNU Taler (date of last substantial change plus implementation status) and SoundCloud via Orosz (a review date in the header) cover the date idea. Listing dated assumptions, referring to future identifiers by concept, the 3-week threshold and the design reconciliation are the team's own. The design reconciliation is **barely tested**: no tested spec depended much on a Figma.
+**Support: Partial.** GNU Taler (date of last substantial change plus implementation status) and SoundCloud via Orosz (a review date in the header) cover the idea of stating what the spec relies on. Writing those facts as behavior, referring to future identifiers by concept and the design reconciliation are the team's own. The design reconciliation is **barely tested**: no tested spec depended much on a Figma.
 
 Rule details:
-- Assumptions cover the platform (how Firestore behaves, how many buttons WhatsApp allows) and the design (which Figma version), not only the team's code.
-- A decision whose reason is a code fact links to that assumption. If that code is changing because of other work (other specs, other PRs), the spec says so.
-- If implementation starts more than about 3 weeks after the last verification, revalidate and update the dates.
-- Design reconciliation, when the spec was written on a draft or partial mockup: name the design version with a date; check every type, verb or state the spec defines against the final design and list which have a design and which do not; those without design become open questions with an owner (see P8), not inventions; visual criteria carry a verifiable reference (node or screenshot), not "per the Figma".
+- Today's facts cover the platform (how Firestore behaves, how many buttons WhatsApp allows) and the design (which Figma version), not only the team's code. They are written as observable behavior: no file paths, functions, constants, keys, dates or commits. Those live in the discovery brief, which is where they are re-verified; the spec must survive a change of implementation.
+- A decision whose reason is a fact about today names that fact in plain words. If that behavior is changing because of other work (other specs, other PRs), the spec says so.
+- Design reconciliation, when the spec was written on a draft or partial mockup: name the design version; check every type, verb or state the spec defines against the final design and list which have a design and which do not; those without design become open questions with an owner (see P8), not inventions; visual criteria carry a verifiable reference (node or screenshot), not "per the Figma".
 
 **Why (team data).**
 - Specs (18 and 21 September) were implemented 13 to 23 October: about 3 to 4 weeks.
@@ -73,11 +72,11 @@ Rule details:
 - Old specs: ITV-551 was implemented about 88 days after its spec, which assumed a live endpoint that was later retired. ITV-696, about 35 days after: its core criterion ended up in a repo being extracted to another.
 
 **Before → after.**
-- (ITV-804) Before: "Reserve log codes `AGE-ENG232` and `AGE-ENG233`." After: "Two new log codes (failure to compute; skipped for lack of Cortex). Values are assigned at implementation from the free ones in the current catalog." And in Assumptions: "The highest code in use is `AGE-ENG229` (verified 2026-09-18)."
-- (ITV-813) Before: "A single tool, not two, because `bindTools` does not force `tool_choice`." After, in Assumptions: "The evaluator is invoked with `bindTools` and no forced `tool_choice` (verified 2026-09-18). That code is being changed by Spec B and other PRs: if it changes, the single-tool decision is reopened. The intent stays: a failure must be distinguishable from 'not met'."
-- (ITV-735) Before: "`node_transfer` carries `content.stage{from, to, reason}`", taken from the draft. After: "Design used: Figma, node 520:19019, reviewed [date]. The stage change is shown as 'Moved to [stage]', without a dropdown. The verbs `used`, `finished` and `created` have no design: question for Design, before freezing."
+- (ITV-804) Before: "Reserve log codes `AGE-ENG232` and `AGE-ENG233`." After: "Two new log codes (failure to compute; skipped for lack of Cortex). Values are assigned at implementation from the free ones in the current catalog." And in Today's behavior: "New log codes are numbered after the highest one in the current catalog, which is still growing from other work."
+- (ITV-813) Before: "A single tool, not two, because `bindTools` does not force `tool_choice`." After: "The evaluator today does not force a tool choice; that behavior is being changed by Spec B. If it changes, the single-tool decision is reopened. The intent stays: a failure must be distinguishable from 'not met'."
+- (ITV-735) Before: "`node_transfer` carries `content.stage{from, to, reason}`", taken from the draft. After: "Design used: the final log design, version named. The stage change is shown as 'Moved to [stage]', without a dropdown. The verbs `used`, `finished` and `created` have no design: question for Design, before freezing."
 
-**Limit.** Do not list trivial assumptions. Only those that force a design change if they stop being true.
+**Limit.** Do not list trivial facts. Only those that force a design change if they stop being true.
 
 ## P4. Size by prescriptive surface; split before it grows
 

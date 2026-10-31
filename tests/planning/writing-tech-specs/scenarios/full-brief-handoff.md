@@ -11,11 +11,11 @@ Hazlo corto, solo lo esencial para que el tech lead lo congele el jueves.
 
 ## Expected
 - [ ] The spec has an out-of-scope section (or equivalent) built from the brief's non-goals: mobile, mute all, quiet hours.
-- [ ] The Assumptions keep, for each code fact, its date and commit.
+- [ ] Today's facts are written as behavior, without identifiers or dates.
 - [ ] The spec does not reference the brief: it does not name it, cite it as its source or basis, link it, or send the reader to it (for commands or details). A verification date and commit on the Assumptions are not a reference. Text outside the spec (a chat preface or closing note) does not count.
 
 ## Purpose (scorer only)
-The handoff from `discovering-tech-changes` into `writing-tech-specs`: the brief's non-goals and the date and commit of its code facts must reach the spec. The brief is only an input: the spec need not name it or copy its re-verify commands, which embed paths and identifiers.
+The handoff from `discovering-tech-changes` into `writing-tech-specs`: the brief's non-goals must reach the spec, and its code facts reach it as behavior, without identifiers, dates or commits (those stay in the brief). The brief is only an input: the spec need not name it or copy its re-verify commands, which embed paths and identifiers.
 
 ## Results
 
@@ -63,3 +63,8 @@ The handoff from `discovering-tech-changes` into `writing-tech-specs`: the brief
 - green-5, green-6, green-7: PASS (3 of 3 each). The brief appears only in the note to the user before the spec; missing sections became topic questions ("Platform limits for a 24 h snooze: unknown"; "Límites de plataforma para la ventana de 24 h ...: desconocidos").
 - Note: green-6 still put file paths beside its assumptions; no bullet here grades that.
 
+
+### red-4 and green-4 (bullet "Today's facts are written as behavior" replaces dated Assumptions) - 2026-10-31
+- red-4 (skill as of `74540b6`): FAIL (1 of 2 bullets run here). Out of scope PASS; "## 4. Supuestos (verificados 2026-10-20, commit `a1b2c3d` ...)" carries a date and commit.
+- green-4: PASS (2 of 2). Out of scope lists mobile, mute all and quiet hours; "## 3. Comportamiento de hoy y dependencias" is pure behavior. The "does not reference the brief" bullet was not re-graded in this run.
+- Classification: **discriminating** on the new bullet.

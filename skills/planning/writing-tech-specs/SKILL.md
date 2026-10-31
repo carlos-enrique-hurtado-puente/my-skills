@@ -11,7 +11,7 @@ Goal: a spec that needs few changes after freeze. This file holds the rules and 
 ## Terms
 - **Spec**: the technical document for one software change (backend, frontend or both), implemented by someone who was not in the room (a person or an agent).
 - **Freeze**: the point after which only the tech lead (LT) or the team changes the spec, through their own process. That process is out of scope here.
-- **Assumption**: a fact about current code, platform, design or in-flight work that the spec relies on, with its verification date.
+- **Today's fact**: an observable fact about current behavior, platform or design that the spec relies on, written without code identifiers.
 - **Contract**: the shape of data or of an API between components or repos.
 - **Fixed / free**: fixed = the implementer must follow it, and the reason is written; free = the implementer's call.
 - **Criterion vs. task**: a criterion is observable behavior (given / when / then); a task is something a person must do (run a script, deploy an index, assign codes).
@@ -26,15 +26,15 @@ First move: ask the user for the discovery brief, or whether there is one; never
 - plain words -> what we are building, and self-sufficiency (P2)
 - goals and non-goals -> what we are building and an Out of scope section (P2)
 - corrections to the input -> a "spec says / is" table (P2)
-- dated code facts -> Assumptions (P3)
+- how it works today -> Today's behavior and dependencies (P3), as behavior, leaving identifiers, dates and commits in the brief
 - reuse reasons -> beside each fixed mechanism (P1)
-- surroundings -> contracts and work in flight (P9, P3); platform limits and design version -> Assumptions (P3)
+- surroundings -> contracts and work in flight (P9, P3); platform limits and design version -> Today's behavior and dependencies (P3)
 - options -> Proposed decision rows (P8)
 - open questions -> the decisions table (P8)
 
 If the brief is reduced or lacks any section above, name each missing section to the user (goals and non-goals, surroundings, options, platform limits, design version) and list it as an open question with owner and moment (P8).
 
-The brief is an input the spec never cites. Write each fact from it as the spec's own statement (code facts with their verification date and commit, without the brief's re-verify commands), and each missing section as a question about the topic itself ("platform limits for the 24 h window: unknown"). Anything about the brief goes to the user outside the spec.
+The brief is an input the spec never cites. Write each fact from it as the spec's own statement, as behavior (no file paths, functions, constants, keys, dates or commits: those stay in the brief), and each missing section as a question about the topic itself ("platform limits for the 24 h window: unknown"). Anything about the brief goes to the user outside the spec.
 
 If none, offer `/discovering-tech-changes`, whatever the user has in hand (FRD, user story, ticket or an idea). If declined, stop: write no spec, no draft and no outline. Say that without knowing the code, the change and what it touches the spec would be guesses, and that the spec can be written once there is a brief.
 
@@ -45,7 +45,7 @@ Support tags: **[B]** backed by several sources; **[P]** partly backed, rest is 
 
 - **P1 [B] Behavior first.** A mechanism (library, file, function, way of implementing) is fixed only with its reason beside it, written as the behavior to preserve. Without a reason it is a suggestion, marked non-binding.
 - **P2 [P] Self-sufficient.** Define your own terms; mark what is fixed and what is free. Clean it: no template placeholders, no parts of other specs, no references the reader cannot open, criteria cited by stable ID, ticket linked, title matches the real scope.
-- **P3 [P] Assumptions, dated.** List assumptions about code, platform and design version, each with date (and commit). Link every decision justified by a code fact to its assumption, and say if that code is changing in other work. Refer to what does not exist yet (log codes, field names, keys) by concept. Revalidate if implementation starts over ~3 weeks later. Against a draft design: name the version, check each type, verb and state against the final design, list those without design as questions with an owner. Design reconciliation is barely tested.
+- **P3 [P] Today's behavior and dependencies.** List today's facts (behavior, platform limits, design version) without identifiers or dates. Link every decision justified by a fact to it, and say if it is changing in other work. Refer to what does not exist yet (log codes, field names, keys) by concept. Against a draft design: name the version, check each type, verb and state against the final design, list those without design as questions with an owner. Design reconciliation is barely tested.
 - **P4 [H] Size by prescriptive surface** (names, paths, signatures, lines fixed), not word count; a declared size or hours must match it, or reduce or split. Use it to size while writing; it does not predict risk. There is no threshold: whether to split is decided with the dev (see Deciding whether to split).
 - **P5 [B shape, O rest] Criteria and tasks.** Criterion: given / when / then with an observable result; no collections, keys, flags, commands, and no path to the situation. Tasks in a separate list; an operational artifact (script, console policy, index) says where it lives and what evidence is attached. Every criterion and task has a destination: a ticket in this delivery, or out of scope with a reason.
 - **P6 [B form, O rest] Verifiability.**
@@ -76,7 +76,7 @@ Walk your own draft through the checklist. Answer each line `yes`, `no` or `n.a.
 
 1. **P1** Each mechanism has its reason as behavior, or is marked a suggestion?
 2. **P2** Understandable by someone absent? Terms defined, fixed vs. free said, clean of leftovers?
-3. **P3** Assumptions dated (code, platform, in-flight work, design version)? Future identifiers by concept? Decisions linked to assumptions? Revalidated if over ~3 weeks? Design reconciled, gaps listed?
+3. **P3** Today's facts (behavior, platform, design version) written without identifiers or dates? Future identifiers by concept? Decisions linked to the facts they depend on, and in-flight changes to them said? Design reconciled, gaps listed?
 4. **P4** Reviewable in one sitting? Declared size fits the surface? (advisory)
 5. **P5** Every criterion given/when/then, observable, no path-dependence, tasks apart, destinations and artifact homes stated?
 6. **P6** Measurables complete with evidence; verification plan; inherited evidence located; verification paths; environment needs; model-behavior cases?
@@ -84,7 +84,7 @@ Walk your own draft through the checklist. Answer each line `yes`, `no` or `n.a.
 8. **P8** Every decision with status and owner; no "before freeze" doubt open; alternatives recorded; nothing "agreed" yet pending; resolved doubts not still listed as open?
 9. **P9** Contracts single-homed; consumer says "I need"; steps and deploy order; sibling-spec phases?
 
-Closing: if the code changed tomorrow, which parts stop being true, and are they marked as assumptions or suggestions? Is anything critical that the implementer can only check by reading the code, and does the spec say so?
+Closing: if the code changed tomorrow, which parts stop being true, and are they marked as today's facts or suggestions? Is anything critical that the implementer can only check by reading the code, and does the spec say so?
 
 ## Out of scope
 Changes by the LT, PM or dev during implementation or code review, QA process, review tickets closed without a PR. This skill only makes each decision's reason and status explicit.
