@@ -34,7 +34,7 @@ Cada paso termina en un punto de control: se detiene, muestra el resultado en le
 
 ## El brief
 
-Se entrega por defecto en el chat, con la oferta de guardarlo en un archivo; Confluence solo si lo pides. Secciones:
+Cuando lo validas (paso 7), se guarda como `~/.tech-specs/<AAAA-MM-DD>-<slug>/brief.md`; la skill confirma contigo el slug antes. Si esa carpeta ya tiene un brief, el anterior se renombra `brief-superseded-<su fecha>.md`, nunca se sobrescribe. Luego la skill dice la ruta completa. Secciones:
 
 0. Encabezado: entrada, fecha, commit, profundidad, qué se validó.
 1. En palabras llanas: problema, resultado, hoy y propuesta, en una página y sin identificadores.
@@ -60,7 +60,7 @@ Cada hecho se etiqueta como observado en el código, inferido o dicho por ti. Un
 
 ## Límites
 
-- Solo lectura sobre tu repo, Jira y Confluence: no escribe nada ahí.
+- Solo lectura sobre tus repos, Jira y Confluence; lo único que escribe está en `~/.tech-specs/`.
 - No decide. Propone y recomienda; tú decides y la decisión queda en la spec.
 - No es un plan de implementación ni la spec: sin pasos de código ni criterios de aceptación. Entrega el brief validado a [`writing-tech-specs`](writing-tech-specs.es.md).
 - La evidencia de Jira detrás de las heurísticas viene de un solo equipo.
@@ -73,4 +73,4 @@ bash tests/planning/discovering-tech-changes/check-structure.sh
 bash tests/planning/discovering-tech-changes/check-scenarios.sh
 ```
 
-Once escenarios de presión (se ejecutan a mano con un runner y un evaluador aparte), una micro-prueba de decisión para el paso 1 mientras corre una búsqueda de código delegada, y su resultado están en [`tests/planning/discovering-tech-changes/`](../../../tests/planning/discovering-tech-changes/README.md). En la micro-prueba, el checkpoint del paso 1 esperó a la búsqueda en 5 de 5 ejecuciones tras el cambio del 2026-10-29, frente a 1 de 5 antes. Resultado de los diez primeros: 9 de 10 escenarios pasan con la skill (ejecuciones sobre commits mixtos de la skill; ver «No cubierto» en el README de tests); 5 de 10 discriminan frente a la línea base (los demás son guardas que un modelo fuerte también pasa sin la skill). El escenario `plain-language` aún pierde un punto: queda una ruta de directorio fuera de las columnas de evidencia, en una celda de "qué se buscó".
+Doce escenarios de presión (se ejecutan a mano con un runner y un evaluador aparte), una micro-prueba de decisión para el paso 1 mientras corre una búsqueda de código delegada, y su resultado están en [`tests/planning/discovering-tech-changes/`](../../../tests/planning/discovering-tech-changes/README.md). En la micro-prueba, el checkpoint del paso 1 esperó a la búsqueda en 5 de 5 ejecuciones tras el cambio del 2026-10-29, frente a 1 de 5 antes. Resultado de los diez primeros: 9 de 10 escenarios pasan con la skill (ejecuciones sobre commits mixtos de la skill; ver «No cubierto» en el README de tests); 5 de 10 discriminan frente a la línea base (los demás son guardas que un modelo fuerte también pasa sin la skill). El escenario `plain-language` aún pierde un punto: queda una ruta de directorio fuera de las columnas de evidencia, en una celda de "qué se buscó".

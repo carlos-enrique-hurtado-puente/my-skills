@@ -1,6 +1,6 @@
 # The discovery brief
 
-Written in the developer's language. Delivered where the developer says (chat, a file, or a Confluence page only on request); default: chat, offering a file. Short: a long document nobody reads is a failure.
+Written in the developer's language. Saved, once the developer validates it, as `~/.tech-specs/<YYYY-MM-DD>-<slug>/brief.md` (an older `brief.md` there is renamed `brief-superseded-<its date>.md`). Short: a long document nobody reads is a failure.
 
 ## Sections
 
@@ -54,7 +54,7 @@ Inferred facts say what they were inferred from. Nothing is invented: a fact wit
 |---|---|
 | 1 | "What we are building" (P2) |
 | 2 | "Spec says / is" table (P2) |
-| 4 | Assumptions with date and commit (P3) |
+| 4 | "Today's behavior and dependencies" (P3): written as behavior; identifiers stay in the brief |
 | 5 | Reasons beside each fixed mechanism (P1) |
 | 6 | Contracts and sibling specs (P9), work in flight (P3) |
 | 7 | Decisions as Proposed rows (P8) |

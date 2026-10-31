@@ -34,7 +34,7 @@ Each step ends at a checkpoint: it stops, shows the result in plain words and wa
 
 ## The brief
 
-Delivered in chat by default, with an offer to save it as a file; Confluence only on request. Sections:
+Once you validate it (step 7), it is saved as `~/.tech-specs/<YYYY-MM-DD>-<slug>/brief.md`; the skill confirms the slug with you first. If that folder already holds a brief, the old one is renamed `brief-superseded-<its date>.md`, never overwritten. The skill then says the full path. Sections:
 
 0. Header: input, date, commit, depth, what was validated.
 1. In plain words: problem, outcome, today and proposal, on one page and without identifiers.
@@ -60,7 +60,7 @@ Every fact is labeled as observed in code, inferred, or told by you. A gap in th
 
 ## Limits
 
-- Read-only toward your repo, Jira and Confluence: it writes nothing there.
+- Read-only toward your repos, Jira and Confluence; the only place it writes is `~/.tech-specs/`.
 - It does not decide. It proposes and recommends; you decide and the decision is recorded in the spec.
 - It is not an implementation plan and not the spec: no code steps and no acceptance criteria. Hand the validated brief to [`writing-tech-specs`](writing-tech-specs.md).
 - The Jira evidence behind the heuristics comes from one team.
@@ -73,4 +73,4 @@ bash tests/planning/discovering-tech-changes/check-structure.sh
 bash tests/planning/discovering-tech-changes/check-scenarios.sh
 ```
 
-Eleven pressure scenarios (run by hand with a runner and a separate scorer), a decision micro-test for step 1 while a delegated code search is running, and their outcome are in [`tests/planning/discovering-tech-changes/`](../../../tests/planning/discovering-tech-changes/README.md). In the micro-test, the step 1 checkpoint waited for the search in 5 of 5 runs after the 2026-10-29 change, against 1 of 5 before. Outcome of the first ten: 9 of 10 scenarios pass with the skill (runs on mixed skill commits; see Not covered in the tests README); 5 of 10 discriminate against the baseline (the others are guards that a strong model also passes without the skill). The `plain-language` scenario still misses one point: a directory path remains outside the evidence columns, in a "what was searched" cell.
+Twelve pressure scenarios (run by hand with a runner and a separate scorer), a decision micro-test for step 1 while a delegated code search is running, and their outcome are in [`tests/planning/discovering-tech-changes/`](../../../tests/planning/discovering-tech-changes/README.md). In the micro-test, the step 1 checkpoint waited for the search in 5 of 5 runs after the 2026-10-29 change, against 1 of 5 before. Outcome of the first ten: 9 of 10 scenarios pass with the skill (runs on mixed skill commits; see Not covered in the tests README); 5 of 10 discriminate against the baseline (the others are guards that a strong model also passes without the skill). The `plain-language` scenario still misses one point: a directory path remains outside the evidence columns, in a "what was searched" cell.

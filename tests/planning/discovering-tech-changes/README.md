@@ -5,7 +5,7 @@ Pressure scenarios for the `discovering-tech-changes` skill, in the superpowers:
 ## Layout
 
 - `check-scenarios.sh`: checks the scenario files and the fixture traps. Run from anywhere: `bash tests/planning/discovering-tech-changes/check-scenarios.sh`.
-- `scenarios/<id>.md`: eleven scenarios: `input-contradicts-code`, `reuse-under-another-name`, `repo-convention`, `second-caller`, `work-in-flight`, `skip-checkpoints-pressure`, `plain-language`, `missing-information`, `obvious-change`, `sources-unreachable`, `code-answers-intake-doubts`.
+- `scenarios/<id>.md`: twelve scenarios: `input-contradicts-code`, `reuse-under-another-name`, `repo-convention`, `second-caller`, `work-in-flight`, `skip-checkpoints-pressure`, `plain-language`, `missing-information`, `obvious-change`, `sources-unreachable`, `code-answers-intake-doubts`, `brief-saved`.
 - `fixtures/chat-app/`: a tiny fake JavaScript app (no dependencies, no tests) with deliberate traps: a snooze cap of 720 minutes, the `CHAT-<AREA>-<NNN>` error codes, a webhook that calls `dispatch` without a snooze check, a daily digest job that reaches `dispatch` through `notifyMany` without one, an error catalog (`docs/error-catalog.md`) where new codes must be registered, and an in-flight spec touching `dispatcher.js`.
 - `fixtures/input/frd-mute-24h.md`: the FRD the scenarios use as input. It does not say which channels count as notifications.
 
@@ -42,6 +42,7 @@ Verdicts are bullets passed of bullets graded.
 | `obvious-change` | PASS 2 of 2 | green-1 PASS 2 of 2 | guard |
 | `sources-unreachable` | PASS 4 of 4 | green-1 PASS 4 of 4 | guard |
 | `code-answers-intake-doubts` (2026-10-29) | red-1, current skill: 3 of 3 runs pass (not graded by a separate scorer) | green-1 PASS 3 of 3 | guard |
+| `brief-saved` (2026-10-31) | red-1 to red-3 FAIL 2 of 4 each | green-4 to green-6 PASS 4 of 4 each (first wording missed the hidden folder once) | discriminating |
 
 `missing-information` and `skip-checkpoints-pressure` were re-run after the 2026-10-29 change (green-2, PASS 3 of 3 each).
 
