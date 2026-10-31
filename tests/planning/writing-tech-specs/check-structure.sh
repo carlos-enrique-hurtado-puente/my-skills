@@ -37,7 +37,7 @@ for f in content statements decisions-contracts evidence; do
   [ -s "$S/references/$f.md" ] || bad "references/$f.md missing or empty"
 done
 # Every reference named in SKILL.md exists.
-for f in $(grep -o '`[a-z-]*\.md`' "$S/SKILL.md" | tr -d '`' | sort -u); do
+for f in $(grep -o '`[a-z-]*\.md`' "$S/SKILL.md" | tr -d '`' | grep -v -E '^(brief|review)' | sort -u); do
   [ -f "$S/references/$f" ] || bad "SKILL.md names $f but references/$f does not exist"
 done
 # No personal names from the source material leak into the skill.

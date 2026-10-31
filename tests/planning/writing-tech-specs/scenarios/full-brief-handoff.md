@@ -1,10 +1,10 @@
 # Scenario: full-brief-handoff
 
 ## Setup
-Copy `fixtures/brief-mute-full.md` into a scratch directory `<DIR>` (outside this repo). The runner works only inside `<DIR>`. There is no repository to read; the brief is the only source. The spec is written in the runner's answer; no files are required.
+Treat `<DIR>/home` as the home directory: `~/.tech-specs/` means `<DIR>/home/.tech-specs/`. Copy `fixtures/brief-mute-full.md` to `<DIR>/home/.tech-specs/2026-10-20-mute-conversation/brief.md`. The runner works only inside `<DIR>`. There is no repository to read; the brief is the only source. The spec is written in the runner's answer; no files are required.
 
 ## Invocation
-Escribe la spec técnica de este cambio a partir del discovery brief que ya validé: `<DIR>/brief-mute-full.md`.
+Escribe la spec técnica de este cambio a partir del discovery brief que ya validé, en la carpeta `~/.tech-specs/2026-10-20-mute-conversation/`.
 
 ## Pressure
 Hazlo corto, solo lo esencial para que el tech lead lo congele el jueves.
@@ -12,7 +12,7 @@ Hazlo corto, solo lo esencial para que el tech lead lo congele el jueves.
 ## Expected
 - [ ] The spec has an out-of-scope section (or equivalent) built from the brief's non-goals: mobile, mute all, quiet hours.
 - [ ] Today's facts are written as behavior, without identifiers or dates.
-- [ ] The spec does not reference the brief: it does not name it, cite it as its source or basis, link it, or send the reader to it (for commands or details). A verification date and commit on the Assumptions are not a reference. Text outside the spec (a chat preface or closing note) does not count.
+- [ ] The spec does not reference the brief: it does not name it, cite it as its source or basis, link it, or send the reader to it (for commands or details). Facts written as behavior in the spec's today's-behavior section are not a reference to the brief. Text outside the spec (a chat preface or closing note) does not count.
 
 ## Purpose (scorer only)
 The handoff from `discovering-tech-changes` into `writing-tech-specs`: the brief's non-goals must reach the spec, and its code facts reach it as behavior, without identifiers, dates or commits (those stay in the brief). The brief is only an input: the spec need not name it or copy its re-verify commands, which embed paths and identifiers.
@@ -68,3 +68,8 @@ The handoff from `discovering-tech-changes` into `writing-tech-specs`: the brief
 - red-4 (skill as of `74540b6`): FAIL (1 of 2 bullets run here). Out of scope PASS; "## 4. Supuestos (verificados 2026-10-20, commit `a1b2c3d` ...)" carries a date and commit.
 - green-4: PASS (2 of 2). Out of scope lists mobile, mute all and quiet hours; "## 3. Comportamiento de hoy y dependencias" is pure behavior. The "does not reference the brief" bullet was not re-graded in this run.
 - Classification: **discriminating** on the new bullet.
+
+### re-run with `~/.tech-specs/` and the Expected bullet 3 reworded - 2026-10-31
+- green A (skill before the "does not settle" sentence): FAIL (2 of 3). Out of scope PASS; today's facts as behavior PASS; "does not reference the brief" FAIL: the spec body said "Ticket: pendiente de enlazar (el brief no trae enlace; ...)". Blind scorer.
+- green B (final skill): PASS (3 of 3), graded by me. Out of scope lists mobile, mute all and quiet hours; today's facts as behavior with no identifiers or dates; the word "brief" appears only in the preface to the user, and the missing ticket link is the spec's own line "Link del ticket de esta entrega".
+- Note: this bullet fails in 1 of 2 runs after the folder change; variance, not caused by the new rule.

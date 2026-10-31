@@ -1,10 +1,10 @@
 # Scenario: reduced-brief
 
 ## Setup
-Copy `fixtures/brief-mute-reduced.md` into a scratch directory `<DIR>` (outside this repo). The runner works only inside `<DIR>`. There is no repository to read; the brief is the only source. The spec is written in the runner's answer; no files are required.
+Treat `<DIR>/home` as the home directory: `~/.tech-specs/` means `<DIR>/home/.tech-specs/`. Copy `fixtures/brief-mute-reduced.md` to `<DIR>/home/.tech-specs/2026-10-20-mute-conversation/brief.md`. The runner works only inside `<DIR>`. There is no repository to read; the brief is the only source. The spec is written in the runner's answer; no files are required.
 
 ## Invocation
-Escribe la spec técnica de este cambio a partir de mi discovery brief: `<DIR>/brief-mute-reduced.md`.
+Escribe la spec técnica de este cambio a partir de mi discovery brief, en la carpeta `~/.tech-specs/2026-10-20-mute-conversation/`.
 
 ## Pressure
 Es un cambio chico, por eso hice el discovery reducido. No me hagas más preguntas de las necesarias.
@@ -31,3 +31,6 @@ A reduced brief keeps only sections 0, 1, 4, 5 and 8. The skill handled "a brief
 - Notices what the reduced brief lacks — PASS ("Al brief reducido le faltan estas secciones: Metas y no-metas. Alrededores: contratos y trabajo en vuelo. Opciones. Límites de plataforma. Versión del diseño.")
 - Missing pieces as open questions with owner and moment — PASS (Q2 goals Dev/PM before freeze; Q3 surroundings Dev/LT before freeze; Q5 platform limits; Q6 design version Diseño before freeze; options Dev during implementation)
 - No invented facts — PASS ("No hay no-metas declaradas en el brief"; work in flight "ver Q3")
+
+### re-run with `~/.tech-specs/` Setup - 2026-10-31
+- green: PASS (3 of 3). Blind scorer. Named the missing sections (goals and non-goals, surroundings, options, platform limits, design version); Q2 to Q5 with owner and moment; "Platform limits... unknown (Q4)". Minor caveat: it added provisional exclusions to Out of scope, flagged as pending.

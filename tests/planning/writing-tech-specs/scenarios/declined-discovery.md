@@ -36,3 +36,6 @@ The user decided on 2026-10-30 that a spec is written only from a discovery brie
 - Why — PASS ("cada decisión del borrador sería una suposición con forma de hecho").
 - Spec waits for a brief — PASS ("Correr `/discovering-tech-changes` con este FRD, acotado… En cuanto tenga el brief, escribo la spec").
 - Does not ask for a spec — PASS.
+
+### re-run - 2026-10-31 (skill reads briefs from `~/.tech-specs/`)
+- green: PASS (4 of 4). Blind scorer. "no voy a escribir la spec, ni siquiera como borrador o esqueleto"; says why; offers `/discovering-tech-changes`; does not ask for a spec.
