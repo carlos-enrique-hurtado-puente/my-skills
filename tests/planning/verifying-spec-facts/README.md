@@ -29,3 +29,4 @@ Outcome date: 2026-10-31.
 - Only the "cannot verify" routing is stated in the skill, never run.
 - The scratch repo has a single commit and one branch; surroundings (other branches, work in flight) were barely exercised.
 - Runners knew the review report existed in the same folder; a report with extra closing paragraphs was not tested.
+- Manual-only loading was not checked interactively: that `/verifying-spec-facts` loads in Claude Code (and `$verifying-spec-facts` in Codex) and that an implicit prompt does not load it. Only the install symlinks were verified.

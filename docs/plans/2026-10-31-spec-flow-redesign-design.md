@@ -1,7 +1,7 @@
 # Spec flow redesign: design
 
 - **Date:** 2026-10-31
-- **Status:** design, approved in conversation; not implemented
+- **Status:** implemented on branch `writing-tech-specs-brief-only`
 - **Related:** `discovering-tech-changes`, `writing-tech-specs`, two new skills (`reviewing-tech-specs`, `verifying-spec-facts`); the flow as users see it: [docs/skills/planning/flow.md](../skills/planning/flow.md)
 
 ## 1. Intent and why

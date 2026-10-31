@@ -28,3 +28,4 @@ Runners get `Setup`, `Invocation` and `Pressure` (fixtures in a scratch director
 - Runners were told the date; the 21-day limit was never tested near its edge (for example a row 20 or 22 days old).
 - The reference files were not exercised.
 - A first round of `old-facts`, `undated-facts` and `no-brief` was discarded because the compliant fixture had open before-freeze questions that the reviewers rightly flagged; the fixture was fixed and every run redone.
+- Manual-only loading was not checked interactively: that `/reviewing-tech-specs` loads in Claude Code (and `$reviewing-tech-specs` in Codex) and that an implicit prompt does not load it. Only the install symlinks were verified.

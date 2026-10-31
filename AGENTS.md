@@ -15,7 +15,7 @@ install.sh                         links skills/*/*/ flat, by skill name, into ~
 
 Categories group skills by what they do:
 
-- `planning/`: from a requirement to a spec (`discovering-tech-changes`, `writing-tech-specs`).
+- `planning/`: from a requirement to a spec (`discovering-tech-changes`, `writing-tech-specs`, `reviewing-tech-specs`, `verifying-spec-facts`).
 - `code/`: writing and reviewing code (`stack-code-review`, `express-best-practices`).
 
 A skill lives in the same category in `skills/`, `docs/skills/` and `tests/`. Categories exist only in the repo; installed skills are flat, so skill names must be unique across categories. Add a new category only when a skill fits neither.
@@ -30,6 +30,7 @@ Keep `skills/<category>/<name>/` limited to what the agent needs at runtime (`SK
   - Codex: `agents/openai.yaml` with `policy: { allow_implicit_invocation: false }`.
 - The folder name must equal the `name` in the `SKILL.md` frontmatter.
 - Shell scripts must work on macOS bash 3.2 and be read-only toward the user's repo (for git use `git --no-optional-locks`).
+- Skills never write to the user's repositories; they write only under `~/.tech-specs/`.
 - `install.sh` never overwrites a real folder or a symlink pointing elsewhere; it warns and continues.
 
 ## Adding a skill
@@ -72,6 +73,10 @@ bash tests/code/express-best-practices/test-detect-version.sh
 bash tests/planning/writing-tech-specs/check-structure.sh
 bash tests/planning/discovering-tech-changes/check-structure.sh
 bash tests/planning/discovering-tech-changes/check-scenarios.sh
+bash tests/planning/reviewing-tech-specs/check-structure.sh
+bash tests/planning/reviewing-tech-specs/test-rules-sync.sh
+bash tests/planning/verifying-spec-facts/check-structure.sh
+bash tests/planning/verifying-spec-facts/test-brief-heading.sh
 ```
 
 ## Git workflow

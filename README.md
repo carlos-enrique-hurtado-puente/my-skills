@@ -14,13 +14,15 @@ Skills run only when you invoke them explicitly.
 |---|---|---|---|
 | `discovering-tech-changes` | Understand a requirement and the code it touches and prepare a discovery brief before writing the tech spec. | `/discovering-tech-changes` (Claude Code), `$discovering-tech-changes` (Codex) | [docs/skills/planning/discovering-tech-changes.md](docs/skills/planning/discovering-tech-changes.md) |
 | `writing-tech-specs` | Prepare and write technical specs from a discovery brief (see `discovering-tech-changes`), checking the draft against a nine-principle checklist before freezing. | `/writing-tech-specs` (Claude Code), `$writing-tech-specs` (Codex) | [docs/skills/planning/writing-tech-specs.md](docs/skills/planning/writing-tech-specs.md) |
+| `reviewing-tech-specs` | Review a spec against the nine principles and check how old its brief's facts are, without reading code. | `/reviewing-tech-specs` (Claude Code), `$reviewing-tech-specs` (Codex) | [docs/skills/planning/reviewing-tech-specs.md](docs/skills/planning/reviewing-tech-specs.md) |
+| `verifying-spec-facts` | Re-verify the brief facts a review flagged against today's code, and update their dates or report what changed. | `/verifying-spec-facts` (Claude Code), `$verifying-spec-facts` (Codex) | [docs/skills/planning/verifying-spec-facts.md](docs/skills/planning/verifying-spec-facts.md) |
 
-These two skills form a chain:
+The planning skills work in two flows:
 
-1. `discovering-tech-changes` turns a requirement (FRD, user story, ticket or an idea) and the code it touches into a discovery brief.
-2. `writing-tech-specs` writes the spec only from that brief and checks it before the freeze. With no brief it offers the discovery, and if you decline it writes nothing.
+1. New spec: `discovering-tech-changes` turns a requirement (FRD, user story, ticket or an idea) and the code it touches into a discovery brief saved in `~/.tech-specs/`; `writing-tech-specs` writes the spec only from that brief and checks it before the freeze. With no brief it offers the discovery, and if you decline it writes nothing.
+2. Existing spec: `reviewing-tech-specs` checks it against the nine principles and the brief's age; `verifying-spec-facts` re-verifies the facts the review flagged.
 
-The full flow, including reviewing and re-verifying an existing spec (planned), is in [docs/skills/planning/flow.md](docs/skills/planning/flow.md).
+The full flow is in [docs/skills/planning/flow.md](docs/skills/planning/flow.md).
 
 A ticket-creation skill can follow; this repo does not include one.
 
@@ -84,6 +86,10 @@ bash tests/code/express-best-practices/check-structure.sh
 bash tests/planning/writing-tech-specs/check-structure.sh
 bash tests/planning/discovering-tech-changes/check-structure.sh
 bash tests/planning/discovering-tech-changes/check-scenarios.sh
+bash tests/planning/reviewing-tech-specs/check-structure.sh
+bash tests/planning/reviewing-tech-specs/test-rules-sync.sh
+bash tests/planning/verifying-spec-facts/check-structure.sh
+bash tests/planning/verifying-spec-facts/test-brief-heading.sh
 ```
 
 Each skill's own tests are listed on its docs page.

@@ -4,8 +4,6 @@
 
 Cómo trabajan juntas las skills de planning. Diseño y razones: [docs/plans/2026-10-31-spec-flow-redesign-design.md](../../plans/2026-10-31-spec-flow-redesign-design.md).
 
-> **Estado (2026-10-31):** `discovering-tech-changes` y `writing-tech-specs` existen. Las partes del flujo que necesitan `reviewing-tech-specs`, `verifying-spec-facts`, guardar briefs en `~/.tech-specs/` y el nuevo P3 están planeadas, todavía no construidas.
-
 ```mermaid
 flowchart TD
     subgraph F1["Flujo 1: de la idea a la spec"]
@@ -43,8 +41,8 @@ flowchart TD
 |---|---|---|---|
 | `discovering-tech-changes` | Produce el brief | Sí | El brief en `~/.tech-specs/` |
 | `writing-tech-specs` | Escribe la spec desde un brief | No | La spec |
-| `reviewing-tech-specs` (planeada) | Revisa la spec contra P1–P9 y la antigüedad del brief | No | Informe de la review |
-| `verifying-spec-facts` (planeada, nombre tentativo) | Comprueba los hechos del brief en el código de hoy | Sí | Las fechas del brief, o un informe de qué cambió |
+| `reviewing-tech-specs` | Revisa la spec contra P1–P9 y la antigüedad del brief | No | Informe de la review |
+| `verifying-spec-facts` | Comprueba los hechos del brief en el código de hoy | Sí | Las fechas del brief, o un informe de qué cambió |
 
 ## Reglas que atraviesan el flujo
 

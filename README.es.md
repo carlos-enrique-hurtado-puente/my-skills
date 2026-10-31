@@ -16,13 +16,15 @@ Las skills solo se ejecutan cuando las invocas de forma explícita.
 |---|---|---|---|
 | `discovering-tech-changes` | Entender un requerimiento y el código que toca, y preparar un brief de descubrimiento antes de escribir la spec técnica. | `/discovering-tech-changes` (Claude Code), `$discovering-tech-changes` (Codex) | [docs/skills/planning/discovering-tech-changes.es.md](docs/skills/planning/discovering-tech-changes.es.md) |
 | `writing-tech-specs` | Preparar y escribir specs técnicas desde un discovery brief (ver `discovering-tech-changes`), revisando el borrador contra una lista de nueve principios antes de congelar. | `/writing-tech-specs` (Claude Code), `$writing-tech-specs` (Codex) | [docs/skills/planning/writing-tech-specs.es.md](docs/skills/planning/writing-tech-specs.es.md) |
+| `reviewing-tech-specs` | Revisar una spec contra los nueve principios y comprobar la antigüedad de los hechos de su brief, sin leer código. | `/reviewing-tech-specs` (Claude Code), `$reviewing-tech-specs` (Codex) | [docs/skills/planning/reviewing-tech-specs.es.md](docs/skills/planning/reviewing-tech-specs.es.md) |
+| `verifying-spec-facts` | Re-verificar en el código de hoy los hechos del brief que marcó la review, y actualizar sus fechas o informar qué cambió. | `/verifying-spec-facts` (Claude Code), `$verifying-spec-facts` (Codex) | [docs/skills/planning/verifying-spec-facts.es.md](docs/skills/planning/verifying-spec-facts.es.md) |
 
 Estas dos skills forman una cadena:
 
-1. `discovering-tech-changes` convierte un requerimiento (FRD, historia de usuario, ticket o solo la idea) y el código que toca en un discovery brief.
-2. `writing-tech-specs` escribe la spec solo desde ese brief y la revisa antes del freeze. Sin brief, ofrece el discovery, y si lo declinas no escribe nada.
+1. Spec nueva: `discovering-tech-changes` convierte un requerimiento (FRD, historia de usuario, ticket o solo la idea) y el código que toca en un discovery brief guardado en `~/.tech-specs/`; `writing-tech-specs` escribe la spec solo desde ese brief y la revisa antes del freeze. Sin brief, ofrece el discovery, y si lo declinas no escribe nada.
+2. Spec existente: `reviewing-tech-specs` la revisa contra los nueve principios y la antigüedad del brief; `verifying-spec-facts` re-verifica los hechos que marcó la review.
 
-El flujo completo, incluida la revisión y la re-verificación de una spec existente (planeadas), está en [docs/skills/planning/flow.es.md](docs/skills/planning/flow.es.md).
+El flujo completo está en [docs/skills/planning/flow.es.md](docs/skills/planning/flow.es.md).
 
 Puede seguir una skill para crear tickets; este repo no la incluye.
 
@@ -86,6 +88,10 @@ bash tests/code/express-best-practices/check-structure.sh
 bash tests/planning/writing-tech-specs/check-structure.sh
 bash tests/planning/discovering-tech-changes/check-structure.sh
 bash tests/planning/discovering-tech-changes/check-scenarios.sh
+bash tests/planning/reviewing-tech-specs/check-structure.sh
+bash tests/planning/reviewing-tech-specs/test-rules-sync.sh
+bash tests/planning/verifying-spec-facts/check-structure.sh
+bash tests/planning/verifying-spec-facts/test-brief-heading.sh
 ```
 
 Los tests de cada skill están en su página de docs.
