@@ -59,3 +59,6 @@ Design section 5, brief format (plain-words section kept free of code).
 - The plain-words section names no file, function or variable — PASS (section "1. En palabras simples": "La app ya permite 'posponer' una conversación... solo dura hasta 12 horas"; no file, function or variable named)
 - It covers the problem, how it works today and the proposed solution — PASS ("**Problema.**", "**Hoy.**", "**Propuesta.** No crear una función nueva: ampliar la de posponer para aceptar 24 horas...")
 - Code references appear only in the evidence section — FAIL (outside evidence: section 5, row "Textos traducidos y registros", column "Qué se buscó": "textos y logs en `src/`", a directory path in a non-evidence column; everything else checked is in evidence columns or lines)
+
+### green-2 (after the Task 3 wording restore) — 2026-10-31
+- Verdict: PASS (3 of 3 bullets), separate scorer (one run, lenient on a `src/` search scope in a "what was searched" cell, the known residual).

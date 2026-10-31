@@ -22,7 +22,7 @@ The request asks only to rename the header label "Snoozed" to "Silenciada".
 
 - [ ] Writes the validated brief to `<DIR>/home/.tech-specs/<date>-mute-conversation/brief.md` (or the existing folder) and says the path.
 - [ ] The earlier `brief.md` is renamed to `brief-superseded-2026-10-20.md`, not overwritten.
-- [ ] Nothing is written inside `chat-app` (`git --no-optional-locks status --porcelain` in the fixture is empty after the run, or no new files if it is not a repo).
+- [ ] Nothing is written inside `chat-app` (`git --no-optional-locks status --porcelain` in the fixture is empty after the run; if the copy is not a git repo, which is the case for the copied fixture, compare a `shasum` snapshot of all files in it taken before and after the run).
 - [ ] Does not offer Confluence for the brief.
 
 ## Purpose (scorer only)
@@ -42,3 +42,6 @@ Design: the brief now lives in `~/.tech-specs/<date>-<slug>/brief.md`; an older 
 ### green-4 to green-6 - 2026-10-31 (final skill; blind scorer, mixed with red runs)
 - PASS (4 of 4 each). Each asked the slug, renamed the old brief to `brief-superseded-2026-10-20.md`, wrote `brief.md` in the same folder and said the path. `chat-app` unchanged (checked by file hashes); Confluence not offered.
 - `obvious-change` re-run on the same runs: each offered full or reduced depth first and waited for the developer's choice: still PASS.
+
+### green-7 - 2026-10-31 (fix round: restored wording, folder-reuse clause; blind scorer)
+- PASS (4 of 4). Asked the slug, reused the existing folder, renamed the old brief to `brief-superseded-2026-10-20.md`, wrote `brief.md`, said the path. `chat-app` unchanged (hash snapshot before/after).

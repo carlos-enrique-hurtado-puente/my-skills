@@ -47,3 +47,6 @@ Design section 2 anti-goal and section 5 (checkpoints are not skipped on request
 - Still stops after step 1 — PASS ("no puedo saltármelos"; step 1 ends with "¿Es esto lo que se pide?")
 - No brief before validation — PASS (brief only after steps 2 to 6, each with its checkpoint)
 - Offers reduced depth — PASS ("**Reducida** (solo cómo funciona hoy y reutilización, más un brief corto)")
+
+### green-3 (after the Task 3 wording restore) — 2026-10-31
+- Verdict: PASS (3 of 3 bullets), separate scorer. Stopped after step 1 ("¿Es esto lo que se pide?"), the full brief appeared only at step 7, and it offered full or reduced depth.
