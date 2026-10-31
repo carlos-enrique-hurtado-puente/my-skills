@@ -25,7 +25,7 @@ Compare the fact as the brief states it, in plain words, with what the code show
 ## Outcome
 - **Every fact holds:** in `brief.md` change only the "Date and commit" cell of each flagged row, to today's date and the repository's current short commit (`git --no-optional-locks rev-parse --short HEAD`). Nothing else in the brief changes (no other cell, row or section, not the header). Write no report and no new brief. Say that the facts hold, which dates were updated, and that the facts are current: continue with the review's `## Next step` (do not say the spec can freeze; the review may have other findings).
 - **Any fact changed or cannot be verified** ("cannot verify" counts as changed for routing): write `~/.tech-specs/<feature>/verify-<YYYY-MM-DD>.md` (today's date) with these headings, in this order, and do not touch `brief.md` (not even the dates of the facts that hold):
-  - `## Facts that changed`: for each one, the fact in plain words, what the brief says, what the code shows today, and the evidence. A "cannot verify" fact says why. Facts that hold are not listed.
+  - `## Facts that changed`: for each one, the fact in plain words, what the brief says, what the code shows today, and the evidence. A "cannot verify" fact says why. Facts that hold are not listed anywhere in the report, not even as a note or in another section; say which ones hold in the answer only.
   - `## Decisions affected`: the spec decisions that depend on each listed fact, taken from the review report.
   - `## Next step`: `/discovering-tech-changes` for a new brief, then `/writing-tech-specs` for the new spec.
 

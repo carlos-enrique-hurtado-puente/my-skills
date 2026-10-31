@@ -36,7 +36,7 @@ else
 fi
 
 T=tests/planning/verifying-spec-facts
-for f in README.md fixtures/brief-mute-old.md fixtures/review-mute-old.md scenarios/all-facts-hold.md scenarios/fact-changed.md scenarios/no-review.md; do
+for f in README.md fixtures/brief-mute-old.md fixtures/review-mute-old.md scenarios/all-facts-hold.md scenarios/fact-changed.md scenarios/no-review.md scenarios/cannot-verify.md scenarios/write-command.md fixtures/brief-mute-old-missing.md fixtures/review-mute-old-missing.md fixtures/brief-mute-old-write.md fixtures/review-mute-old-write.md; do
   [ -s "$T/$f" ] || bad "$T/$f missing or empty"
 done
 [ -d "$T/fixtures/chat-app/src" ] || bad "$T/fixtures/chat-app missing"
