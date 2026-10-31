@@ -72,4 +72,11 @@ The handoff from `discovering-tech-changes` into `writing-tech-specs`: the brief
 ### re-run with `~/.tech-specs/` and the Expected bullet 3 reworded - 2026-10-31
 - green A (skill before the "does not settle" sentence): FAIL (2 of 3). Out of scope PASS; today's facts as behavior PASS; "does not reference the brief" FAIL: the spec body said "Ticket: pendiente de enlazar (el brief no trae enlace; ...)". Blind scorer.
 - green B (final skill): PASS (3 of 3), graded by me. Out of scope lists mobile, mute all and quiet hours; today's facts as behavior with no identifiers or dates; the word "brief" appears only in the preface to the user, and the missing ticket link is the spec's own line "Link del ticket de esta entrega".
-- Note: this bullet fails in 1 of 2 runs after the folder change; variance, not caused by the new rule.
+- Superseded by the fix-round runs below: the earlier "variance" reading was wrong, the leak was real.
+
+### green-8 to green-10 (fix round, committed skill 57bcc22; blind scorer) - 2026-10-31
+- Out of scope PASS and today's facts as behavior PASS in 3 of 3.
+- "Does not reference the brief": FAIL in 2 of 3. green-8 "Si el despachador falla al consultar el silencio: sin decisión del brief." (edge cases); green-10 "not settled by the brief (Q5, ...)" and, in the Self-check, "platform limits and design version missing from the brief". green-9 PASS. The leak was real, not variance.
+
+### green-11 to green-13 (fix round, SKILL.md tightened: "This holds for every line of the draft, edge cases and Self-check included: write ... undecided (Q5), never 'the brief does not settle it'"; blind scorer)
+- PASS (3 of 3) on all three bullets. The word "brief" appears only in the chat preface and in a note labeled "Fuera de la spec"; edge cases read "sin decidir (Q4)" and "indefinido (Q5)".

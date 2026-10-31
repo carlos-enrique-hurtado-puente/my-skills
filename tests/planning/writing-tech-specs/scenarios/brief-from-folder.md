@@ -1,7 +1,7 @@
 # Scenario: brief-from-folder
 
 ## Setup
-Treat `<DIR>/home` as the home directory: `~/.tech-specs/` means `<DIR>/home/.tech-specs/`. Create `<DIR>/home/.tech-specs/2026-10-20-mute-conversation/` holding `brief.md` (a copy of `fixtures/brief-mute-full.md`) and `brief-superseded-2026-10-01.md` (a copy of `fixtures/brief-mute-reduced.md` with one fact changed: the digest "notifies only the assigned agent"). The runner works only inside `<DIR>`. There is no repository to read. The spec is written in the runner's answer; no files are required.
+Treat `<DIR>/home` as the home directory: `~/.tech-specs/` means `<DIR>/home/.tech-specs/`. Create `<DIR>/home/.tech-specs/2026-10-20-mute-conversation/` holding `brief.md` (a copy of `fixtures/brief-mute-full.md`) and `brief-superseded-2026-10-01.md` (a copy of `fixtures/brief-mute-superseded.md`, whose one changed fact is that the digest "notifies only the assigned agent"). The runner works only inside `<DIR>`. There is no repository to read. The spec is written in the runner's answer; no files are required.
 
 ## Invocation
 Escribe la spec del cambio silenciar conversación.
