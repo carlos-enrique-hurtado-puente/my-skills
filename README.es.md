@@ -17,14 +17,16 @@ Las skills solo se ejecutan cuando las invocas de forma explícita.
 | `discovering-tech-changes` | Entender un requerimiento y el código que toca, y preparar un brief de descubrimiento antes de escribir la spec técnica. | `/discovering-tech-changes` (Claude Code), `$discovering-tech-changes` (Codex) | [docs/skills/planning/discovering-tech-changes.es.md](docs/skills/planning/discovering-tech-changes.es.md) |
 | `writing-tech-specs` | Preparar y escribir specs técnicas desde un discovery brief (ver `discovering-tech-changes`), revisando el borrador contra una lista de nueve principios antes de congelar. | `/writing-tech-specs` (Claude Code), `$writing-tech-specs` (Codex) | [docs/skills/planning/writing-tech-specs.es.md](docs/skills/planning/writing-tech-specs.es.md) |
 
-Estas dos skills forman una cadena, y cada una también funciona sola:
+Estas dos skills forman una cadena:
 
-1. `discovering-tech-changes` convierte un requerimiento y el código que toca en un discovery brief.
-2. `writing-tech-specs` escribe la spec desde ese brief (o sin él, dejando los huecos como preguntas abiertas) y la revisa antes del freeze.
+1. `discovering-tech-changes` convierte un requerimiento (FRD, historia de usuario, ticket o solo la idea) y el código que toca en un discovery brief.
+2. `writing-tech-specs` escribe la spec solo desde ese brief y la revisa antes del freeze. Sin brief, ofrece el discovery, y si lo declinas no escribe nada.
+
+El flujo completo, incluida la revisión y la re-verificación de una spec existente (planeadas), está en [docs/skills/planning/flow.es.md](docs/skills/planning/flow.es.md).
 
 Puede seguir una skill para crear tickets; este repo no la incluye.
 
-Cada skill lee el documento de la anterior si se lo das, y nunca necesita que la anterior se haya ejecutado. La siguiente la inicias tú.
+Cada skill la inicias tú.
 
 ### Code: escribir y revisar código
 
