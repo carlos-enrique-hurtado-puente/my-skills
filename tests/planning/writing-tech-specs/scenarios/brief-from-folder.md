@@ -31,3 +31,6 @@ Briefs now live in `~/.specflow/<date>-<slug>/brief.md`. The skill must find the
 
 ### green-rename-1 (after rename to ~/.specflow) - 2026-11-01
 - PASS (blind scorer, all Expected bullets): used ~/.specflow/2026-10-20-mute-conversation/brief.md only; superseded fact absent from the spec; no spec requested.
+
+### green-spec-copy-1 (after the spec.md copy rule) - 2026-11-01
+- PASS (blind scorer, all Expected bullets): used `brief.md` in the one feature folder; "notifies only the assigned agent" absent from the spec and the reply; no spec requested.

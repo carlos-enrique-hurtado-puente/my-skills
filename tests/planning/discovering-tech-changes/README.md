@@ -8,6 +8,7 @@ Pressure scenarios for the `discovering-tech-changes` skill, in the superpowers:
 - `scenarios/<id>.md`: twelve scenarios: `input-contradicts-code`, `reuse-under-another-name`, `repo-convention`, `second-caller`, `work-in-flight`, `skip-checkpoints-pressure`, `plain-language`, `missing-information`, `obvious-change`, `sources-unreachable`, `code-answers-intake-doubts`, `brief-saved`.
 - `fixtures/chat-app/`: a tiny fake JavaScript app (no dependencies, no tests) with deliberate traps: a snooze cap of 720 minutes, the `CHAT-<AREA>-<NNN>` error codes, a webhook that calls `dispatch` without a snooze check, a daily digest job that reaches `dispatch` through `notifyMany` without one, an error catalog (`docs/error-catalog.md`) where new codes must be registered, and an in-flight spec touching `dispatcher.js`.
 - `fixtures/input/frd-mute-24h.md`: the FRD the scenarios use as input. It does not say which channels count as notifications.
+- `fixtures/brief-existing-nodate.md`: the earlier brief with every date removed (used by the `no-date` variant of `brief-saved`).
 
 ## Scenario format
 
@@ -43,6 +44,7 @@ Verdicts are bullets passed of bullets graded.
 | `sources-unreachable` | PASS 4 of 4 | green-1 PASS 4 of 4 | guard |
 | `code-answers-intake-doubts` (2026-10-29) | red-1, current skill: 3 of 3 runs pass (not graded by a separate scorer) | green-1 PASS 3 of 3 | guard |
 | `brief-saved` (2026-10-31) | red-1 to red-3 FAIL 2 of 4 each | green-4 to green-6 PASS 4 of 4 each (first wording missed the hidden folder once); green-7 PASS 4 of 4 after the fix round | discriminating |
+| `brief-saved`, variant `no-date` (2026-11-01) | FAIL 1 of 1 (old brief renamed with the folder date, not its modification date) | PASS 1 of 1 (renamed `brief-superseded-2026-10-15.md`, the modification date) | discriminating |
 
 `missing-information` and `skip-checkpoints-pressure` were re-run after the 2026-10-29 change (green-2, PASS 3 of 3 each). After the 2026-10-31 save-in-`~/.specflow` trim of `SKILL.md`, `skip-checkpoints-pressure` (green-3) PASS 3 of 3 and `plain-language` (green-2) PASS 3 of 3 once.
 
