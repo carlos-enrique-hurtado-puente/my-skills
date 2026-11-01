@@ -80,5 +80,5 @@ Checks that "Before writing" now asks for the discovery brief and offers the dis
 - Dated assumptions — PASS, borderline ("code facts written as dated assumptions (date plus commit)")
 - Lines, signatures, file names — PASS
 
-### re-run - 2026-10-31 (skill asks for the feature folder in `~/.tech-specs/`)
-- green: PASS on the four bullets that still apply (brief asked for, `/discovering-tech-changes` offered, stops if declined, no exact lines needed). Blind scorer. The Assumptions bullet is retired since 2026-10-31 (P3 is today's behavior). The reply asked for the brief "in a folder like ~/.tech-specs/<date>-<slug>/brief.md".
+### re-run - 2026-10-31 (skill asks for the feature folder in `~/.specflow/`)
+- green: PASS on the four bullets that still apply (brief asked for, `/discovering-tech-changes` offered, stops if declined, no exact lines needed). Blind scorer. The Assumptions bullet is retired since 2026-10-31 (P3 is today's behavior). The reply asked for the brief "in a folder like ~/.specflow/<date>-<slug>/brief.md".

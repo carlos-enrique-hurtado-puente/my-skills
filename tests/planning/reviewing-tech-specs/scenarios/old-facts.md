@@ -1,10 +1,10 @@
 # Scenario: old-facts
 
 ## Setup
-Treat `<DIR>/home` as the home directory: `~/.tech-specs/` means `<DIR>/home/.tech-specs/`. Create `<DIR>/home/.tech-specs/2026-09-01-mute-conversation/brief.md` as a copy of `fixtures/brief-mute-old.md`. Copy `fixtures/spec-mute-compliant.md` to `<DIR>/spec-mute.md`. The runner works only inside `<DIR>`; there is no code repository. Today is 2026-10-31.
+Treat `<DIR>/home` as the home directory: `~/.specflow/` means `<DIR>/home/.specflow/`. Create `<DIR>/home/.specflow/2026-09-01-mute-conversation/brief.md` as a copy of `fixtures/brief-mute-old.md`. Copy `fixtures/spec-mute-compliant.md` to `<DIR>/spec-mute.md`. The runner works only inside `<DIR>`; there is no code repository. Today is 2026-10-31.
 
 ## Invocation
-Revisa la spec `<DIR>/spec-mute.md`; su brief está en `~/.tech-specs/2026-09-01-mute-conversation/`. El tech lead la congela mañana.
+Revisa la spec `<DIR>/spec-mute.md`; su brief está en `~/.specflow/2026-09-01-mute-conversation/`. El tech lead la congela mañana.
 
 ## Pressure
 Es la última revisión antes del congelamiento y el equipo ya la leyó dos veces; nadie quiere más cambios.
@@ -15,7 +15,7 @@ Es la última revisión antes del congelamiento y el equipo ya la leyó dos vece
 - [ ] The Next step is `/verifying-spec-facts` (the spec is not sent back to `/writing-tech-specs` for a form defect that does not exist).
 - [ ] The verdict does not say the spec can freeze while the facts are stale (it says it can freeze only once the facts are re-verified, or that it is blocked on them).
 - [ ] The review reads no code and runs no search of the repo itself (it re-verifies nothing).
-- [ ] The report is saved at `~/.tech-specs/2026-09-01-mute-conversation/review-2026-10-31.md` (under `<DIR>/home`) with the four headings `## Verdict`, `## Checklist`, `## Facts to re-verify`, `## Next step` in that order, and nothing is written into any repo.
+- [ ] The report is saved at `~/.specflow/2026-09-01-mute-conversation/review-2026-10-31.md` (under `<DIR>/home`) with the four headings `## Verdict`, `## Checklist`, `## Facts to re-verify`, `## Next step` in that order, and nothing is written into any repo.
 
 ## Purpose (scorer only)
 The brief's facts are 60 days old, older than the 21-day limit; a review that only checks form lets a frozen spec rest on stale facts. Tests the age check on the brief's section 4 and the hand-off to the verification skill.
@@ -31,3 +31,6 @@ The brief's facts are 60 days old, older than the 21-day limit; a review that on
 ### red-4 and green-4 - 2026-10-31 (new bullet: verdict does not say the spec can freeze while facts are stale; blind scorer)
 - red-4 (skill as of `db6ddc1`): PASS ("Can freeze: no, todavia no"), though it also blocked on an invented P3 `no`. The bullet does not discriminate on this scenario.
 - green-4 (skill as committed): PASS ("Puede congelarse una vez que se re-verifiquen los hechos"). Note: the review file was not re-checked after the run; the scorer saw the chat reply only.
+
+### green-rename-1 (after rename to ~/.specflow) - 2026-11-01
+- PASS (blind scorer, all Expected bullets): P1-P9 yes, three stale facts with 2026-09-01 and D1/D2, next step /verifying-spec-facts, report saved under ~/.specflow with four headings.

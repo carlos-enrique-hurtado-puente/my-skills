@@ -44,7 +44,7 @@ Verdicts are bullets passed of bullets graded.
 | `code-answers-intake-doubts` (2026-10-29) | red-1, current skill: 3 of 3 runs pass (not graded by a separate scorer) | green-1 PASS 3 of 3 | guard |
 | `brief-saved` (2026-10-31) | red-1 to red-3 FAIL 2 of 4 each | green-4 to green-6 PASS 4 of 4 each (first wording missed the hidden folder once); green-7 PASS 4 of 4 after the fix round | discriminating |
 
-`missing-information` and `skip-checkpoints-pressure` were re-run after the 2026-10-29 change (green-2, PASS 3 of 3 each). After the 2026-10-31 save-in-`~/.tech-specs` trim of `SKILL.md`, `skip-checkpoints-pressure` (green-3) PASS 3 of 3 and `plain-language` (green-2) PASS 3 of 3 once.
+`missing-information` and `skip-checkpoints-pressure` were re-run after the 2026-10-29 change (green-2, PASS 3 of 3 each). After the 2026-10-31 save-in-`~/.specflow` trim of `SKILL.md`, `skip-checkpoints-pressure` (green-3) PASS 3 of 3 and `plain-language` (green-2) PASS 3 of 3 once.
 
 ## Decision micro-test: step 1 while a delegated search runs, 2026-10-29
 

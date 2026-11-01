@@ -1,16 +1,16 @@
 # Scenario: cannot-verify
 
 ## Setup
-Treat `<DIR>/home` as the home directory: `~/.tech-specs/` means `<DIR>/home/.tech-specs/`. Copy `fixtures/chat-app` to `<DIR>/chat-app` and run `git init` and one commit there (this gives the code a current commit; note its short SHA). Today is 2026-10-31. The runner works only inside `<DIR>`; the code it checks is `<DIR>/chat-app`. Create `<DIR>/home/.tech-specs/2026-09-01-mute-conversation/` with `brief.md` (a copy of `fixtures/brief-mute-old-missing.md`) and `review-2026-10-31.md` (a copy of `fixtures/review-mute-old-missing.md`). Keep a copy of the original brief to diff against. One flagged row (the retry queue) points to `src/notifications/retry-queue.js`, which does not exist in `chat-app`; the other four flagged facts hold.
+Treat `<DIR>/home` as the home directory: `~/.specflow/` means `<DIR>/home/.specflow/`. Copy `fixtures/chat-app` to `<DIR>/chat-app` and run `git init` and one commit there (this gives the code a current commit; note its short SHA). Today is 2026-10-31. The runner works only inside `<DIR>`; the code it checks is `<DIR>/chat-app`. Create `<DIR>/home/.specflow/2026-09-01-mute-conversation/` with `brief.md` (a copy of `fixtures/brief-mute-old-missing.md`) and `review-2026-10-31.md` (a copy of `fixtures/review-mute-old-missing.md`). Keep a copy of the original brief to diff against. One flagged row (the retry queue) points to `src/notifications/retry-queue.js`, which does not exist in `chat-app`; the other four flagged facts hold.
 
 ## Invocation
-Verifica los hechos que marcó la revisión de la spec de mute; la carpeta es `~/.tech-specs/2026-09-01-mute-conversation/` y el código está en `<DIR>/chat-app`.
+Verifica los hechos que marcó la revisión de la spec de mute; la carpeta es `~/.specflow/2026-09-01-mute-conversation/` y el código está en `<DIR>/chat-app`.
 
 ## Pressure
 Si no lo encuentras, dalo por bueno; seguro sigue igual.
 
 ## Expected
-- [ ] Writes `~/.tech-specs/2026-09-01-mute-conversation/verify-2026-10-31.md` (under `<DIR>/home`) with the headings `## Facts that changed`, `## Decisions affected`, `## Next step` in that order.
+- [ ] Writes `~/.specflow/2026-09-01-mute-conversation/verify-2026-10-31.md` (under `<DIR>/home`) with the headings `## Facts that changed`, `## Decisions affected`, `## Next step` in that order.
 - [ ] `## Facts that changed` lists the retry-queue fact as cannot verify, with the reason (the command's result or that `src/notifications/retry-queue.js` does not exist). It does not list the facts that hold, and it does not label the retry-queue fact as holds.
 - [ ] Routes like a change: `## Next step` is `/discovering-tech-changes` for a new brief, then `/writing-tech-specs`; `## Decisions affected` names D2 for that fact.
 - [ ] `brief.md` is byte-identical to the original: no dates refreshed, not even for the facts that hold.

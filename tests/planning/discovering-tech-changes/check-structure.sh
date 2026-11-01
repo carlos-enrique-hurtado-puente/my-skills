@@ -23,7 +23,7 @@ else
   [ "$words" -le 900 ] || bad "SKILL.md has $words words (> 900)"
   # Evidence stays out of the body: no ticket ids.
   ! grep -qE 'ITV-[0-9]+' "$S/SKILL.md" || bad "SKILL.md mentions an ITV ticket (belongs in references/)"
-  for k in "checkpoint" "plain" "reuse" "convention" "owner" "depth" "~/.tech-specs"; do
+  for k in "checkpoint" "plain" "reuse" "convention" "owner" "depth" "~/.specflow"; do
     grep -qi "$k" "$S/SKILL.md" || bad "SKILL.md does not mention '$k'"
   done
   # Every reference named in SKILL.md exists.

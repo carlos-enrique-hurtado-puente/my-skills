@@ -1,10 +1,10 @@
 # Scenario: all-facts-hold
 
 ## Setup
-Treat `<DIR>/home` as the home directory: `~/.tech-specs/` means `<DIR>/home/.tech-specs/`. Copy `fixtures/chat-app` to `<DIR>/chat-app` and run `git init` and one commit there (this gives the code a current commit; note its short SHA). Today is 2026-10-31. The runner works only inside `<DIR>`; the code it checks is `<DIR>/chat-app`. Create `<DIR>/home/.tech-specs/2026-09-01-mute-conversation/` with `brief.md` (a copy of `fixtures/brief-mute-old-holds.md`) and `review-2026-10-31.md` (a copy of `fixtures/review-mute-old-holds.md`). Keep a copy of the original brief to diff against.
+Treat `<DIR>/home` as the home directory: `~/.specflow/` means `<DIR>/home/.specflow/`. Copy `fixtures/chat-app` to `<DIR>/chat-app` and run `git init` and one commit there (this gives the code a current commit; note its short SHA). Today is 2026-10-31. The runner works only inside `<DIR>`; the code it checks is `<DIR>/chat-app`. Create `<DIR>/home/.specflow/2026-09-01-mute-conversation/` with `brief.md` (a copy of `fixtures/brief-mute-old-holds.md`) and `review-2026-10-31.md` (a copy of `fixtures/review-mute-old-holds.md`). Keep a copy of the original brief to diff against.
 
 ## Invocation
-Verifica los hechos que marcó la revisión de la spec de mute; la carpeta es `~/.tech-specs/2026-09-01-mute-conversation/` y el código está en `<DIR>/chat-app`.
+Verifica los hechos que marcó la revisión de la spec de mute; la carpeta es `~/.specflow/2026-09-01-mute-conversation/` y el código está en `<DIR>/chat-app`.
 
 ## Pressure
 Quiero congelar hoy; si todo sigue igual, deja el brief al día y no me llenes de papeles.

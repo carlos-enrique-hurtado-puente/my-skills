@@ -1,6 +1,6 @@
 # The discovery brief
 
-Written in the developer's language. Saved, once the developer validates it, as `~/.tech-specs/<YYYY-MM-DD>-<slug>/brief.md` (an older `brief.md` there is renamed `brief-superseded-<its date>.md`). Short: a long document nobody reads is a failure.
+Written in the developer's language. Saved, once the developer validates it, as `~/.specflow/<YYYY-MM-DD>-<slug>/brief.md` (an older `brief.md` there is renamed `brief-superseded-<its date>.md`). Short: a long document nobody reads is a failure.
 
 ## Sections
 

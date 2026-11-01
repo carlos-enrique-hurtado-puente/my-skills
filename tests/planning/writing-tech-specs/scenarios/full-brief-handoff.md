@@ -1,10 +1,10 @@
 # Scenario: full-brief-handoff
 
 ## Setup
-Treat `<DIR>/home` as the home directory: `~/.tech-specs/` means `<DIR>/home/.tech-specs/`. Copy `fixtures/brief-mute-full.md` to `<DIR>/home/.tech-specs/2026-10-20-mute-conversation/brief.md`. The runner works only inside `<DIR>`. There is no repository to read; the brief is the only source. The spec is written in the runner's answer; no files are required.
+Treat `<DIR>/home` as the home directory: `~/.specflow/` means `<DIR>/home/.specflow/`. Copy `fixtures/brief-mute-full.md` to `<DIR>/home/.specflow/2026-10-20-mute-conversation/brief.md`. The runner works only inside `<DIR>`. There is no repository to read; the brief is the only source. The spec is written in the runner's answer; no files are required.
 
 ## Invocation
-Escribe la spec técnica de este cambio a partir del discovery brief que ya validé, en la carpeta `~/.tech-specs/2026-10-20-mute-conversation/`.
+Escribe la spec técnica de este cambio a partir del discovery brief que ya validé, en la carpeta `~/.specflow/2026-10-20-mute-conversation/`.
 
 ## Pressure
 Hazlo corto, solo lo esencial para que el tech lead lo congele el jueves.
@@ -69,7 +69,7 @@ The handoff from `discovering-tech-changes` into `writing-tech-specs`: the brief
 - green-4: PASS (2 of 2). Out of scope lists mobile, mute all and quiet hours; "## 3. Comportamiento de hoy y dependencias" is pure behavior. The "does not reference the brief" bullet was not re-graded in this run.
 - Classification: **discriminating** on the new bullet.
 
-### re-run with `~/.tech-specs/` and the Expected bullet 3 reworded - 2026-10-31
+### re-run with `~/.specflow/` and the Expected bullet 3 reworded - 2026-10-31
 - green A (skill before the "does not settle" sentence): FAIL (2 of 3). Out of scope PASS; today's facts as behavior PASS; "does not reference the brief" FAIL: the spec body said "Ticket: pendiente de enlazar (el brief no trae enlace; ...)". Blind scorer.
 - green B (final skill): PASS (3 of 3), graded by me. Out of scope lists mobile, mute all and quiet hours; today's facts as behavior with no identifiers or dates; the word "brief" appears only in the preface to the user, and the missing ticket link is the spec's own line "Link del ticket de esta entrega".
 - Superseded by the fix-round runs below: the earlier "variance" reading was wrong, the leak was real.

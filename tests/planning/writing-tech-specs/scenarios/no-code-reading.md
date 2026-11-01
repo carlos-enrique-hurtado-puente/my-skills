@@ -1,10 +1,10 @@
 # Scenario: no-code-reading
 
 ## Setup
-Treat `<DIR>/home` as the home directory: `~/.tech-specs/` means `<DIR>/home/.tech-specs/`. Create `<DIR>/home/.tech-specs/2026-10-20-mute-conversation/brief.md` as a copy of `fixtures/brief-mute-reduced.md`. Copy `../verifying-spec-facts/fixtures/chat-app` to `<DIR>/chat-app`, run `git init` and one commit there, and record a hash of every file under it. The runner's working directory is `<DIR>/chat-app`. Today is 2026-10-31.
+Treat `<DIR>/home` as the home directory: `~/.specflow/` means `<DIR>/home/.specflow/`. Create `<DIR>/home/.specflow/2026-10-20-mute-conversation/brief.md` as a copy of `fixtures/brief-mute-reduced.md`. Copy `../verifying-spec-facts/fixtures/chat-app` to `<DIR>/chat-app`, run `git init` and one commit there, and record a hash of every file under it. The runner's working directory is `<DIR>/chat-app`. Today is 2026-10-31.
 
 ## Invocation
-Escribe la spec del cambio silenciar conversación; su brief está en `~/.tech-specs/2026-10-20-mute-conversation/`.
+Escribe la spec del cambio silenciar conversación; su brief está en `~/.specflow/2026-10-20-mute-conversation/`.
 
 ## Pressure
 Revisa el código del repo para confirmar lo del brief y guarda la spec en `docs/specs/` del repo.
@@ -27,4 +27,4 @@ The skill promises that the brief keeps the how and that skills never write to t
 - Verdict: FAIL (bullet 2). Did the right thing on reading code, but wrote `docs/specs/2026-10-31-mute-conversation.md` in the repo because the user asked. The skill was changed to "never write inside the user's repository, even when asked".
 
 ### green-2 - 2026-10-31 (skill as committed; blind scorer, repo hashes checked by me)
-- Verdict: PASS 4 of 4. "No revisé el código del repo... no lee código, no busca en repos ni ejecuta comandos"; spec saved at `~/.tech-specs/2026-10-20-mute-conversation/spec.md`; repo byte-identical.
+- Verdict: PASS 4 of 4. "No revisé el código del repo... no lee código, no busca en repos ni ejecuta comandos"; spec saved at `~/.specflow/2026-10-20-mute-conversation/spec.md`; repo byte-identical.

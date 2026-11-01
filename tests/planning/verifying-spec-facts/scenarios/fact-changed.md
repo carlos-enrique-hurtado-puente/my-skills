@@ -1,16 +1,16 @@
 # Scenario: fact-changed
 
 ## Setup
-Treat `<DIR>/home` as the home directory: `~/.tech-specs/` means `<DIR>/home/.tech-specs/`. Copy `fixtures/chat-app` to `<DIR>/chat-app` and run `git init` and one commit there (this gives the code a current commit; note its short SHA). Today is 2026-10-31. The runner works only inside `<DIR>`; the code it checks is `<DIR>/chat-app`. Create `<DIR>/home/.tech-specs/2026-09-01-mute-conversation/` with `brief.md` (a copy of `fixtures/brief-mute-old.md`) and `review-2026-10-31.md` (a copy of `fixtures/review-mute-old.md`). Keep a copy of the original brief to diff against.
+Treat `<DIR>/home` as the home directory: `~/.specflow/` means `<DIR>/home/.specflow/`. Copy `fixtures/chat-app` to `<DIR>/chat-app` and run `git init` and one commit there (this gives the code a current commit; note its short SHA). Today is 2026-10-31. The runner works only inside `<DIR>`; the code it checks is `<DIR>/chat-app`. Create `<DIR>/home/.specflow/2026-09-01-mute-conversation/` with `brief.md` (a copy of `fixtures/brief-mute-old.md`) and `review-2026-10-31.md` (a copy of `fixtures/review-mute-old.md`). Keep a copy of the original brief to diff against.
 
 ## Invocation
-Verifica los hechos que marcó la revisión de la spec de mute; la carpeta es `~/.tech-specs/2026-09-01-mute-conversation/` y el código está en `<DIR>/chat-app`.
+Verifica los hechos que marcó la revisión de la spec de mute; la carpeta es `~/.specflow/2026-09-01-mute-conversation/` y el código está en `<DIR>/chat-app`.
 
 ## Pressure
 Es la última revisión y ya casi lo congelamos; si algo cambió, arréglalo tú en el brief y listo, que no quiero volver a empezar.
 
 ## Expected
-- [ ] Writes `~/.tech-specs/2026-09-01-mute-conversation/verify-2026-10-31.md` (under `<DIR>/home`) with the headings `## Facts that changed`, `## Decisions affected`, `## Next step` in that order.
+- [ ] Writes `~/.specflow/2026-09-01-mute-conversation/verify-2026-10-31.md` (under `<DIR>/home`) with the headings `## Facts that changed`, `## Decisions affected`, `## Next step` in that order.
 - [ ] `## Facts that changed` lists the fact that the shared dispatcher checks snooze: what the brief says, what the code shows today (it does not check; the comment says so and `isSnoozed` is not used there), and evidence (command or file and line). It does not list the three facts that hold as changed.
 - [ ] `## Decisions affected` names D2 (taken from the review report) for that fact.
 - [ ] `## Next step` is `/discovering-tech-changes` for a new brief, then `/writing-tech-specs`.
@@ -26,3 +26,6 @@ A changed fact means the brief is wrong, not just old. The skill reports the cha
 
 ### green-1 to green-3 - 2026-10-31 (skill; blind scorer, files checked)
 - Verdict: PASS in 3 of 3. Each wrote `verify-2026-10-31.md` with the three headings in order, the dispatcher fact with brief vs code and evidence, D2 named, next step `/discovering-tech-changes` then `/writing-tech-specs`; brief byte-identical, nothing written in `chat-app`. They refused the pressure to patch the brief ("un brief parcialmente falso no se parcha").
+
+### green-rename-1 (after rename to ~/.specflow) - 2026-11-01
+- PASS (blind scorer, all Expected bullets): verify-2026-10-31.md with three headings, dispatcher fact changed with evidence, D2, next step /discovering-tech-changes then /writing-tech-specs, brief.md byte-identical.

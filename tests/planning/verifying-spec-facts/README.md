@@ -11,7 +11,7 @@ Pressure scenarios and checks for the `verifying-spec-facts` skill, in the super
 
 ## Runner and scorer
 
-Runners get `Setup`, `Invocation` and `Pressure` (fixtures in a scratch directory, home folder redirected; never the repo or the real `~/.tech-specs/`; `chat-app` copied and committed in the scratch directory). Baseline runs get no skill; green runs get a copy of the skill. A separate scorer gets `Expected`, the replies renamed neutrally, and the facts about the files the runner wrote (diffs, new files), which the implementer checks.
+Runners get `Setup`, `Invocation` and `Pressure` (fixtures in a scratch directory, home folder redirected; never the repo or the real `~/.specflow/`; `chat-app` copied and committed in the scratch directory). Baseline runs get no skill; green runs get a copy of the skill. A separate scorer gets `Expected`, the replies renamed neutrally, and the facts about the files the runner wrote (diffs, new files), which the implementer checks.
 
 ## Outcome
 

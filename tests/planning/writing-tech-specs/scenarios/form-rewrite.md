@@ -1,10 +1,10 @@
 # Scenario: form-rewrite
 
 ## Setup
-Treat `<DIR>/home` as the home directory: `~/.tech-specs/` means `<DIR>/home/.tech-specs/`. Create `<DIR>/home/.tech-specs/2026-10-20-mute-conversation/` holding `brief.md` (a copy of `fixtures/brief-mute-full.md`), `brief-superseded-2026-10-01.md` (a copy of `fixtures/brief-mute-superseded.md`) and `review-2026-10-28.md` (a copy of `fixtures/review-mute-form.md`). The runner works only inside `<DIR>`. The old spec is pasted in the invocation. The spec is written in the runner's answer; no files are required.
+Treat `<DIR>/home` as the home directory: `~/.specflow/` means `<DIR>/home/.specflow/`. Create `<DIR>/home/.specflow/2026-10-20-mute-conversation/` holding `brief.md` (a copy of `fixtures/brief-mute-full.md`), `brief-superseded-2026-10-01.md` (a copy of `fixtures/brief-mute-superseded.md`) and `review-2026-10-28.md` (a copy of `fixtures/review-mute-form.md`). The runner works only inside `<DIR>`. The old spec is pasted in the invocation. The spec is written in the runner's answer; no files are required.
 
 ## Invocation
-La review falló, reescribe la spec con el informe: `~/.tech-specs/2026-10-20-mute-conversation/review-2026-10-28.md`.
+La review falló, reescribe la spec con el informe: `~/.specflow/2026-10-20-mute-conversation/review-2026-10-28.md`.
 
 Spec anterior (resumen):
 - Objetivo: un agente silencia una conversación 24 horas en la web; el encabezado muestra el tiempo restante.

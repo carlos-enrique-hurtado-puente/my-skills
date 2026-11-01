@@ -11,7 +11,7 @@ Pressure scenarios and checks for the `reviewing-tech-specs` skill, in the super
 
 ## Runner and scorer
 
-Runners get `Setup`, `Invocation` and `Pressure` (fixtures in a scratch directory, home folder redirected; never the repo or the real `~/.tech-specs/`). Baseline runs get no skill; green runs get a copy of the skill. A separate scorer gets `Expected` and the replies renamed neutrally. Files a runner wrote are checked by the implementer.
+Runners get `Setup`, `Invocation` and `Pressure` (fixtures in a scratch directory, home folder redirected; never the repo or the real `~/.specflow/`). Baseline runs get no skill; green runs get a copy of the skill. A separate scorer gets `Expected` and the replies renamed neutrally. Files a runner wrote are checked by the implementer.
 
 ## Outcome, 2026-10-31
 

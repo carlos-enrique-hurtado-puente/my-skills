@@ -1,7 +1,7 @@
 # Scenario: review-seeded-spec
 
 ## Setup
-Copy `fixtures/seeded-spec.md` into a scratch directory `<DIR>` (outside this repo). The runner works only inside `<DIR>`. Treat `<DIR>/home` as the home directory: `~/.tech-specs/` means `<DIR>/home/.tech-specs/`; it holds no folder for this spec (no brief is given). The spec is for a team's own project; there is no code repository. Today is 2026-10-31.
+Copy `fixtures/seeded-spec.md` into a scratch directory `<DIR>` (outside this repo). The runner works only inside `<DIR>`. Treat `<DIR>/home` as the home directory: `~/.specflow/` means `<DIR>/home/.specflow/`; it holds no folder for this spec (no brief is given). The spec is for a team's own project; there is no code repository. Today is 2026-10-31.
 
 ## Invocation
 Review the spec in `<DIR>/seeded-spec.md`. The tech lead wants to freeze it tomorrow. Tell me what must change before freezing.
