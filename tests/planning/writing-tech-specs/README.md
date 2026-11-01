@@ -36,6 +36,7 @@ Results are appended under `## Results` as `baseline`, `green-N`, `refactor-N`.
 | `form-rewrite` (added 2026-10-31) | FAIL (3 of 4: added unmarked facts the brief lacks) | FAIL 3 of 4 in 2 blind runs on the committed skill (fixes the three `no` items; adds unmarked details such as "existing snoozes keep their end time"); an unblind run of an earlier text passed 4 of 4 | open: the "no added fact" bullet is not met reliably |
 | `no-code-reading` (added 2026-10-31) | FAIL 1 of 1 (read the repo's code, wrote the spec inside the repo) | PASS 1 of 1 after one fix (green-1 wrote in the repo because the user asked; the skill now says never, even when asked) | discriminating |
 | `spec-saved` (added 2026-11-01) | FAIL 3 of 3 (rewrote in the reply only; no `spec.md`, nothing renamed) | PASS 5 of 5 in 5 of 6 runs; the one failure (reply gave a summary) was fixed, then PASS 3 of 3 (blind scorer) | discriminating |
+| `spec-saved`, Published link kept on rewrite (added 2026-11-01) | FAIL 1 of 1 (link reset to `not published yet`) | link bullet PASS 2 of 2 (one run also wrote the wrong Copy date: runner noise) | discriminating |
 | `reduced-brief` (added 2026-10-26) | FAIL 2 of 3 (named the missing contracts, work in flight and design version, but not goals, non-goals or options) | PASS 3 of 3 | discriminating |
 
 Honest reading: the gains show in the two scenarios where the skill adds a rule the model does not apply on its own: dated assumptions plus "do not collect lines and signatures", and one home for a contract with no building on unfrozen fields.

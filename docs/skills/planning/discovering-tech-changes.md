@@ -34,7 +34,7 @@ Each step ends at a checkpoint: it stops, shows the result in plain words and wa
 
 ## The brief
 
-Once you validate it (step 7), it is saved as `~/.specflow/<YYYY-MM-DD>-<slug>/brief.md`; the skill confirms the slug with you first. If that folder already holds a brief, the old one is renamed `brief-superseded-<its date>.md`, never overwritten. The skill then says the full path. Sections:
+Once you validate it (step 7), it is saved as `~/.specflow/<YYYY-MM-DD>-<slug>/brief.md`; the skill confirms the slug with you first. If that folder already holds a brief, the old one is renamed `brief-superseded-<its date>.md`, never overwritten (a second one the same day gets `-2`, `-3`...). The skill then says the full path. Sections:
 
 0. Header: input, date, commit, depth, what was validated.
 1. In plain words: problem, outcome, today and proposal, on one page and without identifiers.

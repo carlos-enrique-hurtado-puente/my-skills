@@ -16,7 +16,6 @@ Es la última revisión antes del congelamiento y el equipo ya la leyó dos vece
 - [ ] The verdict does not say the spec can freeze while the facts are stale (it says it can freeze only once the facts are re-verified, or that it is blocked on them).
 - [ ] The review reads no code and runs no search of the repo itself (it re-verifies nothing).
 - [ ] The report is saved at `~/.specflow/2026-09-01-mute-conversation/review-2026-10-31-2.md` (under `<DIR>/home`; the existing `review-2026-10-31.md` is unchanged, same hash) with the four headings `## Verdict`, `## Checklist`, `## Facts to re-verify`, `## Next step` in that order, and nothing is written into any repo.
-- [ ] The new report is `review-2026-10-31-2.md`; the existing `review-2026-10-31.md` is unchanged.
 
 ## Purpose (scorer only)
 The brief's facts are 60 days old, older than the 21-day limit; a review that only checks form lets a frozen spec rest on stale facts. Tests the age check on the brief's section 4 and the hand-off to the verification skill.

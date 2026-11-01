@@ -34,7 +34,7 @@ Cada paso termina en un punto de control: se detiene, muestra el resultado en le
 
 ## El brief
 
-Cuando lo validas (paso 7), se guarda como `~/.specflow/<YYYY-MM-DD>-<slug>/brief.md`; la skill confirma contigo el slug antes. Si esa carpeta ya tiene un brief, el anterior se renombra `brief-superseded-<su fecha>.md`, nunca se sobrescribe. Luego la skill dice la ruta completa. Secciones:
+Cuando lo validas (paso 7), se guarda como `~/.specflow/<YYYY-MM-DD>-<slug>/brief.md`; la skill confirma contigo el slug antes. Si esa carpeta ya tiene un brief, el anterior se renombra `brief-superseded-<su fecha>.md`, nunca se sobrescribe (si ese nombre ya existe, se añade `-2`, `-3`...). Luego la skill dice la ruta completa. Secciones:
 
 0. Encabezado: entrada, fecha, commit, profundidad, qué se validó.
 1. En palabras llanas: problema, resultado, hoy y propuesta, en una página y sin identificadores.
