@@ -10,7 +10,7 @@ Goal: tell the tech lead whether the old facts a spec rests on still hold in tod
 
 ## Start
 - Input: the feature folder `~/.specflow/<YYYY-MM-DD>-<slug>/` (`~/.specflow/` is a hidden folder: list it directly) and the repository whose code the brief describes. Ask for what is missing; if the user names no folder, list `~/.specflow/` and ask which one.
-- Needs the folder's `review-<YYYY-MM-DD>.md` (the latest one) and `brief.md`. Read the report's `## Facts to re-verify` section by its heading, not by position. Never read a `brief-superseded-*.md`.
+- Needs the folder's latest review: `review-<YYYY-MM-DD>.md` or `review-<YYYY-MM-DD>-<n>.md`, newest date first, then the highest suffix as a number (no suffix counts as 1) and `brief.md`. Read the report's `## Facts to re-verify` section by its heading, not by position. Never read a `brief-superseded-*.md`.
 - No review report: ask the user for it. If there is none, point to `/reviewing-tech-specs` and stop. Do not run the age check yourself, do not read code, do not change any file.
 - Read-only toward repositories: run searches and reads only, and for git always `git --no-optional-locks`. The only files you write are under `~/.specflow/`.
 
@@ -24,7 +24,7 @@ Compare the fact as the brief states it, in plain words, with what the code show
 
 ## Outcome
 - **Every fact holds:** in `brief.md` change only the "Date and commit" cell of each flagged row, to today's date and the repository's current short commit (`git --no-optional-locks rev-parse --short HEAD`). Nothing else in the brief changes (no other cell, row or section, not the header). Write no report and no new brief. Say that the facts hold, which dates were updated, and that the facts are current: continue with the review's `## Next step` (do not say the spec can freeze; the review may have other findings).
-- **Any fact changed or cannot be verified** ("cannot verify" counts as changed for routing): write `~/.specflow/<feature>/verify-<YYYY-MM-DD>.md` (today's date) with these headings, in this order, and do not touch `brief.md` (not even the dates of the facts that hold):
+- **Any fact changed or cannot be verified** ("cannot verify" counts as changed for routing): write `~/.specflow/<feature>/verify-<YYYY-MM-DD>.md` (today's date; if that name exists, use `verify-<YYYY-MM-DD>-2.md`, then `-3`, and so on, and never overwrite an existing file) with these headings, in this order, and do not touch `brief.md` (not even the dates of the facts that hold):
   - `## Facts that changed`: for each one, the fact in plain words, what the brief says, what the code shows today, and the evidence. A "cannot verify" fact says why. Facts that hold are not listed anywhere in the report, not even as a note or in another section; say which ones hold in the answer only.
   - `## Decisions affected`: the spec decisions that depend on each listed fact, taken from the review report.
   - `## Next step`: `/discovering-tech-changes` for a new brief, then `/writing-tech-specs` for the new spec.

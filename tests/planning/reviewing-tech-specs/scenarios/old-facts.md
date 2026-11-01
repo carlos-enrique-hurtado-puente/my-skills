@@ -1,7 +1,7 @@
 # Scenario: old-facts
 
 ## Setup
-Treat `<DIR>/home` as the home directory: `~/.specflow/` means `<DIR>/home/.specflow/`. Create `<DIR>/home/.specflow/2026-09-01-mute-conversation/brief.md` as a copy of `fixtures/brief-mute-old.md`. Copy `fixtures/spec-mute-compliant.md` to `<DIR>/spec-mute.md`. The runner works only inside `<DIR>`; there is no code repository. Today is 2026-10-31.
+Treat `<DIR>/home` as the home directory: `~/.specflow/` means `<DIR>/home/.specflow/`. Create `<DIR>/home/.specflow/2026-09-01-mute-conversation/brief.md` as a copy of `fixtures/brief-mute-old.md`. Also create `<DIR>/home/.specflow/2026-09-01-mute-conversation/review-2026-10-31.md` (today's date) containing the single line `# Earlier review (keep)`; note its hash. Copy `fixtures/spec-mute-compliant.md` to `<DIR>/spec-mute.md`. The runner works only inside `<DIR>`; there is no code repository. Today is 2026-10-31.
 
 ## Invocation
 Revisa la spec `<DIR>/spec-mute.md`; su brief está en `~/.specflow/2026-09-01-mute-conversation/`. El tech lead la congela mañana.
@@ -15,7 +15,8 @@ Es la última revisión antes del congelamiento y el equipo ya la leyó dos vece
 - [ ] The Next step is `/verifying-spec-facts` (the spec is not sent back to `/writing-tech-specs` for a form defect that does not exist).
 - [ ] The verdict does not say the spec can freeze while the facts are stale (it says it can freeze only once the facts are re-verified, or that it is blocked on them).
 - [ ] The review reads no code and runs no search of the repo itself (it re-verifies nothing).
-- [ ] The report is saved at `~/.specflow/2026-09-01-mute-conversation/review-2026-10-31.md` (under `<DIR>/home`) with the four headings `## Verdict`, `## Checklist`, `## Facts to re-verify`, `## Next step` in that order, and nothing is written into any repo.
+- [ ] The report is saved at `~/.specflow/2026-09-01-mute-conversation/review-2026-10-31-2.md` (under `<DIR>/home`; the existing `review-2026-10-31.md` is unchanged, same hash) with the four headings `## Verdict`, `## Checklist`, `## Facts to re-verify`, `## Next step` in that order, and nothing is written into any repo.
+- [ ] The new report is `review-2026-10-31-2.md`; the existing `review-2026-10-31.md` is unchanged.
 
 ## Purpose (scorer only)
 The brief's facts are 60 days old, older than the 21-day limit; a review that only checks form lets a frozen spec rest on stale facts. Tests the age check on the brief's section 4 and the hand-off to the verification skill.
@@ -34,3 +35,7 @@ The brief's facts are 60 days old, older than the 21-day limit; a review that on
 
 ### green-rename-1 (after rename to ~/.specflow) - 2026-11-01
 - PASS (blind scorer, all Expected bullets): P1-P9 yes, three stale facts with 2026-09-01 and D1/D2, next step /verifying-spec-facts, report saved under ~/.specflow with four headings.
+
+### red-suffix-1 and green-suffix-1 (existing review-<today>.md in the folder) - 2026-11-01
+- red-suffix-1 (skill as of `62e9b3a`): PASS on all bullets, including the new ones: the runner chose `review-2026-10-31-2.md` on its own and left the existing file untouched. The suffix bullets do not discriminate against the old skill text; the rule is now written explicitly so it does not depend on the model's habit.
+- green-suffix-1 (edited skill): PASS on all bullets (blind scorer, files read): `review-2026-10-31-2.md` with four headings, existing file same hash.

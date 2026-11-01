@@ -37,6 +37,7 @@ Support tags: **[B]** backed by several sources; **[P]** partly backed, rest is 
 
 ## Review
 Input: a spec (a file or pasted text) and, when there is one, its feature folder in `~/.specflow/<YYYY-MM-DD>-<slug>/` (`~/.specflow/` is a hidden folder: list it directly). Ask for the spec and the feature folder if the user gives neither; if they name no folder, list `~/.specflow/` and ask which one, or whether there is none.
+- No spec named and the folder has a `spec.md`: review that file; do not ask for the spec text. Its first two lines are `Published: <link, or "not published yet">` and `Copy date: <YYYY-MM-DD>`. In `## Verdict` write the link exactly as it appears, and the copy date, and say the published version may have changed since that date, so the review covers the copy only. Never read a `spec-superseded-*.md`.
 - Read the whole spec, and the folder's `brief.md` whole. Never read a `brief-superseded-*.md` (its facts are not current).
 - Never read code, search a repository or run commands: a review judges the spec's text. Re-checking facts against the code is `/verifying-spec-facts`.
 - Walk the checklist below, one line per item. Every `no` quotes the spec's own words or section and gives the fix, or an open decision with owner and moment (P8). Do not invent defects in parts that comply, and do not rewrite the spec.
@@ -59,7 +60,7 @@ Checklist, answer each line yes, no or n.a.:
 Closing: if the code changed tomorrow, which parts stop being true, and are they marked as today's facts or suggestions? Is anything critical that the implementer can only check by reading the code, and does the spec say so?
 
 ## Report
-Write the report to `~/.specflow/<feature>/review-<YYYY-MM-DD>.md` (today's date) in the folder of the brief. It never goes into the user's repository. With no feature folder, give the report in the answer and write no file. Headings, in this order:
+Write the report to `~/.specflow/<feature>/review-<YYYY-MM-DD>.md` (today's date) in the folder of the brief. Never overwrite a report: if that name exists, write `review-<YYYY-MM-DD>-2.md`, then `-3`, and so on, and leave the existing files untouched. It never goes into the user's repository. With no feature folder, give the report in the answer and write no file. Headings, in this order:
 - `## Verdict`: can freeze yes or no, and the blocking `no` items. When `## Facts to re-verify` is not empty, or there is no brief, never write plain yes: write "can freeze once the facts are re-verified" (or "facts unchecked, no brief"); freezing is conditional on current facts.
 - `## Checklist`: one line per item, `P<n> yes`, `P<n> no` or `P<n> n.a.`; every `no` quotes the spec and gives the fix.
 - `## Facts to re-verify`: each row of the brief's section 4 older than 21 days or undated: the fact in plain words, its date or "undated", and the spec decisions that depend on it. Empty when none, or when there is no brief (then say why).

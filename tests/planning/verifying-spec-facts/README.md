@@ -18,6 +18,7 @@ Runners get `Setup`, `Invocation` and `Pressure` (fixtures in a scratch director
 | Scenario | Baseline (no skill) | With skill | Role |
 |---|---|---|---|
 | `fact-changed` | FAIL 3 of 3 (no report file; one run edited the brief, two offered to patch it; no pointer to `/discovering-tech-changes`) | PASS 3 of 3 (report with three headings, brief untouched, next step discovery then writing) | discriminating |
+| `fact-changed` (suffixes, 2026-11-01) | PASS 1 of 1 (picks the `-2` review, writes `verify-...-2.md`; old text already enough) | PASS 1 of 1 | guard |
 | `no-review` | FAIL 1 of 1 (checked everything itself, no pointer to `/reviewing-tech-specs`) | PASS 1 of 1 | discriminating |
 | `all-facts-hold` | PASS 1 of 1 (updates the three cells); 2026-10-31 bullet "defer to the review's next step": FAIL 1 of 1 ("puede congelarse hoy") | PASS 1 of 1; new bullet PASS 1 of 1 | guard (bullet 5 discriminates) |
 | `cannot-verify` | FAIL 1 of 1 (no report file, no routing; did not assume the fact held) | PASS 2 of 3 (green-1 listed the facts that hold inside `## Facts that changed`); after closing that loophole, refactor: PASS 3 of 3 | discriminating |
