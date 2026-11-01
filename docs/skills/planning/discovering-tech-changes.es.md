@@ -2,7 +2,7 @@
 
 [English](discovering-tech-changes.md) | **Español**
 
-Te ayuda a entender un requerimiento (FRD, historias de usuario, una tarea o un diseño) y el código que toca, y prepara un brief de descubrimiento antes de escribir la spec técnica. Trabaja paso a paso: cada paso termina en un punto de control donde validas o corriges antes de seguir. Explica primero en lenguaje llano y deja los identificadores de código como evidencia debajo. Fuente: [`skills/planning/discovering-tech-changes/`](../../../skills/planning/discovering-tech-changes/SKILL.md). Cada paso se apoya en fuentes citadas y en evidencia real de Jira, como heurísticas abiertas y no como reglas cerradas.
+Te ayuda a entender un requerimiento (FRD, historias de usuario, una tarea, un diseño o una spec) y el código que toca, y prepara un brief de descubrimiento antes de escribir la spec técnica. Trabaja paso a paso: cada paso termina en un punto de control donde validas o corriges antes de seguir. Explica primero en lenguaje llano y deja los identificadores de código como evidencia debajo. Fuente: [`skills/planning/discovering-tech-changes/`](../../../skills/planning/discovering-tech-changes/SKILL.md). Cada paso se apoya en fuentes citadas y en evidencia real de Jira, como heurísticas abiertas y no como reglas cerradas.
 
 ## Uso
 
@@ -15,6 +15,7 @@ En Claude Code: `/discovering-tech-changes`. En Codex: `$discovering-tech-change
 ```
 
 - **Entrada:** texto pegado, un archivo local, una página de Confluence, un ticket de Jira (con las herramientas de Atlassian) o un diseño. La skill lo lee completo; si no puede, lo dice y pide el texto. Nunca trabaja a partir de un título ni de memoria.
+- **Una spec como entrada:** una spec de este flujo o una escrita por otro equipo se lee como un FRD. Lo que dice sobre el código de hoy se comprueba y va a las correcciones si no se cumple; sus objetivos se toman de ella y tú los confirmas; cada decisión de diseño que ya trae se vuelve una opción, marcada "la spec propone", junto a una alternativa, y tú eliges, aunque la spec esté aprobada. Al final la skill dice que la spec hay que reescribirla con [`writing-tech-specs`](writing-tech-specs.es.md) desde el brief nuevo antes de planear: siempre para una spec de otro equipo, y para una de este flujo cuando el brief la corrige.
 - **Profundidad:** antes del paso 1 te pide elegir **completa** (pasos 1 a 7) o **reducida** (pasos 3 y 4 más un brief corto, para un cambio que puedes describir en una frase). Dice cuál encaja y por qué; tú eliges.
 - **Idioma:** el brief se escribe en tu idioma.
 
@@ -62,7 +63,7 @@ Cada hecho se etiqueta como observado en el código, inferido o dicho por ti. Un
 
 - Solo lectura sobre tus repos, Jira y Confluence; lo único que escribe está en `~/.specflow/`.
 - No decide. Propone y recomienda; tú decides y la decisión queda en la spec.
-- No es un plan de implementación ni la spec: sin pasos de código ni criterios de aceptación. Entrega el brief validado a [`writing-tech-specs`](writing-tech-specs.es.md).
+- No es un plan de implementación ni la spec: sin pasos de código ni criterios de aceptación. El siguiente paso es [`writing-tech-specs`](writing-tech-specs.es.md), desde el brief validado.
 - La evidencia de Jira detrás de las heurísticas viene de un solo equipo.
 - No se probó en bases de código reales grandes, ni leyendo Jira o Confluence reales, ni en Codex. Ver [lo que no cubre](../../../tests/planning/discovering-tech-changes/README.md#not-covered).
 

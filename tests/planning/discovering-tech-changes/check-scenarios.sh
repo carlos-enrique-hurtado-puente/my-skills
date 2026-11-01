@@ -6,10 +6,10 @@ cd "$(dirname "$0")/../../.." || exit 1
 T=tests/planning/discovering-tech-changes
 F=$T/fixtures/chat-app
 
-ids="brief-saved input-contradicts-code reuse-under-another-name repo-convention second-caller work-in-flight skip-checkpoints-pressure plain-language missing-information obvious-change sources-unreachable code-answers-intake-doubts"
+ids="brief-saved input-contradicts-code reuse-under-another-name repo-convention second-caller work-in-flight skip-checkpoints-pressure plain-language missing-information obvious-change sources-unreachable code-answers-intake-doubts spec-as-input spec-from-flow"
 
 count=$(ls "$T/scenarios" 2>/dev/null | grep -c '\.md$')
-[ "$count" -eq 12 ] || bad "scenarios/ holds $count .md files (expected 12)"
+[ "$count" -eq 14 ] || bad "scenarios/ holds $count .md files (expected 14)"
 for id in $ids; do
   s=$T/scenarios/$id.md
   if [ ! -f "$s" ]; then bad "scenarios/$id.md missing"; continue; fi
@@ -32,6 +32,10 @@ grep -q 'notifyMany' "$F/src/jobs/daily-digest.js" 2>/dev/null || bad "daily-dig
 grep -q 'CHAT-CONV-001' "$F/docs/error-catalog.md" 2>/dev/null || bad "error-catalog.md missing or lacks CHAT-CONV-001"
 grep -q 'dispatcher.js' "$F/docs/specs/in-flight/quiet-hours.md" 2>/dev/null || bad "quiet-hours.md lacks dispatcher.js"
 grep -q '24 hours' "$T/fixtures/input/frd-mute-24h.md" 2>/dev/null || bad "frd-mute-24h.md lacks '24 hours'"
+grep -q 'already skips conversations that are snoozed' "$T/fixtures/input/spec-mute-external.md" 2>/dev/null || bad "spec-mute-external.md lacks the false dispatcher claim"
+grep -q 'conversation_mutes' "$T/fixtures/input/spec-mute-external.md" 2>/dev/null || bad "spec-mute-external.md lacks the design decision"
+grep -q '^Published: ' "$T/fixtures/spec-from-flow.md" 2>/dev/null || bad "spec-from-flow.md lacks the Published line"
+grep -q 'up to 48 hours' "$T/fixtures/spec-from-flow.md" 2>/dev/null || bad "spec-from-flow.md lacks the false 48-hour claim"
 
 if [ "$fail" -eq 0 ]; then echo "OK: scenario checks passed"; fi
 exit "$fail"

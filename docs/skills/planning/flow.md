@@ -10,8 +10,8 @@ flowchart TD
       Q0{"Is there a brief?"} -- "No, discovery declined" --> STOP["Stop, write nothing"]
       Q0 -- "No, discovery accepted" --> DISC
       Q0 -- "Yes" --> WRITE
-      IN["FRD, user story, ticket or idea"] --> DISC["/discovering-tech-changes<br/>the only skill that creates briefs<br/>reads code"]
-      DISC --> BRIEF["~/.specflow/&lt;date&gt;-&lt;feature&gt;/brief.md<br/>the how: files, functions, commits,<br/>dates, re-verify commands"]
+      IN["FRD, user story, ticket, idea<br/>or a spec (ours or external)"] --> DISC["/discovering-tech-changes<br/>the only skill that creates briefs<br/>reads code"]
+      DISC --> BRIEF["~/.specflow/&lt;date&gt;-&lt;feature&gt;/brief.md<br/>the what and the how: goals, options,<br/>files, functions, commits, dates,<br/>re-verify commands"]
       BRIEF --> WRITE["/writing-tech-specs<br/>does not read code"]
       WRITE --> SPEC["Spec: only the what<br/>today's behavior and what each decision<br/>depends on; no code, no dates"]
     end
@@ -72,7 +72,8 @@ Everything the skills write lives in `~/.specflow/` (hidden), one folder per fea
 ## Rules across the flow
 
 - There is always a brief, and only `discovering-tech-changes` creates one.
-- The "what" goes in the spec; the "how" and its dates go in the brief. A spec survives a change of language or implementation.
+- The spec holds the "what", for people, and lasts; the brief holds the "what" and the "how" with code evidence and dates, for the agent. A spec survives a change of language or implementation.
+- A spec can be discovery's input. An external spec is always rewritten with `writing-tech-specs` from the new brief before planning, so every spec that reaches planning has the team's format; a spec from this flow is rewritten when the brief corrects it.
 - Skills never write to your repositories. They write only under `~/.specflow/`, one folder per feature, so a change across backend and front has one brief.
 - Rules P1-P9 are copied in `writing-tech-specs` and `reviewing-tech-specs`; a test fails if the copies differ.
 - You start each skill yourself; none runs implicitly.

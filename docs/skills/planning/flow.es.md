@@ -10,8 +10,8 @@ flowchart TD
       Q0{"¿Hay brief?"} -- "No, y declina el discovery" --> STOP["Se detiene, no escribe nada"]
       Q0 -- "No, acepta" --> DISC
       Q0 -- "Sí" --> WRITE
-      IN["FRD, HU, ticket o solo la idea"] --> DISC["/discovering-tech-changes<br/>única skill que produce briefs<br/>lee código"]
-      DISC --> BRIEF["~/.specflow/&lt;fecha&gt;-&lt;feature&gt;/brief.md<br/>el 'cómo': archivos, funciones, commits,<br/>fechas, comandos de re-verificación"]
+      IN["FRD, HU, ticket, solo la idea<br/>o una spec (nuestra o externa)"] --> DISC["/discovering-tech-changes<br/>única skill que produce briefs<br/>lee código"]
+      DISC --> BRIEF["~/.specflow/&lt;fecha&gt;-&lt;feature&gt;/brief.md<br/>el 'qué' y el 'cómo': objetivos, opciones,<br/>archivos, funciones, commits, fechas,<br/>comandos de re-verificación"]
       BRIEF --> WRITE["/writing-tech-specs<br/>no lee código"]
       WRITE --> SPEC["Spec: solo el 'qué'<br/>comportamiento de hoy y de qué depende<br/>cada decisión; sin código ni fechas"]
     end
@@ -72,7 +72,8 @@ Todo lo que escriben las skills vive en `~/.specflow/` (oculta), una carpeta por
 ## Reglas que atraviesan el flujo
 
 - Siempre hay un brief, y solo `discovering-tech-changes` lo crea.
-- El "qué" va en la spec; el "cómo" y sus fechas, en el brief. La spec sobrevive a un cambio de lenguaje o de implementación.
+- La spec guarda el "qué", para personas, y perdura; el brief guarda el "qué" y el "cómo" con evidencia del código y fechas, para el agente. La spec sobrevive a un cambio de lenguaje o de implementación.
+- Una spec puede ser la entrada de discovery. Una spec externa siempre se reescribe con `writing-tech-specs` desde el brief nuevo antes de planear, para que toda spec que llega a planear tenga el formato del equipo; una spec de este flujo se reescribe cuando el brief la corrige.
 - Las skills nunca escriben en tus repos. Solo escriben en `~/.specflow/`, una carpeta por feature, así un cambio que toca backend y front tiene un solo brief.
 - Las reglas P1–P9 están copiadas en `writing-tech-specs` y `reviewing-tech-specs`; un test falla si las copias difieren.
 - Cada skill la inicias tú; ninguna se ejecuta sola.

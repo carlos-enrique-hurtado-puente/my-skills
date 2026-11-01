@@ -7,9 +7,11 @@ Note: runs recorded before 2026-11-01 used `~/.tech-specs/`; it was renamed to `
 ## Layout
 
 - `check-scenarios.sh`: checks the scenario files and the fixture traps. Run from anywhere: `bash tests/planning/discovering-tech-changes/check-scenarios.sh`.
-- `scenarios/<id>.md`: twelve scenarios: `input-contradicts-code`, `reuse-under-another-name`, `repo-convention`, `second-caller`, `work-in-flight`, `skip-checkpoints-pressure`, `plain-language`, `missing-information`, `obvious-change`, `sources-unreachable`, `code-answers-intake-doubts`, `brief-saved`.
+- `scenarios/<id>.md`: fourteen scenarios: `input-contradicts-code`, `reuse-under-another-name`, `repo-convention`, `second-caller`, `work-in-flight`, `skip-checkpoints-pressure`, `plain-language`, `missing-information`, `obvious-change`, `sources-unreachable`, `code-answers-intake-doubts`, `brief-saved`, `spec-as-input`, `spec-from-flow`.
 - `fixtures/chat-app/`: a tiny fake JavaScript app (no dependencies, no tests) with deliberate traps: a snooze cap of 720 minutes, the `CHAT-<AREA>-<NNN>` error codes, a webhook that calls `dispatch` without a snooze check, a daily digest job that reaches `dispatch` through `notifyMany` without one, an error catalog (`docs/error-catalog.md`) where new codes must be registered, and an in-flight spec touching `dispatcher.js`.
 - `fixtures/input/frd-mute-24h.md`: the FRD the scenarios use as input. It does not say which channels count as notifications.
+- `fixtures/input/spec-mute-external.md`: a spec from another team for `spec-as-input`. It claims the dispatcher already skips snoozed conversations (false), fixes a separate store for mutes and has its own acceptance format.
+- `fixtures/spec-from-flow.md`: a spec in the team's format (`Published:` and `Copy date:` lines) for `spec-from-flow`, placed in a feature folder without a brief. It claims snooze lasts up to 48 hours today (the code caps it at 12).
 - `fixtures/brief-existing-nodate.md`: the earlier brief with every date removed (used by the `no-date` variant of `brief-saved`).
 
 ## Scenario format
@@ -46,6 +48,8 @@ Verdicts are bullets passed of bullets graded.
 | `sources-unreachable` | PASS 4 of 4 | green-1 PASS 4 of 4 | guard |
 | `code-answers-intake-doubts` (2026-10-29) | red-1, current skill: 3 of 3 runs pass (not graded by a separate scorer) | green-1 PASS 3 of 3 | guard |
 | `brief-saved` (2026-10-31) | red-1 to red-3 FAIL 2 of 4 each | green-4 to green-6 PASS 4 of 4 each (first wording missed the hidden folder once); green-7 PASS 4 of 4 after the fix round | discriminating |
+| `spec-as-input` (2026-11-01) | red-1 to red-3 FAIL 2 of 4 each (design choice kept as decided; no rewrite before planning) | green-1 to green-3 PASS 4 of 4 each | discriminating |
+| `spec-from-flow` (2026-11-01) | red-1 to red-3 FAIL 3 of 4 each (rewrite before planning only advised; red-2 borderline) | green-1 to green-3 PASS 4 of 4 each | discriminating (one bullet) |
 | `brief-saved`, variant `no-date` (2026-11-01) | FAIL 1 of 1 (old brief renamed with the folder date, not its modification date) | PASS 1 of 1 (renamed `brief-superseded-2026-10-15.md`, the modification date) | discriminating |
 
 `missing-information` and `skip-checkpoints-pressure` were re-run after the 2026-10-29 change (green-2, PASS 3 of 3 each). After the 2026-10-31 save-in-`~/.specflow` trim of `SKILL.md`, `skip-checkpoints-pressure` (green-3) PASS 3 of 3 and `plain-language` (green-2) PASS 3 of 3 once.

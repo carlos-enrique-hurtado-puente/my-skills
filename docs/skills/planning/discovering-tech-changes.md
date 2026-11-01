@@ -2,7 +2,7 @@
 
 **English** | [Español](discovering-tech-changes.es.md)
 
-Helps you understand a requirement (FRD, user stories, a task or a design) and the code it touches, and prepares a discovery brief before you write the technical spec. It works step by step: each step ends at a checkpoint where you validate or correct before it goes on. It explains in plain words first and keeps code identifiers as evidence underneath. Source: [`skills/planning/discovering-tech-changes/`](../../../skills/planning/discovering-tech-changes/SKILL.md). Each step is grounded in cited sources and in real Jira evidence, as open heuristics rather than closed rules.
+Helps you understand a requirement (FRD, user stories, a task, a design or a spec) and the code it touches, and prepares a discovery brief before you write the technical spec. It works step by step: each step ends at a checkpoint where you validate or correct before it goes on. It explains in plain words first and keeps code identifiers as evidence underneath. Source: [`skills/planning/discovering-tech-changes/`](../../../skills/planning/discovering-tech-changes/SKILL.md). Each step is grounded in cited sources and in real Jira evidence, as open heuristics rather than closed rules.
 
 ## Usage
 
@@ -15,6 +15,7 @@ In Claude Code: `/discovering-tech-changes`. In Codex: `$discovering-tech-change
 ```
 
 - **Input:** pasted text, a local file, a Confluence page, a Jira ticket (through the Atlassian tools) or a design. The skill reads all of it; if it cannot, it says so and asks for the text. It never works from a title or from memory.
+- **A spec as input:** a spec from this flow or one written by another team is read like an FRD. What it says about today's code is checked and goes to the corrections when it does not hold; its goals are taken from it and you confirm them; each design choice it already makes becomes one option, marked "the spec proposes", next to an alternative, and you choose, even if the spec is approved. At the end the skill says the spec must be rewritten with [`writing-tech-specs`](writing-tech-specs.md) from the new brief before planning: always for a spec from another team, and for one from this flow when the brief corrects it.
 - **Depth:** before step 1 it asks you to choose **full** (steps 1 to 7) or **reduced** (steps 3 and 4 plus a short brief, for a change you can describe in one sentence). It says which one fits and why; you choose.
 - **Language:** the brief is written in your language.
 
@@ -62,7 +63,7 @@ Every fact is labeled as observed in code, inferred, or told by you. A gap in th
 
 - Read-only toward your repos, Jira and Confluence; the only place it writes is `~/.specflow/`.
 - It does not decide. It proposes and recommends; you decide and the decision is recorded in the spec.
-- It is not an implementation plan and not the spec: no code steps and no acceptance criteria. Hand the validated brief to [`writing-tech-specs`](writing-tech-specs.md).
+- It is not an implementation plan and not the spec: no code steps and no acceptance criteria. The next step is [`writing-tech-specs`](writing-tech-specs.md), from the validated brief.
 - The Jira evidence behind the heuristics comes from one team.
 - Not tested on large real codebases, on real Jira or Confluence reading, or on Codex. See [what is not covered](../../../tests/planning/discovering-tech-changes/README.md#not-covered).
 

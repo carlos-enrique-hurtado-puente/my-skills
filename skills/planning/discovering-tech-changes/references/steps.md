@@ -14,6 +14,14 @@ Offer both, say which looks fitting and why, and wait. The developer picks; the 
 
 Sources: Claude Code best practices (skip the plan when the diff fits in a sentence); Google design docs (skip the doc when the path is obvious).
 
+## Spec as input
+
+A spec is accepted as input like an FRD, whoever wrote it: one from this flow (a `spec.md` in a `~/.specflow/` folder) or one from another team, with only the "what" or mixing "what" and "how". The steps run as usual, with these changes:
+- **Step 1.** Every claim the spec makes about today's code (what exists, what calls what, what a component already does) is an input claim, not a fact: check it in the code; when it does not hold, it goes to the corrections list (spec says / is / evidence).
+- **Step 2.** Do not reinvent the goals: take the goals and non-goals the spec states and ask the developer to confirm them; add only what the spec leaves out.
+- **Step 6.** Each design choice the spec already makes (where data is stored, which mechanism, how an error is named) is one option, marked "the spec proposes", next to at least one alternative from the code (for example reusing what already exists). The developer chooses. This holds when the spec is approved or the developer says its decisions are taken: product approved the "what"; the "how" is checked against today's code.
+- **Step 7.** Save the brief in the spec's own feature folder when the spec is a `spec.md` from `~/.specflow/`; else in a new folder. The closing message says the next step: the spec is rewritten with `writing-tech-specs` from this brief before any planning. An external spec is always rewritten, so every spec that reaches planning has the team's format; a spec from this flow is rewritten when the brief corrects it. Never say an external spec is ready to plan.
+
 ## Step 1. Intake and contrast of the input
 
 **Agent.** Read the whole input: pasted text, a file, a Confluence page or a Jira ticket (through the Atlassian tools when connected). If it cannot be read, say so and ask for the text; never work from a title or from memory. Restate in plain words what is asked and the expected outcome. Mark:
