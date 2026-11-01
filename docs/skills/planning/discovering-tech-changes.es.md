@@ -34,7 +34,7 @@ Cada paso termina en un punto de control: se detiene, muestra el resultado en le
 
 ## El brief
 
-Cuando lo validas (paso 7), se guarda como `~/.tech-specs/<YYYY-MM-DD>-<slug>/brief.md`; la skill confirma contigo el slug antes. Si esa carpeta ya tiene un brief, el anterior se renombra `brief-superseded-<su fecha>.md`, nunca se sobrescribe. Luego la skill dice la ruta completa. Secciones:
+Cuando lo validas (paso 7), se guarda como `~/.specflow/<YYYY-MM-DD>-<slug>/brief.md`; la skill confirma contigo el slug antes. Si esa carpeta ya tiene un brief, el anterior se renombra `brief-superseded-<su fecha>.md`, nunca se sobrescribe. Luego la skill dice la ruta completa. Secciones:
 
 0. Encabezado: entrada, fecha, commit, profundidad, qué se validó.
 1. En palabras llanas: problema, resultado, hoy y propuesta, en una página y sin identificadores.
@@ -60,7 +60,7 @@ Cada hecho se etiqueta como observado en el código, inferido o dicho por ti. Un
 
 ## Límites
 
-- Solo lectura sobre tus repos, Jira y Confluence; lo único que escribe está en `~/.tech-specs/`.
+- Solo lectura sobre tus repos, Jira y Confluence; lo único que escribe está en `~/.specflow/`.
 - No decide. Propone y recomienda; tú decides y la decisión queda en la spec.
 - No es un plan de implementación ni la spec: sin pasos de código ni criterios de aceptación. Entrega el brief validado a [`writing-tech-specs`](writing-tech-specs.es.md).
 - La evidencia de Jira detrás de las heurísticas viene de un solo equipo.

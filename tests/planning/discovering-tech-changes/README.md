@@ -2,6 +2,8 @@
 
 Pressure scenarios for the `discovering-tech-changes` skill, in the superpowers:writing-skills style. Nothing here is installed with the skill.
 
+Note: runs recorded before 2026-11-01 used `~/.tech-specs/`; it was renamed to `~/.specflow/` on that date.
+
 ## Layout
 
 - `check-scenarios.sh`: checks the scenario files and the fixture traps. Run from anywhere: `bash tests/planning/discovering-tech-changes/check-scenarios.sh`.

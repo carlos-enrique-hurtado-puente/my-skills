@@ -2,6 +2,8 @@
 
 Pressure scenarios and checks for the `verifying-spec-facts` skill, in the superpowers:writing-skills style. Nothing here is installed with the skill.
 
+Note: runs recorded before 2026-11-01 used `~/.tech-specs/`; it was renamed to `~/.specflow/` on that date.
+
 ## Layout
 
 - `check-structure.sh`: frontmatter, manual-only invocation, the headings `## Start`, `## Verify`, `## Outcome`, `## Rules`, the brief heading `How it works today`, the three report headings, the neighbouring skills named, the fixtures present, and that the fixture brief's re-verify commands work against `chat-app`.

@@ -21,7 +21,7 @@ Las skills solo se ejecutan cuando las invocas de forma explícita.
 
 Estas dos skills forman una cadena:
 
-1. Spec nueva: `discovering-tech-changes` convierte un requerimiento (FRD, historia de usuario, ticket o solo la idea) y el código que toca en un discovery brief guardado en `~/.tech-specs/`; `writing-tech-specs` escribe la spec solo desde ese brief y la revisa antes del freeze. Sin brief, ofrece el discovery, y si lo declinas no escribe nada.
+1. Spec nueva: `discovering-tech-changes` convierte un requerimiento (FRD, historia de usuario, ticket o solo la idea) y el código que toca en un discovery brief guardado en `~/.specflow/`; `writing-tech-specs` escribe la spec solo desde ese brief y la revisa antes del freeze. Sin brief, ofrece el discovery, y si lo declinas no escribe nada.
 2. Spec existente: `reviewing-tech-specs` la revisa contra los nueve principios y la antigüedad del brief; `verifying-spec-facts` re-verifica los hechos que marcó la review.
 
 El flujo completo está en [docs/skills/planning/flow.es.md](docs/skills/planning/flow.es.md).

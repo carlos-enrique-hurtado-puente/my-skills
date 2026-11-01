@@ -34,7 +34,7 @@ Each step ends at a checkpoint: it stops, shows the result in plain words and wa
 
 ## The brief
 
-Once you validate it (step 7), it is saved as `~/.tech-specs/<YYYY-MM-DD>-<slug>/brief.md`; the skill confirms the slug with you first. If that folder already holds a brief, the old one is renamed `brief-superseded-<its date>.md`, never overwritten. The skill then says the full path. Sections:
+Once you validate it (step 7), it is saved as `~/.specflow/<YYYY-MM-DD>-<slug>/brief.md`; the skill confirms the slug with you first. If that folder already holds a brief, the old one is renamed `brief-superseded-<its date>.md`, never overwritten. The skill then says the full path. Sections:
 
 0. Header: input, date, commit, depth, what was validated.
 1. In plain words: problem, outcome, today and proposal, on one page and without identifiers.
@@ -60,7 +60,7 @@ Every fact is labeled as observed in code, inferred, or told by you. A gap in th
 
 ## Limits
 
-- Read-only toward your repos, Jira and Confluence; the only place it writes is `~/.tech-specs/`.
+- Read-only toward your repos, Jira and Confluence; the only place it writes is `~/.specflow/`.
 - It does not decide. It proposes and recommends; you decide and the decision is recorded in the spec.
 - It is not an implementation plan and not the spec: no code steps and no acceptance criteria. Hand the validated brief to [`writing-tech-specs`](writing-tech-specs.md).
 - The Jira evidence behind the heuristics comes from one team.

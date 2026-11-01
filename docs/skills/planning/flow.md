@@ -11,7 +11,7 @@ flowchart TD
       Q0 -- "No, discovery accepted" --> DISC
       Q0 -- "Yes" --> WRITE
       IN["FRD, user story, ticket or idea"] --> DISC["/discovering-tech-changes<br/>the only skill that creates briefs<br/>reads code"]
-      DISC --> BRIEF["~/.tech-specs/&lt;date&gt;-&lt;feature&gt;/brief.md<br/>the how: files, functions, commits,<br/>dates, re-verify commands"]
+      DISC --> BRIEF["~/.specflow/&lt;date&gt;-&lt;feature&gt;/brief.md<br/>the how: files, functions, commits,<br/>dates, re-verify commands"]
       BRIEF --> WRITE["/writing-tech-specs<br/>does not read code"]
       WRITE --> SPEC["Spec: only the what<br/>today's behavior and what each decision<br/>depends on; no code, no dates"]
     end
@@ -39,15 +39,40 @@ flowchart TD
 
 | Skill | Does | Reads code | Writes |
 |---|---|---|---|
-| `discovering-tech-changes` | Produces the brief | Yes | The brief in `~/.tech-specs/` |
-| `writing-tech-specs` | Writes the spec from a brief | No | The spec |
+| `discovering-tech-changes` | Produces the brief | Yes | The brief in `~/.specflow/` |
+| `writing-tech-specs` | Writes the spec from a brief | No | The spec, and a local copy `spec.md` |
 | `reviewing-tech-specs` | Checks the spec against P1-P9 and the brief's age | No | A review report |
 | `verifying-spec-facts` | Checks the brief's facts against today's code | Yes | The brief's dates, or a report of what changed |
+
+## The specflow folder
+
+Everything the skills write lives in `~/.specflow/` (hidden), one folder per feature:
+
+```text
+~/.specflow/
+  <YYYY-MM-DD>-<slug>/                 one folder per feature
+    brief.md                           discovering-tech-changes
+    brief-superseded-<YYYY-MM-DD>.md   an older brief
+    spec.md                            writing-tech-specs: local copy of the spec
+    spec-superseded-<YYYY-MM-DD>.md    an older spec
+    review-<YYYY-MM-DD>.md             reviewing-tech-specs
+    verify-<YYYY-MM-DD>.md             verifying-spec-facts, only when a fact changed
+    repos.md                           reserved: repositories of the feature
+    plan-<repo>.md                     reserved: one plan per repository
+    progress-<repo>.md                 reserved: one progress ledger per repository
+```
+
+- Feature folder: `<YYYY-MM-DD>-<slug>`, the date it was created; a slug of 2 to 5 lowercase words joined by `-`, confirmed with you. `<repo>` is the repository's folder name (for example `atom`, `atom-ui`).
+- Nothing is overwritten. A skill that writes a file which already exists first renames the old one to `<name>-superseded-<YYYY-MM-DD>.md` (the date written inside the old file, else its modification date; `-2`, `-3`... if that name exists). Today this applies to `brief.md` and `spec.md`.
+- Reports never overwrite either: a second one on the same day is `review-<YYYY-MM-DD>-2.md`, then `-3`... "The latest" report is the newest date, then the highest suffix as a number (no suffix counts as 1).
+- `spec.md` starts with `Published: <link or not published yet>` and `Copy date: <YYYY-MM-DD>`. `reviewing-tech-specs` reviews the spec you point to; if you name none, it uses the folder's `spec.md` and says its source and date. It never writes it.
+- No skill reads `*-superseded-*`.
+- Coming from the old folder name? Run once: `mv ~/.tech-specs ~/.specflow`. If both folders exist, nothing is merged for you.
 
 ## Rules across the flow
 
 - There is always a brief, and only `discovering-tech-changes` creates one.
 - The "what" goes in the spec; the "how" and its dates go in the brief. A spec survives a change of language or implementation.
-- Skills never write to your repositories. They write only under `~/.tech-specs/`, one folder per feature, so a change across backend and front has one brief.
+- Skills never write to your repositories. They write only under `~/.specflow/`, one folder per feature, so a change across backend and front has one brief.
 - Rules P1-P9 are copied in `writing-tech-specs` and `reviewing-tech-specs`; a test fails if the copies differ.
 - You start each skill yourself; none runs implicitly.

@@ -1,5 +1,7 @@
 # Spec flow redesign: design
 
+> Note: `~/.tech-specs/` was renamed to `~/.specflow/`; see [2026-10-31-specflow-folder-design.md](2026-10-31-specflow-folder-design.md).
+
 - **Date:** 2026-10-31
 - **Status:** implemented on branch `writing-tech-specs-brief-only`
 - **Related:** `discovering-tech-changes`, `writing-tech-specs`, two new skills (`reviewing-tech-specs`, `verifying-spec-facts`); the flow as users see it: [docs/skills/planning/flow.md](../skills/planning/flow.md)

@@ -11,7 +11,7 @@ flowchart TD
       Q0 -- "No, acepta" --> DISC
       Q0 -- "Sí" --> WRITE
       IN["FRD, HU, ticket o solo la idea"] --> DISC["/discovering-tech-changes<br/>única skill que produce briefs<br/>lee código"]
-      DISC --> BRIEF["~/.tech-specs/&lt;fecha&gt;-&lt;feature&gt;/brief.md<br/>el 'cómo': archivos, funciones, commits,<br/>fechas, comandos de re-verificación"]
+      DISC --> BRIEF["~/.specflow/&lt;fecha&gt;-&lt;feature&gt;/brief.md<br/>el 'cómo': archivos, funciones, commits,<br/>fechas, comandos de re-verificación"]
       BRIEF --> WRITE["/writing-tech-specs<br/>no lee código"]
       WRITE --> SPEC["Spec: solo el 'qué'<br/>comportamiento de hoy y de qué depende<br/>cada decisión; sin código ni fechas"]
     end
@@ -39,15 +39,40 @@ flowchart TD
 
 | Skill | Hace | Lee código | Escribe |
 |---|---|---|---|
-| `discovering-tech-changes` | Produce el brief | Sí | El brief en `~/.tech-specs/` |
-| `writing-tech-specs` | Escribe la spec desde un brief | No | La spec |
+| `discovering-tech-changes` | Produce el brief | Sí | El brief en `~/.specflow/` |
+| `writing-tech-specs` | Escribe la spec desde un brief | No | La spec, y una copia local `spec.md` |
 | `reviewing-tech-specs` | Revisa la spec contra P1–P9 y la antigüedad del brief | No | Informe de la review |
 | `verifying-spec-facts` | Comprueba los hechos del brief en el código de hoy | Sí | Las fechas del brief, o un informe de qué cambió |
+
+## La carpeta specflow
+
+Todo lo que escriben las skills vive en `~/.specflow/` (oculta), una carpeta por feature:
+
+```text
+~/.specflow/
+  <YYYY-MM-DD>-<slug>/                 una carpeta por feature
+    brief.md                           discovering-tech-changes
+    brief-superseded-<YYYY-MM-DD>.md   un brief anterior
+    spec.md                            writing-tech-specs: copia local de la spec
+    spec-superseded-<YYYY-MM-DD>.md    una spec anterior
+    review-<YYYY-MM-DD>.md             reviewing-tech-specs
+    verify-<YYYY-MM-DD>.md             verifying-spec-facts, solo si un hecho cambió
+    repos.md                           reservado: repositorios de la feature
+    plan-<repo>.md                     reservado: un plan por repositorio
+    progress-<repo>.md                 reservado: un registro de avance por repositorio
+```
+
+- Carpeta de la feature: `<YYYY-MM-DD>-<slug>`, la fecha en que se creó; un slug de 2 a 5 palabras en minúsculas unidas por `-`, confirmado contigo. `<repo>` es el nombre de la carpeta del repositorio (por ejemplo `atom`, `atom-ui`).
+- Nada se sobrescribe. Una skill que escribe un archivo que ya existe renombra primero el anterior a `<nombre>-superseded-<YYYY-MM-DD>.md` (la fecha escrita dentro del archivo anterior, o si no, su fecha de modificación; `-2`, `-3`... si ese nombre existe). Hoy aplica a `brief.md` y `spec.md`.
+- Los informes tampoco se sobrescriben: un segundo informe el mismo día es `review-<YYYY-MM-DD>-2.md`, luego `-3`... "El más reciente" es la fecha más nueva y luego el sufijo más alto como número (sin sufijo cuenta como 1).
+- `spec.md` empieza con `Published: <link o not published yet>` y `Copy date: <YYYY-MM-DD>`. `reviewing-tech-specs` revisa la spec que indicas; si no nombras ninguna, usa el `spec.md` de la carpeta y dice su origen y su fecha. Nunca lo escribe.
+- Ninguna skill lee `*-superseded-*`.
+- ¿Vienes del nombre anterior de la carpeta? Ejecuta una vez: `mv ~/.tech-specs ~/.specflow`. Si existen las dos carpetas, nada se une por ti.
 
 ## Reglas que atraviesan el flujo
 
 - Siempre hay un brief, y solo `discovering-tech-changes` lo crea.
 - El "qué" va en la spec; el "cómo" y sus fechas, en el brief. La spec sobrevive a un cambio de lenguaje o de implementación.
-- Las skills nunca escriben en tus repos. Solo escriben en `~/.tech-specs/`, una carpeta por feature, así un cambio que toca backend y front tiene un solo brief.
+- Las skills nunca escriben en tus repos. Solo escriben en `~/.specflow/`, una carpeta por feature, así un cambio que toca backend y front tiene un solo brief.
 - Las reglas P1–P9 están copiadas en `writing-tech-specs` y `reviewing-tech-specs`; un test falla si las copias difieren.
 - Cada skill la inicias tú; ninguna se ejecuta sola.

@@ -1,7 +1,7 @@
 # specflow folder: design
 
 - **Date:** 2026-10-31
-- **Status:** design, approved in conversation; not implemented
+- **Status:** implemented on branch `specflow-folder`
 - **Related:** [docs/plans/2026-10-31-spec-flow-redesign-design.md](2026-10-31-spec-flow-redesign-design.md) (the four planning skills and `~/.tech-specs/`), [docs/skills/planning/flow.md](../skills/planning/flow.md)
 
 ## 1. Intent and why

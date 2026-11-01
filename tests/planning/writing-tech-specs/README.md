@@ -2,6 +2,8 @@
 
 Pressure scenarios and a structure check for the `writing-tech-specs` skill, in the superpowers:writing-skills style. Nothing here is installed with the skill.
 
+Note: runs recorded before 2026-11-01 used `~/.tech-specs/`; it was renamed to `~/.specflow/` on that date.
+
 ## Layout
 
 - `check-structure.sh` checks frontmatter, manual-only invocation, the nine rule lines, the checklist headings, that the references exist, that no ticket id sits in `SKILL.md` and that no person's name leaks into the skill.

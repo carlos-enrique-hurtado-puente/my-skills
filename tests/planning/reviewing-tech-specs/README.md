@@ -2,6 +2,8 @@
 
 Pressure scenarios and checks for the `reviewing-tech-specs` skill, in the superpowers:writing-skills style. Nothing here is installed with the skill.
 
+Note: runs recorded before 2026-11-01 used `~/.tech-specs/`; it was renamed to `~/.specflow/` on that date.
+
 ## Layout
 
 - `check-structure.sh`: frontmatter, manual-only invocation, the nine rule lines, the headings `## Terms`, `## Rules`, `## Review`, `## Report`, the four report headings, the nine checklist lines, the "never read code" rule, the references, no ticket id, no personal names.

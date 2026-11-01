@@ -19,7 +19,7 @@ Skills run only when you invoke them explicitly.
 
 The planning skills work in two flows:
 
-1. New spec: `discovering-tech-changes` turns a requirement (FRD, user story, ticket or an idea) and the code it touches into a discovery brief saved in `~/.tech-specs/`; `writing-tech-specs` writes the spec only from that brief and checks it before the freeze. With no brief it offers the discovery, and if you decline it writes nothing.
+1. New spec: `discovering-tech-changes` turns a requirement (FRD, user story, ticket or an idea) and the code it touches into a discovery brief saved in `~/.specflow/`; `writing-tech-specs` writes the spec only from that brief and checks it before the freeze. With no brief it offers the discovery, and if you decline it writes nothing.
 2. Existing spec: `reviewing-tech-specs` checks it against the nine principles and the brief's age; `verifying-spec-facts` re-verifies the facts the review flagged.
 
 The full flow is in [docs/skills/planning/flow.md](docs/skills/planning/flow.md).
