@@ -34,5 +34,5 @@ The skill keeps a local copy of every spec it produces in `~/.specflow/<feature>
 - green-1, green-2: PASS 5 of 5. New `spec.md` starting `Published: not published yet` / `Copy date: 2026-10-31`; old one renamed to `spec-superseded-2026-10-31-2.md` (hash `6dc7874f...`, the original); `spec-superseded-2026-10-31.md` unchanged (`7f8ca2f8...`); repo hashes unchanged; no planted fact in the new spec.
 - green-3: FAIL 4 of 5. Same files, but the reply was only a summary of the spec, not the spec. SKILL.md gained "give the full spec text in the answer (not a summary of it)".
 
-### green-4 to green-6 - 2026-11-01 (final wording; checked on disk by the implementer: file listings, hashes, grep for the planted facts, reply read)
-- PASS 5 of 5 each. Same disk results as above; each reply carries the full spec, starting with the two header lines.
+### green-4 to green-6 - 2026-11-01 (final wording; blind scorer, replaces the implementer's self-grade)
+- PASS 5 of 5 each. New `spec.md` starts `Published: not published yet` / `Copy date: 2026-10-31`; `spec-superseded-2026-10-31-2.md` holds the original hash `6dc7874f...`; `spec-superseded-2026-10-31.md` still `7f8ca2f8...`; repo hashes identical; no planted fact in the new specs; each reply carries the full spec.
